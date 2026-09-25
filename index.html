@@ -20,7 +20,9 @@
   "url": "https://mobiletirerepairottawa.ca/",
   "telephone": "+1-613-601-6471",
   "description": "Mobile tire service in Ottawa: winter and summer tire changeovers, flat tire repair, tire installation and off-rim balancing at your home, work or roadside.",
-  "address": {"@type": "PostalAddress", "addressLocality": "Ottawa", "addressRegion": "ON", "addressCountry": "CA"},
+  "address": {"@type": "PostalAddress", "streetAddress": "1405 Prince of Wales Dr", "addressLocality": "Ottawa", "addressRegion": "ON", "postalCode": "K2C 3J9", "addressCountry": "CA"},
+  "geo": {"@type": "GeoCoordinates", "latitude": 45.3703218, "longitude": -75.7015757},
+  "hasMap": "https://maps.app.goo.gl/qU2JMVwsBgFoiasH7",
   "areaServed": ["Ottawa","Kanata","Nepean","Orleans","Barrhaven","Gloucester","Vanier","Gatineau"],
   "openingHoursSpecification": {"@type": "OpeningHoursSpecification","dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens": "00:00","closes": "23:59"},
   "hasOfferCatalog": {
@@ -901,13 +903,21 @@ ul{list-style:none;}
   align-items:start;
 }
 .winter-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--font-cond);font-size:12px;font-weight:700;
-  letter-spacing:0.16em;text-transform:uppercase;
-  color:#bfe9ff;border:1px solid rgba(191,233,255,0.3);
-  background:rgba(191,233,255,0.06);
-  border-radius:40px;padding:5px 14px;margin-bottom:18px;
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-cond);font-size:15px;font-weight:800;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:#03101f;
+  background:linear-gradient(90deg,#bff3ff 0%,#00e5ff 55%,#1dff8e 100%);
+  border-radius:40px;padding:9px 20px 9px 16px;margin-bottom:20px;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.25) inset,0 0 22px rgba(0,229,255,0.45);
+  animation:badgeGlow 3s ease-in-out infinite;
 }
+.winter-badge-icon{font-size:18px;line-height:1;animation:flakeSpin 8s linear infinite;display:inline-block;}
+@keyframes badgeGlow{
+  0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,0.25) inset,0 0 18px rgba(0,229,255,0.35);}
+  50%{box-shadow:0 0 0 1px rgba(255,255,255,0.35) inset,0 0 34px rgba(0,229,255,0.7),0 0 60px rgba(29,255,142,0.25);}
+}
+@media(prefers-reduced-motion:reduce){.winter-badge,.winter-badge-icon{animation:none;}}
 .winter-body p{font-size:15.5px;color:var(--muted);line-height:1.75;max-width:60ch;margin-bottom:14px;}
 .winter-body p b{color:var(--white);font-weight:600;}
 .winter-facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0 28px;}
@@ -1038,6 +1048,23 @@ ul{list-style:none;}
   color:var(--white);
 }
 .review-loc{font-size:12px;color:var(--muted);}
+.review-avatar{font-size:12px;}
+.reviews-more{
+  margin-top:28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:16px;
+  padding:20px 24px;
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-lg);
+  background:var(--glass-bg);
+}
+.reviews-score{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.reviews-score-num{font-family:var(--font-display);font-size:30px;font-weight:900;color:var(--white);}
+.reviews-score-stars{color:var(--green);font-size:18px;letter-spacing:2px;text-shadow:0 0 8px var(--green-glow);}
+.reviews-score-label{font-family:var(--font-cond);font-size:14px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
 
 /* ============================================================
    FAQ
@@ -1330,6 +1357,7 @@ ul{list-style:none;}
   transition:opacity .35s ease;
 }
 .promo.show{opacity:1;}
+.promo[hidden]{display:none !important;}
 .promo-card{
   position:relative;
   width:100%;
@@ -1597,8 +1625,8 @@ ul{list-style:none;}
       <span class="stat-label">Areas Covered</span>
     </div>
     <div class="stat-item reveal">
-      <span class="stat-num">5★</span>
-      <span class="stat-label">Google Rated</span>
+      <span class="stat-num">4.9★</span>
+      <span class="stat-label">130+ Google Reviews</span>
     </div>
   </div>
 </div>
@@ -1610,7 +1638,7 @@ ul{list-style:none;}
   <div class="container">
     <div class="winter-layout">
       <div class="winter-body reveal">
-        <span class="winter-badge">❄ Winter 2026 · Now booking</span>
+        <span class="winter-badge"><span class="winter-badge-icon" aria-hidden="true">❄</span>Winter 2026 · Now Booking</span>
         <h2 class="section-title" id="winter-title">Winter Tire Changeover in Ottawa — At Your Home</h2>
         <p>Skip the tire shop lineup this fall. We bring the tools to your <b>driveway, condo parking or office lot</b> and swap your summer or all-season tires for winter tires while you stay inside.</p>
         <p>We handle <b>winter tires already on rims</b> (quick swap) and <b>tires that need mounting</b> on your existing rims, with off-rim balancing done on-site. Serving Ottawa, Kanata, Nepean, Orleans, Barrhaven and Gatineau.</p>
@@ -1852,43 +1880,47 @@ ul{list-style:none;}
     <div class="reveal">
       <div class="section-label">Customer Reviews</div>
       <h2 class="section-title" id="reviews-title">What Ottawa Drivers Say</h2>
-      <p class="section-desc">Real customers, real results. See why Ottawa drivers trust us for mobile tire service.</p>
+      <p class="section-desc">Rated 4.9 out of 5 from 130+ Google reviews. Here's what customers say about Shawn and Ray.</p>
     </div>
 
     <div class="reviews-grid">
       <div class="review-card reveal">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Had a flat on the 417 at 11 PM. Called this guy and he showed up in under 30 minutes. Fixed it on the spot. Incredible service — saved my night."</div>
+        <div class="review-text">"I walked outside to find a completely flat tire with a screw in it, and from the time I made the phone call to the repair being completed at my home was only 40 minutes. That level of service is incredible."</div>
         <div class="review-author">
-          <div class="review-avatar">MK</div>
+          <div class="review-avatar">G</div>
           <div>
-            <div class="review-name">Mike K.</div>
-            <div class="review-loc">Kanata, Ottawa</div>
+            <div class="review-name">Flat tire at home</div>
+            <div class="review-loc">Google review</div>
           </div>
         </div>
       </div>
       <div class="review-card reveal">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Best $80 I ever spent. Came to my driveway for winter tires — done in 40 minutes, no shop visit, no driving across town. Will use every season."</div>
+        <div class="review-text">"Noticed a flat tire on my way back home. Shawn arrived in 45 mins and provided amazing service in the rain! He was very professional, knowledgeable and pleasant to speak with."</div>
         <div class="review-author">
-          <div class="review-avatar">SR</div>
+          <div class="review-avatar">G</div>
           <div>
-            <div class="review-name">Sarah R.</div>
-            <div class="review-loc">Barrhaven, Ottawa</div>
+            <div class="review-name">Roadside flat</div>
+            <div class="review-loc">Google review</div>
           </div>
         </div>
       </div>
       <div class="review-card reveal">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Texted my tire size, got a quote in 5 minutes, booked same-day. Super professional, fast, reasonably priced. This is how tire service should work."</div>
+        <div class="review-text">"Called and Shawn was at my house within an hour to fix my tire. Can't say enough about the quality of service he provided. Worth the price for the convenience and great service!"</div>
         <div class="review-author">
-          <div class="review-avatar">JP</div>
+          <div class="review-avatar">G</div>
           <div>
-            <div class="review-name">Jason P.</div>
-            <div class="review-loc">Orleans, Ottawa</div>
+            <div class="review-name">Repair at home</div>
+            <div class="review-loc">Google review</div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="reviews-more reveal">
+      <div class="reviews-score"><span class="reviews-score-num">4.9</span><span class="reviews-score-stars">★★★★★</span><span class="reviews-score-label">130+ reviews on Google</span></div>
+      <a href="https://maps.app.goo.gl/qU2JMVwsBgFoiasH7" class="btn-secondary" target="_blank" rel="noopener">Read all reviews on Google</a>
     </div>
   </div>
 </section>
@@ -2019,6 +2051,7 @@ ul{list-style:none;}
         <a href="#areas">Areas</a>
         <a href="#reviews">Reviews</a>
         <a href="#faq">FAQ</a>
+        <a href="https://maps.app.goo.gl/qU2JMVwsBgFoiasH7" target="_blank" rel="noopener">Google Reviews</a>
         <a href="sms:+16136016471">Text (613) 601-6471</a>
       </nav>
     </div>
