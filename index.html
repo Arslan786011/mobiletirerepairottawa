@@ -3,8 +3,39 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Mobile Tire Repair Ottawa | 24/7 Emergency Tire Service</title>
-<meta name="description" content="Ottawa's #1 mobile tire repair service. Flat tire repair, tire change, balancing — we come to you. Serving Ottawa, Kanata, Nepean, Orleans, Barrhaven & Gatineau. Call (613) 601-6471."/>
+<title>Mobile Tire Repair Ottawa | Winter Tire Swaps at Your Home</title>
+<meta name="description" content="Mobile tire repair and winter tire changeovers in Ottawa. We swap, mount and balance tires in your driveway. Kanata, Nepean, Orleans, Barrhaven, Gatineau. Text (613) 601-6471."/>
+<link rel="canonical" href="https://mobiletirerepairottawa.ca/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Mobile Tire Repair Ottawa | Winter Tire Swaps at Your Home"/>
+<meta property="og:description" content="Winter tire changeovers, flat repair and balancing done at your home or roadside. Text (613) 601-6471 for a quote."/>
+<meta property="og:url" content="https://mobiletirerepairottawa.ca/"/>
+<meta name="geo.region" content="CA-ON"/>
+<meta name="geo.placename" content="Ottawa"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Mobile Tire Repair Ottawa",
+  "url": "https://mobiletirerepairottawa.ca/",
+  "telephone": "+1-613-601-6471",
+  "description": "Mobile tire service in Ottawa: winter and summer tire changeovers, flat tire repair, tire installation and off-rim balancing at your home, work or roadside.",
+  "address": {"@type": "PostalAddress", "addressLocality": "Ottawa", "addressRegion": "ON", "addressCountry": "CA"},
+  "areaServed": ["Ottawa","Kanata","Nepean","Orleans","Barrhaven","Gloucester","Vanier","Gatineau"],
+  "openingHoursSpecification": {"@type": "OpeningHoursSpecification","dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens": "00:00","closes": "23:59"},
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Mobile tire services",
+    "itemListElement": [
+      {"@type": "Offer","itemOffered": {"@type": "Service","name": "Mobile winter tire changeover"}},
+      {"@type": "Offer","itemOffered": {"@type": "Service","name": "Seasonal tire swap at home"}},
+      {"@type": "Offer","itemOffered": {"@type": "Service","name": "Flat tire repair"}},
+      {"@type": "Offer","itemOffered": {"@type": "Service","name": "Tire mounting and off-rim balancing"}},
+      {"@type": "Offer","itemOffered": {"@type": "Service","name": "Roadside tire help"}}
+    ]
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet"/>
@@ -24,6 +55,8 @@
   --green-dim:   #14cc70;
   --green-glow:  rgba(29,255,142,0.18);
   --orange:      #ff6b35;
+  --red:         #ff4d4d;
+  --red-glow:    rgba(255,77,77,0.16);
   --white:       #eef4ff;
   --muted:       #8899bb;
   --glass-bg:    rgba(13,20,38,0.72);
@@ -415,6 +448,117 @@ ul{list-style:none;}
 
 .btn-icon{font-size:18px;line-height:1;}
 
+/* Emergency (red) button */
+.btn-emergency{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  background:transparent;
+  color:var(--red);
+  font-family:var(--font-cond);
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  padding:13px 24px;
+  border-radius:var(--radius-md);
+  border:1.5px solid rgba(255,77,77,0.55);
+  cursor:pointer;
+  transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;
+  white-space:nowrap;
+  text-decoration:none;
+}
+.btn-emergency:hover{
+  transform:translateY(-2px);
+  background:var(--red-glow);
+  border-color:var(--red);
+  box-shadow:0 0 24px var(--red-glow);
+}
+
+/* Hero lanes (Book a service / Emergency) */
+.hero-lanes{
+  display:grid;
+  grid-template-columns:1.08fr 1fr;
+  gap:18px;
+  max-width:880px;
+  margin-bottom:40px;
+  opacity:0;
+  animation:fadeUp .7s ease forwards;
+  animation-delay:.85s;
+}
+.lane{
+  border-radius:var(--radius-lg);
+  padding:22px 22px 24px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  backdrop-filter:blur(8px);
+}
+.lane-kicker{
+  font-family:var(--font-cond);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+}
+.lane-title{
+  font-family:var(--font-cond);
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:0.02em;
+  text-transform:uppercase;
+  line-height:1.15;
+  color:var(--white);
+}
+.lane-desc{font-size:14px;color:var(--muted);line-height:1.6;}
+.lane .btn-primary,.lane .btn-emergency{align-self:flex-start;margin-top:auto;}
+/* Chasing border light */
+@property --chase{
+  syntax:'<angle>';
+  initial-value:0deg;
+  inherits:false;
+}
+.lane{position:relative;isolation:isolate;}
+.lane::before,.lane::after{
+  content:'';
+  position:absolute;
+  inset:-1px;
+  border-radius:inherit;
+  padding:2.5px;
+  background:conic-gradient(from var(--chase),transparent 0deg,transparent 170deg,color-mix(in srgb,var(--chase-color) 25%,transparent) 250deg,var(--chase-color) 325deg,color-mix(in srgb,var(--chase-color) 40%,#ffffff) 350deg,transparent 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:chase 6.5s linear infinite;
+  will-change:--chase;
+  pointer-events:none;
+  z-index:-1;
+}
+.lane::after{
+  filter:blur(10px);
+  opacity:1;
+  padding:4px;
+}
+.lane-emergency{--chase-color:var(--red);}
+.lane-emergency::before,.lane-emergency::after{animation-duration:5.5s;}
+.lane-quote{--chase-color:var(--green);}
+.lane-quote::before,.lane-quote::after{animation-delay:-3.2s;}
+@keyframes chase{to{--chase:360deg;}}
+@media(prefers-reduced-motion:reduce){.lane::before,.lane::after{animation:none;}}
+
+.lane-quote{
+  border:1px solid rgba(29,255,142,0.35);
+  background:rgba(29,255,142,0.05);
+}
+.lane-quote .lane-kicker{color:var(--green);}
+.lane-emergency{
+  border:1px solid rgba(255,77,77,0.35);
+  background:rgba(255,77,77,0.05);
+}
+.lane-emergency .lane-kicker{color:var(--red);}
+.lane-number{font-family:var(--font-cond);font-size:15px;font-weight:700;letter-spacing:0.06em;color:var(--white);}
+
 .hero-hint{
   font-family:var(--font-body);
   font-size:12px;
@@ -734,6 +878,62 @@ ul{list-style:none;}
 .btn-full{display:block;text-align:center;width:100%;}
 
 /* ============================================================
+   WINTER TIRES
+============================================================ */
+.winter{
+  background:linear-gradient(180deg,var(--bg-void) 0%,#06101f 100%);
+  position:relative;
+  overflow:hidden;
+}
+.winter::before{
+  content:'';
+  position:absolute;
+  width:700px;height:700px;
+  background:radial-gradient(rgba(160,220,255,0.08),transparent 70%);
+  top:-260px;left:-200px;
+  border-radius:50%;
+}
+.winter .container{position:relative;}
+.winter-layout{
+  display:grid;
+  grid-template-columns:1.1fr 0.9fr;
+  gap:48px;
+  align-items:start;
+}
+.winter-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-cond);font-size:12px;font-weight:700;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:#bfe9ff;border:1px solid rgba(191,233,255,0.3);
+  background:rgba(191,233,255,0.06);
+  border-radius:40px;padding:5px 14px;margin-bottom:18px;
+}
+.winter-body p{font-size:15.5px;color:var(--muted);line-height:1.75;max-width:60ch;margin-bottom:14px;}
+.winter-body p b{color:var(--white);font-weight:600;}
+.winter-facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0 28px;}
+.winter-fact{
+  border:1px solid var(--glass-border);background:var(--glass-bg);
+  border-radius:var(--radius-md);padding:16px;
+}
+.winter-fact-num{font-family:var(--font-display);font-size:20px;font-weight:900;color:var(--cyan);display:block;margin-bottom:4px;}
+.winter-fact-label{font-size:13px;color:var(--muted);line-height:1.5;}
+.winter-card{
+  background:linear-gradient(150deg,rgba(0,229,255,0.07) 0%,rgba(13,20,38,0.92) 100%);
+  border:1px solid rgba(0,229,255,0.22);
+  border-radius:var(--radius-lg);
+  padding:28px 26px;
+  position:relative;overflow:hidden;
+}
+.winter-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--green));}
+.winter-card h3{font-family:var(--font-cond);font-size:20px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:14px;}
+.winter-list{display:flex;flex-direction:column;gap:10px;margin-bottom:22px;}
+.winter-list li{display:flex;gap:10px;font-size:14.5px;color:var(--white);line-height:1.5;}
+.winter-list li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;}
+.winter-card-note{font-size:13px;color:var(--muted);margin-top:12px;text-align:center;}
+@media(max-width:900px){.winter-layout{grid-template-columns:1fr;gap:32px;}}
+@media(max-width:600px){.winter-facts{grid-template-columns:1fr;}}
+
+/* ============================================================
    AREAS
 ============================================================ */
 .areas{background:var(--bg-deep);}
@@ -899,7 +1099,7 @@ ul{list-style:none;}
   color:var(--muted);
   line-height:1.7;
 }
-.faq-item.open .faq-a{max-height:200px;}
+.faq-item.open .faq-a{max-height:420px;}
 
 /* ============================================================
    CTA SECTION
@@ -1063,11 +1263,133 @@ ul{list-style:none;}
   box-shadow:0 0 16px var(--green-glow);
 }
 .float-btn-text{
+  background:var(--green);
+  color:var(--bg-void);
+  box-shadow:0 0 16px var(--green-glow);
+}
+.float-btn-emergency{
   background:transparent;
-  color:var(--cyan);
-  border:1.5px solid rgba(0,229,255,0.4);
+  color:var(--red);
+  border:1.5px solid rgba(255,77,77,0.55);
 }
 .float-btn:hover{transform:scale(0.97);}
+
+/* ============================================================
+   SNOWFALL
+============================================================ */
+#snow{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:800;
+}
+
+/* ============================================================
+   BIG SIDE SNOWFLAKES
+============================================================ */
+.big-flake{
+  position:absolute;
+  z-index:1;
+  pointer-events:none;
+  color:#dff4ff;
+  filter:drop-shadow(0 0 18px rgba(0,229,255,0.45));
+  animation:flakeSpin 40s linear infinite, flakeBob 9s ease-in-out infinite;
+}
+.big-flake svg{width:100%;height:100%;display:block;}
+.bf-1{width:230px;height:230px;top:8%;right:-60px;opacity:0.22;}
+.bf-2{width:120px;height:120px;top:46%;right:6%;opacity:0.16;animation-duration:55s,11s;animation-direction:reverse,normal;}
+.bf-3{width:180px;height:180px;bottom:6%;left:-50px;opacity:0.18;animation-duration:48s,10s;}
+.bf-4{width:80px;height:80px;top:14%;left:4%;opacity:0.14;animation-duration:36s,8s;animation-direction:reverse,normal;}
+.bf-5{width:60px;height:60px;bottom:20%;right:22%;opacity:0.12;animation-duration:30s,7s;}
+@keyframes flakeSpin{from{rotate:0deg;}to{rotate:360deg;}}
+@keyframes flakeBob{0%,100%{translate:0 0;}50%{translate:0 -18px;}}
+@media(max-width:900px){
+  .bf-1{width:150px;height:150px;right:-50px;top:4%;}
+  .bf-2,.bf-5{display:none;}
+  .bf-3{width:120px;height:120px;left:-40px;}
+  .bf-4{width:54px;height:54px;}
+}
+
+/* ============================================================
+   WINTER POPUP
+============================================================ */
+.promo{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(3,5,15,0.72);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  opacity:0;
+  transition:opacity .35s ease;
+}
+.promo.show{opacity:1;}
+.promo-card{
+  position:relative;
+  width:100%;
+  max-width:440px;
+  background:linear-gradient(160deg,#0c1a30 0%,#070c1a 100%);
+  border:1px solid rgba(0,229,255,0.3);
+  border-radius:var(--radius-lg);
+  padding:34px 28px 26px;
+  text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,0.6),0 0 60px rgba(0,229,255,0.12);
+  overflow:hidden;
+  transform:translateY(24px) scale(0.97);
+  transition:transform .4s cubic-bezier(.2,.9,.3,1.2);
+}
+.promo.show .promo-card{transform:none;}
+.promo-card:focus{outline:none;}
+.promo-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--green));}
+.promo-flake{
+  position:absolute;width:160px;height:160px;top:-50px;right:-50px;
+  color:#dff4ff;opacity:0.12;animation:flakeSpin 30s linear infinite;pointer-events:none;
+}
+.promo-flake svg{width:100%;height:100%;}
+.promo-close{
+  position:absolute;top:12px;right:12px;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);
+  color:var(--muted);font-size:18px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .2s,background .2s;
+}
+.promo-close:hover,.promo-close:focus-visible{color:var(--white);background:rgba(255,255,255,0.12);outline:none;}
+.promo-kicker{
+  display:inline-block;
+  font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  color:#bfe9ff;border:1px solid rgba(191,233,255,0.3);background:rgba(191,233,255,0.06);
+  border-radius:40px;padding:5px 14px;margin-bottom:16px;
+}
+.promo-title{
+  font-family:var(--font-display);font-size:26px;font-weight:900;text-transform:uppercase;line-height:1.1;
+  margin-bottom:12px;
+}
+.promo-title span{display:block;background:linear-gradient(90deg,var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.promo-text{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:22px;}
+.promo-text b{color:var(--white);font-weight:600;}
+.promo-card .btn-primary{width:100%;justify-content:center;}
+.promo-later{
+  display:block;margin:14px auto 0;background:none;border:none;cursor:pointer;
+  font-family:var(--font-cond);font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);
+}
+.promo-later:hover,.promo-later:focus-visible{color:var(--white);outline:none;text-decoration:underline;}
+.promo-foot{margin-top:14px;padding-top:14px;border-top:1px solid var(--glass-border);font-size:12.5px;color:var(--muted);}
+@media(max-width:600px){
+  .promo{align-items:flex-end;padding:0;}
+  .promo-card{max-width:none;border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:50px 22px calc(22px + env(safe-area-inset-bottom,0px));transform:translateY(100%);}
+  .promo-title{font-size:22px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .big-flake,.promo-flake{animation:none;}
+  .promo,.promo-card{transition:none;}
+}
 
 /* ============================================================
    REVEAL ANIMATIONS
@@ -1095,10 +1417,14 @@ ul{list-style:none;}
 @media(max-width:600px){
   .services-grid{grid-template-columns:1fr;}
   .areas-grid{grid-template-columns:1fr 1fr;}
-  .hero-actions{flex-direction:column;}
-  .hero-actions .btn-primary,.hero-actions .btn-secondary{justify-content:center;}
+  .hero-lanes{grid-template-columns:1fr;}
+  .lane .btn-primary,.lane .btn-emergency{align-self:stretch;justify-content:center;}
+  .float-bar-inner{grid-template-columns:1.4fr 1fr;}
+  .nav-long{display:none;}
+  .nav-logo{font-size:11px;}
+  .float-btn{white-space:nowrap;font-size:13px;letter-spacing:0.06em;padding:12px 8px;}
   .cta-actions{flex-direction:column;align-items:center;}
-  .cta-actions .btn-primary,.cta-actions .btn-secondary{width:100%;justify-content:center;}
+  .cta-actions .btn-primary,.cta-actions .btn-secondary,.cta-actions .btn-emergency{width:100%;justify-content:center;}
   .footer-top{flex-direction:column;align-items:flex-start;}
   .footer-bottom{flex-direction:column;align-items:flex-start;}
   .stats-grid{grid-template-columns:repeat(2,1fr);}
@@ -1106,26 +1432,63 @@ ul{list-style:none;}
 </style>
 </head>
 <body>
+<canvas id="snow" aria-hidden="true"></canvas>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="flake" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round">
+      <g id="arm">
+        <line x1="50" y1="50" x2="50" y2="6"/>
+        <polyline points="40,14 50,24 60,14"/>
+        <polyline points="42,28 50,36 58,28"/>
+        <line x1="50" y1="18" x2="44" y2="10"/><line x1="50" y1="18" x2="56" y2="10"/>
+      </g>
+      <use href="#arm" transform="rotate(60 50 50)"/>
+      <use href="#arm" transform="rotate(120 50 50)"/>
+      <use href="#arm" transform="rotate(180 50 50)"/>
+      <use href="#arm" transform="rotate(240 50 50)"/>
+      <use href="#arm" transform="rotate(300 50 50)"/>
+      <circle cx="50" cy="50" r="5"/>
+    </g>
+  </symbol>
+</svg>
+
+<!-- WINTER POPUP -->
+<div class="promo" id="promo" role="dialog" aria-modal="true" aria-labelledby="promo-title" hidden>
+  <div class="promo-card" id="promo-card" tabindex="-1">
+    <div class="promo-flake" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#flake"/></svg></div>
+    <button class="promo-close" id="promo-close" type="button" aria-label="Close">✕</button>
+    <span class="promo-kicker">❄ Winter 2026 · Spots filling up</span>
+    <h2 class="promo-title" id="promo-title">Beat the First Snow<span>Swap in Your Driveway</span></h2>
+    <p class="promo-text">We'll put your <b>winter tires on at your home</b>. No shop lineups, no waiting room. Book now to lock in your time slot before the rush.</p>
+    <a href="sms:+16136016471" class="btn-primary" id="promo-book">
+      <span class="btn-icon">💬</span> Text to Book My Swap
+    </a>
+    <button class="promo-later" id="promo-later" type="button">Maybe later</button>
+    <div class="promo-foot">Text your tire size + address to <b style="color:var(--white)">(613) 601-6471</b></div>
+  </div>
+</div>
 
 <!-- ============================================================
      TICKER
 ============================================================ -->
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker-track">
+    <span>Winter Tire Swaps — Book Before the First Snow</span>
     <span>Mobile Tire Change</span>
     <span>Flat Tire Repair</span>
     <span>Off-Rim Balancing</span>
     <span>Serving Ottawa · Kanata · Nepean · Orleans · Gatineau</span>
-    <span>Call/Text (613) 601-6471</span>
-    <span>24/7 Emergency Service</span>
+    <span>Text for a Quote (613) 601-6471</span>
+    <span>24/7 Roadside Emergency</span>
     <span>We Come to You</span>
     <!-- duplicate for seamless loop -->
+    <span>Winter Tire Swaps — Book Before the First Snow</span>
     <span>Mobile Tire Change</span>
     <span>Flat Tire Repair</span>
     <span>Off-Rim Balancing</span>
     <span>Serving Ottawa · Kanata · Nepean · Orleans · Gatineau</span>
-    <span>Call/Text (613) 601-6471</span>
-    <span>24/7 Emergency Service</span>
+    <span>Text for a Quote (613) 601-6471</span>
+    <span>24/7 Roadside Emergency</span>
     <span>We Come to You</span>
   </div>
 </div>
@@ -1136,17 +1499,18 @@ ul{list-style:none;}
 <nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <div class="nav-logo">
-      Ottawa Mobile Tire
+      Mobile Tire Repair Ottawa
       <span>◆ Repair · Change · Balancing</span>
     </div>
     <div class="nav-links">
+      <a href="#winter-tires">Winter Swaps</a>
       <a href="#services">Services</a>
       <a href="#areas">Areas</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-cta">
-      <a href="tel:6136016471" class="btn-nav-call">📞 (613) 601-6471</a>
+      <a href="sms:+16136016471" class="btn-nav-call">💬 Text<span class="nav-long"> for Quote</span></a>
     </div>
   </div>
 </nav>
@@ -1160,11 +1524,16 @@ ul{list-style:none;}
   <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
   <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
   <div class="scan-line" aria-hidden="true"></div>
+  <div class="big-flake bf-1" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#flake"/></svg></div>
+  <div class="big-flake bf-2" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#flake"/></svg></div>
+  <div class="big-flake bf-3" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#flake"/></svg></div>
+  <div class="big-flake bf-4" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#flake"/></svg></div>
+  <div class="big-flake bf-5" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#flake"/></svg></div>
 
   <div class="hero-content">
     <div class="hero-badge" role="status">
       <div class="hero-badge-dot"></div>
-      Ottawa · Mobile · 24/7 Dispatch
+      Now booking winter tire swaps
     </div>
 
     <h1 class="hero-headline">
@@ -1175,20 +1544,29 @@ ul{list-style:none;}
 
     <div class="hero-sub">
       <p>Ottawa's premier mobile tire service — dispatched to your location.</p>
-      <p class="services-inline"><b>Flat Tire Repair</b> · <b>Tire Change at Home</b> · <b>Seasonal Swaps</b> · <b>Off-Rim Balancing</b></p>
+      <p class="services-inline"><b>Winter Tire Changeovers</b> · <b>Flat Tire Repair</b> · <b>Tire Change at Home</b> · <b>Off-Rim Balancing</b></p>
       <p style="margin-top:6px;font-size:14px;">Serving Ottawa · Kanata · Nepean · Orleans · Barrhaven · Gatineau</p>
     </div>
 
-    <div class="hero-actions">
-      <a href="tel:6136016471" class="btn-primary">
-        <span class="btn-icon">📞</span> Call (613) 601-6471
-      </a>
-      <a href="sms:6136016471" class="btn-secondary">
-        <span class="btn-icon">💬</span> Text for Quote
-      </a>
+    <div class="hero-lanes">
+      <div class="lane lane-emergency">
+        <span class="lane-kicker">Stranded now</span>
+        <div class="lane-title">Roadside emergency</div>
+        <p class="lane-desc">Flat on the 417 or stuck in a parking lot? Call for dispatch.</p>
+        <span class="lane-number">(613) 601-6471</span>
+        <a href="tel:+16136016471" class="btn-emergency">
+          <span class="btn-icon">📞</span> Call Now
+        </a>
+      </div>
+      <div class="lane lane-quote">
+        <span class="lane-kicker">Book a service</span>
+        <div class="lane-title">Winter swaps, installs &amp; repairs</div>
+        <p class="lane-desc">Text your tire size (ex: 225/65R17) or a photo of the sidewall, plus your address. We reply with a price and a time slot.</p>
+        <a href="sms:+16136016471" class="btn-primary">
+          <span class="btn-icon">💬</span> Text for a Quote
+        </a>
+      </div>
     </div>
-
-    <p class="hero-hint">Fastest: text your <b>tire size</b> (ex: 225/65R17) + <b>location</b></p>
 
     <div class="hero-brands">
       <span class="hero-brands-label">We work with</span>
@@ -1226,6 +1604,54 @@ ul{list-style:none;}
 </div>
 
 <!-- ============================================================
+     WINTER TIRES
+============================================================ -->
+<section class="section winter" id="winter-tires" aria-labelledby="winter-title">
+  <div class="container">
+    <div class="winter-layout">
+      <div class="winter-body reveal">
+        <span class="winter-badge">❄ Winter 2026 · Now booking</span>
+        <h2 class="section-title" id="winter-title">Winter Tire Changeover in Ottawa — At Your Home</h2>
+        <p>Skip the tire shop lineup this fall. We bring the tools to your <b>driveway, condo parking or office lot</b> and swap your summer or all-season tires for winter tires while you stay inside.</p>
+        <p>We handle <b>winter tires already on rims</b> (quick swap) and <b>tires that need mounting</b> on your existing rims, with off-rim balancing done on-site. Serving Ottawa, Kanata, Nepean, Orleans, Barrhaven and Gatineau.</p>
+        <div class="winter-facts">
+          <div class="winter-fact">
+            <span class="winter-fact-num">7°C</span>
+            <span class="winter-fact-label">Rule of thumb: once daytime temps stay below 7°C, it's time for winter tires.</span>
+          </div>
+          <div class="winter-fact">
+            <span class="winter-fact-num">Dec 1</span>
+            <span class="winter-fact-label">Winter tires are mandatory in Quebec (including Gatineau) from Dec 1 to Mar 15.</span>
+          </div>
+          <div class="winter-fact">
+            <span class="winter-fact-num">Ontario</span>
+            <span class="winter-fact-label">Insurers must offer a discount if you run winter tires. Ask your provider.</span>
+          </div>
+          <div class="winter-fact">
+            <span class="winter-fact-num">Book early</span>
+            <span class="winter-fact-label">The first snowfall brings a rush. Early bookings get the best time slots.</span>
+          </div>
+        </div>
+      </div>
+      <div class="winter-card reveal">
+        <h3>What's included</h3>
+        <ul class="winter-list">
+          <li>All 4 tires swapped at your location</li>
+          <li>Lug nuts torqued to your vehicle's spec</li>
+          <li>Tire pressure set for cold weather</li>
+          <li>Quick check of tread depth and tire condition</li>
+          <li>Mounting + off-rim balancing if your tires aren't on rims</li>
+        </ul>
+        <a href="sms:+16136016471" class="btn-primary btn-full">
+          <span class="btn-icon">💬</span> Text to Book a Winter Swap
+        </a>
+        <p class="winter-card-note">Send your tire size, whether they're on rims, and your address.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      SERVICES
 ============================================================ -->
 <section class="section services" id="services" aria-labelledby="services-title">
@@ -1234,7 +1660,7 @@ ul{list-style:none;}
       <div>
         <div class="section-label">What We Do</div>
         <h2 class="section-title" id="services-title">Our Services</h2>
-        <p class="section-desc">Professional mobile tire solutions delivered directly to you — wherever you are in Ottawa.</p>
+        <p class="section-desc">Mobile tire change, repair and balancing delivered to you — wherever you are in Ottawa.</p>
       </div>
     </div>
 
@@ -1253,9 +1679,9 @@ ul{list-style:none;}
       </div>
       <div class="service-card reveal">
         <div class="service-icon">🌨️</div>
-        <div class="service-name">Seasonal Tire Swaps</div>
-        <div class="service-desc">Summer to winter, or winter to summer — professional seasonal changeovers at your convenience.</div>
-        <span class="service-tag">Spring &amp; Fall</span>
+        <div class="service-name">Winter Tire Changeover</div>
+        <div class="service-desc">Seasonal tire swaps at your home — summer to winter in the fall, winter to summer in the spring. On rims or off rims.</div>
+        <span class="service-tag green">Booking Now</span>
       </div>
       <div class="service-card reveal">
         <div class="service-icon">⚖️</div>
@@ -1266,7 +1692,7 @@ ul{list-style:none;}
       <div class="service-card reveal">
         <div class="service-icon">🛣️</div>
         <div class="service-name">Roadside Tire Help</div>
-        <div class="service-desc">Blowout on the highway or stranded in a parking lot? Call or text us for fast roadside tire assistance.</div>
+        <div class="service-desc">Blowout on the highway or stranded in a parking lot? Call us for fast roadside tire assistance.</div>
         <span class="service-tag green">24/7 Dispatch</span>
       </div>
       <div class="service-card reveal">
@@ -1287,7 +1713,7 @@ ul{list-style:none;}
     <div class="why-layout">
       <div>
         <div class="section-label reveal">Why Choose Us</div>
-        <h2 class="section-title reveal" id="why-title">The Ottawa Mobile Tire Difference</h2>
+        <h2 class="section-title reveal" id="why-title">Why Ottawa Drivers Choose Us</h2>
         <p class="section-desc reveal" style="margin-bottom:32px;">We built this service for one reason: your time is valuable. No shops, no waiting rooms, no hassle.</p>
 
         <div class="why-features">
@@ -1324,14 +1750,14 @@ ul{list-style:none;}
 
       <div class="why-cta-panel reveal">
         <div class="why-cta-panel-title">Ready to Get<br/>Back on the Road?</div>
-        <div class="why-cta-panel-sub">Call or text us now for a fast quote. Available 24/7 across the Ottawa region.</div>
-        <a href="tel:6136016471" class="why-cta-panel-number">(613) 601-6471</a>
+        <div class="why-cta-panel-sub">Text your tire size and address for a quote. Stranded on the road? Call for 24/7 emergency dispatch.</div>
+        <a href="sms:+16136016471" class="why-cta-panel-number">(613) 601-6471</a>
         <div class="why-cta-actions">
-          <a href="tel:6136016471" class="btn-primary btn-full">
-            <span class="btn-icon">📞</span> Call Now — Free Dispatch
+          <a href="sms:+16136016471" class="btn-primary btn-full">
+            <span class="btn-icon">💬</span> Text for a Quote
           </a>
-          <a href="sms:6136016471" class="btn-secondary btn-full">
-            <span class="btn-icon">💬</span> Text for Instant Quote
+          <a href="tel:+16136016471" class="btn-emergency btn-full">
+            <span class="btn-icon">📞</span> Roadside Emergency — Call
           </a>
         </div>
       </div>
@@ -1346,8 +1772,8 @@ ul{list-style:none;}
   <div class="container">
     <div class="reveal">
       <div class="section-label">Coverage</div>
-      <h2 class="section-title" id="areas-title">Service Areas</h2>
-      <p class="section-desc">We cover the entire Ottawa-Gatineau region. Can't find your area? Call us — we may still be able to help.</p>
+      <h2 class="section-title" id="areas-title">Mobile Tire Service Areas</h2>
+      <p class="section-desc">We cover the entire Ottawa-Gatineau region. Can't find your area? Text us — we may still be able to help.</p>
     </div>
 
     <div class="areas-grid">
@@ -1411,7 +1837,7 @@ ul{list-style:none;}
         <div class="area-dot" style="background:var(--green);box-shadow:0 0 8px var(--green);"></div>
         <div>
           <div class="area-name">Other Areas</div>
-          <div class="area-sub">Call to confirm</div>
+          <div class="area-sub">Text to confirm</div>
         </div>
       </div>
     </div>
@@ -1484,7 +1910,7 @@ ul{list-style:none;}
           <div class="faq-icon" aria-hidden="true">+</div>
         </button>
         <div class="faq-a" role="region">
-          <div class="faq-a-inner">Our average response time is around 30 minutes within the Ottawa area. It can vary based on location and current demand — call or text us for a real-time estimate when you need us.</div>
+          <div class="faq-a-inner">Our average response time is around 30 minutes within the Ottawa area. It can vary based on location and current demand — text us for a real-time estimate. For roadside emergencies, call.</div>
         </div>
       </div>
       <div class="faq-item reveal">
@@ -1511,7 +1937,7 @@ ul{list-style:none;}
           <div class="faq-icon" aria-hidden="true">+</div>
         </button>
         <div class="faq-a" role="region">
-          <div class="faq-a-inner">We serve Ottawa, Kanata, Nepean, Orleans, Barrhaven, Gatineau, and surrounding areas. Not sure if we cover your area? Just call or text — we'll let you know right away.</div>
+          <div class="faq-a-inner">We serve Ottawa, Kanata, Nepean, Orleans, Barrhaven, Gatineau, and surrounding areas. Not sure if we cover your area? Just text us — we'll let you know right away.</div>
         </div>
       </div>
       <div class="faq-item reveal">
@@ -1525,11 +1951,29 @@ ul{list-style:none;}
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">
-          <span class="faq-q-text">Do you offer winter / summer tire swaps?</span>
+          <span class="faq-q-text">Do you do winter tire changeovers at home?</span>
           <div class="faq-icon" aria-hidden="true">+</div>
         </button>
         <div class="faq-a" role="region">
-          <div class="faq-a-inner">Absolutely. Seasonal tire changeovers are one of our most popular services. We come to your home or office and do the full swap, including balancing, right in your driveway.</div>
+          <div class="faq-a-inner">Yes. Seasonal tire changeovers are our most popular service. We come to your home, condo or office anywhere in Ottawa and do the full summer-to-winter swap in your driveway, including mounting and balancing if your tires aren't on rims.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">When should I put winter tires on in Ottawa?</span>
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">A good rule is once daytime temperatures stay below 7°C, usually late October to mid-November in Ottawa. Booking before the first snowfall avoids the rush. If you drive in Gatineau or anywhere in Quebec, winter tires are required from December 1 to March 15.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">My winter tires aren't on rims. Can you still swap them?</span>
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">Yes. We mount your winter tires onto your existing rims and balance them on-site. Let us know when you text whether your tires are on rims or not so we can quote it correctly.</div>
         </div>
       </div>
     </div>
@@ -1543,16 +1987,16 @@ ul{list-style:none;}
   <div class="container">
     <div class="cta-box reveal">
       <div class="section-label">Get Help Now</div>
-      <h2 class="section-title">Flat Tire? Need a Swap?<br/>We're Ready.</h2>
+      <h2 class="section-title">Winter Swap? Flat Tire?<br/>We're Ready.</h2>
       <p class="section-desc">Available 24/7 across Ottawa and surrounding areas. Fast, professional, and we come to you.</p>
       <span class="cta-number">(613) 601-6471</span>
-      <span class="cta-number-sub">Call or text anytime — 24/7 dispatch</span>
+      <span class="cta-number-sub">Text for a quote · Call for roadside emergencies</span>
       <div class="cta-actions">
-        <a href="tel:6136016471" class="btn-primary">
-          <span class="btn-icon">📞</span> Call Now
+        <a href="sms:+16136016471" class="btn-primary">
+          <span class="btn-icon">💬</span> Text for a Quote
         </a>
-        <a href="sms:6136016471" class="btn-secondary">
-          <span class="btn-icon">💬</span> Text for Quote
+        <a href="tel:+16136016471" class="btn-emergency">
+          <span class="btn-icon">📞</span> Emergency? Call
         </a>
       </div>
     </div>
@@ -1566,19 +2010,20 @@ ul{list-style:none;}
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-logo">
-        Ottawa Mobile Tire
+        Mobile Tire Repair Ottawa
         <span>Repair · Change · Balancing · 24/7</span>
       </div>
       <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#winter-tires">Winter Swaps</a>
         <a href="#services">Services</a>
         <a href="#areas">Areas</a>
         <a href="#reviews">Reviews</a>
         <a href="#faq">FAQ</a>
-        <a href="tel:6136016471">(613) 601-6471</a>
+        <a href="sms:+16136016471">Text (613) 601-6471</a>
       </nav>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2025 Ottawa Mobile Tire. All rights reserved.</div>
+      <div class="footer-copy">© 2026 Mobile Tire Repair Ottawa. All rights reserved.</div>
       <div class="footer-areas">Ottawa · Kanata · Nepean · Orleans · Barrhaven · Gatineau</div>
     </div>
   </div>
@@ -1589,11 +2034,11 @@ ul{list-style:none;}
 ============================================================ -->
 <div class="float-bar" aria-label="Quick contact bar">
   <div class="float-bar-inner">
-    <a href="tel:6136016471" class="float-btn float-btn-call">
-      📞 Call Now
+    <a href="sms:+16136016471" class="float-btn float-btn-text">
+      💬 Text Quote
     </a>
-    <a href="sms:6136016471" class="float-btn float-btn-text">
-      💬 Get Quote
+    <a href="tel:+16136016471" class="float-btn float-btn-emergency">
+      📞 Emergency
     </a>
   </div>
 </div>
@@ -1652,6 +2097,88 @@ const scrollObs = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '-40% 0px -50% 0px' });
 sections.forEach(s => scrollObs.observe(s));
+
+// Winter popup: shows once per visit, 3s after landing
+(function(){
+  const promo = document.getElementById('promo');
+  if (!promo) return;
+  let seen = false;
+  try { seen = sessionStorage.getItem('winterPromoSeen') === '1'; } catch(e) {}
+  if (seen) return;
+  let lastFocus = null;
+  function open(){
+    lastFocus = document.activeElement;
+    promo.hidden = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => promo.classList.add('show')));
+    document.getElementById('promo-card').focus({preventScroll:true});
+    try { sessionStorage.setItem('winterPromoSeen','1'); } catch(e) {}
+  }
+  function close(){
+    promo.classList.remove('show');
+    setTimeout(() => { promo.hidden = true; }, 350);
+    if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+  }
+  document.getElementById('promo-close').addEventListener('click', close);
+  document.getElementById('promo-later').addEventListener('click', close);
+  document.getElementById('promo-book').addEventListener('click', () => setTimeout(close, 300));
+  promo.addEventListener('click', e => { if (e.target === promo) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !promo.hidden) close(); });
+  setTimeout(open, 3000);
+})();
+
+// Snowfall
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const c = document.getElementById('snow');
+  const ctx = c.getContext('2d');
+  let w, h, dpr, flakes = [];
+  function size(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth; h = window.innerHeight;
+    c.width = w * dpr; c.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = w < 600 ? 32 : 70;
+    flakes = Array.from({length: count}, () => make(true));
+  }
+  function make(anywhere){
+    const r = Math.random() * 2.4 + 0.8;
+    return {
+      x: Math.random() * w,
+      y: anywhere ? Math.random() * h : -10,
+      r: r,
+      vy: r * 0.35 + 0.25,
+      drift: Math.random() * Math.PI * 2,
+      sway: Math.random() * 0.6 + 0.2,
+      a: Math.random() * 0.5 + 0.35
+    };
+  }
+  let running = true;
+  function tick(){
+    if (!running) return;
+    ctx.clearRect(0, 0, w, h);
+    for (const f of flakes){
+      f.drift += 0.01;
+      f.y += f.vy;
+      f.x += Math.sin(f.drift) * f.sway * 0.4;
+      if (f.y > h + 10){ Object.assign(f, make(false)); }
+      if (f.x > w + 10) f.x = -10; else if (f.x < -10) f.x = w + 10;
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(235,245,255,' + f.a + ')';
+      ctx.shadowColor = 'rgba(0,229,255,0.6)';
+      ctx.shadowBlur = f.r > 2 ? 6 : 0;
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  size();
+  window.addEventListener('resize', size);
+  document.addEventListener('visibilitychange', () => {
+    running = !document.hidden;
+    if (running) requestAnimationFrame(tick);
+  });
+  requestAnimationFrame(tick);
+})();
 </script>
 </body>
 </html>
