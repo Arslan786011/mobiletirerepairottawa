@@ -1,21 +1,25 @@
-/* ===== Google Ads conversion tracking: paste your 3 codes here ===== */
+/* ===== Tracking: paste your codes here (Google Ads + Google Analytics) ===== */
 window.TRACKING = {
-    ADS_ID:     'AW-XXXXXXXXXX',   // e.g. AW-1234567890
-    TEXT_LABEL: 'XXXXXXXXXXXX',    // label for the "Text click" conversion
-    CALL_LABEL: 'XXXXXXXXXXXX'     // label for the "Call click" conversion
-  };
-  (function(){
-    var T = window.TRACKING;
-    if (!T.ADS_ID || T.ADS_ID.indexOf('X') !== -1) return;
-    var g = document.createElement('script');
-    g.async = true;
-    g.src = 'https://www.googletagmanager.com/gtag/js?id=' + T.ADS_ID;
-    document.head.appendChild(g);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function(){ dataLayer.push(arguments); };
-    gtag('js', new Date());
-    gtag('config', T.ADS_ID);
-  })();
+  ADS_ID:     'AW-XXXXXXXXXX',   // Google Ads ID, e.g. AW-1234567890
+  TEXT_LABEL: 'XXXXXXXXXXXX',    // label for the "Text click" conversion
+  CALL_LABEL: 'XXXXXXXXXXXX',    // label for the "Call click" conversion
+  GA4_ID:     'G-XXXXXXXXXX'     // Google Analytics 4 measurement ID, e.g. G-AB12CD34EF
+};
+(function(){
+  var T = window.TRACKING;
+  var ok = function(v){ return v && v.indexOf('XXXX') === -1; };
+  var first = ok(T.GA4_ID) ? T.GA4_ID : (ok(T.ADS_ID) ? T.ADS_ID : null);
+  if (!first) return;
+  var g = document.createElement('script');
+  g.async = true;
+  g.src = 'https://www.googletagmanager.com/gtag/js?id=' + first;
+  document.head.appendChild(g);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ dataLayer.push(arguments); };
+  gtag('js', new Date());
+  if (ok(T.GA4_ID)) gtag('config', T.GA4_ID);
+  if (ok(T.ADS_ID)) gtag('config', T.ADS_ID);
+})();
 
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(btn => {
@@ -72,7 +76,10 @@ sections.forEach(s => scrollObs.observe(s));
 window.trackConversion = function(kind){
   if (typeof window.gtag !== 'function') return;
   var T = window.TRACKING;
-  gtag('event', 'conversion', { send_to: T.ADS_ID + '/' + (kind === 'call' ? T.CALL_LABEL : T.TEXT_LABEL) });
+  var ok = function(v){ return v && v.indexOf('XXXX') === -1; };
+  if (ok(T.GA4_ID)) gtag('event', kind === 'call' ? 'call_click' : 'text_click', { page_path: location.pathname });
+  var label = kind === 'call' ? T.CALL_LABEL : T.TEXT_LABEL;
+  if (ok(T.ADS_ID) && ok(label)) gtag('event', 'conversion', { send_to: T.ADS_ID + '/' + label });
 };
 document.addEventListener('click', function(e){
   var link = e.target.closest('a[href^="sms:"], a[href^="tel:"]');
