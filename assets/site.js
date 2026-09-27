@@ -1,13 +1,22 @@
-/* ===== Tracking: paste your codes here (Google Ads + Google Analytics) ===== */
+/* ===== Tracking: paste your codes here (Google Ads + Google Analytics + Microsoft Clarity) ===== */
 window.TRACKING = {
-  ADS_ID:     'AW-XXXXXXXXXX',   // Google Ads ID, e.g. AW-1234567890
-  TEXT_LABEL: 'XXXXXXXXXXXX',    // label for the "Text click" conversion
-  CALL_LABEL: 'XXXXXXXXXXXX',    // label for the "Call click" conversion
-  GA4_ID:     'G-XXXXXXXXXX'     // Google Analytics 4 measurement ID, e.g. G-AB12CD34EF
+  ADS_ID:     'AW-17930508850',        // Google Ads ID
+  TEXT_LABEL: 'UQ_YCJyZ9ocdELK09-VC',  // label for the "Text click" conversion
+  CALL_LABEL: 'oYTACJmZ9ocdELK09-VC',  // label for the "Call click" conversion
+  GA4_ID:     'G-T2F1ZE53Q8',          // Google Analytics 4 measurement ID
+  CLARITY_ID: 'XXXXXXXXXX'             // Microsoft Clarity project ID (paste when ready)
 };
 (function(){
   var T = window.TRACKING;
   var ok = function(v){ return v && v.indexOf('XXXX') === -1; };
+  // Microsoft Clarity (only loads once a real ID is pasted above)
+  if (ok(T.CLARITY_ID)) {
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", T.CLARITY_ID);
+  }
   var first = ok(T.GA4_ID) ? T.GA4_ID : (ok(T.ADS_ID) ? T.ADS_ID : null);
   if (!first) return;
   var g = document.createElement('script');
