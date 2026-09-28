@@ -4,7 +4,7 @@ window.TRACKING = {
   TEXT_LABEL: 'UQ_YCJyZ9ocdELK09-VC',  // label for the "Text click" conversion
   CALL_LABEL: 'oYTACJmZ9ocdELK09-VC',  // label for the "Call click" conversion
   GA4_ID:     'G-T2F1ZE53Q8',          // Google Analytics 4 measurement ID
-  CLARITY_ID: 'XXXXXXXXXX'             // Microsoft Clarity project ID (paste when ready)
+  CLARITY_ID: 'yp63l2vzfy'             // Microsoft Clarity project ID (paste when ready)
 };
 (function(){
   var T = window.TRACKING;
