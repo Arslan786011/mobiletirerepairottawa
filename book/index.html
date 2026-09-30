@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Book Your Winter Swap | Mobile Tire Repair Ottawa</title>
+<meta name="description" content="Book your mobile winter tire swap in Ottawa in 1 minute. We come to your home or work.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#03050f">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap">
+<!-- GA4 only (counts /book visits + sends). The Google Ads conversion tag is left off on purpose:
+     these people already called, so counting them again would teach Ads the wrong thing. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T2F1ZE53Q8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-T2F1ZE53Q8');</script>
+<style>
+:root{--bg:#03050f;--surface:#0d1426;--line:rgba(0,229,255,.14);--cyan:#00e5ff;--green:#1dff8e;--red:#ff4d4d;--white:#eef4ff;--muted:#8899bb;
+--display:'Orbitron',sans-serif;--cond:'Barlow Condensed',sans-serif;--body:'Barlow',system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--white);font:16px/1.5 var(--body);min-height:100vh;padding:env(safe-area-inset-top,0) 16px env(safe-area-inset-bottom,0)}
+.wrap{max-width:520px;margin:0 auto;padding-block:28px 40px;display:grid;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--white);text-decoration:none;font-family:var(--cond);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.brand img{width:32px;height:32px}
+h1{font-family:var(--display);font-size:1.45rem;line-height:1.25;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 18px;display:grid;gap:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:420px){.row{grid-template-columns:1fr}}
+label,legend{display:block;font-family:var(--cond);font-weight:600;letter-spacing:.03em;font-size:.98rem;margin-bottom:6px}
+label i,legend i{font-style:normal;color:var(--muted);font-weight:400}
+input,select{width:100%;font:inherit;color:var(--white);background:#070c1a;border:1px solid var(--line);border-radius:12px;padding:12px 12px;min-height:48px}
+input:focus,select:focus{outline:2px solid var(--cyan);outline-offset:1px}
+fieldset{border:0;margin:0;padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{margin:0}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips span{display:inline-block;padding:10px 14px;border:1px solid var(--line);border-radius:999px;font-family:var(--body);font-weight:500;cursor:pointer}
+.chips input:checked+span{background:var(--cyan);color:var(--bg);border-color:var(--cyan)}
+.chips input:focus-visible+span{outline:2px solid var(--cyan);outline-offset:2px}
+.err input,.err .chips span{border-color:var(--red)}
+.error{color:var(--red);margin:0;min-height:1.2em;font-size:.95rem}
+button{font:700 1.05rem var(--cond);letter-spacing:.05em;text-transform:uppercase;background:var(--green);color:var(--bg);border:0;border-radius:12px;min-height:54px;cursor:pointer}
+button:focus-visible{outline:2px solid var(--white);outline-offset:2px}
+.note{color:var(--muted);margin:0;text-align:center;font-size:.95rem}
+.note a{color:var(--cyan)}
+.points{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0;padding:0;list-style:none;color:var(--muted);font-size:.95rem}
+.points li::before{content:"✓ ";color:var(--green)}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="brand" href="/"><img src="/assets/favicon.svg" alt="" width="32" height="32">Mobile Tire Repair Ottawa</a>
+  <div>
+    <h1>Book your winter tire swap</h1>
+    <p class="sub">Takes 1 minute. Tap send and it opens a text to us with everything filled in. We reply to confirm your time and price.</p>
+  </div>
+  <ul class="points"><li>We come to your home or work</li><li>No shop lineup</li><li>Ottawa &amp; Gatineau</li></ul>
+
+  <form class="card" id="bk" novalidate>
+    <div class="row">
+      <div id="w-name"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Sarah"></div>
+      <div><label for="f-vehicle">Vehicle <i>(optional)</i></label><input id="f-vehicle" name="vehicle" type="text" placeholder="e.g. 2019 Honda Civic"></div>
+    </div>
+    <fieldset id="w-rims">
+      <legend>Are your winter tires on rims?</legend>
+      <div class="chips">
+        <label><input type="radio" name="rims" value="Yes, on rims"><span>Yes, on rims</span></label>
+        <label><input type="radio" name="rims" value="No, need mounting"><span>No, need mounting</span></label>
+        <label><input type="radio" name="rims" value="Not sure"><span>Not sure</span></label>
+      </div>
+    </fieldset>
+    <div><label for="f-size">Tire size <i>(optional, or send a photo after)</i></label><input id="f-size" name="size" type="text" placeholder="e.g. 225/65R17"></div>
+    <div id="w-address"><label for="f-address">Address or area</label><input id="f-address" name="address" type="text" autocomplete="street-address" placeholder="e.g. 123 Main St, Kanata"></div>
+    <div class="row">
+      <div><label for="f-date">Preferred day</label><input id="f-date" name="date" type="date"></div>
+      <div><label for="f-time">Time</label>
+        <select id="f-time" name="time"><option>Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select></div>
+    </div>
+    <p class="error" id="err" role="alert"></p>
+    <button type="submit">💬 Send my booking by text</button>
+    <p class="note" id="note">Rather talk? Call <a href="tel:+16136016471"><b>(613) 601-6471</b></a></p>
+  </form>
+</main>
+<script>
+(function(){
+  var PHONE='+16136016471';
+  var isApple=/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
+  var f=document.getElementById('bk'), err=document.getElementById('err');
+  // Optional ?r=Emma tells us which dispatcher sent the link
+  var rep=''; try{rep=(new URLSearchParams(location.search).get('r')||'').replace(/[^\w .-]/g,'').slice(0,20)}catch(e){}
+  var d=new Date(); d.setDate(d.getDate()+1); document.getElementById('f-date').min=d.toISOString().slice(0,10);
+  try{gtag('event','book_link_view',{rep:rep||'none'})}catch(e){}
+  function fmt(v){if(!v)return 'Flexible';var p=v.split('-').map(Number);return new Date(p[0],p[1]-1,p[2]).toLocaleDateString('en-CA',{weekday:'short',month:'short',day:'numeric'})}
+  function mark(id,bad){document.getElementById(id).classList.toggle('err',bad)}
+  f.addEventListener('input',function(e){var w=e.target.closest('#w-name,#w-address,#w-rims');if(w)w.classList.remove('err');if(!f.querySelector('.err'))err.textContent=''});
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=f.name.value.trim(), address=f.address.value.trim(), r=f.querySelector('input[name="rims"]:checked'), rims=r&&r.value;
+    mark('w-name',!name); mark('w-address',!address); mark('w-rims',!rims);
+    if(!name||!address||!rims){err.textContent='Please add your name, address, and whether your tires are on rims.';return}
+    err.textContent='';
+    var lines=['WINTER SWAP BOOKING (via /book link)',
+      'Name: '+name,
+      f.vehicle.value.trim()?'Vehicle: '+f.vehicle.value.trim():null,
+      'Tires on rims: '+rims,
+      'Tire size: '+(f.size.value.trim()||'Not sure (will send photo)'),
+      'Address: '+address,
+      'Preferred: '+fmt(f.date.value)+', '+f.time.value,
+      rep?'Link sent by: '+rep:null].filter(Boolean);
+    try{gtag('event','book_link_submit',{rep:rep||'none'})}catch(e){}
+    var href='sms:'+PHONE+(isApple?'&':'?')+'body='+encodeURIComponent(lines.join('\n'));
+    location.href=href;
+    document.getElementById('note').innerHTML='Text app didn’t open? Text us at <a href="sms:'+PHONE+'"><b>(613) 601-6471</b></a> or <a href="tel:'+PHONE+'"><b>call</b></a>.';
+  });
+})();
+</script>
+</body>
+</html>
