@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Book Your Winter Swap | Mobile Tire Repair Ottawa</title>
-<meta name="description" content="Book your mobile winter tire swap in Ottawa in 1 minute. We come to your home or work.">
+<title>Book Your Tire Swap | Mobile Tire Repair Ottawa</title>
+<meta name="description" content="Book your mobile tire swap in Ottawa in 1 minute. We come to your home or work.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#03050f">
 <link rel="icon" href="/favicon.ico">
@@ -56,7 +56,7 @@ button:focus-visible{outline:2px solid var(--white);outline-offset:2px}
 <main class="wrap">
   <a class="brand" href="/"><img src="/assets/favicon.svg" alt="" width="32" height="32">Mobile Tire Repair Ottawa</a>
   <div>
-    <h1>Book your winter tire swap</h1>
+    <h1 id="bk-h1">Book your winter tire swap</h1>
     <p class="sub">Takes 1 minute. Tap send and it opens a text to us with everything filled in. We reply to confirm your time and price.</p>
   </div>
   <ul class="points"><li>We come to your home or work</li><li>No shop lineup</li><li>Ottawa &amp; Gatineau</li></ul>
@@ -67,7 +67,7 @@ button:focus-visible{outline:2px solid var(--white);outline-offset:2px}
       <div><label for="f-vehicle">Vehicle <i>(optional)</i></label><input id="f-vehicle" name="vehicle" type="text" placeholder="e.g. 2019 Honda Civic"></div>
     </div>
     <fieldset id="w-rims">
-      <legend>Are your winter tires on rims?</legend>
+      <legend id="bk-rims-q">Are your winter tires on rims?</legend>
       <div class="chips">
         <label><input type="radio" name="rims" value="Yes, on rims"><span>Yes, on rims</span></label>
         <label><input type="radio" name="rims" value="No, need mounting"><span>No, need mounting</span></label>
@@ -93,6 +93,22 @@ button:focus-visible{outline:2px solid var(--white);outline-offset:2px}
   var f=document.getElementById('bk'), err=document.getElementById('err');
   // Optional ?r=Emma tells us which dispatcher sent the link
   var rep=''; try{rep=(new URLSearchParams(location.search).get('r')||'').replace(/[^\w .-]/g,'').slice(0,20)}catch(e){}
+  // Season comes from the booking script (SETTINGS.SEASON), so one switch changes the whole system.
+  // If the script can't be reached in 3.5 s, the page stays on winter wording.
+  var SEASON='winter', API='https://script.google.com/macros/s/AKfycbyjKnwGTA5GzNDKnC2dq76zASZuYogTx35tJrKmfA3Rtg4xlrgjh3FKO86unmhtvC1XtQ/exec';
+  function applySeason(se){
+    SEASON=se==='summer'?'summer':'winter';
+    document.getElementById('bk-h1').textContent='Book your '+SEASON+' tire swap';
+    document.getElementById('bk-rims-q').textContent='Are your '+SEASON+' tires on rims?';
+    document.title='Book Your '+(SEASON==='summer'?'Summer':'Winter')+' Swap | Mobile Tire Repair Ottawa';
+  }
+  try{
+    var qs=(location.search.match(/[?&]season=(summer|winter)/)||[])[1];
+    var ctl=window.AbortController?new AbortController():null; if(ctl) setTimeout(function(){ctl.abort()},3500);
+    fetch(API+'?action=config',ctl?{signal:ctl.signal}:{}).then(function(r){return r.json()}).then(function(c){
+      if(!c||!c.ok) return; applySeason(c.testMode&&qs?qs:c.season);   // ?season= preview only while the script is in TEST MODE
+    }).catch(function(){});
+  }catch(e){}
   var d=new Date(); d.setDate(d.getDate()+1); document.getElementById('f-date').min=d.toISOString().slice(0,10);
   try{gtag('event','book_link_view',{rep:rep||'none'})}catch(e){}
   function fmt(v){if(!v)return 'Flexible';var p=v.split('-').map(Number);return new Date(p[0],p[1]-1,p[2]).toLocaleDateString('en-CA',{weekday:'short',month:'short',day:'numeric'})}
@@ -104,7 +120,7 @@ button:focus-visible{outline:2px solid var(--white);outline-offset:2px}
     mark('w-name',!name); mark('w-address',!address); mark('w-rims',!rims);
     if(!name||!address||!rims){err.textContent='Please add your name, address, and whether your tires are on rims.';return}
     err.textContent='';
-    var lines=['WINTER SWAP BOOKING (via /book link)',
+    var lines=[SEASON.toUpperCase()+' SWAP BOOKING (via /book link)',
       'Name: '+name,
       f.vehicle.value.trim()?'Vehicle: '+f.vehicle.value.trim():null,
       'Tires on rims: '+rims,
