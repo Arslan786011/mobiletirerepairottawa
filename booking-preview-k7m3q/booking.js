@@ -16,7 +16,7 @@
   var T = {
     en: {
       kicker: '❄ Winter swap booking', title: 'Book your winter tire swap', sub: 'We come to your driveway. Pick a time in 2 minutes.',
-      headline: 'Winter swaps from $160 · mounting & balancing included · we come to you.',
+      headline: 'Winter swaps from {MIN} · mounting & balancing included · we come to you.',
       test: '🧪 TEST MODE: bookings are marked TEST and emails go to the owner only',
       s1: 'Your vehicle', year: 'Year', make: 'Make', model: 'Model', trim: 'Trim', choose: 'Choose…', notSure: 'Not sure of trim (use most common)',
       notListed: "My vehicle isn't listed", backToList: '← Pick from the list', otherYear: 'Year', otherMake: 'Make', otherModel: 'Model',
@@ -52,11 +52,12 @@
       fbTitle: 'Online booking is having trouble right now', fbSub: "No problem: text us your booking and we'll confirm it fast.",
       fbBtn: '💬 Text us my booking', offerTitle: '15% off your first winter swap', offerSub: 'Valid 48 hours.', offerYes: 'Claim 15% off', offerNo: 'No thanks',
       offerBar: '🏷️ 15% off applied. Valid until ', loading: 'Loading…', err: 'Something went wrong. Please try again.',
-      tierFrom: 'Your price: ', plusTax: ' + tax'
+      tierFrom: 'Your price: ', plusTax: ' + tax',
+      prevWeek: 'Previous week', nextWeek: 'Next week', pickDay: 'Pick a day above to see open times.'
     },
     fr: {
       kicker: "❄ Réservation pneus d'hiver", title: "Réservez votre changement de pneus d'hiver", sub: 'On se déplace chez vous. Réservez en 2 minutes.',
-      headline: "Changement de pneus d'hiver à partir de 160 $ · montage et équilibrage inclus · on se déplace chez vous.",
+      headline: "Changement de pneus d'hiver à partir de {MIN} · montage et équilibrage inclus · on se déplace chez vous.",
       test: '🧪 MODE TEST : réservations marquées TEST, courriels au propriétaire seulement',
       s1: 'Votre véhicule', year: 'Année', make: 'Marque', model: 'Modèle', trim: 'Version', choose: 'Choisir…', notSure: 'Version inconnue (la plus courante)',
       notListed: "Mon véhicule n'est pas dans la liste", backToList: '← Choisir dans la liste', otherYear: 'Année', otherMake: 'Marque', otherModel: 'Modèle',
@@ -92,13 +93,28 @@
       fbTitle: 'La réservation en ligne a un problème', fbSub: 'Textez-nous votre réservation et on confirme rapidement.',
       fbBtn: '💬 Texte-nous en français ou en anglais', offerTitle: 'Rabais de 15 % sur votre premier changement de pneus', offerSub: 'Valide 48 heures.', offerYes: 'Obtenir 15 %', offerNo: 'Non merci',
       offerBar: '🏷️ Rabais de 15 % appliqué. Valide jusqu\'au ', loading: 'Chargement…', err: 'Une erreur est survenue. Réessayez.',
-      tierFrom: 'Votre prix : ', plusTax: ' + taxes', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars."
+      tierFrom: 'Votre prix : ', plusTax: ' + taxes', prevWeek: 'Semaine précédente', nextWeek: 'Semaine suivante', pickDay: 'Choisissez un jour ci-dessus pour voir les plages libres.', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars."
+    }
+  };
+  // Summer mode (SETTINGS.SEASON = 'summer' in the script): only these lines change.
+  var TS = {
+    en: {
+      kicker: '☀ Summer swap booking', title: 'Book your summer tire swap',
+      headline: 'Summer swaps from {MIN} · mounting & balancing included · we come to you.',
+      onD: 'Your summer tires are already on their own rims. We swap the wheels.', offerTitle: '15% off your first summer swap'
+    },
+    fr: {
+      kicker: "☀ Réservation pneus d'été", title: "Réservez votre changement de pneus d'été",
+      headline: "Changement de pneus d'été à partir de {MIN} · montage et équilibrage inclus · on se déplace chez vous.",
+      onD: "Vos pneus d'été sont déjà sur leurs jantes. On change les roues.",
+      quebec: "Au Québec, les pneus d'hiver peuvent être retirés après le 15 mars."
     }
   };
   var qsLang = (location.search.match(/[?&]lang=(fr|en)/) || [])[1];
+  var qsSeason = (location.search.match(/[?&]season=(summer|winter)/) || [])[1];   // preview only (works in TEST MODE)
   var S = {
     lang: qsLang || lsGet('bk_lang') || ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en'),
-    step: 1, cfg: null, rows: [], session: lsGet('bk_session') || rid(),
+    season: 'winter', week: 0, step: 1, cfg: null, rows: [], session: lsGet('bk_session') || rid(),
     veh: { mode: 'list', year: '', make: '', model: '', trim: '', unsure: false, id: '', cls: 'car', tier: 'STANDARD', size: '', verified: false,
            oYear: '', oMake: '', oModel: '', typed: '', photoUrl: '' },
     service: 'off', tires: 4, zone: null, addrText: '', days: [], date: '', dateLabel: '', slot: '', slotLabel: '', hold: 0,
@@ -113,7 +129,16 @@
     S.ref = r;
   })();
   try { var of = JSON.parse(lsGet('bk_offer') || 'null'); if (of && of.expires > Date.now() && !of.used) S.offer = of; } catch (e) {}
-  function t(k) { return (T[S.lang] && T[S.lang][k]) || T.en[k] || k; }
+  function t(k) {
+    var v = (S.season === 'summer' && TS[S.lang] && TS[S.lang][k]) || (T[S.lang] && T[S.lang][k]) || T.en[k] || k;
+    return v.indexOf('{MIN}') >= 0 ? v.replace('{MIN}', minPrice()) : v;
+  }
+  function minPrice() {
+    var p = S.cfg && S.cfg.prices, m = 160;
+    if (p) { m = Infinity; Object.keys(p).forEach(function (k) { if (+p[k] < m) m = +p[k]; }); }
+    return money(m);
+  }
+  function seasonWord() { return S.season === 'summer' ? 'summer' : 'winter'; }
   function rid() { return 'S' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function money(n) { n = Math.round(n * 100) / 100; var s = n % 1 ? n.toFixed(2) : String(n); return S.lang === 'fr' ? s.replace('.', ',') + ' $' : '$' + s; }
@@ -293,12 +318,17 @@
   function step4() {
     var h = '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('s4') + '</h2><p class="bk-sub">' + t('s4sub') + '</p>';
     if (!S.days.length) return h + '<p>' + (S.busy ? t('loading') : t('err')) + '</p><button class="bk-btn ghost" type="button" data-act="back">' + t('back') + '</button></div>';
-    h += '<div class="bk-days">' + S.days.map(function (d) {
+    var wk = Math.min(S.week || 0, weekCount() - 1), vis = S.days.slice(wk * WK, wk * WK + WK);
+    h += '<div class="bk-week"><button type="button" class="bk-wk-nav" data-act="wk" data-v="-1" aria-label="' + t('prevWeek') + '"' + (wk === 0 ? ' disabled' : '') + '>←</button>' +
+      '<div class="bk-month">' + esc(monthLabel(vis)) + '</div>' +
+      '<button type="button" class="bk-wk-nav" data-act="wk" data-v="1" aria-label="' + t('nextWeek') + '"' + (wk >= weekCount() - 1 ? ' disabled' : '') + '>→</button></div>';
+    h += '<div class="bk-days">' + vis.map(function (d) {
       var p = (S.lang === 'fr' ? d.labelFr : d.label).split(' ');
       var full = d.open === 0;
       return '<button type="button" class="bk-day' + (full ? ' full' : '') + (S.date === d.date ? ' sel' : '') + '" data-act="day" data-v="' + d.date + '"><small>' + esc(p[0]) + '</small><b>' + esc(S.lang === 'fr' ? p[1] : p[2]) + '</b><small>' + esc(S.lang === 'fr' ? p[2] : p[1]) + '</small><em>' + (full ? t('full') : d.open + ' ' + t('open1')) + '</em></button>';
     }).join('') + '</div>';
-    var day = S.days.filter(function (d) { return d.date === S.date; })[0];
+    var day = vis.filter(function (d) { return d.date === S.date; })[0];
+    if (!day) h += '<p class="bk-hint">' + t('pickDay') + '</p>';
     if (day) {
       h += '<label class="bk-label">' + esc(S.lang === 'fr' ? day.labelFr : day.label) + '</label>';
       day.slots.filter(function (s) { return s.state === 'open'; }).forEach(function (s) {
@@ -308,6 +338,24 @@
     }
     h += '<div class="bk-err" id="bk-slot-err">' + (S.slotErr || '') + '</div>';
     return h + '<button class="bk-btn" type="button" data-act="next"' + (S.slot && S.date ? '' : ' disabled') + '>' + t('next') + '</button><button class="bk-btn ghost" type="button" data-act="back">' + t('back') + '</button></div>';
+  }
+
+  var WK = 7;
+  function weekCount() { return Math.max(1, Math.ceil(S.days.length / WK)); }
+  function weekOf(ds) { for (var i = 0; i < S.days.length; i++) if (S.days[i].date === ds) return Math.floor(i / WK); return 0; }
+  function ymd(ds) { var p = ds.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); }
+  function monthLabel(vis) {
+    if (!vis.length) return '';
+    var loc = S.lang === 'fr' ? 'fr-CA' : 'en-CA', a = ymd(vis[0].date), b = ymd(vis[vis.length - 1].date);
+    function m(d, yr, cap) { var x = d.toLocaleDateString(loc, yr ? { month: 'long', year: 'numeric' } : { month: 'long' }); return cap ? x.charAt(0).toUpperCase() + x.slice(1) : x; }
+    var cap2 = S.lang !== 'fr';   // French: only the first word is capitalised
+    if (a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear()) return m(a, true, true);
+    return a.getFullYear() === b.getFullYear() ? m(a, false, true) + ' – ' + m(b, true, cap2) : m(a, true, true) + ' – ' + m(b, true, cap2);
+  }
+  function goWeek(dir) {
+    S.week = Math.max(0, Math.min(weekCount() - 1, (S.week || 0) + dir));
+    var vis = S.days.slice(S.week * WK, S.week * WK + WK), f = vis.filter(function (d) { return d.open; })[0];
+    S.date = f ? f.date : ''; S.slot = ''; S.slotErr = ''; render();
   }
 
   function waitHtml() {
@@ -383,14 +431,14 @@
     return f(d.start) + '/' + f(d.end);
   }
   function gcalLink(d) {
-    var title = S.lang === 'fr' ? "Changement de pneus d'hiver (Mobile Tire Repair Ottawa)" : 'Winter tire swap (Mobile Tire Repair Ottawa)';
+    var title = S.lang === 'fr' ? 'Changement de pneus ' + (S.season === 'summer' ? "d'été" : "d'hiver") + ' (Mobile Tire Repair Ottawa)' : (S.season === 'summer' ? 'Summer' : 'Winter') + ' tire swap (Mobile Tire Repair Ottawa)';
     return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(title) + '&dates=' + calDates(d) +
       '&details=' + encodeURIComponent(d.bookingNo + ' · ' + t('change')) + '&location=' + encodeURIComponent(d.address || '');
   }
   function icsHref(d) {
     var dt = calDates(d).split('/');
     var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//MTRO//Booking//EN', 'BEGIN:VEVENT', 'UID:' + d.bookingNo + '@mobiletirerepairottawa.ca',
-      'DTSTAMP:' + dt[0], 'DTSTART:' + dt[0], 'DTEND:' + dt[1], 'SUMMARY:Winter tire swap (Mobile Tire Repair Ottawa)',
+      'DTSTAMP:' + dt[0], 'DTSTART:' + dt[0], 'DTEND:' + dt[1], 'SUMMARY:' + (S.season === 'summer' ? 'Summer' : 'Winter') + ' tire swap (Mobile Tire Repair Ottawa)',
       'LOCATION:' + String(d.address || '').replace(/,/g, '\\,'), 'DESCRIPTION:' + d.bookingNo, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
     return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
   }
@@ -398,7 +446,7 @@
   // ---------------------------------------------------------------- fallback (script down)
   function smsBody() {
     var v = S.veh;
-    var lines = ['WINTER SWAP BOOKING'];
+    var lines = [seasonWord().toUpperCase() + ' SWAP BOOKING'];
     var veh = vehicleLabel(); if (veh.trim()) lines.push('Vehicle: ' + veh);
     if (v.typed) lines.push('Tire size: ' + v.typed);
     lines.push('Service: ' + (S.service === 'on' ? 'On rims' : 'Off rims (mount & balance)') + ' x' + S.tires);
@@ -467,6 +515,7 @@
     if (act === 'back') { S.bookErr = ''; S.step = Math.max(1, S.step - 1); return render(); }
     if (act === 'next') return next();
     if (act === 'zone') return checkZone();
+    if (act === 'wk') return goWeek(+val);
     if (act === 'day') return pickDay(val);
     if (act === 'slot') return pickSlot(val);
     if (act === 'wait') return joinWait();
@@ -508,6 +557,7 @@
       S.days = r.days;
       if (S.date && !S.days.some(function (d) { return d.date === S.date && d.open; })) { S.date = ''; S.slot = ''; }
       if (!S.date) { var f = S.days.filter(function (d) { return d.open; })[0]; if (f) S.date = f.date; }
+      S.week = S.date ? weekOf(S.date) : 0;
       render();
     }).catch(function () { S.busy = false; goFallback(); });
   }
@@ -672,6 +722,10 @@
   Promise.all([apiGet('config'), apiGet('vehicles')]).then(function (res) {
     if (!res[0].ok || !res[1].ok) return goFallback();
     S.cfg = res[0]; S.rows = res[1].rows;
+    S.season = S.cfg.season === 'summer' ? 'summer' : 'winter';
+    if (S.cfg.testMode && qsSeason) S.season = qsSeason;   // ?season=summer preview while in TEST MODE
+    document.title = t('title') + ' | Mobile Tire Repair Ottawa';
+    if (S.season === 'summer') { var sn = document.getElementById('snow'); if (sn) sn.style.display = 'none'; }   // no snowfall in summer
     render();
   }).catch(function () { goFallback(); });
   window.__bk = S; // for testing
