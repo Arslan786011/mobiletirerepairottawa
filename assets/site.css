@@ -1553,3 +1553,78 @@ a.footer-logo{display:block;text-decoration:none;margin-bottom:12px;}
   .page-lead{font-size:16.5px;}
   .page-hero{padding:40px 0 40px;}
 }
+
+/* ============================================================
+   MOBILE BOOKING PUSH (Oct 2026)
+   - 3-button bottom bar: Book | Text | Call (only on pages whose bar has .has-book)
+   - Winter banner at the top of the homepage (mobile only)
+   - Tappable service cards + winter card "Book now"
+============================================================ */
+/* bottom bar: Book first and brightest */
+.float-btn-book{
+  background:linear-gradient(180deg,#5ff2ff 0%,#00e5ff 55%,#00c8e0 100%);
+  color:var(--bg-void);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.35) inset,0 0 22px rgba(0,229,255,0.55);
+}
+.float-bar-inner.has-book{grid-template-columns:1.25fr 1fr 1fr;gap:8px;}
+.float-bar-inner.has-book .float-btn-text{
+  background:#0c2a22;
+  color:var(--green);
+  box-shadow:none;
+  border:1px solid rgba(29,255,142,0.55);
+}
+.float-bar-inner.has-book .float-btn{padding:13px 6px;font-size:14px;letter-spacing:0.07em;white-space:nowrap;}
+.float-bar-inner.has-book .float-btn-book{font-size:15px;}
+
+/* winter banner (homepage, mobile only) */
+.m-winter-banner{display:none;}
+@media(max-width:900px){
+  .m-winter-banner{
+    display:block;
+    position:relative;z-index:2;
+    padding:11px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    background:linear-gradient(90deg,#0b2a3a 0%,#0e3b4f 50%,#0b2a3a 100%);
+    border-bottom:1px solid rgba(0,229,255,0.45);
+    color:var(--white);text-decoration:none;text-align:center;
+    font-family:var(--font-cond);font-size:clamp(13px,4vw,16px);font-weight:700;letter-spacing:0.01em;line-height:1.25;
+  }
+  .m-winter-banner b{color:var(--cyan);font-weight:800;}
+  .m-winter-banner .arr{color:var(--cyan);font-weight:800;margin-left:2px;}
+}
+
+/* service cards: look tappable */
+a.service-card,.service-card.has-book{cursor:pointer;}
+.service-card .service-name{font-size:15px;}
+.service-card .service-desc{font-size:15px;line-height:1.55;}
+.service-card .service-more{font-size:15px;}
+.service-card .card-arrow{
+  position:absolute;top:22px;right:20px;
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(0,229,255,0.35);background:rgba(0,229,255,0.08);
+  color:var(--cyan);font-size:18px;font-weight:700;line-height:1;
+  transition:transform .2s,background .2s;
+}
+a.service-card:hover .card-arrow,.service-card.has-book:hover .card-arrow{transform:translateX(3px);background:rgba(0,229,255,0.16);}
+a.service-card:active,.service-card.has-book:active{transform:scale(0.985);}
+/* winter card: whole card -> winter page; Book now button sits above the card link */
+.service-card.has-book{border-color:rgba(0,229,255,0.4);background:linear-gradient(135deg,rgba(0,229,255,0.1) 0%,rgba(13,20,38,0.9) 100%);}
+.service-card.has-book .card-link{color:inherit;text-decoration:none;}
+.service-card.has-book .card-link::after{content:'';position:absolute;inset:0;z-index:1;}
+.service-card .service-price{display:block;margin-top:10px;font-family:var(--font-cond);font-size:18px;font-weight:700;color:var(--white);letter-spacing:0.02em;}
+.service-card .service-price b{color:var(--green);font-size:22px;}
+.service-card .card-book{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:14px;padding:13px 16px;border-radius:var(--radius-md);
+  background:linear-gradient(180deg,#5ff2ff 0%,#00e5ff 55%,#00c8e0 100%);
+  color:var(--bg-void);text-decoration:none;
+  font-family:var(--font-cond);font-size:16px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;
+  box-shadow:0 0 18px rgba(0,229,255,0.4);
+}
+.service-card .card-book:hover{filter:brightness(1.08);}
+@media(max-width:600px){
+  .service-card{padding:22px 20px;}
+  .service-card .service-name{font-size:16px;padding-right:44px;}
+  .service-card .service-icon{font-size:30px;margin-bottom:12px;}
+}
