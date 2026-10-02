@@ -1628,3 +1628,8 @@ a.service-card:active,.service-card.has-book:active{transform:scale(0.985);}
   .service-card .service-name{font-size:16px;padding-right:44px;}
   .service-card .service-icon{font-size:30px;margin-bottom:12px;}
 }
+
+/* m-winter-banner fit (v6): show the whole line on phones instead of cutting it off */
+@media(max-width:900px){
+  .m-winter-banner{white-space:normal;overflow:visible;text-overflow:clip;font-size:clamp(12px,3.4vw,16px);letter-spacing:0;padding:10px 8px;}
+}

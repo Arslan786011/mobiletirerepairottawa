@@ -58,7 +58,7 @@
       emailSent: 'A confirmation email is on its way.', change: 'Need to change it? Text (613) 601-6471.', addCal: '📅 Add to my calendar', addIcs: 'Download calendar file (.ics)',
       testDone: '🧪 Test booking saved. Check the Winter Swaps calendar, your email and the WhatsApp groups.',
       fbTitle: 'Online booking is having trouble right now', fbSub: "No problem: text us your booking and we'll confirm it fast.",
-      fbBtn: '💬 Text us my booking', offerTitle: '15% off your first winter swap', offerSub: 'Valid 48 hours.', offerYes: 'Claim 15% off', offerNo: 'No thanks',
+      fbBtn: '💬 Text us my booking', offerTitle: '15% off your first winter swap', offerSub: 'Valid 48 hours. New customers only.', offerYes: 'Claim 15% off', offerNo: 'No thanks',
       offerBar: '🏷️ 15% off applied. Valid until ', loading: 'Loading…', err: 'Something went wrong. Please try again.',
       tierFrom: 'Your price: ', plusTax: ' + tax',
       prevWeek: 'Previous week', nextWeek: 'Next week', pickDay: 'Pick a day above to see open times.'
@@ -107,7 +107,7 @@
       emailSent: 'Un courriel de confirmation est en route.', change: 'Pour modifier : textez le (613) 601-6471.', addCal: '📅 Ajouter à mon calendrier', addIcs: 'Télécharger le fichier calendrier (.ics)',
       testDone: '🧪 Réservation test enregistrée. Vérifiez le calendrier, votre courriel et les groupes WhatsApp.',
       fbTitle: 'La réservation en ligne a un problème', fbSub: 'Textez-nous votre réservation et on confirme rapidement.',
-      fbBtn: '💬 Texte-nous en français ou en anglais', offerTitle: 'Rabais de 15 % sur votre premier changement de pneus', offerSub: 'Valide 48 heures.', offerYes: 'Obtenir 15 %', offerNo: 'Non merci',
+      fbBtn: '💬 Texte-nous en français ou en anglais', offerTitle: 'Rabais de 15 % sur votre premier changement de pneus', offerSub: 'Valide 48 heures. Nouveaux clients seulement.', offerYes: 'Obtenir 15 %', offerNo: 'Non merci',
       offerBar: '🏷️ Rabais de 15 % appliqué. Valide jusqu\'au ', loading: 'Chargement…', err: 'Une erreur est survenue. Réessayez.',
       tierFrom: 'Votre prix : ', plusTax: ' + taxes', prevWeek: 'Semaine précédente', nextWeek: 'Semaine suivante', pickDay: 'Choisissez un jour ci-dessus pour voir les plages libres.', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars."
     }
@@ -161,15 +161,29 @@
 
   // ---------------------------------------------------------------- API
   function withTimeout(p, ms) { return Promise.race([p, new Promise(function (_, rej) { setTimeout(function () { rej(new Error('timeout')); }, ms); })]); }
+  // Google sometimes answers with a one-off 404 (~1 in 22 calls). Wait 1 s and try again before giving up.
+  // Bookings, waitlist and custom-quote requests are only resent when Google clearly did NOT run the script
+  // (an error status like 404), never after a timeout, so nobody gets booked or posted twice.
+  var SAFE_TO_RESEND = { zone: 1, hold: 1, offer: 1, draft: 1, photo: 1 };
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function callApi(url, opts, retries, ms, anyError) {
+    return withTimeout(fetch(url, opts), ms).then(function (r) {
+      if (!r.ok) { var e = new Error('http_' + r.status); e.notRun = true; throw e; }
+      return r.json();
+    }).catch(function (e) {
+      if (retries > 0 && (e.notRun || anyError)) return sleep(1000).then(function () { return callApi(url, opts, retries - 1, ms, anyError); });
+      throw e;
+    });
+  }
   function apiGet(action, params) {
     if (!API || API.indexOf('PASTE') >= 0) return Promise.reject(new Error('no_api'));
     var q = '?action=' + encodeURIComponent(action);
     Object.keys(params || {}).forEach(function (k) { q += '&' + k + '=' + encodeURIComponent(params[k]); });
-    return withTimeout(fetch(API + q, { method: 'GET' }).then(function (r) { return r.json(); }), 20000);
+    return callApi(API + q, { method: 'GET' }, action === 'vehicles' ? 2 : 1, 20000, true);
   }
   function apiPost(obj) {
     if (!API || API.indexOf('PASTE') >= 0) return Promise.reject(new Error('no_api'));
-    return withTimeout(fetch(API, { method: 'POST', body: JSON.stringify(obj) }).then(function (r) { return r.json(); }), 30000);
+    return callApi(API, { method: 'POST', body: JSON.stringify(obj) }, 1, 30000, !!SAFE_TO_RESEND[obj.action]);
   }
 
   // ---------------------------------------------------------------- pricing (preview; the server has the final say)
@@ -215,7 +229,10 @@
   }
   function basePrice(service, tires, tier) {
     var c = S.cfg;
-    if (service === 'on') return +c.onRim[tires];
+    if (service === 'on') {   // on-rim: one price for cars/SUVs, one for pickups/large SUVs (settings in the script)
+      var grp = c.onRim[(tier === 'PICKUP' || tier === 'PICKUP_LOW') ? 'PICKUP' : 'CAR'];
+      return +(grp ? grp[tires] : c.onRim[tires]);
+    }
     return tires === 4 ? +c.prices[tier] : +c.twoTireOffRim[tier];
   }
   function quote() {
@@ -326,6 +343,9 @@
     if (w && !keep) w.innerHTML = chipHtml();
     var b = root.querySelector('[data-act="next"]'); if (b) b.disabled = !step1Ready();
     var e = document.getElementById('bk-size-err'); if (e) e.textContent = S.veh.typed && !parseSize(S.veh.typed) ? t('sizeBad') : '';
+  }
+  function markStarted() {   // picked a car → if they leave before confirming, the 15% offer can show (assets/offer.js)
+    if (S.cfg && !S.done && step1Basics() && !isExotic() && !lsGet('bk_started')) lsSet('bk_started', String(Date.now()));
   }
   function step1Basics() {
     var v = S.veh;
@@ -556,10 +576,10 @@
       if (val === '__unsure') { v.unsure = true; v.trim = ''; applyRow(commonRow(list)); }
       else { v.unsure = false; v.trim = val; applyRow(list.filter(function (r) { return r[5] === val; })[0]); }
     }
-    else if (f === 'typed' || f === 'oYear' || f === 'oMake' || f === 'oModel') { v[f] = val.trim(); return refreshStep1(); }
+    else if (f === 'typed' || f === 'oYear' || f === 'oMake' || f === 'oModel') { v[f] = val.trim(); refreshStep1(); return markStarted(); }
     else if (f === 'addr') { S.addrText = val.trim(); return; }
     else if (f === 'name' || f === 'phone' || f === 'email' || f === 'notes') { S.c[f] = val.trim(); return; }
-    render();
+    render(); markStarted();
   });
   root.addEventListener('input', function (e) {
     var f = e.target.getAttribute('data-f');
@@ -720,7 +740,7 @@
       if (r.ok) {
         S.done = r;
         if (S.offer) { S.offer.used = true; lsSet('bk_offer', JSON.stringify(S.offer)); S.offer = null; }
-        lsSet('bk_booked', '1');
+        lsSet('bk_booked', '1'); lsSet('bk_started', '');
         fireConversion(r);
         return render();
       }
@@ -759,43 +779,19 @@
     document.body.classList.toggle('bk-fr-textonly', textOnly);
   }
 
-  // ---------------------------------------------------------------- 15% leaving offer (once per visitor, no fake timers)
-  var offerModal = document.getElementById('bk-offer');
-  var offerArmedAt = Date.now() + 8000, idleTimer = null, wasHidden = false;
-  function offerEligible() {
-    return S.cfg && !S.fatal && !S.done && !S.offer && !lsGet('bk_offer_seen') && !lsGet('bk_booked') && Date.now() > offerArmedAt && offerModal;
-  }
-  function showOffer() {
-    if (!offerEligible()) return;
-    lsSet('bk_offer_seen', '1');
-    offerModal.querySelector('h3').textContent = t('offerTitle');
-    offerModal.querySelector('p').textContent = t('offerSub');
-    offerModal.querySelector('[data-o="yes"]').textContent = t('offerYes');
-    offerModal.querySelector('[data-o="no"]').textContent = t('offerNo');
-    offerModal.hidden = false;
-  }
-  if (offerModal) {
-    offerModal.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-o]'); if (!b && e.target !== offerModal) return;
-      offerModal.hidden = true;
-      if (b && b.getAttribute('data-o') === 'yes') {
-        apiPost({ action: 'offer', session: S.session }).then(function (r) {
-          if (r.ok) { S.offer = { offerId: r.offerId, expires: r.expires, percent: r.percent }; lsSet('bk_offer', JSON.stringify(S.offer)); render(); }
-        }).catch(function () {});
-      }
-    });
-    // Desktop: exit intent
-    document.addEventListener('mouseout', function (e) { if (!e.relatedTarget && e.clientY <= 0 && window.matchMedia('(pointer:fine)').matches) showOffer(); });
-    // Mobile: tab switch (show when they come back)
-    document.addEventListener('visibilitychange', function () {
-      if (document.visibilityState === 'hidden') wasHidden = true;
-      else if (wasHidden) { wasHidden = false; showOffer(); }
-    });
-    // Idle ~30s
-    function resetIdle() { clearTimeout(idleTimer); idleTimer = setTimeout(showOffer, 30000); }
-    ['touchstart', 'scroll', 'keydown', 'mousemove', 'click'].forEach(function (ev) { document.addEventListener(ev, resetIdle, { passive: true }); });
-    resetIdle();
-  }
+  // ---------------------------------------------------------------- 15% leaving offer
+  // The popup + triggers live in /assets/offer.js (shared with the homepage and winter page).
+  // Here we only tell it when it may show, whether a car is picked, and how to apply the offer.
+  window.MTRO_OFFER = {
+    canShow: function () { return !!S.cfg && !S.fatal && !S.done && !S.offer && !S.busy; },
+    started: function () { return !!S.cfg && !S.done && step1Basics() && !isExotic(); },
+    text: function () { return { title: t('offerTitle'), sub: t('offerSub'), yes: t('offerYes'), no: t('offerNo') }; },
+    claim: function () {
+      apiPost({ action: 'offer', session: S.session }).then(function (r) {
+        if (r.ok) { S.offer = { offerId: r.offerId, expires: r.expires, percent: r.percent }; lsSet('bk_offer', JSON.stringify(S.offer)); render(); }
+      }).catch(function () {});
+    }
+  };
 
   // ---------------------------------------------------------------- start
   render();
