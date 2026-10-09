@@ -204,6 +204,7 @@ document.addEventListener('click', function(e){
 (function(){
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const c = document.getElementById('snow');
+  if (!c) return;
   const ctx = c.getContext('2d');
   const mobile = window.innerWidth < 600;
   let w = 0, h = 0, dpr = 1, flakes = [];
