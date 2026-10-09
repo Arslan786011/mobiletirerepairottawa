@@ -15,8 +15,8 @@
   // ---------------------------------------------------------------- text (EN / FR)
   var T = {
     en: {
-      kicker: '❄ Winter swap booking', title: 'Book your winter tire swap', sub: 'We come to your driveway. Pick a time in 2 minutes.',
-      headline: 'Winter swaps from {MIN} · mounting & balancing included · we come to you.',
+      kicker: '❄ Winter swap booking', title: 'Book your winter tire swap', sub: "We come to your driveway. Send your request in 2 minutes and we'll call you.",
+      headline: 'Winter tire swaps · mounting & balancing included · we come to you. We call to confirm your price.',
       test: '🧪 TEST MODE: bookings are marked TEST and emails go to the owner only',
       s1: 'Your vehicle', year: 'Year', make: 'Make', model: 'Model', trim: 'Trim', choose: 'Choose…', notSure: 'Not sure of trim (use most common)',
       notListed: "My vehicle isn't listed", backToList: '← Pick from the list', otherYear: 'Year', otherMake: 'Make', otherModel: 'Model',
@@ -28,7 +28,7 @@
       s2: 'What do you need?', off: 'Off rims: mount & balance', offD: 'Your tires need to be moved onto your rims and balanced.',
       on: 'On rims', onD: 'Your winter tires are already on their own rims. We swap the wheels.', howMany: 'How many tires?', t4: '4 tires', t2: '2 tires',
       s3: "Where's the car?", addr: 'Street address + city', addrPh: 'e.g. 123 Greenbank Rd, Nepean', check: 'Check address',
-      z1: "✅ Red zone: no travel fee.", z2: '🚐 Blue zone: travel fee +$FEE.', z3: '🚐 Black zone: travel fee +$FEE.',
+      z1: "✅ Good news, we cover your area.", z2: '✅ Good news, we cover your area.', z3: '✅ Good news, we cover your area.',
       z0: 'Outside our service area — call us.',
       multi: 'I have 2 or more cars at this address', multiWaived: 'Travel fee waived for 2+ cars',
       multiNote: "Book one time window for all of them. We'll text you to confirm the other car(s).",
@@ -47,25 +47,25 @@
       s5: 'How do we reach you?', name: 'Name', phone: 'Mobile phone', email: 'Email (optional, for your confirmation)', notes: 'Parking notes (optional)',
       notesPh: 'Driveway, underground, visitor spot…', mayContact: 'We may contact you about this booking.',
       phoneBad: 'Please enter a 10-digit phone number.', nameBad: 'Please enter your name.',
-      s6: 'Confirm your booking', when: 'When', service: 'Service', where: 'Where', vehicle: 'Vehicle', contact: 'Contact', tsize: 'Tire size',
+      s6: 'Check your details', when: 'When', service: 'Service', where: 'Where', vehicle: 'Vehicle', contact: 'Contact', tsize: 'Tire size',
       sizeEst: 'estimated from vehicle', sizeCust: 'entered by you', sizeUnk: "we'll confirm by phone",
       price: 'Service', off15: '15% off', zoneFee: 'Travel fee', subtotal: 'Subtotal', tax: 'Tax', total: 'Total',
       pay: 'Pay the tech when done: cash, card or e-transfer.', locked: "Price is locked based on your vehicle. If your tires turn out to be a different size, we'll let you know before we start.",
-      noHidden: 'No hidden fees.', confirm: '✓ Confirm booking', booking: 'Booking…',
+      noHidden: 'No hidden fees.', confirm: '✓ Send my request', booking: 'Sending…',
       priceChanged: 'The price was updated. Please review and confirm again.', offerGone: "Your 15% offer couldn't be applied (it may have expired or already been used). Please review the price.",
       limit: 'This phone number already has bookings today. Please call or text us.',
-      doneT: "You're booked!", doneR: 'Request received', doneRsub: "We'll text you to confirm your time.", bookingNo: 'Booking #',
-      emailSent: 'A confirmation email is on its way.', change: 'Need to change it? Text (613) 601-6471.', addCal: '📅 Add to my calendar', addIcs: 'Download calendar file (.ics)',
+      doneT: "You're booked!", doneR: 'Request received!', doneRsub: "We'll call you shortly to confirm the time and give you your price.", bookingNo: 'Request #',
+      emailSent: 'A copy of your request is in your email.', change: 'Need us sooner? Call or text (613) 601-6471.', addCal: '📅 Add to my calendar', addIcs: 'Download calendar file (.ics)',
       testDone: '🧪 Test booking saved. Check the Winter Swaps calendar, your email and the WhatsApp groups.',
       fbTitle: 'Online booking is having trouble right now', fbSub: "No problem: text us your booking and we'll confirm it fast.",
       fbBtn: '💬 Text us my booking', offerTitle: '15% off your first winter swap', offerSub: 'Valid 48 hours. New customers only.', offerYes: 'Claim 15% off', offerNo: 'No thanks',
       offerBar: '🏷️ 15% off applied. Valid until ', loading: 'Loading…', err: 'Something went wrong. Please try again.',
-      tierFrom: 'Your price: ', plusTax: ' + tax',
+      tierFrom: 'Your price: ', plusTax: ' + tax', callPrice: "We'll call you shortly to confirm the time and give you your price.",
       prevWeek: 'Previous week', nextWeek: 'Next week', pickDay: 'Pick a day above to see open times.'
     },
     fr: {
-      kicker: "❄ Réservation pneus d'hiver", title: "Réservez votre changement de pneus d'hiver", sub: 'On se déplace chez vous. Réservez en 2 minutes.',
-      headline: "Changement de pneus d'hiver à partir de {MIN} · montage et équilibrage inclus · on se déplace chez vous.",
+      kicker: "❄ Réservation pneus d'hiver", title: "Réservez votre changement de pneus d'hiver", sub: 'On se déplace chez vous. Envoyez votre demande en 2 minutes et on vous appelle.',
+      headline: "Changement de pneus d'hiver · montage et équilibrage inclus · on se déplace chez vous. On vous appelle pour confirmer le prix.",
       test: '🧪 MODE TEST : réservations marquées TEST, courriels au propriétaire seulement',
       s1: 'Votre véhicule', year: 'Année', make: 'Marque', model: 'Modèle', trim: 'Version', choose: 'Choisir…', notSure: 'Version inconnue (la plus courante)',
       notListed: "Mon véhicule n'est pas dans la liste", backToList: '← Choisir dans la liste', otherYear: 'Année', otherMake: 'Marque', otherModel: 'Modèle',
@@ -77,7 +77,7 @@
       s2: 'De quoi avez-vous besoin?', off: 'Hors jantes : montage et équilibrage', offD: 'Les pneus doivent être montés sur vos jantes et équilibrés.',
       on: 'Sur jantes', onD: "Vos pneus d'hiver sont déjà sur leurs jantes. On change les roues.", howMany: 'Combien de pneus?', t4: '4 pneus', t2: '2 pneus',
       s3: 'Où est le véhicule?', addr: 'Adresse + ville', addrPh: 'ex. 123 rue Principale, Gatineau', check: "Vérifier l'adresse",
-      z1: '✅ Zone rouge : aucuns frais de déplacement.', z2: '🚐 Zone bleue : frais de déplacement +FEE $.', z3: '🚐 Zone noire : frais de déplacement +FEE $.',
+      z1: '✅ Bonne nouvelle, on dessert votre secteur.', z2: '✅ Bonne nouvelle, on dessert votre secteur.', z3: '✅ Bonne nouvelle, on dessert votre secteur.',
       z0: 'Hors de notre zone de service — texte-nous en français ou en anglais.',
       multi: "J'ai 2 véhicules ou plus à cette adresse", multiWaived: 'Frais de déplacement annulés (2+ véhicules)',
       multiNote: 'Réservez une seule plage pour tous. On vous texte pour confirmer les autres véhicules.',
@@ -96,32 +96,32 @@
       s5: 'Comment vous joindre?', name: 'Nom', phone: 'Cellulaire', email: 'Courriel (facultatif, pour la confirmation)', notes: 'Stationnement (facultatif)',
       notesPh: 'Entrée, garage souterrain, visiteurs…', mayContact: 'Nous pourrions vous contacter au sujet de cette réservation.',
       phoneBad: 'Entrez un numéro à 10 chiffres.', nameBad: 'Entrez votre nom.',
-      s6: 'Confirmez votre réservation', when: 'Quand', service: 'Service', where: 'Adresse', vehicle: 'Véhicule', contact: 'Contact', tsize: 'Taille',
+      s6: 'Vérifiez vos informations', when: 'Quand', service: 'Service', where: 'Adresse', vehicle: 'Véhicule', contact: 'Contact', tsize: 'Taille',
       sizeEst: 'estimée selon le véhicule', sizeCust: 'entrée par vous', sizeUnk: 'à confirmer par téléphone',
       price: 'Service', off15: 'Rabais 15 %', zoneFee: 'Déplacement', subtotal: 'Sous-total', tax: 'Taxes', total: 'Total',
       pay: 'Paiement au technicien à la fin : comptant, carte ou virement Interac.', locked: "Le prix est basé sur votre véhicule. Si vos pneus sont d'une autre taille, on vous le dira avant de commencer.",
-      noHidden: 'Aucuns frais cachés.', confirm: '✓ Confirmer', booking: 'Réservation…',
+      noHidden: 'Aucuns frais cachés.', confirm: '✓ Envoyer ma demande', booking: 'Envoi…',
       priceChanged: 'Le prix a été mis à jour. Vérifiez et confirmez de nouveau.', offerGone: "Le rabais de 15 % n'a pas pu être appliqué (expiré ou déjà utilisé). Vérifiez le prix.",
       limit: "Ce numéro a déjà des réservations aujourd'hui. Texte-nous en français ou en anglais.",
-      doneT: 'Réservation confirmée!', doneR: 'Demande reçue', doneRsub: 'On vous texte pour confirmer.', bookingNo: 'Réservation n°',
-      emailSent: 'Un courriel de confirmation est en route.', change: 'Pour modifier : textez le (613) 601-6471.', addCal: '📅 Ajouter à mon calendrier', addIcs: 'Télécharger le fichier calendrier (.ics)',
+      doneT: 'Réservation confirmée!', doneR: 'Demande reçue!', doneRsub: "On vous appelle bientôt pour confirmer l'heure et vous donner le prix.", bookingNo: 'Demande n°',
+      emailSent: 'Une copie de votre demande est dans vos courriels.', change: 'Besoin de nous plus vite? Textez le (613) 601-6471.', addCal: '📅 Ajouter à mon calendrier', addIcs: 'Télécharger le fichier calendrier (.ics)',
       testDone: '🧪 Réservation test enregistrée. Vérifiez le calendrier, votre courriel et les groupes WhatsApp.',
       fbTitle: 'La réservation en ligne a un problème', fbSub: 'Textez-nous votre réservation et on confirme rapidement.',
       fbBtn: '💬 Texte-nous en français ou en anglais', offerTitle: 'Rabais de 15 % sur votre premier changement de pneus', offerSub: 'Valide 48 heures. Nouveaux clients seulement.', offerYes: 'Obtenir 15 %', offerNo: 'Non merci',
       offerBar: '🏷️ Rabais de 15 % appliqué. Valide jusqu\'au ', loading: 'Chargement…', err: 'Une erreur est survenue. Réessayez.',
-      tierFrom: 'Votre prix : ', plusTax: ' + taxes', prevWeek: 'Semaine précédente', nextWeek: 'Semaine suivante', pickDay: 'Choisissez un jour ci-dessus pour voir les plages libres.', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars."
+      tierFrom: 'Votre prix : ', plusTax: ' + taxes', callPrice: "On vous appelle bientôt pour confirmer l'heure et vous donner le prix.", prevWeek: 'Semaine précédente', nextWeek: 'Semaine suivante', pickDay: 'Choisissez un jour ci-dessus pour voir les plages libres.', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars."
     }
   };
   // Summer mode (SETTINGS.SEASON = 'summer' in the script): only these lines change.
   var TS = {
     en: {
       kicker: '☀ Summer swap booking', title: 'Book your summer tire swap',
-      headline: 'Summer swaps from {MIN} · mounting & balancing included · we come to you.',
+      headline: 'Summer tire swaps · mounting & balancing included · we come to you. We call to confirm your price.',
       onD: 'Your summer tires are already on their own rims. We swap the wheels.', offerTitle: '15% off your first summer swap'
     },
     fr: {
       kicker: "☀ Réservation pneus d'été", title: "Réservez votre changement de pneus d'été",
-      headline: "Changement de pneus d'été à partir de {MIN} · montage et équilibrage inclus · on se déplace chez vous.",
+      headline: "Changement de pneus d'été · montage et équilibrage inclus · on se déplace chez vous. On vous appelle pour confirmer le prix.",
       onD: "Vos pneus d'été sont déjà sur leurs jantes. On change les roues.",
       quebec: "Au Québec, les pneus d'hiver peuvent être retirés après le 15 mars."
     }
@@ -261,7 +261,7 @@
 
   // ---------------------------------------------------------------- render helpers
   function opt(v, label, sel) { return '<option value="' + esc(v) + '"' + (sel ? ' selected' : '') + '>' + esc(label) + '</option>'; }
-  function stepsBar() { var h = '<div class="bk-steps" aria-hidden="true">'; for (var i = 1; i <= 6; i++) h += '<i class="' + (i <= S.step ? 'on' : '') + '"></i>'; return h + '</div>'; }
+  function stepsBar() { var h = '<div class="bk-steps" aria-hidden="true">'; for (var i = 1; i <= 5; i++) h += '<i class="' + (i <= (S.step >= 4 ? S.step - 1 : S.step) ? 'on' : '') + '"></i>'; return h + '</div>'; }
   function offerBar() {
     if (!S.offer) return '';
     var d = new Date(S.offer.expires);
@@ -323,7 +323,7 @@
     if (!step1Basics()) return '';
     if (isExotic()) return exoticHtml();
     var q = quote();
-    return '<span class="bk-chip">' + t('tierFrom') + money(basePrice('off', 4, q.tier)) + t('plusTax') + ' · ' + esc(S.cfg.tierLabels[q.tier] || '') + '</span>' + whyHtml(q.tier);
+    return '';   // prices hidden: we call to confirm the price
   }
   function exoticHtml() {
     if (S.exoticDone) return '<div class="bk-exotic"><p class="bk-ok" style="font-size:16px">' + t('exDone') + '</p></div>';
@@ -365,7 +365,7 @@
     var tier = currentTier();
     function card(key, desc, service) {
       var p = basePrice(service, S.tires, tier);
-      return '<button type="button" class="bk-opt' + (S.service === service ? ' sel' : '') + '" data-act="svc" data-v="' + service + '"><span class="p">' + money(p) + '</span><b>' + t(key) + '</b><small>' + t(desc) + '</small></button>';
+      return '<button type="button" class="bk-opt' + (S.service === service ? ' sel' : '') + '" data-act="svc" data-v="' + service + '"><b>' + t(key) + '</b><small>' + t(desc) + '</small></button>';
     }
     return '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('s2') + '</h2>' + card('off', 'offD', 'off') + card('on', 'onD', 'on') +
       '<label class="bk-label">' + t('howMany') + '</label><div class="bk-toggle"><button type="button" data-act="tires" data-v="4" class="' + (S.tires === 4 ? 'sel' : '') + '">' + t('t4') + '</button>' +
@@ -387,7 +387,7 @@
     var msg = z.zone === 1 ? t('z1') : t(z.zone === 2 ? 'z2' : 'z3').replace('FEE', z.fee);
     var h = '<div class="bk-zone ' + cls + '">' + msg + '<br><small>' + esc(z.formatted) + '</small></div>';
     h += '<label class="bk-check"><input type="checkbox" data-act="multi"' + (S.multiCar ? ' checked' : '') + '> ' + t('multi') + '</label>';
-    if (S.multiCar) h += '<p class="bk-hint">' + (z.fee ? '✅ ' + t('multiWaived') + ' (−' + money(z.fee) + '). ' : '') + t('multiNote') + '</p>';
+    if (S.multiCar) h += '<p class="bk-hint">' + t('multiNote') + '</p>';
     return h;
   }
   function step3() {
@@ -477,20 +477,12 @@
     var q = quote();
     var svc = (S.service === 'on' ? t('on') : t('off')) + ' · ' + (S.tires === 4 ? t('t4') : t('t2'));
     var h = '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('s6') + '</h2><div class="bk-sum">' +
-      '<div><span>' + t('when') + '</span><span>' + esc(S.dateLabel + ' · ' + S.slotLabel) + '</span></div>' +
       '<div><span>' + t('service') + '</span><span>' + esc(svc) + '</span></div>' +
       '<div><span>' + t('vehicle') + '</span><span>' + esc(vehicleLabel()) + '</span></div>' +
       '<div><span>' + t('tsize') + '</span><span>' + esc(sizeLabel()) + '</span></div>' +
       '<div><span>' + t('where') + '</span><span>' + esc(S.zone.formatted) + '</span></div>' +
       '<div><span>' + t('contact') + '</span><span>' + esc(S.c.name + ' · ' + S.c.phone) + '</span></div></div>' +
-      '<div class="bk-price"><div><span>' + t('price') + '</span><span>' + money(q.base) + '</span></div>' +
-      (q.pct ? '<div><span>' + t('off15') + '</span><span>−' + money(q.disc) + '</span></div>' : '') +
-      (q.fee ? '<div><span>' + t('zoneFee') + ' (' + esc(S.zone.zoneName || '') + ')</span><span>' + money(q.fee) + '</span></div>' : '') +
-      (q.waived ? '<div><span>' + t('multiWaived') + '</span><span>' + money(0) + '</span></div>' : '') +
-      '<div><span>' + t('subtotal') + '</span><span>' + money(q.sub) + '</span></div>' +
-      '<div><span>' + t('tax') + '</span><span>' + money(q.tax) + '</span></div>' +
-      '<div class="tot"><span>' + t('total') + '</span><span>' + money(q.total) + '</span></div></div>' +
-      whyHtml(q.tier) + '<p class="bk-note">' + t('noHidden') + ' ' + t('pay') + '</p><p class="bk-note">' + t('locked') + '</p>' +
+      '<p class="bk-note" style="font-size:16px"><b>' + t('callPrice') + '</b></p><p class="bk-note">' + t('pay') + '</p>' +
       '<div class="bk-err" id="bk-book-err">' + (S.bookErr || '') + '</div>' +
       '<button class="bk-btn green" type="button" data-act="book"' + (S.busy ? ' disabled' : '') + '>' + (S.busy ? '<span class="bk-spin"></span> ' + t('booking') : t('confirm')) + '</button>' +
       '<button class="bk-btn ghost" type="button" data-act="back">' + t('back') + '</button></div>';
@@ -498,18 +490,14 @@
   }
 
   function doneHtml() {
-    var d = S.done, booked = d.status === 'booked';
-    var h = '<div class="bk-card bk-done"><div class="big">' + (booked ? '✅' : '📩') + '</div><h2 class="bk-title">' + (booked ? t('doneT') : t('doneR')) + '</h2>' +
-      (booked ? '' : '<p class="bk-sub">' + t('doneRsub') + '</p>') +
-      '<div class="bk-sum" style="text-align:left"><div><span>' + t('bookingNo') + '</span><span>' + esc(d.bookingNo) + '</span></div>' +
-      '<div><span>' + t('when') + '</span><span>' + esc(d.dateLabel + ' · ' + d.slotLabel) + '</span></div>' +
-      '<div><span>' + t('total') + '</span><span>' + money(d.price.subtotal) + t('plusTax') + '</span></div></div>' +
+    var d = S.done;
+    return '<div class="bk-card bk-done"><div class="big">✅</div><h2 class="bk-title">' + t('doneR') + '</h2>' +
+      '<p class="bk-sub" style="font-size:17px"><b>' + t('doneRsub') + '</b></p>' +
+      '<div class="bk-sum" style="text-align:left"><div><span>' + t('bookingNo') + '</span><span>' + esc(d.bookingNo) + '</span></div></div>' +
       (d.emailed ? '<p class="bk-note">' + t('emailSent') + '</p>' : '') + '<p class="bk-note">' + t('change') + '</p>' +
-      (d.testMode ? '<p class="bk-note" style="color:#ffd27a">' + t('testDone') + '</p>' : '') +
-      '<a class="bk-btn ghost" target="_blank" rel="noopener" href="' + gcalLink(d) + '">' + t('addCal') + '</a>' +
-      '<a class="bk-link" download="winter-tire-swap.ics" href="' + icsHref(d) + '">' + t('addIcs') + '</a></div>';
-    return h;
+      (d.testMode ? '<p class="bk-note" style="color:#ffd27a">' + t('testDone') + '</p>' : '') + '</div>';
   }
+
   function calDates(d) {
     function f(ms) { return new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
     return f(d.start) + '/' + f(d.end);
@@ -599,7 +587,7 @@
     if (act === 'list') { S.veh.mode = 'list'; return render(); }
     if (act === 'svc') { S.service = val; return render(); }
     if (act === 'tires') { S.tires = +val; return render(); }
-    if (act === 'back') { S.bookErr = ''; S.step = Math.max(1, S.step - 1); return render(); }
+    if (act === 'back') { S.bookErr = ''; S.step = Math.max(1, S.step === 5 ? 3 : S.step - 1); return render(); }
     if (act === 'next') return next();
     if (act === 'zone') return checkZone();
     if (act === 'wk') return goWeek(+val);
@@ -620,7 +608,7 @@
       if (!cleanPhone(S.c.phone)) { err.textContent = t('phoneBad'); return; }
       sendDraft();
     }
-    S.step++;
+    S.step = S.step === 3 ? 5 : S.step + 1;   // no time step: we call to confirm the time
     render();
     window.scrollTo({ top: root.getBoundingClientRect().top + window.pageYOffset - 90, behavior: 'smooth' });
     if (S.step === 4) loadDays();
@@ -728,12 +716,12 @@
     var q = quote(), v = S.veh;
     S.busy = true; S.bookErr = ''; render();
     var payload = {
-      action: 'book', session: S.session, lang: S.lang, hp: hp ? hp.value : '',
+      action: 'lead', session: S.session, lang: S.lang, hp: hp ? hp.value : '',
       vehicleId: v.mode === 'list' ? v.id : '', year: v.mode === 'list' ? v.year : v.oYear, make: v.mode === 'list' ? v.make : v.oMake,
       model: v.mode === 'list' ? v.model : v.oModel, trim: v.trim, trimUnsure: v.unsure, vehicleClass: v.mode === 'list' ? v.cls : 'car',
       sizeTyped: parseSize(v.typed) ? v.typed : '', photoUrl: v.photoUrl, service: S.service, tires: S.tires,
-      address: S.addrText, addressFormatted: S.zone.formatted, date: S.date, slot: S.slot,
-      name: S.c.name, phone: S.c.phone, email: S.c.email, notes: S.c.notes, offerId: S.offer ? S.offer.offerId : '', expectedSubtotal: q.sub, ref: S.ref, multiCar: !!S.multiCar
+      address: S.addrText, addressFormatted: S.zone.formatted,
+      name: S.c.name, phone: S.c.phone, email: S.c.email, notes: S.c.notes, offerId: S.offer ? S.offer.offerId : '', expectedSubtotal: null, ref: S.ref, multiCar: !!S.multiCar
     };
     apiPost(payload).then(function (r) {
       S.busy = false;
@@ -744,7 +732,7 @@
         fireConversion(r);
         return render();
       }
-      if (r.error === 'taken') { S.step = 4; S.slot = ''; S.slotErr = t('taken'); render(); return loadDays(); }
+      
       if (r.error === 'offer_invalid') { S.offer = null; lsSet('bk_offer', 'null'); S.bookErr = t('offerGone'); return render(); }
       if (r.error === 'price_changed') { S.bookErr = t('priceChanged'); return render(); }
       if (r.error === 'limit') { S.bookErr = t('limit'); return render(); }
@@ -758,8 +746,8 @@
   function fireConversion(r) {
     try {
       if (r.testMode || !S.cfg.adsBookingLabel || !window.gtag || !window.TRACKING) return;
-      window.gtag('event', 'conversion', { send_to: window.TRACKING.ADS_ID + '/' + S.cfg.adsBookingLabel, value: r.price.subtotal, currency: 'CAD', transaction_id: r.bookingNo });
-      window.gtag('event', 'booking_confirmed', { value: r.price.subtotal, currency: 'CAD', booking_no: r.bookingNo });
+      window.gtag('event', 'conversion', { send_to: window.TRACKING.ADS_ID + '/' + S.cfg.adsBookingLabel, value: 1, currency: 'CAD', transaction_id: r.bookingNo });
+      window.gtag('event', 'booking_confirmed', { value: 1, currency: 'CAD', booking_no: r.bookingNo });
     } catch (e) {}
   }
 
