@@ -26,7 +26,7 @@
   "address": {"@type": "PostalAddress", "streetAddress": "1405 Prince of Wales Dr", "addressLocality": "Ottawa", "addressRegion": "ON", "postalCode": "K2C 3J9", "addressCountry": "CA"},
   "geo": {"@type": "GeoCoordinates", "latitude": 45.3703218, "longitude": -75.7015757},
   "hasMap": "https://maps.app.goo.gl/qU2JMVwsBgFoiasH7",
-  "areaServed": ["Ottawa","Kanata","Nepean","Orleans","Barrhaven","Gloucester","Vanier","Gatineau"],
+  "areaServed": ["Ottawa","Kanata","Nepean","Orleans","Barrhaven","Gloucester","Stittsville","Riverside South","Vanier","Gatineau","Manotick"],
   "openingHoursSpecification": {"@type": "OpeningHoursSpecification","dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens": "00:00","closes": "23:59"},
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
@@ -51,7 +51,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/site.css?v=20261002v6"/>
+<link rel="stylesheet" href="/assets/site.css?v=20261009areas"/>
 </head>
 <body data-promo="auto">
 <canvas id="snow" aria-hidden="true"></canvas>
@@ -166,14 +166,14 @@
     <span>24/7 Flat Tire Repair</span>
     <span>Roadside Tire Help</span>
     <span>Battery Boosts</span>
-    <span>Serving Ottawa · Kanata · Nepean · Orleans · Barrhaven · Gatineau</span>
+    <span>Serving Ottawa · Kanata · Nepean · Orleans · Barrhaven · Stittsville · Gatineau</span>
     <span>Call or Text (613) 601-6471</span>
     <span>We Come to You</span>
     <span>Winter Tire Swaps — Book Before the First Snow</span>
     <span>24/7 Flat Tire Repair</span>
     <span>Roadside Tire Help</span>
     <span>Battery Boosts</span>
-    <span>Serving Ottawa · Kanata · Nepean · Orleans · Barrhaven · Gatineau</span>
+    <span>Serving Ottawa · Kanata · Nepean · Orleans · Barrhaven · Stittsville · Gatineau</span>
     <span>Call or Text (613) 601-6471</span>
     <span>We Come to You</span>
   </div>
@@ -233,7 +233,7 @@
     <div class="hero-sub">
       <p>Ottawa's premier mobile tire service — dispatched to your location.</p>
       <p class="services-inline"><a href="/flat-tire-repair/"><b>Flat Tire Repair</b></a> · <a href="/roadside-tire-assistance/"><b>Roadside Tire Help</b></a> · <a href="/battery-boost/"><b>Battery Boosts</b></a> · <a href="/winter-tire-changeover/"><b>Winter Tire Changeovers</b></a></p>
-      <p style="margin-top:6px;font-size:14px;">Serving Ottawa · Kanata · Nepean · Orleans · Barrhaven · Gatineau</p>
+      <p style="margin-top:6px;font-size:14px;">Serving Ottawa, Kanata, Nepean, Orleans, Barrhaven, Stittsville, Gatineau and more. <a class="text-link" href="#areas">All service areas</a></p>
     </div>
 
     <div class="hero-lanes">
@@ -281,12 +281,12 @@
       <span class="stat-label">Typical Arrival</span>
     </div>
     <div class="stat-item reveal">
-      <span class="stat-num">6+</span>
-      <span class="stat-label">Areas Covered</span>
+      <span class="stat-num">11</span>
+      <span class="stat-label">Communities Served</span>
     </div>
     <div class="stat-item reveal">
       <span class="stat-num">4.9★</span>
-      <span class="stat-label">130+ Google Reviews</span>
+      <span class="stat-label">150+ Google Reviews</span>
     </div>
   </div>
 </div>
@@ -473,71 +473,92 @@
     <div class="reveal">
       <div class="section-label">Coverage</div>
       <h2 class="section-title" id="areas-title">Mobile Tire Service Areas</h2>
-      <p class="section-desc">We cover the whole Ottawa-Gatineau region for flat tire repair, roadside tire help and battery boosts. Can't find your area? Call or text and we'll let you know.</p>
+      <p class="section-desc">We come to homes, workplaces and the roadside across the Ottawa-Gatineau region. Each community below has its own page. If you do not see yours, call or text and we will tell you if we can come.</p>
     </div>
 
     <div class="areas-grid">
-      <div class="area-card reveal">
+      <a class="area-card reveal" href="/">
         <div class="area-dot"></div>
         <div>
           <div class="area-name">Ottawa</div>
           <div class="area-sub">All neighbourhoods</div>
         </div>
-      </div>
-      <div class="area-card reveal">
+      </a>
+      <a class="area-card reveal" href="/mobile-tire-repair-kanata/">
         <div class="area-dot"></div>
         <div>
           <div class="area-name">Kanata</div>
           <div class="area-sub">West Ottawa</div>
         </div>
-      </div>
-      <div class="area-card reveal">
+      </a>
+      <a class="area-card reveal" href="/mobile-tire-repair-nepean/">
         <div class="area-dot"></div>
         <div>
           <div class="area-name">Nepean</div>
           <div class="area-sub">South Ottawa</div>
         </div>
-      </div>
-      <div class="area-card reveal">
+      </a>
+      <a class="area-card reveal" href="/mobile-tire-repair-orleans/">
         <div class="area-dot"></div>
         <div>
           <div class="area-name">Orleans</div>
           <div class="area-sub">East Ottawa</div>
         </div>
-      </div>
-      <div class="area-card reveal">
+      </a>
+      <a class="area-card reveal" href="/mobile-tire-repair-barrhaven/">
         <div class="area-dot"></div>
         <div>
           <div class="area-name">Barrhaven</div>
           <div class="area-sub">Southwest Ottawa</div>
         </div>
-      </div>
-      <div class="area-card reveal">
+      </a>
+      <a class="area-card reveal" href="/mobile-tire-repair-gloucester/">
+        <div class="area-dot"></div>
+        <div>
+          <div class="area-name">Gloucester</div>
+          <div class="area-sub">East and southeast</div>
+        </div>
+      </a>
+      <a class="area-card reveal" href="/mobile-tire-repair-stittsville/">
+        <div class="area-dot"></div>
+        <div>
+          <div class="area-name">Stittsville</div>
+          <div class="area-sub">West of Kanata</div>
+        </div>
+      </a>
+      <a class="area-card reveal" href="/mobile-tire-repair-riverside-south/">
+        <div class="area-dot"></div>
+        <div>
+          <div class="area-name">Riverside South</div>
+          <div class="area-sub">South of the airport</div>
+        </div>
+      </a>
+      <a class="area-card reveal" href="/mobile-tire-repair-vanier/">
+        <div class="area-dot"></div>
+        <div>
+          <div class="area-name">Vanier</div>
+          <div class="area-sub">Central Ottawa</div>
+        </div>
+      </a>
+      <a class="area-card reveal" href="/mobile-tire-repair-gatineau/">
         <div class="area-dot"></div>
         <div>
           <div class="area-name">Gatineau</div>
           <div class="area-sub">Across the river</div>
         </div>
-      </div>
-      <div class="area-card reveal">
-        <div class="area-dot" style="background:var(--green);box-shadow:0 0 8px var(--green);"></div>
+      </a>
+      <a class="area-card reveal" href="/mobile-tire-repair-manotick/">
+        <div class="area-dot"></div>
         <div>
-          <div class="area-name">Gloucester</div>
-          <div class="area-sub">East Ottawa</div>
+          <div class="area-name">Manotick</div>
+          <div class="area-sub">Rideau village</div>
         </div>
-      </div>
-      <div class="area-card reveal">
-        <div class="area-dot" style="background:var(--green);box-shadow:0 0 8px var(--green);"></div>
-        <div>
-          <div class="area-name">Vanier</div>
-          <div class="area-sub">Central Ottawa</div>
-        </div>
-      </div>
+      </a>
       <div class="area-card reveal">
         <div class="area-dot" style="background:var(--green);box-shadow:0 0 8px var(--green);"></div>
         <div>
           <div class="area-name">Other Areas</div>
-          <div class="area-sub">Text to confirm</div>
+          <div class="area-sub">Call or text to confirm</div>
         </div>
       </div>
     </div>
@@ -552,7 +573,7 @@
     <div class="reveal">
       <div class="section-label">Customer Reviews</div>
       <h2 class="section-title" id="reviews-title">What Ottawa Drivers Say</h2>
-      <p class="section-desc">Rated 4.9 out of 5 from 130+ Google reviews. Here's what customers say about Shawn and Ray.</p>
+      <p class="section-desc">Rated 4.9 out of 5 from 150+ Google reviews. Here's what customers say about Shawn and Ray.</p>
     </div>
 
     <div class="reviews-grid">
@@ -591,7 +612,7 @@
       </div>
     </div>
     <div class="reviews-more reveal">
-      <div class="reviews-score"><span class="reviews-score-num">4.9</span><span class="reviews-score-stars">★★★★★</span><span class="reviews-score-label">130+ reviews on Google</span></div>
+      <div class="reviews-score"><span class="reviews-score-num">4.9</span><span class="reviews-score-stars">★★★★★</span><span class="reviews-score-label">150+ reviews on Google</span></div>
       <a href="https://maps.app.goo.gl/qU2JMVwsBgFoiasH7" class="btn-secondary" target="_blank" rel="noopener">Read all reviews on Google</a>
     </div>
   </div>
@@ -650,7 +671,7 @@
           <div class="faq-icon" aria-hidden="true">+</div>
         </button>
         <div class="faq-a" role="region">
-          <div class="faq-a-inner">We serve Ottawa, Kanata, Nepean, Orleans, Barrhaven, Gatineau, and surrounding areas. Not sure if we cover your area? Just text us — we'll let you know right away.</div>
+          <div class="faq-a-inner">We come to <a class="text-link" href="/">Ottawa</a>, <a class="text-link" href="/mobile-tire-repair-kanata/">Kanata</a>, <a class="text-link" href="/mobile-tire-repair-nepean/">Nepean</a>, <a class="text-link" href="/mobile-tire-repair-orleans/">Orleans</a>, <a class="text-link" href="/mobile-tire-repair-barrhaven/">Barrhaven</a>, <a class="text-link" href="/mobile-tire-repair-gloucester/">Gloucester</a>, <a class="text-link" href="/mobile-tire-repair-stittsville/">Stittsville</a>, <a class="text-link" href="/mobile-tire-repair-riverside-south/">Riverside South</a>, <a class="text-link" href="/mobile-tire-repair-vanier/">Vanier</a>, <a class="text-link" href="/mobile-tire-repair-gatineau/">Gatineau</a> and <a class="text-link" href="/mobile-tire-repair-manotick/">Manotick</a>. Farther out? Text us and we will tell you if we can come.</div>
         </div>
       </div>
       <div class="faq-item reveal">
@@ -738,9 +759,22 @@
         <a href="/winter-tire-changeover/">Winter Tire Changeover</a>
         <a href="/truck-tire-repair/">Truck Tire Repair</a>
       </nav>
+      <nav class="footer-col" aria-label="Service areas">
+        <div class="footer-h">Service Areas</div>
+        <a href="/">Ottawa</a>
+        <a href="/mobile-tire-repair-kanata/">Kanata</a>
+        <a href="/mobile-tire-repair-nepean/">Nepean</a>
+        <a href="/mobile-tire-repair-orleans/">Orleans</a>
+        <a href="/mobile-tire-repair-barrhaven/">Barrhaven</a>
+        <a href="/mobile-tire-repair-gloucester/">Gloucester</a>
+        <a href="/mobile-tire-repair-stittsville/">Stittsville</a>
+        <a href="/mobile-tire-repair-riverside-south/">Riverside South</a>
+        <a href="/mobile-tire-repair-vanier/">Vanier</a>
+        <a href="/mobile-tire-repair-gatineau/">Gatineau</a>
+        <a href="/mobile-tire-repair-manotick/">Manotick</a>
+      </nav>
       <nav class="footer-col" aria-label="More">
         <div class="footer-h">More</div>
-        <a href="/#areas">Service Areas</a>
         <a href="/#reviews">Reviews</a>
         <a href="/#faq">FAQ</a>
         <a href="https://maps.app.goo.gl/qU2JMVwsBgFoiasH7" target="_blank" rel="noopener">Find us on Google</a>
@@ -749,7 +783,7 @@
     </div>
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 Mobile Tire Repair Ottawa. All rights reserved.</div>
-      <div class="footer-areas">Ottawa · Kanata · Nepean · Orleans · Barrhaven · Gloucester · Vanier · Gatineau</div>
+      <div class="footer-areas">Ottawa · Kanata · Nepean · Orleans · Barrhaven · Gloucester · Stittsville · Riverside South · Vanier · Gatineau · Manotick</div>
     </div>
   </div>
 </footer>
