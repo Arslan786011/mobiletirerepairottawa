@@ -1,4 +1,4 @@
-/* 15% first-swap offer: homepage, winter page and booking page. Lives at /assets/offer.js.
+/* Leaving popup is turned off: the site does not show prices or discounts. Lives at /assets/offer.js.
  * Shows ONCE per visitor (this browser), never after they've booked here, never twice.
  * Shows when the visitor:
  *   - switches apps/tabs and comes back
@@ -21,14 +21,14 @@
   function rid() { return 'S' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36); }
   var fr = (D.documentElement.lang || '').toLowerCase().indexOf('fr') === 0;
   var TX = fr ? {
-    title: 'Rabais de 15 % sur votre premier changement de pneus', sub: 'Réservez en ligne dans les 48 heures. Nouveaux clients seulement.',
-    yes: 'Obtenir 15 %', no: 'Non merci', saving: 'Un instant…',
-    okT: '✓ Votre rabais de 15 % est gardé', okS: "Il s'applique tout seul quand vous réservez en ligne d'ici 48 heures.", book: '📅 Réserver en ligne', later: 'Plus tard',
+    title: 'Appelez pour une soumission', sub: 'On vous rappelle pour confirmer l\'heure.',
+    yes: 'Appelez pour une soumission', no: 'Non merci', saving: 'Un instant…',
+    okT: '✓ Demande notée', okS: "On vous appelle pour confirmer l'heure.", book: '📅 Réserver en ligne', later: 'Plus tard',
     err: "Ça n'a pas fonctionné. Réessayez.", bookUrl: '/fr/reserver-changement-pneus/'
   } : {
-    title: '15% off your first tire swap', sub: 'Book online within 48 hours. New customers only.',
-    yes: 'Claim 15% off', no: 'No thanks', saving: 'Saving…',
-    okT: '✓ Your 15% off is saved', okS: "It's applied automatically when you book online in the next 48 hours.", book: '📅 Book Online Now', later: 'Later',
+    title: 'Call for a quote', sub: 'We will call you to confirm the time.',
+    yes: 'Call for a quote', no: 'No thanks', saving: 'Saving…',
+    okT: '✓ Request noted', okS: "We'll call you to confirm the time.", book: '📅 Book Online Now', later: 'Later',
     err: "That didn't work. Please try again.", bookUrl: '/book-tire-swap/'
   };
   function useHookText() {   // booking page passes its own wording (season + language)
@@ -109,6 +109,8 @@
 
   var lastWhy = '';
   function show(why, skipArm) {
+    // No prices or discounts are shown on the site.
+    return false;
     if (!eligible(skipArm)) return false;
     shown = true; lastWhy = why;
     lsSet('bk_offer_seen', '1');                 // once per visitor, even if they ignore it

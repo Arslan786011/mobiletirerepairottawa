@@ -49,17 +49,17 @@
       phoneBad: 'Please enter a 10-digit phone number.', nameBad: 'Please enter your name.',
       s6: 'Check your details', when: 'When', service: 'Service', where: 'Where', vehicle: 'Vehicle', contact: 'Contact', tsize: 'Tire size',
       sizeEst: 'estimated from vehicle', sizeCust: 'entered by you', sizeUnk: "we'll confirm by phone",
-      price: 'Service', off15: '15% off', zoneFee: 'Travel fee', subtotal: 'Subtotal', tax: 'Tax', total: 'Total',
+      price: 'Service', off15: 'Offer', zoneFee: 'Travel fee', subtotal: 'Subtotal', tax: 'Tax', total: 'Total',
       pay: 'Pay the tech when done: cash, card or e-transfer.', locked: "Price is locked based on your vehicle. If your tires turn out to be a different size, we'll let you know before we start.",
       noHidden: 'No hidden fees.', confirm: '✓ Send my request', booking: 'Sending…',
-      priceChanged: 'The price was updated. Please review and confirm again.', offerGone: "Your 15% offer couldn't be applied (it may have expired or already been used). Please review the price.",
+      priceChanged: 'Please review your request and confirm again.', offerGone: "That offer couldn't be applied (it may have expired or already been used). Call for a quote.",
       limit: 'This phone number already has bookings today. Please call or text us.',
       doneT: "You're booked!", doneR: 'Request received!', doneRsub: "We'll call you shortly to confirm the time and give you your price.", bookingNo: 'Request #',
       emailSent: 'A copy of your request is in your email.', change: 'Need us sooner? Call or text (613) 601-6471.', addCal: '📅 Add to my calendar', addIcs: 'Download calendar file (.ics)',
       testDone: '🧪 Test booking saved. Check the Winter Swaps calendar, your email and the WhatsApp groups.',
       fbTitle: 'Online booking is having trouble right now', fbSub: "No problem: text us your booking and we'll confirm it fast.",
-      fbBtn: '💬 Text us my booking', offerTitle: '15% off your first winter swap', offerSub: 'Valid 48 hours. New customers only.', offerYes: 'Claim 15% off', offerNo: 'No thanks',
-      offerBar: '🏷️ 15% off applied. Valid until ', loading: 'Loading…', err: 'Something went wrong. Please try again.',
+      fbBtn: '💬 Text us my booking', offerTitle: 'Call for a quote', offerSub: 'We will call you to confirm the time.', offerYes: 'Call for a quote', offerNo: 'No thanks',
+      offerBar: '', loading: 'Loading…', err: 'Something went wrong. Please try again.',
       tierFrom: 'Your price: ', plusTax: ' + tax', callPrice: "We'll call you shortly to confirm the time and give you your price.",
       prevWeek: 'Previous week', nextWeek: 'Next week', pickDay: 'Pick a day above to see open times.'
     },
@@ -98,17 +98,17 @@
       phoneBad: 'Entrez un numéro à 10 chiffres.', nameBad: 'Entrez votre nom.',
       s6: 'Vérifiez vos informations', when: 'Quand', service: 'Service', where: 'Adresse', vehicle: 'Véhicule', contact: 'Contact', tsize: 'Taille',
       sizeEst: 'estimée selon le véhicule', sizeCust: 'entrée par vous', sizeUnk: 'à confirmer par téléphone',
-      price: 'Service', off15: 'Rabais 15 %', zoneFee: 'Déplacement', subtotal: 'Sous-total', tax: 'Taxes', total: 'Total',
+      price: 'Service', off15: 'Offre', zoneFee: 'Déplacement', subtotal: 'Sous-total', tax: 'Taxes', total: 'Total',
       pay: 'Paiement au technicien à la fin : comptant, carte ou virement Interac.', locked: "Le prix est basé sur votre véhicule. Si vos pneus sont d'une autre taille, on vous le dira avant de commencer.",
       noHidden: 'Aucuns frais cachés.', confirm: '✓ Envoyer ma demande', booking: 'Envoi…',
-      priceChanged: 'Le prix a été mis à jour. Vérifiez et confirmez de nouveau.', offerGone: "Le rabais de 15 % n'a pas pu être appliqué (expiré ou déjà utilisé). Vérifiez le prix.",
+      priceChanged: 'Vérifiez votre demande et confirmez de nouveau.', offerGone: "Cette offre n'a pas pu être appliquée (expirée ou déjà utilisée). Appelez pour une soumission.",
       limit: "Ce numéro a déjà des réservations aujourd'hui. Texte-nous en français ou en anglais.",
       doneT: 'Réservation confirmée!', doneR: 'Demande reçue!', doneRsub: "On vous appelle bientôt pour confirmer l'heure et vous donner le prix.", bookingNo: 'Demande n°',
       emailSent: 'Une copie de votre demande est dans vos courriels.', change: 'Besoin de nous plus vite? Textez le (613) 601-6471.', addCal: '📅 Ajouter à mon calendrier', addIcs: 'Télécharger le fichier calendrier (.ics)',
       testDone: '🧪 Réservation test enregistrée. Vérifiez le calendrier, votre courriel et les groupes WhatsApp.',
       fbTitle: 'La réservation en ligne a un problème', fbSub: 'Textez-nous votre réservation et on confirme rapidement.',
-      fbBtn: '💬 Texte-nous en français ou en anglais', offerTitle: 'Rabais de 15 % sur votre premier changement de pneus', offerSub: 'Valide 48 heures. Nouveaux clients seulement.', offerYes: 'Obtenir 15 %', offerNo: 'Non merci',
-      offerBar: '🏷️ Rabais de 15 % appliqué. Valide jusqu\'au ', loading: 'Chargement…', err: 'Une erreur est survenue. Réessayez.',
+      fbBtn: '💬 Texte-nous en français ou en anglais', offerTitle: 'Appelez pour une soumission', offerSub: 'On vous appelle pour confirmer l\'heure.', offerYes: 'Appelez pour une soumission', offerNo: 'Non merci',
+      offerBar: '', loading: 'Chargement…', err: 'Une erreur est survenue. Réessayez.',
       tierFrom: 'Votre prix : ', plusTax: ' + taxes', callPrice: "On vous appelle bientôt pour confirmer l'heure et vous donner le prix.", prevWeek: 'Semaine précédente', nextWeek: 'Semaine suivante', pickDay: 'Choisissez un jour ci-dessus pour voir les plages libres.', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars."
     }
   };
@@ -117,7 +117,7 @@
     en: {
       kicker: '☀ Summer swap booking', title: 'Book your summer tire swap',
       headline: 'Summer tire swaps · mounting & balancing included · we come to you. We call to confirm your price.',
-      onD: 'Your summer tires are already on their own rims. We swap the wheels.', offerTitle: '15% off your first summer swap'
+      onD: 'Your summer tires are already on their own rims. We swap the wheels.', offerTitle: 'Call for a quote'
     },
     fr: {
       kicker: "☀ Réservation pneus d'été", title: "Réservez votre changement de pneus d'été",
@@ -263,10 +263,7 @@
   function opt(v, label, sel) { return '<option value="' + esc(v) + '"' + (sel ? ' selected' : '') + '>' + esc(label) + '</option>'; }
   function stepsBar() { var h = '<div class="bk-steps" aria-hidden="true">'; for (var i = 1; i <= 5; i++) h += '<i class="' + (i <= (S.step >= 4 ? S.step - 1 : S.step) ? 'on' : '') + '"></i>'; return h + '</div>'; }
   function offerBar() {
-    if (!S.offer) return '';
-    var d = new Date(S.offer.expires);
-    var when = d.toLocaleString(S.lang === 'fr' ? 'fr-CA' : 'en-CA', { weekday: 'short', hour: 'numeric', minute: '2-digit' });
-    return '<div class="bk-offer-bar">' + t('offerBar') + esc(when) + '</div>';
+    return '';   // no prices or discounts shown
   }
   function shell(inner) {
     var c = S.cfg;
@@ -344,7 +341,7 @@
     var b = root.querySelector('[data-act="next"]'); if (b) b.disabled = !step1Ready();
     var e = document.getElementById('bk-size-err'); if (e) e.textContent = S.veh.typed && !parseSize(S.veh.typed) ? t('sizeBad') : '';
   }
-  function markStarted() {   // picked a car → if they leave before confirming, the 15% offer can show (assets/offer.js)
+  function markStarted() {   // picked a car, then left before confirming (assets/offer.js)
     if (S.cfg && !S.done && step1Basics() && !isExotic() && !lsGet('bk_started')) lsSet('bk_started', String(Date.now()));
   }
   function step1Basics() {
@@ -767,7 +764,7 @@
     document.body.classList.toggle('bk-fr-textonly', textOnly);
   }
 
-  // ---------------------------------------------------------------- 15% leaving offer
+  // ---------------------------------------------------------------- leaving popup (turned off: no prices or discounts shown)
   // The popup + triggers live in /assets/offer.js (shared with the homepage and winter page).
   // Here we only tell it when it may show, whether a car is picked, and how to apply the offer.
   window.MTRO_OFFER = {
