@@ -49,9 +49,8 @@
       phoneBad: 'Please enter a 10-digit phone number.', nameBad: 'Please enter your name.',
       s6: 'Check your details', when: 'When', service: 'Service', where: 'Where', vehicle: 'Vehicle', contact: 'Contact', tsize: 'Tire size',
       sizeEst: 'estimated from vehicle', sizeCust: 'entered by you', sizeUnk: "we'll confirm by phone",
-      price: 'Service', off15: 'Offer', zoneFee: 'Travel fee', subtotal: 'Subtotal', tax: 'Tax', total: 'Total',
-      pay: 'Pay the tech when done: cash, card or e-transfer.', locked: "Price is locked based on your vehicle. If your tires turn out to be a different size, we'll let you know before we start.",
-      noHidden: 'No hidden fees.', confirm: '✓ Send my request', booking: 'Sending…',
+      pay: 'Pay the tech when done: cash, card or e-transfer.',
+      confirm: '✓ Send my request', booking: 'Sending…',
       priceChanged: 'Please review your request and confirm again.', offerGone: "That offer couldn't be applied (it may have expired or already been used). Call for a quote.",
       limit: 'This phone number already has bookings today. Please call or text us.',
       doneT: "You're booked!", doneR: 'Request received!', doneRsub: "We'll call you shortly to confirm the time and give you your price.", bookingNo: 'Request #',
@@ -60,7 +59,7 @@
       fbTitle: 'Online booking is having trouble right now', fbSub: "No problem: text us your booking and we'll confirm it fast.",
       fbBtn: '💬 Text us my booking', offerTitle: 'Call for a quote', offerSub: 'We will call you to confirm the time.', offerYes: 'Call for a quote', offerNo: 'No thanks',
       offerBar: '', loading: 'Loading…', err: 'Something went wrong. Please try again.',
-      tierFrom: 'Your price: ', plusTax: ' + tax', callPrice: "We'll call you shortly to confirm the time and give you your price.",
+      callPrice: "We'll call you shortly to confirm the time and give you your price.",
       prevWeek: 'Previous week', nextWeek: 'Next week', pickDay: 'Pick a day above to see open times.'
     },
     fr: {
@@ -98,9 +97,8 @@
       phoneBad: 'Entrez un numéro à 10 chiffres.', nameBad: 'Entrez votre nom.',
       s6: 'Vérifiez vos informations', when: 'Quand', service: 'Service', where: 'Adresse', vehicle: 'Véhicule', contact: 'Contact', tsize: 'Taille',
       sizeEst: 'estimée selon le véhicule', sizeCust: 'entrée par vous', sizeUnk: 'à confirmer par téléphone',
-      price: 'Service', off15: 'Offre', zoneFee: 'Déplacement', subtotal: 'Sous-total', tax: 'Taxes', total: 'Total',
-      pay: 'Paiement au technicien à la fin : comptant, carte ou virement Interac.', locked: "Le prix est basé sur votre véhicule. Si vos pneus sont d'une autre taille, on vous le dira avant de commencer.",
-      noHidden: 'Aucuns frais cachés.', confirm: '✓ Envoyer ma demande', booking: 'Envoi…',
+      pay: 'Paiement au technicien à la fin : comptant, carte ou virement Interac.',
+      confirm: '✓ Envoyer ma demande', booking: 'Envoi…',
       priceChanged: 'Vérifiez votre demande et confirmez de nouveau.', offerGone: "Cette offre n'a pas pu être appliquée (expirée ou déjà utilisée). Appelez pour une soumission.",
       limit: "Ce numéro a déjà des réservations aujourd'hui. Texte-nous en français ou en anglais.",
       doneT: 'Réservation confirmée!', doneR: 'Demande reçue!', doneRsub: "On vous appelle bientôt pour confirmer l'heure et vous donner le prix.", bookingNo: 'Demande n°',
@@ -109,7 +107,7 @@
       fbTitle: 'La réservation en ligne a un problème', fbSub: 'Textez-nous votre réservation et on confirme rapidement.',
       fbBtn: '💬 Texte-nous en français ou en anglais', offerTitle: 'Appelez pour une soumission', offerSub: 'On vous appelle pour confirmer l\'heure.', offerYes: 'Appelez pour une soumission', offerNo: 'Non merci',
       offerBar: '', loading: 'Chargement…', err: 'Une erreur est survenue. Réessayez.',
-      tierFrom: 'Votre prix : ', plusTax: ' + taxes', callPrice: "On vous appelle bientôt pour confirmer l'heure et vous donner le prix.", prevWeek: 'Semaine précédente', nextWeek: 'Semaine suivante', pickDay: 'Choisissez un jour ci-dessus pour voir les plages libres.', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars."
+      callPrice: "On vous appelle bientôt pour confirmer l'heure et vous donner le prix.", prevWeek: 'Semaine précédente', nextWeek: 'Semaine suivante', pickDay: 'Choisissez un jour ci-dessus pour voir les plages libres.', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars."
     }
   };
   // Summer mode (SETTINGS.SEASON = 'summer' in the script): only these lines change.
@@ -147,17 +145,11 @@
   try { var of = JSON.parse(lsGet('bk_offer') || 'null'); if (of && of.expires > Date.now() && !of.used) S.offer = of; } catch (e) {}
   function t(k) {
     var v = (S.season === 'summer' && TS[S.lang] && TS[S.lang][k]) || (T[S.lang] && T[S.lang][k]) || T.en[k] || k;
-    return v.indexOf('{MIN}') >= 0 ? v.replace('{MIN}', minPrice()) : v;
-  }
-  function minPrice() {
-    var p = S.cfg && S.cfg.prices, m = 160;
-    if (p) { m = Infinity; Object.keys(p).forEach(function (k) { if (+p[k] < m) m = +p[k]; }); }
-    return money(m);
+    return v;
   }
   function seasonWord() { return S.season === 'summer' ? 'summer' : 'winter'; }
   function rid() { return 'S' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-  function money(n) { n = Math.round(n * 100) / 100; var s = n % 1 ? n.toFixed(2) : String(n); return S.lang === 'fr' ? s.replace('.', ',') + ' $' : '$' + s; }
 
   // ---------------------------------------------------------------- API
   function withTimeout(p, ms) { return Promise.race([p, new Promise(function (_, rej) { setTimeout(function () { rej(new Error('timeout')); }, ms); })]); }
@@ -226,24 +218,6 @@
   function isLowProfile(tier) { return (S.cfg.lowProfileTiers || []).indexOf(tier) >= 0; }
   function whyHtml(tier) {
     return isLowProfile(tier) ? '<details class="bk-why"><summary>' + t('whyQ') + '</summary><p>' + t('whyA') + '</p></details>' : '';
-  }
-  function basePrice(service, tires, tier) {
-    var c = S.cfg;
-    if (service === 'on') {   // on-rim: one price for cars/SUVs, one for pickups/large SUVs (settings in the script)
-      var grp = c.onRim[(tier === 'PICKUP' || tier === 'PICKUP_LOW') ? 'PICKUP' : 'CAR'];
-      return +(grp ? grp[tires] : c.onRim[tires]);
-    }
-    return tires === 4 ? +c.prices[tier] : +c.twoTireOffRim[tier];
-  }
-  function quote() {
-    var tier = currentTier(), base = basePrice(S.service, S.tires, tier);
-    var pct = S.offer ? (+S.cfg.offerPercent || 0) : 0;
-    var full = S.zone ? (+S.zone.fee || 0) : 0, waived = S.multiCar && S.cfg.multiCarWaivesFee ? full : 0;
-    var disc = Math.round(base * pct) / 100, fee = full - waived;
-    var sub = Math.round((base - disc + fee) * 100) / 100;
-    var rate = S.cfg.taxRates[(S.zone && S.zone.province) || 'ON']; if (rate == null) rate = S.cfg.taxRates.ON;
-    var tax = Math.round(sub * rate * 100) / 100;
-    return { tier: tier, base: base, pct: pct, disc: disc, fee: fee, waived: waived, sub: sub, tax: tax, total: Math.round((sub + tax) * 100) / 100 };
   }
 
   // ---------------------------------------------------------------- vehicles
@@ -319,8 +293,7 @@
   function chipHtml() {
     if (!step1Basics()) return '';
     if (isExotic()) return exoticHtml();
-    var q = quote();
-    return '';   // prices hidden: we call to confirm the price
+    return '';   // no prices: we call to confirm
   }
   function exoticHtml() {
     if (S.exoticDone) return '<div class="bk-exotic"><p class="bk-ok" style="font-size:16px">' + t('exDone') + '</p></div>';
@@ -361,7 +334,6 @@
   function step2() {
     var tier = currentTier();
     function card(key, desc, service) {
-      var p = basePrice(service, S.tires, tier);
       return '<button type="button" class="bk-opt' + (S.service === service ? ' sel' : '') + '" data-act="svc" data-v="' + service + '"><b>' + t(key) + '</b><small>' + t(desc) + '</small></button>';
     }
     return '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('s2') + '</h2>' + card('off', 'offD', 'off') + card('on', 'onD', 'on') +
@@ -471,7 +443,6 @@
     return t('sizeUnk');
   }
   function step6() {
-    var q = quote();
     var svc = (S.service === 'on' ? t('on') : t('off')) + ' · ' + (S.tires === 4 ? t('t4') : t('t2'));
     var h = '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('s6') + '</h2><div class="bk-sum">' +
       '<div><span>' + t('service') + '</span><span>' + esc(svc) + '</span></div>' +
@@ -663,17 +634,15 @@
   }
 
   function draftDetails() {
-    var q = S.cfg ? quote() : null;
     return { name: S.c.name, email: S.c.email, size: sizeLabel(), service: (S.service === 'on' ? 'On-rim' : 'Off-rim') + ' x' + S.tires,
-             address: S.zone && S.zone.formatted, zone: S.zone && S.zone.zone, lang: S.lang, price: q && money(q.sub), ref: S.ref };
+             address: S.zone && S.zone.formatted, zone: S.zone && S.zone.zone, lang: S.lang, price: 'Call for a quote', ref: S.ref };
   }
   function sendDraft() {
     var ph = document.getElementById('bk-phone'); if (ph) S.c.phone = ph.value.trim();
     var nm = document.getElementById('bk-name'); if (nm) S.c.name = nm.value.trim();
     var phone = cleanPhone(S.c.phone); if (!phone || !S.cfg) return;
-    var q = quote();
     var payload = { action: 'draft', session: S.session, firstName: (S.c.name || '').split(' ')[0], phone: phone, vehicle: vehicleLabel(),
-                    slot: S.dateLabel ? S.dateLabel + ' ' + S.slotLabel : '', price: money(q.sub) + '+tax', details: draftDetails() };
+                    slot: S.dateLabel ? S.dateLabel + ' ' + S.slotLabel : '', price: 'Call for a quote', details: draftDetails() };
     var sig = JSON.stringify(payload); if (sig === S.draftSent) return; S.draftSent = sig;
     apiPost(payload).catch(function () {});
   }
@@ -710,7 +679,7 @@
   function book() {
     if (S.busy) return;
     var hp = document.getElementById('bk-hp');
-    var q = quote(), v = S.veh;
+    var v = S.veh;
     S.busy = true; S.bookErr = ''; render();
     var payload = {
       action: 'lead', session: S.session, lang: S.lang, hp: hp ? hp.value : '',
