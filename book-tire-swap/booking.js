@@ -60,7 +60,15 @@
       fbBtn: '💬 Text us my booking', offerTitle: 'Call for a quote', offerSub: 'We will call you to confirm the time.', offerYes: 'Call for a quote', offerNo: 'No thanks',
       offerBar: '', loading: 'Loading…', err: 'Something went wrong. Please try again.',
       callPrice: "We'll call you shortly to confirm the time and give you your price.",
-      prevWeek: 'Previous week', nextWeek: 'Next week', pickDay: 'Pick a day above to see open times.'
+      prevWeek: 'Previous week', nextWeek: 'Next week', pickDay: 'Pick a day above to see open times.',
+      fTitle: 'Your details', req: 'required',
+      car: 'Car make & model or tire size — whichever you know', carHint: "Fill in one or both. Not sure? Make and model is enough.",
+      carMM: 'Make & model', carPh: 'e.g. Toyota RAV4', or: 'or', sizeOnly: 'Tire size', 
+      area: 'City or neighbourhood', areaPh: 'e.g. Kanata, Orleans, Gatineau',
+      more: '+ More details (optional)', fAddr: 'Full street address (optional)', fAddrPh: 'e.g. 123 Greenbank Rd',
+      yearTrim: 'Year / trim (optional)', yearPh: 'Year', trimPh: 'Trim, e.g. LE', when2: 'Preferred time (optional)', anyT: 'Any time',
+      svcQ: 'Service', send: '✓ Send my request', needCar: "Please enter your car's make and model, or your tire size.",
+      needArea: 'Please enter your city or neighbourhood.', fNote: "We'll call you to confirm the time and give you your price. Pay the tech when done."
     },
     fr: {
       kicker: "❄ Réservation pneus d'hiver", title: "Réservez votre changement de pneus d'hiver", sub: 'On se déplace chez vous. Envoyez votre demande en 2 minutes et on vous appelle.',
@@ -107,7 +115,15 @@
       fbTitle: 'La réservation en ligne a un problème', fbSub: 'Textez-nous votre réservation et on confirme rapidement.',
       fbBtn: '💬 Texte-nous en français ou en anglais', offerTitle: 'Appelez pour une soumission', offerSub: 'On vous appelle pour confirmer l\'heure.', offerYes: 'Appelez pour une soumission', offerNo: 'Non merci',
       offerBar: '', loading: 'Chargement…', err: 'Une erreur est survenue. Réessayez.',
-      callPrice: "On vous appelle bientôt pour confirmer l'heure et vous donner le prix.", prevWeek: 'Semaine précédente', nextWeek: 'Semaine suivante', pickDay: 'Choisissez un jour ci-dessus pour voir les plages libres.', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars."
+      callPrice: "On vous appelle bientôt pour confirmer l'heure et vous donner le prix.", prevWeek: 'Semaine précédente', nextWeek: 'Semaine suivante', pickDay: 'Choisissez un jour ci-dessus pour voir les plages libres.', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars.",
+      fTitle: 'Vos informations', req: 'obligatoire',
+      car: 'Marque et modèle du véhicule ou taille des pneus — ce que vous savez', carHint: "Remplissez l'un ou les deux. Pas sûr? La marque et le modèle suffisent.",
+      carMM: 'Marque et modèle', carPh: 'ex. Toyota RAV4', or: 'ou', sizeOnly: 'Taille des pneus',
+      area: 'Ville ou quartier', areaPh: 'ex. Gatineau, Aylmer, Orléans',
+      more: '+ Plus de détails (facultatif)', fAddr: 'Adresse complète (facultatif)', fAddrPh: 'ex. 123 rue Principale',
+      yearTrim: 'Année / version (facultatif)', yearPh: 'Année', trimPh: 'Version, ex. LE', when2: 'Heure préférée (facultatif)', anyT: "N'importe quand",
+      svcQ: 'Service', send: '✓ Envoyer ma demande', needCar: 'Entrez la marque et le modèle du véhicule, ou la taille des pneus.',
+      needArea: 'Entrez votre ville ou quartier.', fNote: "On vous appelle pour confirmer l'heure et vous donner le prix. Paiement au technicien à la fin."
     }
   };
   // Summer mode (SETTINGS.SEASON = 'summer' in the script): only these lines change.
@@ -129,10 +145,10 @@
   var S = {
     lang: qsLang || lsGet('bk_lang') || ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en'),
     season: 'winter', week: 0, step: 1, cfg: null, rows: [], session: lsGet('bk_session') || rid(),
-    veh: { mode: 'list', year: '', make: '', model: '', trim: '', unsure: false, id: '', cls: 'car', tier: 'STANDARD', size: '', verified: false,
-           oYear: '', oMake: '', oModel: '', typed: '', photoUrl: '' },
+    veh: { mode: 'other', year: '', make: '', model: '', trim: '', unsure: false, id: '', cls: 'car', tier: 'STANDARD', size: '', verified: false,
+           oYear: '', oMake: '', oModel: '', typed: '', photoUrl: '', car: '', oTrim: '' },
     service: 'off', tires: 4, zone: null, addrText: '', days: [], date: '', dateLabel: '', slot: '', slotLabel: '', hold: 0,
-    c: { name: '', phone: '', email: '', notes: '' }, offer: null, done: null, busy: false, waitDay: null, draftSent: ''
+    c: { name: '', phone: '', email: '', notes: '' }, area: '', pref: '', more: false, offer: null, done: null, busy: false, waitDay: null, draftSent: ''
   };
   lsSet('bk_session', S.session);
   // ?r=Emma (dispatcher who sent a /book link). Kept for this visit.
@@ -235,7 +251,7 @@
 
   // ---------------------------------------------------------------- render helpers
   function opt(v, label, sel) { return '<option value="' + esc(v) + '"' + (sel ? ' selected' : '') + '>' + esc(label) + '</option>'; }
-  function stepsBar() { var h = '<div class="bk-steps" aria-hidden="true">'; for (var i = 1; i <= 5; i++) h += '<i class="' + (i <= (S.step >= 4 ? S.step - 1 : S.step) ? 'on' : '') + '"></i>'; return h + '</div>'; }
+  function stepsBar() { return ''; }   // one screen now: no progress bar
   function offerBar() {
     return '';   // no prices or discounts shown
   }
@@ -253,209 +269,97 @@
     else if (!S.cfg) h = '<div class="bk-card">' + t('loading') + '</div>';
     else if (S.done) h = doneHtml();
     else if (S.waitDay) h = waitHtml();
-    else h = [null, step1, step2, step3, step4, step5, step6][S.step]();
+    else h = step1();
     root.innerHTML = S.fatal ? h : shell(h);
     document.documentElement.lang = S.lang === 'fr' ? 'fr-CA' : 'en-CA';
     relabelFloatBar();
     bindAfterRender();
   }
 
-  // ---------------------------------------------------------------- steps
-  function step1() {
-    var v = S.veh, h = '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('s1') + '</h2>';
-    if (v.mode === 'list') {
-      var yr = +v.year;
-      h += '<div class="bk-row"><div><label class="bk-label" for="bk-year">' + t('year') + '</label><select class="bk-select" id="bk-year" data-f="year">' + opt('', t('choose')) +
-        years().map(function (y) { return opt(y, y, String(y) === String(v.year)); }).join('') + '</select></div>';
-      h += '<div><label class="bk-label" for="bk-make">' + t('make') + '</label><select class="bk-select" id="bk-make" data-f="make"' + (yr ? '' : ' disabled') + '>' + opt('', t('choose')) +
-        (yr ? makesFor(yr).map(function (m) { return opt(m, m, m === v.make); }).join('') : '') + '</select></div></div>';
-      h += '<div class="bk-row"><div><label class="bk-label" for="bk-model">' + t('model') + '</label><select class="bk-select" id="bk-model" data-f="model"' + (v.make ? '' : ' disabled') + '>' + opt('', t('choose')) +
-        (v.make ? modelsFor(yr, v.make).map(function (m) { return opt(m, m, m === v.model); }).join('') : '') + '</select></div>';
-      var trims = v.model ? trimRows(yr, v.make, v.model) : [];
-      h += '<div><label class="bk-label" for="bk-trim">' + t('trim') + '</label><select class="bk-select" id="bk-trim" data-f="trim"' + (v.model ? '' : ' disabled') + '>' + opt('', t('choose')) +
-        (v.model ? opt('__unsure', t('notSure'), v.unsure) + uniq(trims.map(function (r) { return r[5]; })).map(function (tr) { return opt(tr, tr, !v.unsure && tr === v.trim); }).join('') : '') + '</select></div></div>';
-      h += '<button class="bk-link" type="button" data-act="other">' + t('notListed') + '</button>';
-    } else {
-      h += '<div class="bk-row"><div><label class="bk-label" for="bk-oy">' + t('otherYear') + '</label><input class="bk-input" id="bk-oy" data-f="oYear" inputmode="numeric" maxlength="4" value="' + esc(v.oYear) + '"></div>' +
-        '<div><label class="bk-label" for="bk-om">' + t('otherMake') + '</label><input class="bk-input" id="bk-om" data-f="oMake" value="' + esc(v.oMake) + '"></div></div>' +
-        '<label class="bk-label" for="bk-omo">' + t('otherModel') + '</label><input class="bk-input" id="bk-omo" data-f="oModel" value="' + esc(v.oModel) + '">' +
-        '<p class="bk-hint">' + t('otherNote') + '</p><button class="bk-link" type="button" data-act="list">' + t('backToList') + '</button>';
-    }
-    h += '<label class="bk-label" for="bk-size">' + t('size') + '</label><input class="bk-input" id="bk-size" data-f="typed" placeholder="' + t('sizePh') + '" value="' + esc(v.typed) + '" autocomplete="off">' +
-      '<div class="bk-err" id="bk-size-err">' + (v.typed && !parseSize(v.typed) ? t('sizeBad') : '') + '</div>' +
-      '<p class="bk-hint">💡 ' + t('sizeTip') + '</p>' +
-      '<label class="bk-label" for="bk-photo">' + t('photo') + '</label><input class="bk-input" id="bk-photo" type="file" accept="image/*" data-act="photo">' +
-      '<div class="bk-ok" id="bk-photo-st">' + (v.photoUrl ? t('photoOk') : '') + '</div>';
-    h += '<div id="bk-chip-wrap">' + chipHtml() + '</div>';
-    h += '<button class="bk-btn" type="button" data-act="next"' + (step1Ready() ? '' : ' disabled') + '>' + t('next') + '</button></div>';
-    return h;
+  // ---------------------------------------------------------------- the one-screen form
+  // Required: name, phone, area, and EITHER make & model OR tire size. Everything else is optional.
+  var AREAS = ['Ottawa', 'Kanata', 'Nepean', 'Orleans', 'Barrhaven', 'Gloucester', 'Stittsville', 'Riverside South', 'Vanier', 'Manotick', 'Gatineau', 'Aylmer', 'Hull'];
+  function splitCar(txt) {   // "Toyota RAV4 Hybrid" -> make 'Toyota', model 'RAV4 Hybrid'
+    var w = String(txt || '').trim().split(/\s+/);
+    if (w.length > 1 && /^(land|alfa|aston|mercedes)$/i.test(w[0])) w = [w[0] + ' ' + w[1]].concat(w.slice(2));
+    return { make: w[0] || '', model: w.slice(1).join(' ') };
   }
-  function chipHtml() {
-    if (!step1Basics()) return '';
-    if (isExotic()) return exoticHtml();
-    return '';   // no prices: we call to confirm
-  }
+  function syncCar() { var v = S.veh, c = splitCar(v.car); v.mode = 'other'; v.oMake = c.make; v.oModel = c.model; }
+  function hasCar() { return !!S.veh.car; }
+  function hasSize() { return !!parseSize(S.veh.typed); }
+  function step1Basics() { return hasCar() || hasSize(); }   // enough to send the "almost booked" alert (with a phone)
+  function step1Ready() { return step1Basics(); }
+  function isExoticSafe() { if (S.forceExotic) return true; try { return !!(S.cfg && S.cfg.rules && isExotic()); } catch (e) { return false; } }
+  function chipHtml() { return isExoticSafe() ? exoticHtml() : ''; }
   function exoticHtml() {
     if (S.exoticDone) return '<div class="bk-exotic"><p class="bk-ok" style="font-size:16px">' + t('exDone') + '</p></div>';
     var textOnly = S.lang === 'fr' && !FR_CALLS;
     return '<div class="bk-exotic"><div style="font-size:30px">🏎️</div><h3>' + t('exT') + '</h3><p class="bk-sub">' + t('exSub') + '</p>' +
       '<a class="bk-btn green" href="' + PHONE_SMS + '">💬 ' + (S.lang === 'fr' ? 'Texto' : 'Text us') + '</a>' +
       (textOnly ? '' : '<a class="bk-btn ghost" href="tel:+16136016471">📞 ' + (S.lang === 'fr' ? 'Appeler' : 'Call') + ' (613) 601-6471</a>') +
-      '<label class="bk-label" for="bk-xn">' + t('name') + '</label><input class="bk-input" id="bk-xn" value="' + esc(S.c.name) + '">' +
-      '<label class="bk-label" for="bk-xp">' + t('phone') + ' *</label><input class="bk-input" id="bk-xp" type="tel" inputmode="tel" value="' + esc(S.c.phone) + '">' +
-      '<label class="bk-label" for="bk-xa">' + t('exAddr') + '</label><input class="bk-input" id="bk-xa" value="' + esc(S.addrText) + '">' +
-      '<div class="bk-err" id="bk-x-err"></div><button class="bk-btn" type="button" data-act="exotic">' + (S.busy ? '<span class="bk-spin"></span>' : t('exSend')) + '</button></div>';
+      '<button class="bk-btn" type="button" data-act="exotic">' + (S.busy ? '<span class="bk-spin"></span>' : t('exSend')) + '</button></div>';
   }
-  function refreshStep1(force) {
-    var w = document.getElementById('bk-chip-wrap');
-    // keep the custom-quote form (and what the customer typed) if it's already showing
-    var keep = !force && w && w.querySelector('.bk-exotic') && step1Basics() && isExotic();
-    if (w && !keep) w.innerHTML = chipHtml();
-    var b = root.querySelector('[data-act="next"]'); if (b) b.disabled = !step1Ready();
+  function refreshStep1() {
+    var w = document.getElementById('bk-chip-wrap'); if (w) w.innerHTML = chipHtml();
     var e = document.getElementById('bk-size-err'); if (e) e.textContent = S.veh.typed && !parseSize(S.veh.typed) ? t('sizeBad') : '';
+    var sb = root.querySelector('[data-act="book"]'); if (sb) sb.style.display = isExoticSafe() && !S.exoticDone ? 'none' : '';
   }
-  function markStarted() {   // picked a car, then left before confirming (assets/offer.js)
-    if (S.cfg && !S.done && step1Basics() && !isExotic() && !lsGet('bk_started')) lsSet('bk_started', String(Date.now()));
+  function markStarted() {   // entered a car or size, then left before sending (assets/offer.js)
+    if (S.cfg && !S.done && step1Basics() && !isExoticSafe() && !lsGet('bk_started')) lsSet('bk_started', String(Date.now()));
   }
-  function step1Basics() {
-    var v = S.veh;
-    if (v.typed && !parseSize(v.typed)) return false;
-    if (v.mode === 'other') return !!(v.oMake && v.oModel);
-    return !!(v.year && v.make && v.model && (v.trim || v.unsure) && v.id);
+  function inp(id, f, label, val, extra) {
+    return (label ? '<label class="bk-label" for="' + id + '">' + label + '</label>' : '') + '<input class="bk-input" id="' + id + '" data-f="' + f + '" value="' + esc(val) + '"' + (extra || '') + '>';
   }
-  function step1Ready() {
-    if (S.cfg && step1Basics() && isExotic()) return false;
-    var v = S.veh;
-    if (v.typed && !parseSize(v.typed)) return false;
-    if (v.mode === 'other') return !!(v.oMake && v.oModel);
-    return !!(v.year && v.make && v.model && (v.trim || v.unsure) && v.id);
-  }
-
-  function step2() {
-    var tier = currentTier();
-    function card(key, desc, service) {
-      return '<button type="button" class="bk-opt' + (S.service === service ? ' sel' : '') + '" data-act="svc" data-v="' + service + '"><b>' + t(key) + '</b><small>' + t(desc) + '</small></button>';
-    }
-    return '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('s2') + '</h2>' + card('off', 'offD', 'off') + card('on', 'onD', 'on') +
-      '<label class="bk-label">' + t('howMany') + '</label><div class="bk-toggle"><button type="button" data-act="tires" data-v="4" class="' + (S.tires === 4 ? 'sel' : '') + '">' + t('t4') + '</button>' +
-      '<button type="button" data-act="tires" data-v="2" class="' + (S.tires === 2 ? 'sel' : '') + '">' + t('t2') + '</button></div>' +
-      '<button class="bk-btn" type="button" data-act="next">' + t('next') + '</button><button class="bk-btn ghost" type="button" data-act="back">' + t('back') + '</button></div>';
-  }
-
-  function zoneOk() { return S.zone && !S.zone.error && S.zone.zone >= 1 && S.zone.zone <= 3; }
   function zoneHtml() {
-    var z = S.zone; if (!z) return '';
-    if (z.error) return '<div class="bk-zone z0">' + t(z.error === 'not_found' || z.error === 'address_short' ? 'notFound' : 'err') + '</div>';
-    if (!z.checked) return '<div class="bk-zone z1">' + t('unchecked') + '</div>';
-    if (z.zone === 0) {
-      var textOnly = S.lang === 'fr' && !FR_CALLS;
-      return '<div class="bk-zone z0">' + t('z0') + '<br><small>' + esc(z.formatted) + '</small>' +
-        '<a class="bk-btn ' + (textOnly ? 'green' : '') + '" href="' + (textOnly ? PHONE_SMS : 'tel:+16136016471') + '">' + (textOnly ? '💬 Texto' : '📞 (613) 601-6471') + '</a></div>';
-    }
-    var cls = z.zone === 1 ? 'z1' : 'z2';
-    var msg = z.zone === 1 ? t('z1') : t(z.zone === 2 ? 'z2' : 'z3').replace('FEE', z.fee);
-    var h = '<div class="bk-zone ' + cls + '">' + msg + '<br><small>' + esc(z.formatted) + '</small></div>';
-    h += '<label class="bk-check"><input type="checkbox" data-act="multi"' + (S.multiCar ? ' checked' : '') + '> ' + t('multi') + '</label>';
-    if (S.multiCar) h += '<p class="bk-hint">' + t('multiNote') + '</p>';
+    var z = S.zone; if (!z || z.error || z.zone !== 0) return '';
+    var textOnly = S.lang === 'fr' && !FR_CALLS;
+    return '<div class="bk-zone z0">' + t('z0') + '<br><small>' + esc(z.formatted || '') + '</small>' +
+      '<a class="bk-btn ' + (textOnly ? 'green' : '') + '" href="' + (textOnly ? PHONE_SMS : 'tel:+16136016471') + '">' + (textOnly ? '💬 Texto' : '📞 (613) 601-6471') + '</a></div>';
+  }
+  function slotOpts() {
+    var sl = (S.cfg && S.cfg.slots) || [];
+    return opt('', t('anyT'), !S.pref) + sl.map(function (x) { var l = x.start + '–' + x.end; return opt(l, l, S.pref === l); }).join('');
+  }
+  function step1() {
+    var v = S.veh, r = ' <span class="bk-req">*</span>';
+    var h = '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('fTitle') + '</h2>' +
+      inp('bk-name', 'name', t('name') + r, S.c.name, ' autocomplete="name"') +
+      inp('bk-phone', 'phone', t('phone') + r, S.c.phone, ' type="tel" inputmode="tel" autocomplete="tel"') +
+      '<fieldset class="bk-either"><legend class="bk-label">' + t('car') + r + '</legend>' +
+      inp('bk-car', 'car', t('carMM'), v.car, ' placeholder="' + t('carPh') + '" autocomplete="off"') +
+      '<div class="bk-or">' + t('or') + '</div>' +
+      inp('bk-size', 'typed', t('sizeOnly'), v.typed, ' placeholder="' + t('sizePh') + '" autocomplete="off"') +
+      '<div class="bk-err" id="bk-size-err">' + (v.typed && !parseSize(v.typed) ? t('sizeBad') : '') + '</div>' +
+      '<p class="bk-hint">💡 ' + t('sizeTip') + '</p></fieldset>' +
+      inp('bk-area', 'area', t('area') + r, S.area, ' list="bk-areas" placeholder="' + t('areaPh') + '" autocomplete="address-level2"') +
+      '<datalist id="bk-areas">' + AREAS.map(function (x) { return '<option value="' + x + '">'; }).join('') + '</datalist>' + zoneHtml() +
+      '<details class="bk-more"' + (S.more ? ' open' : '') + '><summary>' + t('more') + '</summary>' +
+      inp('bk-addr', 'addr', t('fAddr'), S.addrText, ' autocomplete="street-address" placeholder="' + t('fAddrPh') + '"') +
+      inp('bk-email', 'email', t('email'), S.c.email, ' type="email" autocomplete="email"') +
+      '<label class="bk-label" for="bk-oy">' + t('yearTrim') + '</label><div class="bk-row">' + inp('bk-oy', 'oYear', '', v.oYear, ' inputmode="numeric" maxlength="4" placeholder="' + t('yearPh') + '"') +
+      inp('bk-trim', 'oTrim', '', v.oTrim, ' placeholder="' + t('trimPh') + '"') + '</div>' +
+      '<label class="bk-label" for="bk-pref">' + t('when2') + '</label><select class="bk-select" id="bk-pref" data-f="pref">' + slotOpts() + '</select>' +
+      '<label class="bk-label">' + t('svcQ') + '</label><div class="bk-toggle"><button type="button" data-act="svc" data-v="off" class="' + (S.service === 'off' ? 'sel' : '') + '">' + t('off').split(':')[0] + '</button>' +
+      '<button type="button" data-act="svc" data-v="on" class="' + (S.service === 'on' ? 'sel' : '') + '">' + t('on') + '</button></div>' +
+      '<div class="bk-toggle"><button type="button" data-act="tires" data-v="4" class="' + (S.tires === 4 ? 'sel' : '') + '">' + t('t4') + '</button>' +
+      '<button type="button" data-act="tires" data-v="2" class="' + (S.tires === 2 ? 'sel' : '') + '">' + t('t2') + '</button></div>' +
+      inp('bk-notes', 'notes', t('notes'), S.c.notes, ' placeholder="' + t('notesPh') + '"') + '</details>' +
+      '<div class="bk-hp" aria-hidden="true"><label>Website<input id="bk-hp" tabindex="-1" autocomplete="off"></label></div>' +
+      '<div id="bk-chip-wrap">' + chipHtml() + '</div>' +
+      '<div class="bk-err" id="bk-book-err" role="alert">' + (S.bookErr || '') + '</div>' +
+      '<button class="bk-btn green" type="button" data-act="book"' + (S.busy ? ' disabled' : '') + (isExoticSafe() && !S.exoticDone ? ' style="display:none"' : '') + '>' +
+        (S.busy ? '<span class="bk-spin"></span> ' + t('booking') : t('send')) + '</button>' +
+      '<p class="bk-note">' + t('fNote') + '</p><p class="bk-hint">' + t('mayContact') + '</p></div>';
     return h;
   }
-  function step3() {
-    var ok = zoneOk();
-    return '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('s3') + '</h2>' +
-      '<label class="bk-label" for="bk-addr">' + t('addr') + '</label><input class="bk-input" id="bk-addr" data-f="addr" autocomplete="street-address" placeholder="' + t('addrPh') + '" value="' + esc(S.addrText) + '">' +
-      '<button class="bk-btn ghost" type="button" data-act="zone">' + (S.busy ? '<span class="bk-spin"></span>' : t('check')) + '</button>' + zoneHtml() +
-      '<button class="bk-btn" type="button" data-act="next"' + (ok ? '' : ' disabled') + '>' + t('next') + '</button><button class="bk-btn ghost" type="button" data-act="back">' + t('back') + '</button></div>';
-  }
-
-  function step4() {
-    var h = '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('s4') + '</h2><p class="bk-sub">' + t('s4sub') + '</p>';
-    if (!S.days.length) return h + '<p>' + (S.busy ? t('loading') : t('err')) + '</p><button class="bk-btn ghost" type="button" data-act="back">' + t('back') + '</button></div>';
-    var wk = Math.min(S.week || 0, weekCount() - 1), vis = S.days.slice(wk * WK, wk * WK + WK);
-    h += '<div class="bk-week"><button type="button" class="bk-wk-nav" data-act="wk" data-v="-1" aria-label="' + t('prevWeek') + '"' + (wk === 0 ? ' disabled' : '') + '>←</button>' +
-      '<div class="bk-month">' + esc(monthLabel(vis)) + '</div>' +
-      '<button type="button" class="bk-wk-nav" data-act="wk" data-v="1" aria-label="' + t('nextWeek') + '"' + (wk >= weekCount() - 1 ? ' disabled' : '') + '>→</button></div>';
-    h += '<div class="bk-days">' + vis.map(function (d) {
-      var p = (S.lang === 'fr' ? d.labelFr : d.label).split(' ');
-      var full = d.open === 0;
-      return '<button type="button" class="bk-day' + (full ? ' full' : '') + (S.date === d.date ? ' sel' : '') + '" data-act="day" data-v="' + d.date + '"><small>' + esc(p[0]) + '</small><b>' + esc(S.lang === 'fr' ? p[1] : p[2]) + '</b><small>' + esc(S.lang === 'fr' ? p[2] : p[1]) + '</small><em>' + (full ? t('full') : d.open + ' ' + t('open1')) + '</em></button>';
-    }).join('') + '</div>';
-    var day = vis.filter(function (d) { return d.date === S.date; })[0];
-    if (!day) h += '<p class="bk-hint">' + t('pickDay') + '</p>';
-    if (day) {
-      h += '<label class="bk-label">' + esc(S.lang === 'fr' ? day.labelFr : day.label) + '</label>';
-      day.slots.filter(function (s) { return s.state === 'open'; }).forEach(function (s) {
-        h += '<button type="button" class="bk-slot' + (S.slot === s.id ? ' sel' : '') + '" data-act="slot" data-v="' + s.id + '">' + esc(S.lang === 'fr' ? s.labelFr : s.label) + '<span>' + (S.slot === s.id ? '✓' : '') + '</span></button>';
-      });
-      if (S.slot && S.hold > Date.now()) h += '<div class="bk-ok">' + t('held') + '</div>';
-    }
-    h += '<div class="bk-err" id="bk-slot-err">' + (S.slotErr || '') + '</div>';
-    return h + '<button class="bk-btn" type="button" data-act="next"' + (S.slot && S.date ? '' : ' disabled') + '>' + t('next') + '</button><button class="bk-btn ghost" type="button" data-act="back">' + t('back') + '</button></div>';
-  }
-
-  var WK = 7;
-  function weekCount() { return Math.max(1, Math.ceil(S.days.length / WK)); }
-  function weekOf(ds) { for (var i = 0; i < S.days.length; i++) if (S.days[i].date === ds) return Math.floor(i / WK); return 0; }
-  function ymd(ds) { var p = ds.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); }
-  function monthLabel(vis) {
-    if (!vis.length) return '';
-    var loc = S.lang === 'fr' ? 'fr-CA' : 'en-CA', a = ymd(vis[0].date), b = ymd(vis[vis.length - 1].date);
-    function m(d, yr, cap) { var x = d.toLocaleDateString(loc, yr ? { month: 'long', year: 'numeric' } : { month: 'long' }); return cap ? x.charAt(0).toUpperCase() + x.slice(1) : x; }
-    var cap2 = S.lang !== 'fr';   // French: only the first word is capitalised
-    if (a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear()) return m(a, true, true);
-    return a.getFullYear() === b.getFullYear() ? m(a, false, true) + ' – ' + m(b, true, cap2) : m(a, true, true) + ' – ' + m(b, true, cap2);
-  }
-  function goWeek(dir) {
-    S.week = Math.max(0, Math.min(weekCount() - 1, (S.week || 0) + dir));
-    var vis = S.days.slice(S.week * WK, S.week * WK + WK), f = vis.filter(function (d) { return d.open; })[0];
-    S.date = f ? f.date : ''; S.slot = ''; S.slotErr = ''; render();
-  }
-
-  function waitHtml() {
-    var d = S.waitDay;
-    if (d.done) return '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('waitDone') + '</h2><button class="bk-btn ghost" type="button" data-act="unwait">' + t('otherDay') + '</button></div>';
-    return '<div class="bk-card"><div class="bk-kicker">' + esc(S.lang === 'fr' ? d.labelFr : d.label) + '</div><h2 class="bk-title" style="font-size:22px">' + t('waitTitle') + '</h2><p class="bk-sub">' + t('waitSub') + '</p>' +
-      '<label class="bk-label" for="bk-wn">' + t('name') + '</label><input class="bk-input" id="bk-wn" value="' + esc(S.c.name) + '">' +
-      '<label class="bk-label" for="bk-wp">' + t('phone') + '</label><input class="bk-input" id="bk-wp" type="tel" inputmode="tel" value="' + esc(S.c.phone) + '">' +
-      '<label class="bk-label" for="bk-wt">' + t('when') + '</label><select class="bk-select" id="bk-wt">' + opt('any', t('anyTime')) + S.cfg.slots.map(function (s) { return opt(s.id, s.start + '–' + s.end); }).join('') + '</select>' +
-      '<div class="bk-err" id="bk-w-err"></div><button class="bk-btn" type="button" data-act="wait">' + (S.busy ? '<span class="bk-spin"></span>' : t('joinWait')) + '</button><button class="bk-btn ghost" type="button" data-act="unwait">' + t('otherDay') + '</button></div>';
-  }
-
-  function step5() {
-    return '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('s5') + '</h2>' +
-      '<label class="bk-label" for="bk-name">' + t('name') + '</label><input class="bk-input" id="bk-name" data-f="name" autocomplete="name" value="' + esc(S.c.name) + '">' +
-      '<label class="bk-label" for="bk-phone">' + t('phone') + ' *</label><input class="bk-input" id="bk-phone" data-f="phone" type="tel" inputmode="tel" autocomplete="tel" value="' + esc(S.c.phone) + '">' +
-      '<label class="bk-label" for="bk-email">' + t('email') + '</label><input class="bk-input" id="bk-email" data-f="email" type="email" autocomplete="email" value="' + esc(S.c.email) + '">' +
-      '<label class="bk-label" for="bk-notes">' + t('notes') + '</label><input class="bk-input" id="bk-notes" data-f="notes" placeholder="' + t('notesPh') + '" value="' + esc(S.c.notes) + '">' +
-      '<div class="bk-hp" aria-hidden="true"><label>Website<input id="bk-hp" tabindex="-1" autocomplete="off"></label></div>' +
-      '<p class="bk-hint">' + t('mayContact') + '</p><div class="bk-err" id="bk-c-err"></div>' +
-      '<button class="bk-btn" type="button" data-act="next">' + t('next') + '</button><button class="bk-btn ghost" type="button" data-act="back">' + t('back') + '</button></div>';
-  }
-
   function vehicleLabel() {
-    var v = S.veh;
-    if (v.mode === 'other') return [v.oYear, v.oMake, v.oModel].filter(String).join(' ');
-    return v.year + ' ' + v.make + ' ' + v.model + ' ' + (v.unsure ? '(' + (S.lang === 'fr' ? 'version courante' : 'most common trim') + ')' : v.trim);
+    var v = S.veh; return [v.oYear, v.car, v.oTrim].filter(Boolean).join(' ');
   }
   function sizeLabel() {
-    var v = S.veh, p = parseSize(v.typed);
-    if (p) return p.text + ' (' + t('sizeCust') + ')';
-    if (v.mode === 'list' && v.size) return v.size + ' (' + t('sizeEst') + ')';
-    return t('sizeUnk');
+    var p = parseSize(S.veh.typed);
+    return p ? p.text + ' (' + t('sizeCust') + ')' : t('sizeUnk');
   }
-  function step6() {
-    var svc = (S.service === 'on' ? t('on') : t('off')) + ' · ' + (S.tires === 4 ? t('t4') : t('t2'));
-    var h = '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('s6') + '</h2><div class="bk-sum">' +
-      '<div><span>' + t('service') + '</span><span>' + esc(svc) + '</span></div>' +
-      '<div><span>' + t('vehicle') + '</span><span>' + esc(vehicleLabel()) + '</span></div>' +
-      '<div><span>' + t('tsize') + '</span><span>' + esc(sizeLabel()) + '</span></div>' +
-      '<div><span>' + t('where') + '</span><span>' + esc(S.zone.formatted) + '</span></div>' +
-      '<div><span>' + t('contact') + '</span><span>' + esc(S.c.name + ' · ' + S.c.phone) + '</span></div></div>' +
-      '<p class="bk-note" style="font-size:16px"><b>' + t('callPrice') + '</b></p><p class="bk-note">' + t('pay') + '</p>' +
-      '<div class="bk-err" id="bk-book-err">' + (S.bookErr || '') + '</div>' +
-      '<button class="bk-btn green" type="button" data-act="book"' + (S.busy ? ' disabled' : '') + '>' + (S.busy ? '<span class="bk-spin"></span> ' + t('booking') : t('confirm')) + '</button>' +
-      '<button class="bk-btn ghost" type="button" data-act="back">' + t('back') + '</button></div>';
-    return h;
-  }
+  function areaLabel() { return (S.zone && !S.zone.error && S.zone.formatted) || [S.addrText, S.area].filter(Boolean).join(', '); }
 
   function doneHtml() {
     var d = S.done;
@@ -490,8 +394,9 @@
     var veh = vehicleLabel(); if (veh.trim()) lines.push('Vehicle: ' + veh);
     if (v.typed) lines.push('Tire size: ' + v.typed);
     lines.push('Service: ' + (S.service === 'on' ? 'On rims' : 'Off rims (mount & balance)') + ' x' + S.tires);
+    if (S.area) lines.push('Area: ' + S.area);
     if (S.addrText) lines.push('Address: ' + S.addrText);
-    if (S.dateLabel) lines.push('Preferred: ' + S.dateLabel + ' ' + (S.slotLabel || ''));
+    if (S.pref) lines.push('Preferred: ' + S.pref);
     if (S.c.name) lines.push('Name: ' + S.c.name);
     if (S.lang === 'fr') lines.push('(français)');
     return lines.join('\n');
@@ -510,86 +415,60 @@
   function bindAfterRender() {
     var ph = document.getElementById('bk-phone');
     if (ph) ph.addEventListener('blur', sendDraft);
-    var addr = document.getElementById('bk-addr');
-    if (addr) addr.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); checkZone(); } });
+    var m = root.querySelector('.bk-more'); if (m) m.addEventListener('toggle', function () { S.more = m.open; });
   }
-
-  root.addEventListener('change', function (e) {
-    var f = e.target.getAttribute('data-f');
-    if (e.target.getAttribute('data-act') === 'photo') return uploadPhoto(e.target);
-    if (!f) return;
-    var v = S.veh, val = e.target.value;
-    if (['year', 'make', 'model', 'trim', 'typed', 'oYear', 'oMake', 'oModel'].indexOf(f) >= 0) S.exoticDone = false;
-    if (f === 'year') { v.year = val; v.make = v.model = v.trim = ''; v.unsure = false; applyRow(null); }
-    else if (f === 'make') { v.make = val; v.model = v.trim = ''; v.unsure = false; applyRow(null); }
-    else if (f === 'model') {
-      v.model = val; v.trim = ''; v.unsure = false; applyRow(null);
-      var tr = trimRows(+v.year, v.make, v.model);
-      if (tr.length === 1) { v.trim = tr[0][5]; applyRow(tr[0]); }
-    }
-    else if (f === 'trim') {
-      var list = trimRows(+v.year, v.make, v.model);
-      if (val === '__unsure') { v.unsure = true; v.trim = ''; applyRow(commonRow(list)); }
-      else { v.unsure = false; v.trim = val; applyRow(list.filter(function (r) { return r[5] === val; })[0]); }
-    }
-    else if (f === 'typed' || f === 'oYear' || f === 'oMake' || f === 'oModel') { v[f] = val.trim(); refreshStep1(); return markStarted(); }
-    else if (f === 'addr') { S.addrText = val.trim(); return; }
-    else if (f === 'name' || f === 'phone' || f === 'email' || f === 'notes') { S.c[f] = val.trim(); return; }
-    render(); markStarted();
-  });
-  root.addEventListener('input', function (e) {
-    var f = e.target.getAttribute('data-f');
-    if (f === 'typed' || f === 'oYear' || f === 'oMake' || f === 'oModel') { S.veh[f] = e.target.value.trim(); refreshStep1(); }
-    if (f === 'addr') S.addrText = e.target.value.trim();
-    if (f === 'name' || f === 'phone' || f === 'email' || f === 'notes') S.c[f] = e.target.value.trim();
-  });
+  var draftTimer = 0;
+  function draftSoon() { clearTimeout(draftTimer); draftTimer = setTimeout(sendDraft, 700); }
+  function readField(el) {
+    var f = el.getAttribute('data-f'), val = el.value.trim(), v = S.veh; if (!f) return '';
+    if (f === 'car') { v.car = val; syncCar(); S.exoticDone = false; }
+    else if (f === 'typed' || f === 'oYear' || f === 'oTrim') { v[f] = val; if (f !== 'oYear') S.exoticDone = false; }
+    else if (f === 'area') { S.area = val; S.zone = null; }
+    else if (f === 'addr') { S.addrText = val; S.zone = null; }
+    else if (f === 'pref') S.pref = val;
+    else if (f === 'name' || f === 'phone' || f === 'email' || f === 'notes') S.c[f] = val;
+    return f;
+  }
+  function onEdit(e) {
+    var f = readField(e.target); if (!f) return;
+    if (f === 'car' || f === 'typed' || f === 'oYear' || f === 'oTrim') { refreshStep1(); markStarted(); }
+    if (f === 'area' || f === 'addr') { var z = root.querySelector('.bk-zone'); if (z) z.remove(); }
+    if (f === 'phone' || f === 'car' || f === 'typed' || f === 'name' || f === 'pref') draftSoon();
+  }
+  root.addEventListener('input', onEdit);
+  root.addEventListener('change', onEdit);
+  function readAll() { Array.prototype.forEach.call(root.querySelectorAll('[data-f]'), readField); }
 
   root.addEventListener('click', function (e) {
     var el = e.target.closest('[data-act]'); if (!el) return;
     var act = el.getAttribute('data-act'), val = el.getAttribute('data-v');
-    if (act === 'photo') return;
-    if (act === 'multi') { S.multiCar = el.checked; return render(); }
     if (act === 'exotic') return sendExotic();
-    if (act === 'lang') { S.lang = S.lang === 'fr' ? 'en' : 'fr'; lsSet('bk_lang', S.lang); return render(); }
-    if (act === 'other') { S.veh.mode = 'other'; applyRow(null); return render(); }
-    if (act === 'list') { S.veh.mode = 'list'; return render(); }
-    if (act === 'svc') { S.service = val; return render(); }
-    if (act === 'tires') { S.tires = +val; return render(); }
-    if (act === 'back') { S.bookErr = ''; S.step = Math.max(1, S.step === 5 ? 3 : S.step - 1); return render(); }
-    if (act === 'next') return next();
-    if (act === 'zone') return checkZone();
-    if (act === 'wk') return goWeek(+val);
-    if (act === 'day') return pickDay(val);
-    if (act === 'slot') return pickSlot(val);
-    if (act === 'wait') return joinWait();
-    if (act === 'unwait') { S.waitDay = null; return render(); }
+    if (act === 'lang') { readAll(); S.lang = S.lang === 'fr' ? 'en' : 'fr'; lsSet('bk_lang', S.lang); return render(); }
+    if (act === 'svc') { readAll(); S.service = val; return render(); }
+    if (act === 'tires') { readAll(); S.tires = +val; return render(); }
     if (act === 'book') return book();
   });
 
-  function next() {
-    if (S.step === 1 && !step1Ready()) return;
-    if (S.step === 3 && !zoneOk()) return;
-    if (S.step === 5) {
-      var err = document.getElementById('bk-c-err');
-      ['name', 'phone', 'email', 'notes'].forEach(function (k) { var i = document.getElementById('bk-' + k); if (i) S.c[k] = i.value.trim(); });
-      if (!S.c.name) { err.textContent = t('nameBad'); return; }
-      if (!cleanPhone(S.c.phone)) { err.textContent = t('phoneBad'); return; }
-      sendDraft();
-    }
-    S.step = S.step === 3 ? 5 : S.step + 1;   // no time step: we call to confirm the time
-    render();
-    window.scrollTo({ top: root.getBoundingClientRect().top + window.pageYOffset - 90, behavior: 'smooth' });
-    if (S.step === 4) loadDays();
+  // Checks the required fields. Returns an error message, or '' when OK.
+  function formError() {
+    readAll();
+    if (!S.c.name) return { msg: t('nameBad'), el: 'bk-name' };
+    if (!cleanPhone(S.c.phone)) return { msg: t('phoneBad'), el: 'bk-phone' };
+    if (S.veh.typed && !parseSize(S.veh.typed) && !hasCar()) return { msg: t('sizeBad'), el: 'bk-size' };
+    if (!step1Basics()) return { msg: t('needCar'), el: 'bk-car' };
+    if (!S.area && !S.addrText) return { msg: t('needArea'), el: 'bk-area' };
+    return null;
   }
   function cleanPhone(p) { var d = String(p || '').replace(/\D/g, ''); if (d.length === 11 && d[0] === '1') d = d.slice(1); return /^[2-9]\d{2}[2-9]\d{6}$/.test(d) ? d : ''; }
 
+  // Zone from the full address if given, otherwise from the city/neighbourhood. Never blocks the request
+  // unless the script says the place is outside our area (zone 0).
   function checkZone() {
-    var i = document.getElementById('bk-addr'); if (i) S.addrText = i.value.trim();
-    if (S.addrText.length < 6) { S.zone = { error: 'address_short' }; return render(); }
-    S.busy = true; render();
-    apiPost({ action: 'zone', address: S.addrText, session: S.session }).then(function (r) {
-      S.busy = false; S.zone = r.ok ? r : { error: r.error || 'not_found' }; render();
-    }).catch(function () { S.busy = false; goFallback(); });
+    if (S.zone) return Promise.resolve(S.zone);
+    var q = S.addrText ? S.addrText + (S.area ? ', ' + S.area : '') : S.area;
+    return apiPost({ action: 'zone', address: q, session: S.session }).then(function (r) {
+      S.zone = r.ok ? r : { error: r.error || 'not_found' }; return S.zone;
+    }).catch(function () { S.zone = { error: 'unreachable' }; return S.zone; });
   }
 
   function loadDays() {
@@ -635,14 +514,14 @@
 
   function draftDetails() {
     return { name: S.c.name, email: S.c.email, size: sizeLabel(), service: (S.service === 'on' ? 'On-rim' : 'Off-rim') + ' x' + S.tires,
-             address: S.zone && S.zone.formatted, zone: S.zone && S.zone.zone, lang: S.lang, price: 'Call for a quote', ref: S.ref };
+             address: areaLabel(), zone: S.zone && !S.zone.error ? S.zone.zone : '', area: S.area, lang: S.lang, price: 'Call for a quote', ref: S.ref };
   }
   function sendDraft() {
-    var ph = document.getElementById('bk-phone'); if (ph) S.c.phone = ph.value.trim();
-    var nm = document.getElementById('bk-name'); if (nm) S.c.name = nm.value.trim();
-    var phone = cleanPhone(S.c.phone); if (!phone || !S.cfg) return;
+    if (S.done) return;
+    readAll();
+    var phone = cleanPhone(S.c.phone); if (!phone || !S.cfg || !step1Basics()) return;   // fires once phone + (car or size) are in
     var payload = { action: 'draft', session: S.session, firstName: (S.c.name || '').split(' ')[0], phone: phone, vehicle: vehicleLabel(),
-                    slot: S.dateLabel ? S.dateLabel + ' ' + S.slotLabel : '', price: 'Call for a quote', details: draftDetails() };
+                    slot: S.pref || '', price: 'Call for a quote', details: draftDetails() };
     var sig = JSON.stringify(payload); if (sig === S.draftSent) return; S.draftSent = sig;
     apiPost(payload).catch(function () {});
   }
@@ -665,47 +544,56 @@
   }
 
   function sendExotic() {
-    var n = document.getElementById('bk-xn').value.trim(), p = document.getElementById('bk-xp').value.trim(), a = document.getElementById('bk-xa').value.trim();
-    var err = document.getElementById('bk-x-err');
-    if (!cleanPhone(p)) { err.textContent = t('phoneBad'); return; }
-    S.c.name = n; S.c.phone = p; S.addrText = a; S.busy = true; refreshStep1(true);
-    var v = S.veh, typed = parseSize(v.typed);
-    apiPost({ action: 'exotic', name: n, phone: p, address: a, vehicle: vehicleLabel(), size: typed ? typed.text : (v.mode === 'list' ? v.size : ''),
+    var fe = formError(), err = document.getElementById('bk-book-err');
+    if (fe && fe.el !== 'bk-area') { err.textContent = fe.msg; var x = document.getElementById(fe.el); if (x) x.focus(); return; }
+    S.busy = true; refreshStep1();
+    var typed = parseSize(S.veh.typed);
+    apiPost({ action: 'exotic', name: S.c.name, phone: S.c.phone, address: areaLabel(), vehicle: vehicleLabel(), size: typed ? typed.text : '',
               service: S.service, tires: S.tires, lang: S.lang, ref: S.ref, hp: '' }).then(function (r) {
-      S.busy = false; if (r.ok) { S.exoticDone = true; refreshStep1(true); } else { refreshStep1(true); var e = document.getElementById('bk-x-err'); if (e) e.textContent = t('err'); }
+      S.busy = false; if (r.ok) { S.exoticDone = true; refreshStep1(); } else { refreshStep1(); var e = document.getElementById('bk-book-err'); if (e) e.textContent = t('err'); }
     }).catch(function () { S.busy = false; goFallback(); });
   }
 
   function book() {
     if (S.busy) return;
-    var hp = document.getElementById('bk-hp');
-    var v = S.veh;
+    var fe = formError();
+    if (fe) { S.bookErr = fe.msg; render(); var x = document.getElementById(fe.el); if (x) x.focus(); return; }
+    if (isExoticSafe()) return;   // custom-quote box is showing instead
+    var hp = document.getElementById('bk-hp'), hpv = hp ? hp.value : '';
     S.busy = true; S.bookErr = ''; render();
-    var payload = {
-      action: 'lead', session: S.session, lang: S.lang, hp: hp ? hp.value : '',
-      vehicleId: v.mode === 'list' ? v.id : '', year: v.mode === 'list' ? v.year : v.oYear, make: v.mode === 'list' ? v.make : v.oMake,
-      model: v.mode === 'list' ? v.model : v.oModel, trim: v.trim, trimUnsure: v.unsure, vehicleClass: v.mode === 'list' ? v.cls : 'car',
-      sizeTyped: parseSize(v.typed) ? v.typed : '', photoUrl: v.photoUrl, service: S.service, tires: S.tires,
-      address: S.addrText, addressFormatted: S.zone.formatted,
-      name: S.c.name, phone: S.c.phone, email: S.c.email, notes: S.c.notes, offerId: S.offer ? S.offer.offerId : '', expectedSubtotal: null, ref: S.ref, multiCar: !!S.multiCar
-    };
-    apiPost(payload).then(function (r) {
-      S.busy = false;
-      if (r.ok) {
-        S.done = r;
-        if (S.offer) { S.offer.used = true; lsSet('bk_offer', JSON.stringify(S.offer)); S.offer = null; }
-        lsSet('bk_booked', '1'); lsSet('bk_started', '');
-        fireConversion(r);
-        return render();
-      }
-      
-      if (r.error === 'offer_invalid') { S.offer = null; lsSet('bk_offer', 'null'); S.bookErr = t('offerGone'); return render(); }
-      if (r.error === 'price_changed') { S.bookErr = t('priceChanged'); return render(); }
-      if (r.error === 'limit') { S.bookErr = t('limit'); return render(); }
-      if (r.error === 'exotic') { S.step = 1; return render(); }
-      if (r.error === 'phone' || r.error === 'name') { S.step = 5; return render(); }
-      if (r.error === 'outside' || r.error === 'address') { S.step = 3; return render(); }
-      goFallback();
+    checkZone().then(function (z) {
+      if (z && !z.error && z.zone === 0) { S.busy = false; return render(); }   // outside our area: show Call/Text box
+      sendDraft();
+      var v = S.veh, typed = parseSize(v.typed);
+      var notes = [S.c.notes, S.pref ? (S.lang === 'fr' ? 'Heure préférée : ' : 'Preferred time: ') + S.pref : ''].filter(Boolean).join(' · ');
+      var payload = {
+        action: 'lead', session: S.session, lang: S.lang, hp: hpv,
+        vehicleId: '', year: v.oYear, make: v.oMake, model: v.oModel, trim: v.oTrim, trimUnsure: !v.oTrim, vehicleClass: 'car',
+        sizeTyped: typed ? typed.text : '', photoUrl: v.photoUrl, service: S.service, tires: S.tires,
+        address: S.addrText || S.area, addressFormatted: areaLabel(),
+        name: S.c.name, phone: S.c.phone, email: S.c.email, notes: notes, offerId: S.offer ? S.offer.offerId : '', expectedSubtotal: null, ref: S.ref, multiCar: !!S.multiCar,
+        // new, informational fields (the script can ignore them):
+        area: S.area, streetAddress: S.addrText, preferredTime: S.pref, vehicleText: v.car, zone: z && !z.error ? z.zone : '', price: 'Call for a quote'
+      };
+      return apiPost(payload).then(function (r) {
+        S.busy = false;
+        if (r.ok) {
+          S.done = r;
+          if (S.offer) { S.offer.used = true; lsSet('bk_offer', JSON.stringify(S.offer)); S.offer = null; }
+          lsSet('bk_booked', '1'); lsSet('bk_started', '');
+          fireConversion(r);
+          return render();
+        }
+        if (r.error === 'offer_invalid') { S.offer = null; lsSet('bk_offer', 'null'); S.bookErr = t('offerGone'); return render(); }
+        if (r.error === 'price_changed') { S.bookErr = t('priceChanged'); return render(); }
+        if (r.error === 'limit') { S.bookErr = t('limit'); return render(); }
+        if (r.error === 'exotic') { S.forceExotic = true; return render(); }
+        if (r.error === 'phone') { S.bookErr = t('phoneBad'); return render(); }
+        if (r.error === 'name') { S.bookErr = t('nameBad'); return render(); }
+        if (r.error === 'outside') { S.zone = { zone: 0, formatted: areaLabel() }; return render(); }
+        if (r.error === 'address') { S.more = true; S.bookErr = t('notFound'); return render(); }
+        goFallback();
+      });
     }).catch(function () { S.busy = false; goFallback(); });
   }
 
@@ -738,7 +626,7 @@
   // Here we only tell it when it may show, whether a car is picked, and how to apply the offer.
   window.MTRO_OFFER = {
     canShow: function () { return !!S.cfg && !S.fatal && !S.done && !S.offer && !S.busy; },
-    started: function () { return !!S.cfg && !S.done && step1Basics() && !isExotic(); },
+    started: function () { return !!S.cfg && !S.done && step1Basics() && !isExoticSafe(); },
     text: function () { return { title: t('offerTitle'), sub: t('offerSub'), yes: t('offerYes'), no: t('offerNo') }; },
     claim: function () {
       apiPost({ action: 'offer', session: S.session }).then(function (r) {
@@ -749,9 +637,9 @@
 
   // ---------------------------------------------------------------- start
   render();
-  Promise.all([apiGet('config'), apiGet('vehicles')]).then(function (res) {
-    if (!res[0].ok || !res[1].ok) return goFallback();
-    S.cfg = res[0]; S.rows = res[1].rows;
+  Promise.all([apiGet('config')]).then(function (res) {   // vehicle list no longer needed (free-text make & model)
+    if (!res[0].ok) return goFallback();
+    S.cfg = res[0]; S.rows = [];
     S.season = S.cfg.season === 'summer' ? 'summer' : 'winter';
     if (S.cfg.testMode && qsSeason) S.season = qsSeason;   // ?season=summer preview while in TEST MODE
     document.title = t('title') + ' | Mobile Tire Repair Ottawa';

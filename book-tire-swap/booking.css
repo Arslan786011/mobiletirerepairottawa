@@ -76,3 +76,12 @@ body.bk-fr-textonly .float-bar-inner{grid-template-columns:1fr !important}
 .bk-exotic{margin-top:14px;background:rgba(255,184,77,.08);border:1px solid rgba(255,184,77,.45);border-radius:14px;padding:16px}
 .bk-exotic h3{font-size:19px;margin:6px 0;color:var(--white);line-height:1.3}
 .bk-zone .bk-btn{margin-top:10px}
+/* one-screen form */
+.bk-req{color:#ff8a8a}
+.bk-either{border:1px solid rgba(0,229,255,.35);border-radius:12px;padding:4px 12px 12px;margin:16px 0 0}
+.bk-either legend.bk-label{margin:0;padding:0 6px;color:var(--white);text-transform:none;letter-spacing:0;font-size:14px}
+.bk-either .bk-label{margin-top:10px}
+.bk-or{text-align:center;color:var(--muted);font-size:13px;font-weight:800;text-transform:uppercase;margin:10px 0 -4px}
+.bk-more{margin-top:16px}
+.bk-more summary{cursor:pointer;color:var(--cyan);font-weight:700;font-size:15px;padding:6px 0}
+.bk-more .bk-toggle{margin-top:8px}
