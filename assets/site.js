@@ -9,25 +9,33 @@ window.TRACKING = {
 (function(){
   var T = window.TRACKING;
   var ok = function(v){ return v && v.indexOf('XXXX') === -1; };
-  // Microsoft Clarity (only loads once a real ID is pasted above)
-  if (ok(T.CLARITY_ID)) {
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", T.CLARITY_ID);
-  }
+  // Speed: the gtag.js and Clarity files (~350 KB) download after the page has shown,
+  // on the visitor's first tap/scroll/key, or once the page is idle, whichever comes first.
+  // gtag() and clarity() calls made before that are queued and sent when the files arrive,
+  // so page views and the Call/Text conversions are still recorded.
   var first = ok(T.GA4_ID) ? T.GA4_ID : (ok(T.ADS_ID) ? T.ADS_ID : null);
-  if (!first) return;
-  var g = document.createElement('script');
-  g.async = true;
-  g.src = 'https://www.googletagmanager.com/gtag/js?id=' + first;
-  document.head.appendChild(g);
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function(){ dataLayer.push(arguments); };
-  gtag('js', new Date());
-  if (ok(T.GA4_ID)) gtag('config', T.GA4_ID);
-  if (ok(T.ADS_ID)) gtag('config', T.ADS_ID);
+  if (first) {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    if (ok(T.GA4_ID)) gtag('config', T.GA4_ID);
+    if (ok(T.ADS_ID)) gtag('config', T.ADS_ID);
+  }
+  if (ok(T.CLARITY_ID)) window.clarity = window.clarity || function(){ (window.clarity.q = window.clarity.q || []).push(arguments); };
+  function addScript(src){ var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
+  var gLoaded = false, cLoaded = false;
+  function loadGtag(){ if (gLoaded || !first) return; gLoaded = true; addScript('https://www.googletagmanager.com/gtag/js?id=' + first); }
+  function loadClarity(){ if (cLoaded || !ok(T.CLARITY_ID)) return; cLoaded = true; addScript('https://www.clarity.ms/tag/' + T.CLARITY_ID); }
+  window.loadTrackingNow = function(){ loadGtag(); loadClarity(); };
+  var EV = ['pointerdown', 'keydown', 'touchstart', 'scroll', 'mousemove'];
+  function onFirst(){ EV.forEach(function(e){ removeEventListener(e, onFirst, true); }); window.loadTrackingNow(); }
+  EV.forEach(function(e){ addEventListener(e, onFirst, {capture:true, passive:true}); });
+  function whenIdle(fn, ms){
+    function go(){ setTimeout(function(){ ('requestIdleCallback' in window) ? requestIdleCallback(fn, {timeout: 2000}) : fn(); }, ms); }
+    if (document.readyState === 'complete') go(); else addEventListener('load', go);
+  }
+  whenIdle(loadGtag, 3500);     // no interaction yet: load gtag a few seconds after the page has loaded
+  whenIdle(loadClarity, 8000);  // Clarity later still
 })();
 
 // FAQ accordion
@@ -84,6 +92,7 @@ sections.forEach(s => scrollObs.observe(s));
 // Conversion tracking: fires on every Text (sms:) and Call (tel:) button
 window.trackConversion = function(kind){
   if (typeof window.gtag !== 'function') return;
+  if (window.loadTrackingNow) window.loadTrackingNow();   // make sure gtag.js is on its way
   var T = window.TRACKING;
   var ok = function(v){ return v && v.indexOf('XXXX') === -1; };
   if (ok(T.GA4_ID)) gtag('event', kind === 'call' ? 'call_click' : 'text_click', { page_path: location.pathname });
@@ -195,16 +204,19 @@ document.addEventListener('click', function(e){
     internal = nav && nav.type === 'navigate' && document.referrer &&
                new URL(document.referrer).host === location.host;
   } catch (e) {}
-  if (document.body.dataset.promo === 'auto' && !internal) {
-    autoTimer = setTimeout(() => { if (promo.hidden) open(1); }, 3000);
-  }
+  // The popup no longer opens by itself (it covered the Call buttons). It opens only when tapped:
+  // any element with data-open-promo (e.g. the "Beat the First Snow" link) opens the announcement.
+  window.openWinterPromo = () => open(1);
+  document.querySelectorAll('[data-open-promo]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); open(1); }));
+  void internal; void autoTimer;
 })();
 
 // Snowfall (background layer, behind all content)
 (function(){
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const c = document.getElementById('snow');
   if (!c) return;
+  // Off on phones/tablets (saves battery and ~2 s of main-thread work) and for reduced motion.
+  if (window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 900px), (pointer: coarse)').matches) { c.style.display = 'none'; return; }
   const ctx = c.getContext('2d');
   const mobile = window.innerWidth < 600;
   let w = 0, h = 0, dpr = 1, flakes = [];
