@@ -85,3 +85,14 @@ body.bk-fr-textonly .float-bar-inner{grid-template-columns:1fr !important}
 .bk-more{margin-top:16px}
 .bk-more summary{cursor:pointer;color:var(--cyan);font-weight:700;font-size:15px;padding:6px 0}
 .bk-more .bk-toggle{margin-top:8px}
+/* best time to call */
+.bk-calltime{border:1px solid rgba(29,255,142,.4);background:rgba(29,255,142,.06);border-radius:12px;padding:6px 12px 12px;margin:16px 0 0}
+.bk-ct-q{float:left;width:100%;box-sizing:border-box;margin:8px 0 2px;font-size:16px;font-weight:800;color:var(--white);padding:0}.bk-ct-q+*{clear:both}.bk-ct-q small{font-weight:400;color:var(--muted);font-size:13px}
+.bk-ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.bk-ct-grid.three{grid-template-columns:repeat(3,1fr)}
+.bk-ct{min-height:48px;padding:10px 6px;border-radius:10px;background:#0a1122;border:1px solid var(--glass-border);color:var(--white);font-weight:700;font-size:15px;line-height:1.2;cursor:pointer;font-family:var(--font-body);touch-action:manipulation}
+.bk-ct.sel{border-color:var(--green);color:var(--green);box-shadow:0 0 0 2px rgba(29,255,142,.3)}
+.bk-ct.sel::before{content:'✓ '}
+.bk-ct:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.bk-ct-sub{font-size:13px;color:var(--muted);font-weight:700;margin-top:12px}
+.bk-ct-day.dim .bk-ct{opacity:.45}
+.bk-ct-chosen{margin:10px 0 0;font-size:14px;color:var(--white)}

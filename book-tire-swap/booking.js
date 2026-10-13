@@ -68,7 +68,9 @@
       more: '+ More details (optional)', fAddr: 'Full street address (optional)', fAddrPh: 'e.g. 123 Greenbank Rd',
       yearTrim: 'Year / trim (optional)', yearPh: 'Year', trimPh: 'Trim, e.g. LE', when2: 'Preferred time (optional)', anyT: 'Any time',
       svcQ: 'Service', send: '✓ Send my request', needCar: "Please enter your car's make and model, or your tire size.",
-      needArea: 'Please enter your city or neighbourhood.', fNote: "We'll call you to confirm the time and give you your price. Pay the tech when done."
+      needArea: 'Please enter your city or neighbourhood.', fNote: "We'll call you to confirm the time and give you your price. Pay the tech when done.",
+      ctQ: 'Best time to call you?', ctOpt: 'optional', ctDay: 'Which day?', ctToday: 'Today', ctTomorrow: 'Tomorrow', ctPick: 'Pick a date', ctDate: 'Date',
+      ctAsap: 'Now / ASAP', ctMorning: 'Morning (9–12)', ctAfternoon: 'Afternoon (12–5)', ctEvening: 'Evening (5–8)', ctChosen: 'We\'ll call:', ctClear: 'Clear'
     },
     fr: {
       kicker: "❄ Réservation pneus d'hiver", title: "Réservez votre changement de pneus d'hiver", sub: 'On se déplace chez vous. Envoyez votre demande en 2 minutes et on vous appelle.',
@@ -123,7 +125,9 @@
       more: '+ Plus de détails (facultatif)', fAddr: 'Adresse complète (facultatif)', fAddrPh: 'ex. 123 rue Principale',
       yearTrim: 'Année / version (facultatif)', yearPh: 'Année', trimPh: 'Version, ex. LE', when2: 'Heure préférée (facultatif)', anyT: "N'importe quand",
       svcQ: 'Service', send: '✓ Envoyer ma demande', needCar: 'Entrez la marque et le modèle du véhicule, ou la taille des pneus.',
-      needArea: 'Entrez votre ville ou quartier.', fNote: "On vous appelle pour confirmer l'heure et vous donner le prix. Paiement au technicien à la fin."
+      needArea: 'Entrez votre ville ou quartier.', fNote: "On vous appelle pour confirmer l'heure et vous donner le prix. Paiement au technicien à la fin.",
+      ctQ: 'Meilleur moment pour vous appeler?', ctOpt: 'facultatif', ctDay: 'Quel jour?', ctToday: "Aujourd'hui", ctTomorrow: 'Demain', ctPick: 'Choisir une date', ctDate: 'Date',
+      ctAsap: 'Maintenant / dès que possible', ctMorning: 'Matin (9 h–12 h)', ctAfternoon: 'Après-midi (12 h–17 h)', ctEvening: 'Soir (17 h–20 h)', ctChosen: 'On vous appelle :', ctClear: 'Effacer'
     }
   };
   // Summer mode (SETTINGS.SEASON = 'summer' in the script): only these lines change.
@@ -148,7 +152,7 @@
     veh: { mode: 'other', year: '', make: '', model: '', trim: '', unsure: false, id: '', cls: 'car', tier: 'STANDARD', size: '', verified: false,
            oYear: '', oMake: '', oModel: '', typed: '', photoUrl: '', car: '', oTrim: '' },
     service: 'off', tires: 4, zone: null, addrText: '', days: [], date: '', dateLabel: '', slot: '', slotLabel: '', hold: 0,
-    c: { name: '', phone: '', email: '', notes: '' }, area: '', pref: '', more: false, offer: null, done: null, busy: false, waitDay: null, draftSent: ''
+    c: { name: '', phone: '', email: '', notes: '' }, area: '', pref: '', more: false, callDay: '', callDate: '', callPart: '', offer: null, done: null, busy: false, waitDay: null, draftSent: ''
   };
   lsSet('bk_session', S.session);
   // ?r=Emma (dispatcher who sent a /book link). Kept for this visit.
@@ -332,6 +336,7 @@
       '<div class="bk-err" id="bk-size-err">' + (v.typed && !parseSize(v.typed) ? t('sizeBad') : '') + '</div>' +
       '<p class="bk-hint">💡 ' + t('sizeTip') + '</p></fieldset>' +
       inp('bk-area', 'area', t('area') + r, S.area, ' list="bk-areas" placeholder="' + t('areaPh') + '" autocomplete="address-level2"') +
+      callTimeHtml() +
       '<datalist id="bk-areas">' + AREAS.map(function (x) { return '<option value="' + x + '">'; }).join('') + '</datalist>' + zoneHtml() +
       '<details class="bk-more"' + (S.more ? ' open' : '') + '><summary>' + t('more') + '</summary>' +
       inp('bk-addr', 'addr', t('fAddr'), S.addrText, ' autocomplete="street-address" placeholder="' + t('fAddrPh') + '"') +
@@ -358,6 +363,45 @@
   function sizeLabel() {
     var p = parseSize(S.veh.typed);
     return p ? p.text + ' (' + t('sizeCust') + ')' : t('sizeUnk');
+  }
+  // ---------------------------------------------------------------- "Best time to call you?" (optional; nothing picked by default)
+  var CT_PARTS = [['asap', 'ctAsap', 'Now / ASAP'], ['morning', 'ctMorning', 'Morning (9–12)'], ['afternoon', 'ctAfternoon', 'Afternoon (12–5)'], ['evening', 'ctEvening', 'Evening (5–8)']];
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function isoDay(d) { return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+  function todayIso() { return isoDay(new Date()); }
+  function ymd(ds) { var p = ds.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); }
+  function dateWords(iso, lang) {   // '2026-10-15' -> 'Thu Oct 15' (EN) / 'jeu. 15 oct.' (FR)
+    var d = ymd(iso); return d.toLocaleDateString(lang === 'fr' ? 'fr-CA' : 'en-CA', { weekday: 'short', month: 'short', day: 'numeric' }).replace(/,/g, '');
+  }
+  // The text the owner sees. Always English so the alert emails read the same for EN and FR customers.
+  function callTime() {
+    if (S.callPart === 'asap') return 'Now / ASAP';
+    var day = S.callDay === 'today' ? 'Today' : S.callDay === 'tomorrow' ? 'Tomorrow' : (S.callDay === 'date' && S.callDate ? dateWords(S.callDate, 'en') : '');
+    var part = (CT_PARTS.filter(function (x) { return x[0] === S.callPart; })[0] || [])[2] || '';
+    return [day, part].filter(Boolean).join(', ');
+  }
+  function callTimeShown() {   // same choice, in the page language
+    if (S.callPart === 'asap') return t('ctAsap');
+    var day = S.callDay === 'today' ? t('ctToday') : S.callDay === 'tomorrow' ? t('ctTomorrow') : (S.callDay === 'date' && S.callDate ? dateWords(S.callDate, S.lang) : '');
+    var part = S.callPart ? t('ct' + S.callPart.charAt(0).toUpperCase() + S.callPart.slice(1)) : '';
+    return [day, part].filter(Boolean).join(', ');
+  }
+  function ctBtn(act, v, label, on, dis) {
+    return '<button type="button" class="bk-ct' + (on ? ' sel' : '') + '" data-act="' + act + '" data-v="' + v + '" aria-pressed="' + (on ? 'true' : 'false') + '"' + (dis ? ' aria-disabled="true"' : '') + '>' + esc(label) + '</button>';
+  }
+  function callTimeHtml() {
+    var asap = S.callPart === 'asap', shown = callTimeShown();
+    return '<fieldset class="bk-calltime"><legend class="bk-ct-q">📞 ' + t('ctQ') + ' <small>(' + t('ctOpt') + ')</small></legend>' +
+      '<div class="bk-ct-grid" role="group" aria-label="' + esc(t('ctQ')) + '">' +
+        CT_PARTS.map(function (x) { return ctBtn('ctpart', x[0], t(x[1]), S.callPart === x[0]); }).join('') + '</div>' +
+      '<div class="bk-ct-day' + (asap ? ' dim' : '') + '"><div class="bk-ct-sub" id="bk-ct-day-l">' + t('ctDay') + '</div>' +
+      '<div class="bk-ct-grid three" role="group" aria-labelledby="bk-ct-day-l">' +
+        ctBtn('ctday', 'today', t('ctToday'), S.callDay === 'today', asap) + ctBtn('ctday', 'tomorrow', t('ctTomorrow'), S.callDay === 'tomorrow', asap) +
+        ctBtn('ctday', 'date', t('ctPick'), S.callDay === 'date', asap) + '</div>' +
+      (S.callDay === 'date' && !asap ? '<label class="bk-label" for="bk-ct-date">' + t('ctDate') + '</label><input class="bk-input" type="date" id="bk-ct-date" data-f="callDate" min="' + todayIso() + '" value="' + esc(S.callDate) + '">' : '') +
+      '</div>' +
+      (shown ? '<p class="bk-ct-chosen" aria-live="polite">' + t('ctChosen') + ' <b>' + esc(shown) + '</b> <button type="button" class="bk-link" data-act="ctclear">' + t('ctClear') + '</button></p>' : '') +
+      '</fieldset>';
   }
   function areaLabel() { return (S.zone && !S.zone.error && S.zone.formatted) || [S.addrText, S.area].filter(Boolean).join(', '); }
 
@@ -397,6 +441,7 @@
     if (S.area) lines.push('Area: ' + S.area);
     if (S.addrText) lines.push('Address: ' + S.addrText);
     if (S.pref) lines.push('Preferred: ' + S.pref);
+    if (callTime()) lines.push('Best time to call: ' + callTime());
     if (S.c.name) lines.push('Name: ' + S.c.name);
     if (S.lang === 'fr') lines.push('(français)');
     return lines.join('\n');
@@ -426,6 +471,7 @@
     else if (f === 'area') { S.area = val; S.zone = null; }
     else if (f === 'addr') { S.addrText = val; S.zone = null; }
     else if (f === 'pref') S.pref = val;
+    else if (f === 'callDate') { S.callDate = val && val >= todayIso() ? val : ''; if (val && !S.callDate) el.value = ''; }
     else if (f === 'name' || f === 'phone' || f === 'email' || f === 'notes') S.c[f] = val;
     return f;
   }
@@ -433,10 +479,12 @@
     var f = readField(e.target); if (!f) return;
     if (f === 'car' || f === 'typed' || f === 'oYear' || f === 'oTrim') { refreshStep1(); markStarted(); }
     if (f === 'area' || f === 'addr') { var z = root.querySelector('.bk-zone'); if (z) z.remove(); }
+    if (f === 'callDate' && e.type === 'change') { render(); return draftSoon(); }
     if (f === 'phone' || f === 'car' || f === 'typed' || f === 'name' || f === 'pref') draftSoon();
   }
   root.addEventListener('input', onEdit);
   root.addEventListener('change', onEdit);
+  function focusAct(a, v) { var b = root.querySelector('[data-act="' + a + '"][data-v="' + v + '"]'); if (b) b.focus(); }
   function readAll() { Array.prototype.forEach.call(root.querySelectorAll('[data-f]'), readField); }
 
   root.addEventListener('click', function (e) {
@@ -446,6 +494,10 @@
     if (act === 'lang') { readAll(); S.lang = S.lang === 'fr' ? 'en' : 'fr'; lsSet('bk_lang', S.lang); return render(); }
     if (act === 'svc') { readAll(); S.service = val; return render(); }
     if (act === 'tires') { readAll(); S.tires = +val; return render(); }
+    if (act === 'ctpart') { readAll(); S.callPart = S.callPart === val ? '' : val; if (val === 'asap' && S.callPart) { S.callDay = ''; S.callDate = ''; } render(); focusAct(act, val); return draftSoon(); }
+    if (act === 'ctday') { if (el.getAttribute('aria-disabled') === 'true') return; readAll(); S.callDay = S.callDay === val ? '' : val; if (S.callPart === 'asap') S.callPart = '';
+      if (val !== 'date') S.callDate = ''; render(); focusAct(act, val); return draftSoon(); }
+    if (act === 'ctclear') { readAll(); S.callPart = S.callDay = S.callDate = ''; render(); return draftSoon(); }
     if (act === 'book') return book();
   });
 
@@ -514,14 +566,14 @@
 
   function draftDetails() {
     return { name: S.c.name, email: S.c.email, size: sizeLabel(), service: (S.service === 'on' ? 'On-rim' : 'Off-rim') + ' x' + S.tires,
-             address: areaLabel(), zone: S.zone && !S.zone.error ? S.zone.zone : '', area: S.area, lang: S.lang, price: 'Call for a quote', ref: S.ref };
+             address: areaLabel(), zone: S.zone && !S.zone.error ? S.zone.zone : '', area: S.area, callTime: callTime(), lang: S.lang, price: 'Call for a quote', ref: S.ref };
   }
   function sendDraft() {
     if (S.done) return;
     readAll();
     var phone = cleanPhone(S.c.phone); if (!phone || !S.cfg || !step1Basics()) return;   // fires once phone + (car or size) are in
     var payload = { action: 'draft', session: S.session, firstName: (S.c.name || '').split(' ')[0], phone: phone, vehicle: vehicleLabel(),
-                    slot: S.pref || '', price: 'Call for a quote', details: draftDetails() };
+                    slot: S.pref || '', callTime: callTime(), price: 'Call for a quote', details: draftDetails() };
     var sig = JSON.stringify(payload); if (sig === S.draftSent) return; S.draftSent = sig;
     apiPost(payload).catch(function () {});
   }
@@ -565,7 +617,8 @@
       if (z && !z.error && z.zone === 0) { S.busy = false; return render(); }   // outside our area: show Call/Text box
       sendDraft();
       var v = S.veh, typed = parseSize(v.typed);
-      var notes = [S.c.notes, S.pref ? (S.lang === 'fr' ? 'Heure préférée : ' : 'Preferred time: ') + S.pref : ''].filter(Boolean).join(' · ');
+      var ct = callTime();
+      var notes = [S.c.notes, ct ? 'Best time to call: ' + ct : '', S.pref ? (S.lang === 'fr' ? 'Heure préférée : ' : 'Preferred time: ') + S.pref : ''].filter(Boolean).join(' · ');
       var payload = {
         action: 'lead', session: S.session, lang: S.lang, hp: hpv,
         vehicleId: '', year: v.oYear, make: v.oMake, model: v.oModel, trim: v.oTrim, trimUnsure: !v.oTrim, vehicleClass: 'car',
@@ -573,7 +626,7 @@
         address: S.addrText || S.area, addressFormatted: areaLabel(),
         name: S.c.name, phone: S.c.phone, email: S.c.email, notes: notes, offerId: S.offer ? S.offer.offerId : '', expectedSubtotal: null, ref: S.ref, multiCar: !!S.multiCar,
         // new, informational fields (the script can ignore them):
-        area: S.area, streetAddress: S.addrText, preferredTime: S.pref, vehicleText: v.car, zone: z && !z.error ? z.zone : '', price: 'Call for a quote'
+        area: S.area, streetAddress: S.addrText, preferredTime: S.pref, callTime: ct, vehicleText: v.car, zone: z && !z.error ? z.zone : '', price: 'Call for a quote'
       };
       return apiPost(payload).then(function (r) {
         S.busy = false;
