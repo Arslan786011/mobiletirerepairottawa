@@ -1,3 +1,7 @@
+/* Self-hosted fonts (SIL Open Font License 1.1, see /assets/fonts/OFL-*.txt). Latin subset, covers French accents. */
+@font-face{font-family:'Orbitron';font-style:normal;font-weight:400 900;font-display:swap;src:url(/assets/fonts/orbitron-latin-var.woff2) format('woff2');}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/fonts/barlow-condensed-700-latin.woff2) format('woff2');}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:300 500;font-display:swap;src:url(/assets/fonts/barlow-400-latin.woff2) format('woff2');}
 /* ============================================================
    CSS VARIABLES & RESET
 ============================================================ */
@@ -1636,4 +1640,28 @@ a.service-card:active,.service-card.has-book:active{transform:scale(0.985);}
 /* m-winter-banner fit (v6): show the whole line on phones instead of cutting it off */
 @media(max-width:900px){
   .m-winter-banner{white-space:normal;overflow:visible;text-overflow:clip;font-size:clamp(12px,3.4vw,16px);letter-spacing:0;padding:10px 8px;}
+}
+
+/* ============================================================
+   SPEED + CALM ON PHONES (2026-10-13)
+============================================================ */
+/* Phones/tablets: no decorative looping animations (they cost seconds of style/paint work on mid-range phones). */
+@media(max-width:900px){
+  .scan-line,.hero-orb,.big-flake{animation:none;}
+  .lane::before,.lane::after{animation:none;}
+  #snow{display:none;}
+}
+@media(prefers-reduced-motion:reduce){
+  #snow{display:none;}
+  .scan-line,.hero-orb,.big-flake,.ticker-track,.hero-badge-dot{animation:none;}
+  .hero-badge,.hero-headline .line1,.hero-headline .line2,.hero-headline .line3,.hero-sub,.hero-actions,.hero-lanes,.hero-hint,.hero-brands{animation:none;opacity:1;}
+}
+/* Winter announcement: tap-to-open link (no auto popup) */
+.winter-open{display:flex;width:fit-content;align-items:center;gap:6px;margin:0 0 18px;padding:8px 14px;border-radius:40px;border:1px solid rgba(0,229,255,.45);background:rgba(0,229,255,.08);
+  color:var(--cyan);font-family:var(--font-cond);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;min-height:44px;}
+.winter-open:hover,.winter-open:focus-visible{background:rgba(0,229,255,.16);outline:none;}
+/* The sticky Call/Text bar is never covered: it sits above the popup, and the popup leaves room for it. */
+@media(max-width:900px){
+  .float-bar{z-index:2100;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));}
+  .promo{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px));}
 }

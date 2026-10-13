@@ -48,12 +48,11 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"/>
 <link rel="icon" href="/assets/icon-96.png" type="image/png" sizes="96x96"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/site.css?v=20261009areas"/>
+<link rel="preload" href="/assets/fonts/barlow-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="/assets/fonts/orbitron-latin-var.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="/assets/site.css?v=20261013speed"/>
 </head>
-<body data-promo="auto">
+<body>
 <canvas id="snow" aria-hidden="true"></canvas>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="flake" viewBox="0 0 100 100">
@@ -223,6 +222,7 @@
       <div class="hero-badge-dot"></div>
       Now booking winter tire swaps
     </div>
+    <button type="button" class="winter-open" data-open-promo aria-haspopup="dialog" aria-controls="promo">❄ Beat the First Snow: winter swap info</button>
 
     <h1 class="hero-headline">
       <span class="line1">Mobile Tire</span>
@@ -801,7 +801,7 @@
   </div>
 </div>
 
-<script src="/assets/site.js"></script>
+<script src="/assets/site.js?v=20261013speed" defer></script>
 <script src="/assets/offer.js" defer></script>
 </body>
 </html>
