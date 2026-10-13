@@ -96,3 +96,29 @@ body.bk-fr-textonly .float-bar-inner{grid-template-columns:1fr !important}
 .bk-ct-sub{font-size:13px;color:var(--muted);font-weight:700;margin-top:12px}
 .bk-ct-day.dim .bk-ct{opacity:.45}
 .bk-ct-chosen{margin:10px 0 0;font-size:14px;color:var(--white)}
+
+/* ============================================================
+   White form card (owner-approved draft B, 2026-10-13): high-contrast, WCAG AA
+============================================================ */
+.bk-wrap .bk-card{background:#ffffff;border:1px solid #00b8cc;color:#0b1530}
+.bk-wrap .bk-card .bk-title{color:#0b1530}
+.bk-wrap .bk-card .bk-label,.bk-wrap .bk-card .bk-either legend.bk-label{color:#1b2a4a;font-size:14px;letter-spacing:.04em}
+.bk-wrap .bk-card .bk-either legend.bk-label{font-size:15px;text-transform:none;letter-spacing:0}
+.bk-wrap .bk-card .bk-req{color:#c62828;font-weight:900}
+.bk-wrap .bk-card .bk-input,.bk-wrap .bk-card .bk-select{background:#f2f5f9;border:2px solid #6b7a99;color:#0b1530;font-size:17px}
+.bk-wrap .bk-card .bk-input:focus,.bk-wrap .bk-card .bk-select:focus{box-shadow:inset 0 0 0 2px #007c94}
+.bk-wrap .bk-card .bk-input::placeholder{color:#5c677d;opacity:1}
+.bk-wrap .bk-card .bk-input:focus,.bk-wrap .bk-card .bk-select:focus,.bk-wrap .bk-card button:focus-visible,.bk-wrap .bk-card summary:focus-visible,.bk-wrap .bk-card a:focus-visible{outline:3px solid #007c94;outline-offset:2px}
+.bk-wrap .bk-card .bk-hint,.bk-wrap .bk-card .bk-note,.bk-wrap .bk-card .bk-or,.bk-wrap .bk-card .bk-ct-sub,.bk-wrap .bk-card .bk-ct-q small{color:#44516b}
+.bk-wrap .bk-card .bk-or{color:#44516b}
+.bk-wrap .bk-card .bk-err{color:#b3261e;font-weight:700}
+.bk-wrap .bk-card .bk-ok{color:#0d6e38}
+.bk-wrap .bk-card .bk-link,.bk-wrap .bk-card .bk-more summary{color:#006b80}
+.bk-wrap .bk-card .bk-either{border:2px solid #6b7a99}
+.bk-wrap .bk-card .bk-calltime{background:#ecfbf3;border:2px solid #1a9d5c}
+.bk-wrap .bk-card .bk-ct-q,.bk-wrap .bk-card .bk-ct-chosen{color:#0b1530}
+.bk-wrap .bk-card .bk-ct,.bk-wrap .bk-card .bk-toggle button{background:#ffffff;border:2px solid #6b7a99;color:#0b1530}
+.bk-wrap .bk-card .bk-ct.sel,.bk-wrap .bk-card .bk-toggle button.sel{border-color:#0d6e38;color:#0d6e38;box-shadow:0 0 0 2px #0d6e38}
+.bk-wrap .bk-card .bk-btn.ghost{color:#006b80;border:2px solid #6b7a99}
+.bk-wrap .bk-card .bk-sum div{border-bottom-color:#6b7a99}
+.bk-wrap .bk-card .bk-sum div span:first-child{color:#44516b}
