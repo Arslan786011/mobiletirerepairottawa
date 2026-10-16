@@ -18,7 +18,6 @@
   var AFTER_PROMO_MS = 5000;  // wait 5 s after the winter popup closes
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
-  function rid() { return 'S' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36); }
   var fr = (D.documentElement.lang || '').toLowerCase().indexOf('fr') === 0;
   var TX = fr ? {
     title: 'Appelez pour une soumission', sub: 'On vous rappelle pour confirmer l\'heure.',
@@ -126,29 +125,11 @@
     if (how === 'no' || how === 'x' || how === 'backdrop' || how === 'esc') track('offer_declined', lastWhy);
   }
 
-  // ------------------------------------------------------------ claim (server creates the 48-hour offer)
-  function api() {
-    if (W.BOOKING_API) return Promise.resolve(W.BOOKING_API);
-    return new Promise(function (res, rej) {
-      var s = D.createElement('script'); s.src = '/book-tire-swap/api.js';
-      s.onload = function () { W.BOOKING_API ? res(W.BOOKING_API) : rej(new Error('no_api')); };
-      s.onerror = function () { rej(new Error('no_api')); }; D.head.appendChild(s);
-    });
-  }
-  function claim() {
+  // ------------------------------------------------------------ claim (offers are turned off)
+  function claim() {   // no offers or discounts: never asks the booking script for one
     track('offer_claimed', lastWhy);
-    if (H.claim) { close('yes'); H.claim(); return; }   // booking page: applies straight into the form
-    var b = ov.querySelector('.mo-yes'); if (b) { b.disabled = true; b.textContent = TX.saving; }
-    var session = lsGet('bk_session'); if (!session) { session = rid(); lsSet('bk_session', session); }
-    var t = new Promise(function (_, rej) { setTimeout(function () { rej(new Error('timeout')); }, 20000); });
-    Promise.race([api().then(function (u) {
-      var go = function () { return fetch(u, { method: 'POST', body: JSON.stringify({ action: 'offer', session: session }) }).then(function (r) { if (!r.ok) throw new Error('http'); return r.json(); }); };
-      return go().catch(function () { return new Promise(function (r) { setTimeout(r, 1000); }).then(go); });   // one retry after 1 s (Google's one-off 404s)
-    }), t]).then(function (r) {
-      if (!r || !r.ok) throw new Error('bad');
-      lsSet('bk_offer', JSON.stringify({ offerId: r.offerId, expires: r.expires, percent: r.percent }));
-      paintSaved();
-    }).catch(function () { paintAsk(true); });
+    if (H.claim) H.claim();
+    close('yes');
   }
 
   // ------------------------------------------------------------ triggers

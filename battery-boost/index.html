@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <link rel="preload" href="/assets/fonts/barlow-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="/assets/fonts/orbitron-latin-var.woff2" as="font" type="font/woff2" crossorigin/>
-<link rel="stylesheet" href="/assets/site.css?v=20261013speed"/>
+<link rel="stylesheet" href="/assets/site.css?v=20261016popup"/>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -170,7 +170,7 @@
   </symbol>
 </svg>
 
-<!-- WINTER POPUP -->
+<!-- WINTER POPUP (tap to open only). Step 2 sends a request to the booking sheet (Apps Script action 'lead'); no prices. -->
 <div class="promo" id="promo" role="dialog" aria-modal="true" aria-labelledby="promo-title" hidden>
   <div class="promo-card" id="promo-card" tabindex="-1">
     <div class="promo-flake" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#flake"/></svg></div>
@@ -180,70 +180,92 @@
     <div class="promo-step" id="promo-step-1">
       <span class="promo-kicker"><span class="winter-badge-icon" aria-hidden="true">❄</span>Now Accepting Winter Appointments</span>
       <h2 class="promo-title" id="promo-title">Beat the First Snow<span>Swap in Your Driveway</span></h2>
-      <p class="promo-text">We'll put your <b>winter tires on at your home</b>. No shop lineups, no waiting room. Book now to lock in your time slot before the rush.</p>
-      <a class="btn-primary" href="/book-tire-swap/" style="text-decoration:none">
-        <span class="btn-icon">📅</span> Book Online
-      </a>
-      <button class="btn-secondary" id="promo-book" type="button" style="margin-top:10px">
-        <span class="btn-icon">💬</span> Or Book by Text
+      <p class="promo-text">We'll put your <b>winter tires on at your home</b>. No shop lineups, no waiting room. Send a quick request and we'll call you to set your time before the rush.</p>
+      <button class="btn-primary" id="promo-book" type="button">
+        <span class="btn-icon">📝</span> Request a Call Back
       </button>
+      <a class="btn-secondary promo-sms" id="promo-text-1" href="sms:+16136016471" style="margin-top:10px">
+        <span class="btn-icon">💬</span> Text Us Instead
+      </a>
+      <a class="btn-secondary promo-call" href="tel:+16136016471" style="margin-top:10px">
+        <span class="btn-icon">📞</span> Call (613) 601-6471
+      </a>
       <button class="promo-later" id="promo-later" type="button">Maybe later</button>
-      <div class="promo-foot">Takes 30 seconds. Or call <a href="tel:+16136016471" style="color:var(--white);font-weight:700">(613) 601-6471</a></div>
+      <div class="promo-foot">Takes 30 seconds. Prefer the full form? <a href="/book-tire-swap/" style="color:var(--white);font-weight:700">Book online</a></div>
     </div>
 
-    <!-- Step 2: booking form -->
+    <!-- Step 2: short request form (posts to the booking sheet) -->
     <div class="promo-step" id="promo-step-2" hidden>
       <div class="book-head">
         <button class="book-back" id="book-back" type="button">← Back</button>
         <div class="book-title" id="book-title">Book Your Winter Swap</div>
-        <p class="book-sub">Fill this in and tap send. It opens a text to us with everything filled in. We'll reply to confirm your time and price.</p>
+        <p class="book-sub">Fill this in and tap send. We'll call you to confirm the time and give you your price.</p>
       </div>
       <form class="book-form" id="book-form" novalidate>
-        <div class="book-row">
-          <div class="book-field" id="f-name-wrap">
-            <label for="f-name">Your name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Sarah">
-          </div>
-          <div class="book-field">
-            <label for="f-vehicle">Vehicle <i>(optional)</i></label>
-            <input id="f-vehicle" name="vehicle" type="text" placeholder="e.g. 2019 Honda Civic">
-          </div>
+        <div class="book-field" id="f-name-wrap">
+          <label for="f-name">Your name <i>*</i></label>
+          <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Sarah" maxlength="60">
         </div>
-        <fieldset class="book-chips" id="f-rims-wrap">
-          <legend class="book-legend">Are your winter tires on rims?</legend>
-          <label><input type="radio" name="rims" value="Yes, on rims"><span>Yes, on rims</span></label>
-          <label><input type="radio" name="rims" value="No, need mounting"><span>No, need mounting</span></label>
-          <label><input type="radio" name="rims" value="Not sure"><span>Not sure</span></label>
+        <div class="book-field" id="f-phone-wrap">
+          <label for="f-phone">Mobile phone <i>*</i></label>
+          <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 613 555 0123" maxlength="20">
+        </div>
+        <div class="book-field" id="f-car-wrap">
+          <label for="f-car">Car make &amp; model or tire size <i>*</i></label>
+          <input id="f-car" name="car" type="text" autocomplete="off" placeholder="e.g. Toyota RAV4 or 225/65R17" maxlength="80">
+        </div>
+        <div class="book-field" id="f-area-wrap">
+          <label for="f-area">City or neighbourhood <i>*</i></label>
+          <input id="f-area" name="area" type="text" list="f-areas" autocomplete="address-level2" placeholder="e.g. Kanata, Orleans, Gatineau" maxlength="80">
+          <datalist id="f-areas"><option value="Ottawa"><option value="Kanata"><option value="Nepean"><option value="Orleans"><option value="Barrhaven"><option value="Gloucester"><option value="Stittsville"><option value="Riverside South"><option value="Vanier"><option value="Manotick"><option value="Gatineau"><option value="Aylmer"><option value="Hull"></datalist>
+        </div>
+        <fieldset class="promo-ct" id="f-ct">
+          <legend class="book-legend">📞 Best time to call you? <i>(optional)</i></legend>
+          <div class="promo-ct-grid" role="group" aria-label="Best time to call you?">
+            <button type="button" data-ctpart="asap" aria-pressed="false">Now / ASAP</button>
+            <button type="button" data-ctpart="morning" aria-pressed="false">Morning (9–12)</button>
+            <button type="button" data-ctpart="afternoon" aria-pressed="false">Afternoon (12–5)</button>
+            <button type="button" data-ctpart="evening" aria-pressed="false">Evening (5–8)</button>
+          </div>
+          <div class="promo-ct-day" id="f-ct-day">
+            <div class="promo-ct-sub" id="f-ct-day-l">Which day?</div>
+            <div class="promo-ct-grid three" role="group" aria-labelledby="f-ct-day-l">
+              <button type="button" data-ctday="today" aria-pressed="false">Today</button>
+              <button type="button" data-ctday="tomorrow" aria-pressed="false">Tomorrow</button>
+              <button type="button" data-ctday="date" aria-pressed="false">Pick a date</button>
+            </div>
+            <div class="book-field" id="f-ct-date-wrap" hidden>
+              <label for="f-ct-date">Date</label>
+              <input id="f-ct-date" type="date">
+            </div>
+          </div>
+          <p class="promo-ct-chosen" id="f-ct-chosen" aria-live="polite" hidden></p>
         </fieldset>
-        <div class="book-field">
-          <label for="f-size">Tire size <i>(optional, or send a photo after)</i></label>
-          <input id="f-size" name="size" type="text" placeholder="e.g. 225/65R17">
-        </div>
-        <div class="book-field" id="f-address-wrap">
-          <label for="f-address">Address or area</label>
-          <input id="f-address" name="address" type="text" autocomplete="street-address" placeholder="e.g. 123 Main St, Kanata">
-        </div>
-        <div class="book-row">
-          <div class="book-field">
-            <label for="f-date">Preferred day</label>
-            <input id="f-date" name="date" type="date">
-          </div>
-          <div class="book-field">
-            <label for="f-time">Time</label>
-            <select id="f-time" name="time">
-              <option value="Any time">Any time</option>
-              <option value="Morning">Morning</option>
-              <option value="Afternoon">Afternoon</option>
-              <option value="Evening">Evening</option>
-            </select>
-          </div>
-        </div>
+        <div class="book-hp" aria-hidden="true"><label>Website<input id="f-hp" name="website" tabindex="-1" autocomplete="off"></label></div>
         <p class="book-error" id="book-error" role="alert"></p>
-        <button class="btn-primary" type="submit">
-          <span class="btn-icon">💬</span> Send My Booking by Text
+        <button class="btn-primary" type="submit" id="book-send">
+          <span class="btn-icon">✓</span> Send My Request
         </button>
-        <p class="book-note" id="book-note">Rather talk? Call <a href="tel:+16136016471"><b>(613) 601-6471</b></a></p>
+        <a class="btn-secondary promo-sms" id="promo-text-2" href="sms:+16136016471">
+          <span class="btn-icon">💬</span> Text Us Instead
+        </a>
+        <a class="btn-secondary promo-call" href="tel:+16136016471">
+          <span class="btn-icon">📞</span> Call (613) 601-6471
+        </a>
+        <p class="book-note" id="book-note">We'll call you to confirm the time and give you your price. Pay the tech when done.</p>
       </form>
+    </div>
+
+    <!-- Step 3: sent -->
+    <div class="promo-step" id="promo-step-3" hidden>
+      <div class="promo-done-big" aria-hidden="true">✅</div>
+      <h2 class="promo-title" id="done-title" tabindex="-1">Request received!</h2>
+      <p class="promo-text" id="done-text">We'll call you shortly to confirm the time and give you your price.</p>
+      <p class="book-note" id="done-no"></p>
+      <a class="btn-secondary promo-call" href="tel:+16136016471" style="margin-top:10px">
+        <span class="btn-icon">📞</span> Need us sooner? Call (613) 601-6471
+      </a>
+      <button class="promo-later" id="promo-done-close" type="button">Close</button>
     </div>
   </div>
 </div>
@@ -555,6 +577,6 @@
   </div>
 </div>
 
-<script src="/assets/site.js?v=20261013speed" defer></script>
+<script src="/assets/site.js?v=20261016popup" defer></script>
 </body>
 </html>
