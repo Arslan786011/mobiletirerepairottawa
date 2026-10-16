@@ -162,7 +162,7 @@
     try { if (r) sessionStorage.setItem('bk_ref', r); else r = sessionStorage.getItem('bk_ref') || ''; } catch (e) {}
     S.ref = r;
   })();
-  try { var of = JSON.parse(lsGet('bk_offer') || 'null'); if (of && of.expires > Date.now() && !of.used) S.offer = of; } catch (e) {}
+  // No offers or discounts: any old saved offer is ignored (S.offer stays null).
   function t(k) {
     var v = (S.season === 'summer' && TS[S.lang] && TS[S.lang][k]) || (T[S.lang] && T[S.lang][k]) || T.en[k] || k;
     return v;
@@ -235,10 +235,6 @@
     return v.tier || 'STANDARD';
   }
   function isExotic() { return S.cfg && currentTier() === 'EXOTIC'; }
-  function isLowProfile(tier) { return (S.cfg.lowProfileTiers || []).indexOf(tier) >= 0; }
-  function whyHtml(tier) {
-    return isLowProfile(tier) ? '<details class="bk-why"><summary>' + t('whyQ') + '</summary><p>' + t('whyA') + '</p></details>' : '';
-  }
 
   // ---------------------------------------------------------------- vehicles
   function rowsFor(year) { return S.rows.filter(function (r) { return r[1] <= year && year <= r[2]; }); }
@@ -624,7 +620,7 @@
         vehicleId: '', year: v.oYear, make: v.oMake, model: v.oModel, trim: v.oTrim, trimUnsure: !v.oTrim, vehicleClass: 'car',
         sizeTyped: typed ? typed.text : '', photoUrl: v.photoUrl, service: S.service, tires: S.tires,
         address: S.addrText || S.area, addressFormatted: areaLabel(),
-        name: S.c.name, phone: S.c.phone, email: S.c.email, notes: notes, offerId: S.offer ? S.offer.offerId : '', expectedSubtotal: null, ref: S.ref, multiCar: !!S.multiCar,
+        name: S.c.name, phone: S.c.phone, email: S.c.email, notes: notes, offerId: '', expectedSubtotal: null, ref: S.ref, multiCar: !!S.multiCar,
         // new, informational fields (the script can ignore them):
         area: S.area, streetAddress: S.addrText, preferredTime: S.pref, callTime: ct, vehicleText: v.car, zone: z && !z.error ? z.zone : '', price: 'Call for a quote'
       };
@@ -681,18 +677,19 @@
     canShow: function () { return !!S.cfg && !S.fatal && !S.done && !S.offer && !S.busy; },
     started: function () { return !!S.cfg && !S.done && step1Basics() && !isExoticSafe(); },
     text: function () { return { title: t('offerTitle'), sub: t('offerSub'), yes: t('offerYes'), no: t('offerNo') }; },
-    claim: function () {
-      apiPost({ action: 'offer', session: S.session }).then(function (r) {
-        if (r.ok) { S.offer = { offerId: r.offerId, expires: r.expires, percent: r.percent }; lsSet('bk_offer', JSON.stringify(S.offer)); render(); }
-      }).catch(function () {});
-    }
+    claim: function () {}   // no offers or discounts: never asks the script for one
   };
 
   // ---------------------------------------------------------------- start
+  // The page only uses these config fields. It never reads prices, fees, taxes or offers, so the
+  // script's config action can (and should) stop sending them: see CONFIG-PRICE-REMOVAL steps.
+  // (Anything the script sends is still public in the network tab; this just keeps it out of the page.)
+  var CFG_KEYS = ['ok', 'testMode', 'season', 'slots', 'rules', 'adsBookingLabel', 'phone'];
+  function publicPart(c) { var o = {}; CFG_KEYS.forEach(function (k) { if (c && c[k] !== undefined) o[k] = c[k]; }); return o; }
   render();
   Promise.all([apiGet('config')]).then(function (res) {   // vehicle list no longer needed (free-text make & model)
     if (!res[0].ok) return goFallback();
-    S.cfg = res[0]; S.rows = [];
+    S.cfg = publicPart(res[0]); S.rows = [];
     S.season = S.cfg.season === 'summer' ? 'summer' : 'winter';
     if (S.cfg.testMode && qsSeason) S.season = qsSeason;   // ?season=summer preview while in TEST MODE
     document.title = t('title') + ' | Mobile Tire Repair Ottawa';
