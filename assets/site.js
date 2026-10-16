@@ -102,7 +102,7 @@ window.trackConversion = function(kind){
 };
 document.addEventListener('click', function(e){
   var link = e.target.closest('a[href^="sms:"], a[href^="tel:"]');
-  if (!link || link.hasAttribute('data-book-winter')) return;
+  if (!link) return;   // includes the "Book by Text" buttons and the popup's "Text Us Instead"
   window.trackConversion(link.getAttribute('href').indexOf('tel:') === 0 ? 'call' : 'text');
 });
 
@@ -182,8 +182,23 @@ document.addEventListener('click', function(e){
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !promo.hidden) close(); });
 
   // Tap-to-open only (the popup never opens by itself: it used to cover the Call buttons).
+  // "Book by Text" buttons (data-book-winter) are plain sms: links: they open the text app and fire the Text click conversion.
+  // "Request a Call Back" buttons (data-callback) open the call-back form.
   document.querySelectorAll('[data-open-promo]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); open(1); }));
-  document.querySelectorAll('[data-book-winter]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); open(2); }));
+  document.querySelectorAll('[data-callback]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); open(2); }));
+
+  // "Text Us Instead" in the form: opens the text app with whatever is already typed (Text click conversion fires
+  // from the sms: click handler above, with the original Text label).
+  const isApple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
+  $('promo-text-2').addEventListener('click', () => {
+    const v = id => $(id).value.trim(), t = callTime();
+    const lines = [v('f-name') ? 'Name: ' + v('f-name') : '', v('f-phone') ? 'Phone: ' + v('f-phone') : '',
+                   v('f-car') ? 'Vehicle / tire size: ' + v('f-car') : '', v('f-area') ? 'Area: ' + v('f-area') : '',
+                   t ? 'Best time to call: ' + t : ''].filter(Boolean);
+    const href = 'sms:+16136016471' + (lines.length ? (isApple ? '&' : '?') + 'body=' + encodeURIComponent(['WINTER SWAP BOOKING'].concat(lines).join('\n')) : '');
+    $('promo-text-2').setAttribute('href', href);
+    window.lastBookingText = href;
+  });
 
   // ---------------- "Best time to call" quick picks (same choices as the booking form; nothing picked by default)
   function callTime(){   // English text for the owner's alert
