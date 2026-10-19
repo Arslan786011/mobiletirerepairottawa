@@ -10,7 +10,7 @@
  *              Set to 0 to never offer it for that case.
  * ============================================================================================ */
 window.SWAP_PRICES = {
-  build: '20261019fast2',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
+  build: '20261019perf',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
   tiers: {
     small:  { off: 160, on: 120, discount: { off: 15, on: 10 }, en: 'Small car', fr: 'Petite voiture',
               egEn: 'e.g. Chevy Spark, Hyundai Accent', egFr: 'ex. Chevy Spark, Hyundai Accent' },
@@ -74,6 +74,9 @@ window.SWAP_PRICES = {
   //       (performance / run-flat models and trims: GT, AMG, M3, Type R, N, SRT, Scat Pack, TRD Pro, RS, S line…)
   //     - a tire size is given with aspect ratio (the "35" in 295/35R20) at or below lowProfileMaxAspect,
   //       or rim (the "20") at or above lowProfileMinRim inches. A size can only move the type UP, never down.
+  //     - the car's FACTORY tire size (stock-sizes.js, ~360 models) passes one of those same two size rules
+  //       (no trim typed: the base size for normal cars, the biggest stock size for performance models)
+  //     - the make/model is on the performance list in stock-sizes.js (C43, i8, M3, Golf R, Model 3 Performance...)
   //   Make & model not in any list (e.g. "Lada Niva"): priced as unknownTier (SUV / crossover / minivan) and the
   //   booking is flagged for staff: "Vehicle not recognized: confirm tire type on the call". Never blocked.
   lowProfileMaxAspect: 40,
@@ -86,13 +89,20 @@ window.SWAP_PRICES = {
               'srt', 'scat pack', 'hellcat', 'trackhawk', 'amg', 's3', 's4', 's5', 's6', 's7', 's8', 'sq5', 'sq7', 'sq8', 'rs', 'rs3', 'rs4', 'rs5', 'rs6', 'rs7', 'rs q8', 'rsq8', 'e-tron gt',
               's-line', 's line', 'sline', 'm2', 'm3', 'm4', 'm5', 'm8', 'm sport', 'f sport', 'trd pro', 'nismo', 'type r', 'type s', 'si',
               ['tesla', 'performance'], ['model 3', 'performance'], ['model y', 'performance'], 'gt-r', 'gtr', ['nissan', 'z'], '370z', '350z',
-              ['lexus', 'rc'], ['lexus', 'lc'], 'rc f', 'is f', 'g70', 'stinger', 'golf r', 'gti', 'wrx', 'sti', ['hyundai', 'n'], 'elantra n', 'veloster n', 'kona n', 'abarth'],
+              ['lexus', 'rc'], ['lexus', 'lc'], 'rc f', 'is f', 'g70', 'stinger', 'golf r', 'gti', 'wrx', 'sti', 'abarth',
+              // Mercedes-AMG + BMW i8 by model code (also in stock-sizes.js; repeated here so they work even before that file loads)
+              'i8', 'c43', 'c63', 'c63s', 'e43', 'e53', 'e63', 'e63s', 'glc43', 'glc63', 'gle43', 'gle53', 'gle63', 'gls63', 'a35', 'a45', 'cla35', 'cla45',
+              'gla35', 'gla45', 'glb35', 's63', 'g63', 'sl55', 'sl63', 'amg gt'],
+  // Hyundai N (Elantra N, Kona N...) and the rest of the performance list are in stock-sizes.js (PERF), which skips "N Line".
+  // Every car in stock-sizes.js also gets its factory tire size checked against the two size rules above.
   // Ordinary cars (small car price), listed so we know the vehicle.
   smallModels: ['camry', 'accord', 'civic', 'corolla', 'elantra', 'sentra', 'altima', 'maxima', 'versa', 'micra', 'mazda3', 'mazda 3', 'mazda6', 'mazda 6', 'jetta', 'golf',
                 'passat', 'arteon', 'beetle', 'accent', 'spark', 'malibu', 'cruze', 'sonic', 'impala', 'volt', 'bolt', 'fusion', 'focus', 'fiesta', 'taurus', 'mustang', 'camaro',
                 'sonata', 'ioniq', 'veloster', 'optima', 'k5', 'forte', 'rio', 'soul', 'fit', 'insight', 'clarity', 'prius', 'yaris', 'avalon', 'impreza', 'legacy', 'mirage',
                 'lancer', 'charger', 'challenger', 'chrysler 300', 'dart', 'leaf', 'model 3', 'model s', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'c-class', 'e-class', 'cla', 'a-class',
-                'ilx', 'tlx', 'integra', 'lexus es', 'lexus is', 'g80', 'g90', 'q50', 'q60', 'ct4', 'ct5', 'ats', 'cts', 's60', 's90', 'v60', 'giulia', 'polestar 2', 'niro ev'],
+                'ilx', 'tlx', 'integra', 'lexus es', 'lexus is', 'g80', 'g90', 'q50', 'q60', 'ct4', 'ct5', 'ats', 'cts', 's60', 's90', 'v60', 'giulia', 'polestar 2', 'niro ev',
+                ['audi', 'tt'], 'mx-5', 'mx5', 'miata', ['jaguar', 'xf'], ['lexus', 'gs'], ['lexus', 'ls'], ['toyota', 'crown'], 'c300', 'a220', 'cla250', 'cle300', 'cle', 'e300', 'e350', 'e450',
+                's500', 's580', 'eqe', 'eqs', 'eqe350', 'eqs450', 'i4', 'i5', 'i7'],
 
   // Exit offer: shown at most once per visitor (remembered in this browser), only when the
   // booking form was started but not sent.
@@ -107,6 +117,9 @@ window.SWAP_PRICES = {
               'cx-3', 'cx-30', 'cx-5', 'cx-50', 'cx-9', 'cx-70', 'cx-90', 'forester', 'outback', 'crosstrek', 'ascent', 'highlander', '4runner', 'sequoia',
               'venza', 'corolla cross', 'sienna', 'pilot', 'passport', 'odyssey', 'compass', 'cherokee', 'grand cherokee', 'wrangler', 'durango', 'journey',
               'pacifica', 'grand caravan', 'caravan', 'atlas', 'tiguan', 'taos', 'id.4', 'outlander', 'rvr', 'eclipse cross', 'model x', 'model y', 'mach-e',
-              'q3', 'q5', 'q7', 'q8', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'glc', 'gle', 'gla', 'glb', 'gls', 'rx', 'nx', 'ux', 'gx', 'rdx', 'mdx',
+              'q3', 'q5', 'q7', 'q8', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'glc', 'gle', 'gla', 'glb', 'gls',
+              'glc300', 'gle350', 'gle450', 'gls450', 'gls580', 'gla250', 'glb250', 'g550', 'g-class', 'eqb', 'eqb300', 'q4 e-tron', 'e-tron', 'envista', 'lyriq',
+              'voyager', 'hornet', 'ecosport', ['ford', 'flex'], 'gv60', 'gv70', 'gv80', 'prologue', 'qx50', 'qx55', 'qx60', 'qx80', 'e-pace', 'f-pace', 'renegade',
+              'wagoneer', ['lexus', 'lx'], ['lexus', 'tx'], 'ariya', 'solterra', 'c-hr', 'bz4x', 'touareg', 'ix', 'rx', 'nx', 'ux', 'gx', 'rdx', 'mdx',
               'xc40', 'xc60', 'xc90', 'macan', 'transit', 'transit connect', 'sprinter', 'promaster', 'express', 'savana', 'metris', 'nv200', 'quest', 'sedona', 'ioniq 9', 'cayenne', 'escalade', 'xt4', 'xt5', 'xt6', 'navigator', 'aviator', 'nautilus', 'corsair', 'range rover', 'discovery', 'defender']
 };

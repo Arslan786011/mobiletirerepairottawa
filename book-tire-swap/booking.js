@@ -325,20 +325,22 @@
   function autoTier() {
     var txt = tierText(), p = parseSize(S.veh.typed), e, base = '', why = '', rec = true, lowWhy = [];
     if (!hasCar()) return null;
+    var st = stockFor(txt), pf = perfOf(txt);   // factory tire size + performance list (stock-sizes.js; loads in the background)
     if ((e = listHit(PR.pickupModels, txt))) { base = 'pickup'; why = 'pickup model (' + nice(e) + ')'; }
     else {
       var lm = listHit(PR.lowModels, txt), mk = listHit(PR.lowMakes, txt);
-      if (lm) lowWhy.push('performance model/trim (' + nice(lm) + ')'); else if (mk) lowWhy.push('run-flat make (' + nice(mk) + ')');
+      if (lm) lowWhy.push('performance model/trim (' + nice(lm) + ')'); else if (pf) lowWhy.push('performance model (' + pf + ')'); else if (mk) lowWhy.push('run-flat make (' + nice(mk) + ')');
       if ((e = listHit(PR.suvModels, txt))) { base = 'suv'; why = 'SUV/crossover/minivan model (' + nice(e) + ')'; }
       else if ((e = listHit(PR.smallModels, txt))) { base = 'small'; why = 'car model (' + nice(e) + ')'; }
       else if (lowWhy.length) { base = 'small'; why = ''; }
+      else if (st) { base = PR.tiers[PR.unknownTier] ? PR.unknownTier : 'suv'; why = 'in the stock-size table (' + st.model + '), type not listed'; }
       else { base = PR.tiers[PR.unknownTier] ? PR.unknownTier : 'suv'; rec = false; why = 'default: vehicle not recognized'; }
+      // the car's factory size runs through the same size rules (never lowers the type)
+      if (st && lowSize(parseSize(st.size)).length) lowWhy.push('stock size ' + st.size + ' (' + st.label + ')');
     }
     var tier = base;
     if (p) {   // a tire size can only move the type UP
-      var sl = [];
-      if (p.aspect <= (+PR.lowProfileMaxAspect || 40)) sl.push(p.aspect + ' series');
-      if (p.rim >= (+PR.lowProfileMinRim || 19)) sl.push(p.rim + 'in');
+      var sl = lowSize(p);
       if (base === 'pickup') { if (sl.length) why += '; low-profile size ' + p.text + ' stays at the pickup price'; }
       else {
         if (sl.length) lowWhy.push(sl.join(' / '));
@@ -347,7 +349,27 @@
     }
     if (tier !== 'pickup' && lowWhy.length && rankOf('low') > rankOf(tier)) tier = 'low';
     var reason = tier === 'low' ? 'low-profile: ' + lowWhy.join(' + ') + (rec ? '' : '; vehicle not recognized') : (tier === 'pickup' ? 'pickup: ' : tier === 'suv' && rec ? 'suv: ' : tier === 'small' ? 'small: ' : '') + why;
-    return { tier: tier, reason: reason, recognized: rec, lowWhy: lowWhy, base: base, why: rec ? 'car' : 'default' };
+    return { tier: tier, reason: reason, recognized: rec, lowWhy: lowWhy, base: base, why: rec ? 'car' : 'default', stock: st, perf: pf };
+  }
+  function lowSize(p) {   // ['35 series', '20in'] when a size counts as low-profile (prices.js thresholds), else []
+    var sl = []; if (!p) return sl;
+    if (p.aspect <= (+PR.lowProfileMaxAspect || 40)) sl.push(p.aspect + ' series');
+    if (p.rim >= (+PR.lowProfileMinRim || 19)) sl.push(p.rim + 'in');
+    return sl;
+  }
+  // ---- factory (OEM) tire size + performance names: /book-tire-swap/stock-sizes.js (window.STOCK_SIZES). Optional: if that file
+  //      is missing or still loading, the lists in prices.js decide alone. Staff see "Assumed stock size 245/30R20 (Honda Civic Type R)".
+  function stockFor(txt) {
+    var SS = window.STOCK_SIZES, r = null;
+    try { r = SS && SS.lookup ? SS.lookup(txt) : null; } catch (e) { r = null; }
+    if (!r || !parseSize(r.size)) return null;
+    r.label = r.model + (r.trim ? ' ' + nice(r.trim) : r.how === 'largest' ? ', performance model' : ', base trim');
+    return r;
+  }
+  function perfOf(txt) { var SS = window.STOCK_SIZES; try { return SS && SS.perf ? SS.perf(txt) : ''; } catch (e) { return ''; } }
+  function stockNote(a, typed) {
+    if (!a || !a.stock) return '';
+    return (typed ? 'Stock size for ' + a.stock.label + ': ' + a.stock.size + ' (customer typed ' + typed.text + ')' : 'Assumed stock size ' + a.stock.size + ' (' + a.stock.label + ')');
   }
   function tierLabel(k, lang) { var x = PR.tiers[k] || {}; return (lang || S.lang) === 'fr' ? (x.fr || x.en || k) : (x.en || k); }
   // ---- service call fee by area (lists + fees in prices.js). Area field first, then the street address.
@@ -599,7 +621,7 @@
   function syncCar() { var v = S.veh, c = splitCar(v.car); v.mode = 'other'; v.oMake = c.make; v.oModel = c.model; }
   // Make & model required: two words ("Toyota RAV4"), or one word we know ("F-150", "Supra").
   function hasCar() { var c = String(S.veh.car || '').trim(); if (!c) return false; if (c.split(/\s+/).length >= 2) return true;
-    return !!(PR && (listHit(PR.pickupModels, c) || listHit(PR.suvModels, c) || listHit(PR.smallModels, c) || listHit(PR.lowModels, c))); }
+    return !!(PR && (listHit(PR.pickupModels, c) || listHit(PR.suvModels, c) || listHit(PR.smallModels, c) || listHit(PR.lowModels, c) || perfOf(c))); }
   function hasSize() { return !!parseSize(S.veh.typed); }
   function step1Basics() { return hasCar(); }   // enough to send the "almost booked" alert (with a phone)
   function step1Ready() { return step1Basics(); }
@@ -1025,12 +1047,15 @@
         payload.offerApplied = !!q.disc; payload.offerAmount = q.disc; payload.offerType = q.disc ? q.offerType : ''; payload.offerFloor = q.offerFloor; payload.tier = q.tier; payload.tierLabel = tierLabel(q.tier, 'en');
         payload.tierSource = tierSource(q); payload.tierReason = q.auto.reason; payload.vehicleRecognized = !!q.auto.recognized;
         payload.vehicleFlag = q.auto.recognized ? '' : '⚠️ Vehicle not recognized: confirm tire type on the call';
+        payload.stockSize = q.auto.stock ? q.auto.stock.size : ''; payload.stockSizeNote = stockNote(q.auto, typed);
+        payload.stockSizeSource = q.auto.stock ? q.auto.stock.src + ' (' + (q.auto.stock.how === 'trim' ? 'trim match' : q.auto.stock.how === 'largest' ? 'performance model, no trim: biggest standard size' : 'no trim given: base size') + ')' : '';
+        payload.performanceModel = q.auto.perf || '';
         payload.runFlat = /run-flat|performance/.test(q.auto.reason); payload.beforeTax = true; payload.priceShown = priceText(q, S.lang);
         payload.afterHours = !!q.after; payload.serviceFeeType = q.after ? 'after-hours' : q.fee === null ? 'to confirm' : q.fee ? 'area' : 'none';
         payload.urgency = !!q.urg; payload.urgencyReason = q.urg; payload.urgencyFee = q.asapFee;
         payload.asapFee = q.asap ? q.asapFee : 0;
         if (q.urg) payload.notes = ['⚡ ' + (q.urg === 'asap' ? 'ASAP' : 'SAME-DAY') + ' urgency (+' + money(q.asapFee, 'en') + ')', payload.notes].filter(Boolean).join(' · ');
-        payload.notes = [payload.vehicleFlag, payload.notes, 'Tier: ' + payload.tierLabel + ' (' + q.auto.reason + ')', 'Total shown: ' + payload.price].filter(Boolean).join(' · ');   // the script keeps 300 chars: flag first
+        payload.notes = [payload.vehicleFlag, payload.notes, 'Tier: ' + payload.tierLabel + ' (' + q.auto.reason + ')', payload.stockSizeNote, 'Total shown: ' + payload.price].filter(Boolean).join(' · ');   // the script keeps 300 chars: flag first
       }
       var cal = calInfo(q && q.ready ? q : null, Date.now());
       return apiPost(payload).then(function (r) {
@@ -1130,6 +1155,8 @@
       var y = window.scrollY; renderKeepFocus(); window.scrollTo(0, y);
     } else if (S.veh.car) refreshStep1();   // rules changed (exotic list etc.): refresh the price part only
   }).catch(function () { S.cfgSource = 'default (config unavailable)'; });
-  window.BK_JS_BUILD = '20261019fast2';   // must match the ?v= on the booking pages (stale-cache guard there)
+  window.BK_JS_BUILD = '20261019perf';   // must match the ?v= on the booking pages (stale-cache guard there)
+  // stock-sizes.js loads after this file (async): re-price once it arrives, keeping everything typed
+  window.BK_STOCK_READY = function () { try { if (S.veh && S.veh.car) refreshStep1(); } catch (e) {} };
   window.__bk = S; // for testing
 })();
