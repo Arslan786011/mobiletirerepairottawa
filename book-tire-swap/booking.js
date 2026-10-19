@@ -1102,15 +1102,34 @@
   // (Anything the script sends is still public in the network tab; this just keeps it out of the page.)
   var CFG_KEYS = ['ok', 'testMode', 'season', 'slots', 'rules', 'adsBookingLabel', 'phone'];   // prices come from prices.js, not the script
   function publicPart(c) { var o = {}; CFG_KEYS.forEach(function (k) { if (c && c[k] !== undefined) o[k] = c[k]; }); return o; }
-  render();
-  Promise.all([apiGet('config')]).then(function (res) {   // vehicle list no longer needed (free-text make & model)
-    if (!res[0].ok) return goFallback();
-    S.cfg = publicPart(res[0]); S.rows = [];
-    S.season = S.cfg.season === 'summer' ? 'summer' : 'winter';
-    if (S.cfg.testMode && qsSeason) S.season = qsSeason;   // ?season=summer preview while in TEST MODE
+  // Built-in config = what the live script's ?action=config returned on Oct 19 2026 (public fields only).
+  // The form renders from this INSTANTLY; the script's config is fetched in the background (4 s, no retry)
+  // and only re-renders if something that matters changed. If it is slow or fails, the defaults stay, silently.
+  var DEFAULT_CFG = { ok: true, testMode: false, season: 'winter', phone: '(613) 601-6471', adsBookingLabel: '7xVECNbm1I0dELK09-VC',
+    rules: {"standardMaxRim": 16, "lowMaxAspect": 40, "bigRimMin": 19, "bigRimLowMaxAspect": 45, "ultraLowMaxAspect": 30, "pickupLowMinRim": 22, "pickupLowMaxAspect": 50, "exoticMinRim": 22, "premiumBrands": ["Mercedes-Benz", "Mercedes", "BMW", "Audi", "Lexus", "Acura", "Genesis", "Volvo", "Tesla", "Infiniti", "Cadillac", "Lincoln", "Porsche", "Land Rover", "Jaguar", "Maserati", "Alfa Romeo"], "exoticMakes": ["Lamborghini", "Ferrari", "McLaren", "Bentley", "Rolls-Royce", "Rolls Royce", "Aston Martin", "Bugatti", "Koenigsegg", "Pagani", "Lotus"], "exoticModels": [["Audi", "R8"], ["Porsche", "911 GT"], ["Porsche", "911 Turbo"], ["Porsche", "GT2"], ["Porsche", "GT3"], ["Porsche", "GT4"], ["Nissan", "GT-R"], ["Nissan", "GTR"], ["Chevrolet", "Corvette Z06"], ["Chevrolet", "Corvette ZR1"], ["Dodge", "Viper"]]} };
+  function applyCfg(c) {
+    S.cfg = c;
+    S.season = c.season === 'summer' ? 'summer' : 'winter';
+    if (c.testMode && qsSeason) S.season = qsSeason;   // ?season=summer preview while in TEST MODE
     document.title = t('title') + ' | Mobile Tire Repair Ottawa';
-    if (S.season === 'summer') { var sn = document.getElementById('snow'); if (sn) sn.style.display = 'none'; }   // no snowfall in summer
-    render();
-  }).catch(function () { goFallback(); });
+    var sn = document.getElementById('snow'); if (sn) sn.style.display = S.season === 'summer' ? 'none' : '';   // no snowfall in summer
+  }
+  function cfgSig(c) { return JSON.stringify([c.season, !!c.testMode, c.rules || null, c.phone || '', c.adsBookingLabel || '']); }
+  applyCfg(publicPart(DEFAULT_CFG));
+  render();
+  S.cfgSource = 'default';
+  (API && API.indexOf('PASTE') < 0 ? callApi(API + '?action=config', { method: 'GET' }, 0, 4000, false) : Promise.reject(new Error('no_api'))).then(function (r) {
+    if (!r || !r.ok || !r.rules) { S.cfgSource = 'default (bad reply)'; return; }
+    var c = publicPart(r); if (!c.season) c.season = DEFAULT_CFG.season; if (!c.phone) c.phone = DEFAULT_CFG.phone;
+    var changed = cfgSig(c) !== cfgSig(S.cfg); S.cfgSource = changed ? 'script (changed)' : 'script (same)';
+    if (!changed) { S.cfg = c; return; }
+    var seasonBefore = S.season, testBefore = !!S.cfg.testMode;
+    applyCfg(c);
+    if (S.done) return;
+    if (S.season !== seasonBefore || !!c.testMode !== testBefore) {   // visible change: re-render, keeping everything typed / picked + focus + scroll
+      var y = window.scrollY; renderKeepFocus(); window.scrollTo(0, y);
+    } else if (S.veh.car) refreshStep1();   // rules changed (exotic list etc.): refresh the price part only
+  }).catch(function () { S.cfgSource = 'default (config unavailable)'; });
+  window.BK_JS_BUILD = '20261019fast2';   // must match the ?v= on the booking pages (stale-cache guard there)
   window.__bk = S; // for testing
 })();
