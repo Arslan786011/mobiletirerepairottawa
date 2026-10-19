@@ -59,6 +59,12 @@ window.SWAP_PRICES = {
   // (never both). ASAP still adds on top. Visit time = the time they book (ASAP) or the "Preferred time" they pick.
   afterHours: { fee: 100, start: '20:00', end: '08:00' },
 
+  // VISIT SLOTS for Today / Tomorrow / a picked date: 1-hour windows starting every `minutes` from `first` to `last`
+  // (Ottawa time). 10:30 AM, 11:30 AM ... 10:30 PM (= 10:30-11:30 PM). Nothing earlier or overnight; ASAP / Now is 24/7.
+  // After-hours goes by the slot START (8:30, 9:30, 10:30 PM pay it; 7:30 PM doesn't). Keep SLOT_FIRST / SLOT_LAST in the script the same.
+  slots: { first: '10:30', last: '22:30', minutes: 60 },
+
+
   // VEHICLE TYPE IS SET AUTOMATICALLY (owner, Oct 19): customers can't pick it. Make & model are required; the tire
   // size is optional. Highest tier wins (small < SUV < low-profile < pickup), and a pickup ALWAYS stays at the pickup
   // price, even on low-profile tires.

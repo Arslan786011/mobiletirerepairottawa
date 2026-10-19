@@ -68,11 +68,8 @@
       yearTrim: 'Year / trim (optional)', yearPh: 'Year', trimPh: 'Trim, e.g. LE',
       svcQ: 'Service', send: '✅ Book my appointment', needCar: 'Please enter your car\'s make and model, e.g. Toyota RAV4.',
       needArea: 'Please enter your city or neighbourhood.',       callBtn: '📞 Call (613) 601-6471',
-      pTitle: 'Your price', pBefore: 'before tax', pType: 'Vehicle type',
-      pTierLow: 'Low-profile tires detected — {V}', pTierIs: '{T} detected — {V}', pTierAs: 'Priced as {T} — {V}',
-      pTierNote: 'Set automatically from your vehicle (and tire size, if you gave it).',
+      pTitle: 'Your price', pBefore: 'before tax',
       pNoTier: "Enter your car's make & model above to see your price.", pSvc: 'Winter tire swap',
-      pLow: 'Low-profile and run-flat tires take more time and care to mount, so they cost more.',
       pRimsQ: 'Are your winter tires already on rims?', rYes: 'Yes', rNo: 'No', rUnsure: 'Not sure',
       rimsYes: 'tires already on rims', rimsNo: 'tires not on rims (mount & balance)', rimsUnsure: 'not sure if on rims',
       pRimsHint: 'On rims = each winter tire is already mounted on its own wheel, so we just swap the wheels.',
@@ -88,7 +85,7 @@
       pAsap: '⚡ ASAP: we send the next available tech now (same-day / ASAP urgency +{F} included).', pSameDay: '⚡ Same-day visit: same-day / ASAP urgency +{F} included.',
       pVisitFirst: 'Pick "When should we come?" above. ASAP and same-day visits add the urgency fee; visits from 8 PM to 8 AM use the after-hours service call.',
       vQ: 'When should we come?', vAsapBtn: '⚡ ASAP / Now', vToday: 'Today', vTomorrow: 'Tomorrow', vPick: 'Pick a date', vChoice: 'Visit day',
-      vTime: 'Visit time (1-hour window)', vPickHour: 'Choose a time…', vDate: 'Visit date', vHint: 'We come 24/7. Pick the 1-hour window that suits you.',
+      vTime: 'Visit time (1-hour window)', vPickHour: 'Choose a time…', vDate: 'Visit date', vHint: 'Pick the 1-hour window that suits you. Need us right now? Choose ⚡ ASAP / Now (24/7).',
       vAsap: '⚡ ASAP: we send the next available tech now. No time to pick.', vNoneLeft: 'No visit times left today. Choose ASAP / Now or Tomorrow.',
       vNeed: 'Please choose when we should come: ASAP / Now, Today, Tomorrow or a date.', vNeedDate: 'Please pick the visit date.', vNeedHour: 'Please pick a visit time.',
       vPast: 'That time has already passed. Please pick a later time.', vChosen: 'Your visit:',
@@ -159,11 +156,8 @@
       yearTrim: 'Année / version (facultatif)', yearPh: 'Année', trimPh: 'Version, ex. LE',
       svcQ: 'Service', send: '✅ Réserver mon rendez-vous', needCar: 'Entrez la marque et le modèle du véhicule, ex. Toyota RAV4.',
       needArea: 'Entrez votre ville ou quartier.',       callBtn: '📞 Appeler (613) 601-6471 (en anglais)',
-      pTitle: 'Votre prix', pBefore: 'avant taxes', pType: 'Type de véhicule',
-      pTierLow: 'Pneus à profil bas détectés — {V}', pTierIs: 'Type détecté : {T} — {V}', pTierAs: 'Prix pour : {T} — {V}',
-      pTierNote: 'Choisi automatiquement selon votre véhicule (et la taille des pneus, si vous l\'avez donnée).',
+      pTitle: 'Votre prix', pBefore: 'avant taxes',
       pNoTier: 'Entrez la marque et le modèle du véhicule ci-dessus pour voir votre prix.', pSvc: "Changement de pneus d'hiver",
-      pLow: 'Les pneus à profil bas ou à affaissement limité demandent plus de temps et de soin au montage, donc ils coûtent plus cher.',
       pRimsQ: "Vos pneus d'hiver sont-ils déjà sur des jantes?", rYes: 'Oui', rNo: 'Non', rUnsure: 'Je ne sais pas',
       rimsYes: 'pneus déjà sur jantes', rimsNo: 'pneus pas sur jantes (montage et équilibrage)', rimsUnsure: 'pas sûr pour les jantes',
       pRimsHint: "Sur jantes = chaque pneu d'hiver est déjà monté sur sa propre roue; on change seulement les roues.",
@@ -179,7 +173,7 @@
       pAsap: '⚡ Service rapide : on envoie le prochain technicien libre, maintenant (urgence même jour / service rapide +{F} incluse).', pSameDay: '⚡ Visite le jour même : urgence même jour / service rapide +{F} incluse.',
       pVisitFirst: "Choisissez « Quand voulez-vous la visite? » plus haut. Le service rapide et les visites le jour même ajoutent les frais d'urgence; de 20 h à 8 h, ce sont les frais de déplacement en dehors des heures.",
       vQ: 'Quand voulez-vous la visite?', vAsapBtn: '⚡ Dès que possible / maintenant', vToday: "Aujourd'hui", vTomorrow: 'Demain', vPick: 'Choisir une date', vChoice: 'Jour de la visite',
-      vTime: "Heure de la visite (plage d'une heure)", vPickHour: 'Choisir une heure…', vDate: 'Date de la visite', vHint: "On se déplace 24 h/24, 7 j/7. Choisissez la plage d'une heure qui vous convient.",
+      vTime: "Heure de la visite (plage d'une heure)", vPickHour: 'Choisir une heure…', vDate: 'Date de la visite', vHint: "Choisissez la plage d'une heure qui vous convient. Besoin de nous tout de suite? Choisissez ⚡ Dès que possible (24 h/24).",
       vAsap: "⚡ Service rapide : on envoie le prochain technicien libre, maintenant. Pas d'heure à choisir.", vNoneLeft: "Plus de plages libres aujourd'hui. Choisissez « Dès que possible » ou Demain.",
       vNeed: 'Choisissez quand on doit venir : dès que possible, aujourd’hui, demain ou une date.', vNeedDate: 'Choisissez la date de la visite.', vNeedHour: "Choisissez l'heure de la visite.",
       vPast: "Cette heure est déjà passée. Choisissez une heure plus tard.", vChosen: 'Votre visite :',
@@ -393,12 +387,16 @@
   }
   function asapOn() { return S.visitDay === 'asap' && asapOpen(); }
   // ---- visit day/time the customer picks ("When should we come?", REQUIRED). Day resolved in Ottawa time at form time.
-  //      ASAP / Now: no hour. Today / Tomorrow / a date: a one-hour visit slot is required (24/7: 12 AM to 11 PM).
+  //      ASAP / Now: no hour. Today / Tomorrow / a date: a one-hour visit slot is required (prices.js slots: 10:30 AM ... 10:30 PM; ASAP is 24/7).
   function torToday() { return torParts(Date.now()).day; }
   function visitDateIso() { var d = torToday(); return S.visitDay === 'today' ? d : S.visitDay === 'tomorrow' ? wall(d, 0, 0, 1440).day : S.visitDay === 'date' ? S.visitDate : ''; }
-  function hoursFor(day) {   // 'HH:00' slots still open on that day; today = only hours after the current Ottawa hour
-    var out = [], nowH = day && day === torToday() ? torParts(Date.now()).hh : -1;
-    for (var h = nowH + 1; h < 24; h++) out.push(pad2(h) + ':00');
+  function hm2min(hm) { return +hm.slice(0, 2) * 60 + +hm.slice(3, 5); }
+  function min2hm(m) { m = ((m % 1440) + 1440) % 1440; return pad2(Math.floor(m / 60)) + ':' + pad2(m % 60); }
+  function hoursFor(day) {   // 1-hour slot starts ('HH:MM') still bookable that day: prices.js slots (10:30 AM ... 10:30 PM);
+    var c = (PR && PR.slots) || {}, first = hm2min(c.first || '10:30'), last = hm2min(c.last || '22:30'), step = +c.minutes || 60;
+    var out = [], now = -1;                     // today = only slots that have not started yet (Ottawa time)
+    if (day && day === torToday()) { var tp = torParts(Date.now()); now = tp.hh * 60 + tp.mm; }
+    for (var m = first; m <= last; m += step) if (m > now) out.push(min2hm(m));
     return out;
   }
   function isTaken(day, hm) { return (S.taken[day] || []).indexOf(hm) >= 0; }
@@ -410,9 +408,9 @@
     if (!day || (!force && S.slotState[day])) return;
     S.slotState[day] = 'loading';
     var url = API && API.indexOf('PASTE') < 0 ? API + '?action=slots&date=' + encodeURIComponent(day) : '';
-    (url ? callApi(url, { method: 'GET' }, 0, 6000, false) : Promise.reject(new Error('no_api'))).then(function (r) {
+    (url ? callApi(url, { method: 'GET' }, 0, 4000, false) : Promise.reject(new Error('no_api'))).then(function (r) {
       if (r && r.ok && Array.isArray(r.busy)) {
-        S.taken[day] = uniq((S.taken[day] || []).concat(r.busy.filter(function (h) { return /^\d{2}:00$/.test(h); })));
+        S.taken[day] = uniq((S.taken[day] || []).concat(r.busy.filter(function (h) { return /^\d{2}:\d{2}$/.test(h); })));
         S.slotState[day] = 'ok';
       } else S.slotState[day] = 'down';
     }).catch(function () { S.slotState[day] = 'down'; }).then(function () {
@@ -497,11 +495,6 @@
       '<div class="bk-toggle"><button type="button" data-act="tires" data-v="4" class="' + (S.tires === 4 ? 'sel' : '') + '">' + t('t4') + '</button>' +
       '<button type="button" data-act="tires" data-v="2" class="' + (S.tires === 2 ? 'sel' : '') + '">' + t('t2') + '</button></div>';
   }
-  function tierLine(q) {   // read-only, e.g. "Low-profile tires detected — Toyota Supra 295/35R20"
-    var p = parseSize(S.veh.typed), veh = [S.veh.oYear, S.veh.car, S.veh.oTrim].filter(Boolean).join(' ') + (p ? ' ' + p.text : '');
-    var k = !q.auto.recognized && q.tier === q.auto.base ? 'pTierAs' : q.tier === 'low' ? 'pTierLow' : 'pTierIs';
-    return t(k).replace('{T}', tierLabel(q.tier)).replace('{V}', veh);
-  }
   function areaSelect(q) {
     var o = '<option value="">' + esc(t('pAreaPick')) + '</option>';
     (PR.serviceCall || []).slice().sort(function (a, b) { return a.fee - b.fee; }).forEach(function (g) {
@@ -514,11 +507,10 @@
   }
   function priceHtml() {
     var q = priceInfo(); if (!q || q.exotic) return '';
-    var h = '<div class="bk-price" id="bk-price"><div class="bk-price-h">💲 ' + t('pTitle') + '</div>' +
-      '<div class="bk-label">' + t('pType') + '</div>' +
-      (q.none ? '<p class="bk-tier-note" id="bk-tier-note">' + esc(t('pNoTier')) + '</p>' :
-        '<p class="bk-tier-auto" id="bk-tier-auto" data-tier="' + q.tier + '"><b>✓ ' + esc(tierLine(q)) + '</b></p>' +
-        '<p class="bk-tier-note" id="bk-tier-note">' + esc(t('pTierNote')) + '</p>') +
+    var h = '<div class="bk-price" id="bk-price"' + (q.none ? '' : ' data-tier="' + q.tier + '"') + '><div class="bk-price-h">💲 ' + t('pTitle') + '</div>' +
+      // the vehicle type is worked out automatically (autoTier) and only goes to staff (payload tier + tierReason);
+      // the customer just sees the total
+      (q.none ? '<p class="bk-tier-note" id="bk-tier-note">' + esc(t('pNoTier')) + '</p>' : '') +
       '<div class="bk-label" id="bk-rims-l">' + t('pRimsQ') + ' <span class="bk-req">*</span></div>' +
       '<div class="bk-ct-grid three bk-rims" role="group" aria-labelledby="bk-rims-l">' +
         [['yes', 'rYes'], ['no', 'rNo'], ['unsure', 'rUnsure']].map(function (r) {
@@ -534,13 +526,12 @@
       (q.urg === 'same-day' ? '<p class="bk-price-note bk-sameday" id="bk-sameday">' + esc(t('pSameDay').replace('{F}', money(q.asapFee))) + '</p>' : '') +
       (q.after ? '<p class="bk-price-note bk-after" id="bk-after">' + esc(t('pAfter').replace('{W}', q.visit.shown).replace('{F}', money(q.fee))) + '</p>' : '') +
       (q.rims === 'unsure' ? '<p class="bk-price-note">' + t('pUnsureNote') + '</p>' : '') +
-      (q.low ? '<p class="bk-price-note">' + t('pLow') + '</p>' : '') +
       (q.fee === null ? '<p class="bk-price-note">' + t('pAreaOtherNote') + '</p>' : '') +
       '<div class="bk-total" id="bk-total"><div class="bk-total-l">' + t('pTotalT') + '</div>' +
         '<div class="bk-price-amt" id="bk-price-amt" aria-live="polite">' + esc(shown) + '</div>' +
         (q.fee || q.disc || q.asapFee ? '<div class="bk-price-break" id="bk-price-break">' + esc(breakdown(q, S.lang)) + '</div>' : '') +
         (q.disc ? '<div class="bk-offer-on" id="bk-offer-on">' + esc(offerFill(t('pOfferOn' + offerKey(q)).replace('{D}', money(q.disc)), q)) + '</div>' : '') +
-        '<div class="bk-price-svc">' + t('pSvc') + ' · ' + esc(tierLabel(q.tier)) + ' · ' + esc(rimsWord(q, S.lang)) + '</div>' +
+        '<div class="bk-price-svc">' + t('pSvc') + ' · ' + esc(rimsWord(q, S.lang)) + '</div>' +
         (q.fee === null ? '<div class="bk-price-svc">' + esc(t('pAreaOtherShort')) + '</div>' : '') +
         '<p class="bk-price-note">' + t('pPlusTax') + '</p></div></div>';
   }
@@ -683,8 +674,8 @@
   function ctBtn(act, v, label, on, dis) {
     return '<button type="button" class="bk-ct' + (on ? ' sel' : '') + '" id="bk-' + act + '-' + v + '" data-act="' + act + '" data-v="' + v + '" aria-pressed="' + (on ? 'true' : 'false') + '"' + (dis ? ' aria-disabled="true"' : '') + '>' + esc(label) + '</button>';
   }
-  function hourWord(hm, lang) { var h = +hm.slice(0, 2); return (lang || S.lang) === 'fr' ? h + ' h' : ((h % 12) || 12) + ':00 ' + (h < 12 ? 'AM' : 'PM'); }
-  function slotWord(hm, lang) { var e = pad2((+hm.slice(0, 2) + 1) % 24) + ':00'; return hourWord(hm, lang) + ' – ' + hourWord(e, lang); }   // "9:00 PM – 10:00 PM" / "21 h – 22 h"
+  function hourWord(hm, lang) { var h = +hm.slice(0, 2), m = hm.slice(3, 5); return (lang || S.lang) === 'fr' ? h + ' h' + (m !== '00' ? ' ' + m : '') : ((h % 12) || 12) + ':' + m + ' ' + (h < 12 ? 'AM' : 'PM'); }
+  function slotWord(hm, lang) { var e = min2hm(hm2min(hm) + ((PR && PR.slots && +PR.slots.minutes) || 60)); return hourWord(hm, lang) + ' – ' + hourWord(e, lang); }   // "8:30 PM – 9:30 PM" / "20 h 30 – 21 h 30"
   // The visit the customer asked for, as text. lang 'en' = for staff (alert emails read the same for EN and FR customers).
   function visitWhen(lang) {
     var L = T[lang || S.lang] || T.en;
@@ -784,10 +775,10 @@
   function calInfo(q, now) {
     var tp = torParts(now), start, asap = asapOn(), vd = visitDateIso();
     if (asap) start = wall(tp.day, tp.hh, 0, Math.ceil(tp.mm / 15) * 15);   // ASAP: now, rounded up to the next 15 minutes (same as the staff calendar event)
-    else if (S.visitTime && vd) start = { day: vd, hh: +S.visitTime.slice(0, 2), mm: 0 };
+    else if (S.visitTime && vd) start = { day: vd, hh: +S.visitTime.slice(0, 2), mm: +S.visitTime.slice(3, 5) };
     else start = wall(tp.day, tp.hh, 0, 60);   // not reachable (a visit choice is required); next full hour
     var end = wall(start.day, start.hh, start.mm, 60), L = T[S.lang] || T.en;
-    var total = q ? (q.fee || q.disc || q.asapFee ? breakdown(q, S.lang) : priceText(q, S.lang)) + ' (' + tierLabel(q.tier) + ', ' + rimsWord(q, S.lang) + ')' : L.calNoPrice;
+    var total = q ? (q.fee || q.disc || q.asapFee ? breakdown(q, S.lang) : priceText(q, S.lang)) + ' (' + rimsWord(q, S.lang) + ')' : L.calNoPrice;
     if (q && q.fee === null) total += ' · ' + L.pAreaOtherShort;
     return { asap: asap, start: start, end: end, title: asap ? L.calTAsap : L.calT, address: areaLabel() || S.area || S.addrText || '',
              desc: [asap ? L.calReqAsap : L.calReq + ': ' + visitWhen(S.lang), L.calAddr + ': ' + (areaLabel() || S.area || S.addrText || '—'), L.calTotal + ': ' + (q ? total : L.calNoPrice), L.calQ + ' ' + PHONE_SHOWN + '. Mobile Tire Repair Ottawa'] };
@@ -1059,6 +1050,9 @@
           S.visitTime = ''; S.visitErr = t('vTaken'); S.bookErr = t('vTaken'); S.bookErrVisit = true; render();
           var vt = document.getElementById('bk-visit-time'); if (vt) { vt.focus(); if (vt.scrollIntoView) vt.scrollIntoView({ block: 'center' }); }
           loadSlots(td, true); return;
+        }
+        if (r.error === 'slot_invalid') {   // the script refused the time (not a bookable slot, or it already started)
+          S.visitTime = ''; S.visitErr = t('vPast'); S.bookErr = t('vPast'); S.bookErrVisit = true; return render();
         }
         if (r.error === 'offer_invalid') { S.offer = null; lsSet('bk_offer', 'null'); S.bookErr = t('offerGone'); return render(); }
         if (r.error === 'price_changed') { S.bookErr = t('priceChanged'); return render(); }
