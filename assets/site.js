@@ -104,7 +104,8 @@ document.addEventListener('click', function(e){
 });
 
 // Winter popup: a simple choice, "✅ Book online" (a plain link to /book-tire-swap/) or "📞 Call".
-// Opens on tap only (data-open-promo). No form: nothing is sent to the script from here.
+// Opens on tap only (data-open-promo). No form: nothing is sent to the script from here. Book online deep-links
+// straight into the full instant booking form (day/time, address, phone, total); there is no call-back path.
 (function(){
   const promo = document.getElementById('promo');
   if (!promo) return;
@@ -122,6 +123,7 @@ document.addEventListener('click', function(e){
     document.body.style.overflow = '';
     setTimeout(() => { promo.hidden = true; }, 350);
     if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+    document.dispatchEvent(new CustomEvent('mtro:promo-closed'));   // assets/offer.js: the one-time exit offer comes first (once)
   }
   window.openWinterPromo = open;
   document.getElementById('promo-close').addEventListener('click', close);
@@ -204,4 +206,15 @@ document.addEventListener('click', function(e){
     if (running){ last = performance.now(); requestAnimationFrame(tick); }
   });
   requestAnimationFrame(tick);
+})();
+
+// One-time exit offer on every page (assets/offer.js). The booking form loads it itself; everywhere else it is added
+// after the page has loaded and gone idle, so it never slows the first paint.
+(function(){
+  function add(){
+    if (document.querySelector('script[src*="/assets/offer.js"]')) return;
+    var s = document.createElement('script'); s.src = '/assets/offer.js?v=20261019flow'; s.async = true; document.body.appendChild(s);
+  }
+  function idle(){ ('requestIdleCallback' in window) ? requestIdleCallback(add, {timeout: 1500}) : setTimeout(add, 200); }
+  if (document.readyState === 'complete') idle(); else addEventListener('load', idle);
 })();

@@ -10,7 +10,7 @@
  *              Set to 0 to never offer it for that case.
  * ============================================================================================ */
 window.SWAP_PRICES = {
-  build: '20261019fast2',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
+  build: '20261019flow',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
   tiers: {
     small:  { off: 160, on: 120, discount: { off: 15, on: 10 }, en: 'Small car', fr: 'Petite voiture',
               egEn: 'e.g. Chevy Spark, Hyundai Accent', egFr: 'ex. Chevy Spark, Hyundai Accent' },
@@ -47,7 +47,17 @@ window.SWAP_PRICES = {
   //   2) else there is a same-day / ASAP urgency fee:        min(urgency fee, total - floor) off  -> "we'll waive the rush fee"
   //   3) else: the tier's flat discount above ($15 off rims / "Not sure", $10 on rims), also capped at total - floor.
   //   NEVER below the floor: if the discount would be $0 or less (total already at/below the floor), no exit popup at all.
-  exitOffer: { floor: 175 },
+  //   ONE offer per visitor, shared with the sitewide exit offer (assets/offer.js): a visitor who took it outside the form
+  //   arrives here with ?offer=<token> (and 'bk_swap_offer' saved), and the form applies it with the rule above.
+  //   Outside the form the offer is words only ("we'll waive your service call fee"): no dollar amounts there.
+  exitOffer: {
+    floor: 175,
+    token: 'exit1',
+    // SECOND TIER ("discount on discount"): OFF. To turn it on later: enabled: true (and set EXIT_OFFER_SECOND_MAX in the
+    // script to the largest extra, so its price check agrees). Booking form only: shown ONCE more to a visitor who already
+    // took the first offer and is leaving again; `extra` dollars on top (off rims / "Not sure" vs on rims), never below the floor.
+    second: { enabled: false, extra: { off: 10, on: 5 } }
+  },
 
   // SAME-DAY / ASAP URGENCY: added to the total as its own line when the customer ticks ASAP (next available tech)
   // OR picks a visit date that is today (Ottawa time). Stacks on top of the service call (area or after-hours).
