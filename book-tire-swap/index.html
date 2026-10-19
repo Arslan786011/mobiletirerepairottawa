@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <link rel="preload" href="/assets/fonts/barlow-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="/assets/fonts/orbitron-latin-var.woff2" as="font" type="font/woff2" crossorigin/>
-<link rel="stylesheet" href="/assets/site.css?v=20261016popup"/>
+<link rel="stylesheet" href="/assets/site.css?v=20261018callonly"/>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -37,7 +37,7 @@
 <link rel="alternate" hreflang="en-CA" href="https://mobiletirerepairottawa.ca/book-tire-swap/"/>
 <link rel="alternate" hreflang="fr-CA" href="https://mobiletirerepairottawa.ca/fr/reserver-changement-pneus/"/>
 <link rel="alternate" hreflang="x-default" href="https://mobiletirerepairottawa.ca/book-tire-swap/"/>
-<link rel="stylesheet" href="/book-tire-swap/booking.css?v=20261013whitecard"/>
+<link rel="stylesheet" href="/book-tire-swap/booking.css?v=20261019a"/>
 </head>
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
@@ -78,7 +78,6 @@
       <a href="/#reviews">Reviews</a>
     </div>
     <div class="nav-cta">
-      <a href="sms:+16136016471" class="btn-nav-call btn-nav-text">💬 Text<span class="nav-long"> for Quote</span></a>
       <a href="tel:+16136016471" class="btn-nav-call btn-nav-callnow">📞 Call<span class="nav-long"> Now</span></a>
     </div>
   </div>
@@ -86,7 +85,7 @@
 
 
 <main class="bk-wrap">
-  <div id="bk" aria-live="polite"><noscript>Please text us your booking: (613) 601-6471</noscript></div>
+  <div id="bk" aria-live="polite"><noscript>Please call us to book: <a href="tel:+16136016471">(613) 601-6471</a></noscript></div>
 </main>
 <!-- ============================================================
      FOOTER
@@ -143,19 +142,17 @@
      FLOATING BAR (mobile only)
 ============================================================ -->
 <div class="float-bar" aria-label="Quick contact bar">
-  <div class="float-bar-inner">
-    <a href="sms:+16136016471" class="float-btn float-btn-text">
-      💬 Text Quote
-    </a>
+  <div class="float-bar-inner call-only">
     <a href="tel:+16136016471" class="float-btn float-btn-emergency">
       📞 Call Now
     </a>
   </div>
 </div>
 
-<script src="/assets/site.js?v=20261016popup"></script>
-<script src="/book-tire-swap/api.js"></script>
-<script src="/book-tire-swap/booking.js?v=20261016nocfgprice"></script>
-<script src="/assets/offer.js?v=20261016"></script>
+<script src="/assets/site.js?v=20261018callonly"></script>
+<script src="/book-tire-swap/api.js?v=20261018"></script>
+<script src="/book-tire-swap/prices.js?v=20261019a"></script>
+<script src="/book-tire-swap/booking.js?v=20261019a"></script>
+<script src="/assets/offer.js?v=20261018asap"></script>
 </body>
 </html>

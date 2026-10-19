@@ -1,7 +1,6 @@
 /* ===== Tracking: paste your codes here (Google Ads + Google Analytics + Microsoft Clarity) ===== */
 window.TRACKING = {
   ADS_ID:     'AW-17930508850',        // Google Ads ID
-  TEXT_LABEL: 'UQ_YCJyZ9ocdELK09-VC',  // label for the "Text click" conversion
   CALL_LABEL: 'oYTACJmZ9ocdELK09-VC',  // label for the "Call click" conversion
   BOOKING_LABEL: '7xVECNbm1I0dELK09-VC', // "Online booking" conversion (winter popup request; same label the booking page uses)
   GA4_ID:     'G-T2F1ZE53Q8',          // Google Analytics 4 measurement ID
@@ -13,7 +12,7 @@ window.TRACKING = {
   // Speed: the gtag.js and Clarity files (~350 KB) download after the page has shown,
   // on the visitor's first tap/scroll/key, or once the page is idle, whichever comes first.
   // gtag() and clarity() calls made before that are queued and sent when the files arrive,
-  // so page views and the Call/Text conversions are still recorded.
+  // so page views and the Call conversions are still recorded.
   var first = ok(T.GA4_ID) ? T.GA4_ID : (ok(T.ADS_ID) ? T.ADS_ID : null);
   if (first) {
     window.dataLayer = window.dataLayer || [];
@@ -90,20 +89,18 @@ const scrollObs = new IntersectionObserver((entries) => {
 }, { rootMargin: '-40% 0px -50% 0px' });
 sections.forEach(s => scrollObs.observe(s));
 
-// Conversion tracking: fires on every Text (sms:) and Call (tel:) button
+// Conversion tracking: fires on every Call (tel:) button. (The site has no text/SMS buttons.)
 window.trackConversion = function(kind){
-  if (typeof window.gtag !== 'function') return;
+  if (kind !== 'call' || typeof window.gtag !== 'function') return;
   if (window.loadTrackingNow) window.loadTrackingNow();   // make sure gtag.js is on its way
   var T = window.TRACKING;
   var ok = function(v){ return v && v.indexOf('XXXX') === -1; };
-  if (ok(T.GA4_ID)) gtag('event', kind === 'call' ? 'call_click' : 'text_click', { page_path: location.pathname });
-  var label = kind === 'call' ? T.CALL_LABEL : T.TEXT_LABEL;
-  if (ok(T.ADS_ID) && ok(label)) gtag('event', 'conversion', { send_to: T.ADS_ID + '/' + label });
+  if (ok(T.GA4_ID)) gtag('event', 'call_click', { page_path: location.pathname });
+  if (ok(T.ADS_ID) && ok(T.CALL_LABEL)) gtag('event', 'conversion', { send_to: T.ADS_ID + '/' + T.CALL_LABEL });
 };
 document.addEventListener('click', function(e){
-  var link = e.target.closest('a[href^="sms:"], a[href^="tel:"]');
-  if (!link) return;   // includes the "Book by Text" buttons and the popup's "Text Us Instead"
-  window.trackConversion(link.getAttribute('href').indexOf('tel:') === 0 ? 'call' : 'text');
+  var link = e.target.closest('a[href^="tel:"]');
+  if (link) window.trackConversion('call');
 });
 
 // Winter popup + short request form.
@@ -182,23 +179,9 @@ document.addEventListener('click', function(e){
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !promo.hidden) close(); });
 
   // Tap-to-open only (the popup never opens by itself: it used to cover the Call buttons).
-  // "Book by Text" buttons (data-book-winter) are plain sms: links: they open the text app and fire the Text click conversion.
   // "Request a Call Back" buttons (data-callback) open the call-back form.
   document.querySelectorAll('[data-open-promo]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); open(1); }));
   document.querySelectorAll('[data-callback]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); open(2); }));
-
-  // "Text Us Instead" in the form: opens the text app with whatever is already typed (Text click conversion fires
-  // from the sms: click handler above, with the original Text label).
-  const isApple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
-  $('promo-text-2').addEventListener('click', () => {
-    const v = id => $(id).value.trim(), t = callTime();
-    const lines = [v('f-name') ? 'Name: ' + v('f-name') : '', v('f-phone') ? 'Phone: ' + v('f-phone') : '',
-                   v('f-car') ? 'Vehicle / tire size: ' + v('f-car') : '', v('f-area') ? 'Area: ' + v('f-area') : '',
-                   t ? 'Best time to call: ' + t : ''].filter(Boolean);
-    const href = 'sms:+16136016471' + (lines.length ? (isApple ? '&' : '?') + 'body=' + encodeURIComponent(['WINTER SWAP BOOKING'].concat(lines).join('\n')) : '');
-    $('promo-text-2').setAttribute('href', href);
-    window.lastBookingText = href;
-  });
 
   // ---------------- "Best time to call" quick picks (same choices as the booking form; nothing picked by default)
   function callTime(){   // English text for the owner's alert
