@@ -59,17 +59,47 @@ window.SWAP_PRICES = {
   // (never both). ASAP still adds on top. Visit time = the time they book (ASAP) or the "Preferred time" they pick.
   afterHours: { fee: 100, start: '20:00', end: '08:00' },
 
-  // Tire size rule: aspect ratio (the "35" in 245/35R19) at or below this = low-profile tier.
-  lowProfileMaxAspect: 35,
+  // VISIT SLOTS for Today / Tomorrow / a picked date: 1-hour windows starting every `minutes` from `first` to `last`
+  // (Ottawa time). 10:30 AM, 11:30 AM ... 10:30 PM (= 10:30-11:30 PM). Nothing earlier or overnight; ASAP / Now is 24/7.
+  // After-hours goes by the slot START (8:30, 9:30, 10:30 PM pay it; 7:30 PM doesn't). Keep SLOT_FIRST / SLOT_LAST in the script the same.
+  slots: { first: '10:30', last: '22:30', minutes: 60 },
+
+
+  // VEHICLE TYPE IS SET AUTOMATICALLY (owner, Oct 19): customers can't pick it. Make & model are required; the tire
+  // size is optional. Highest tier wins (small < SUV < low-profile < pickup), and a pickup ALWAYS stays at the pickup
+  // price, even on low-profile tires.
+  //   Low-profile / run-flat tier when ANY of these is true:
+  //     - the make is in lowMakes (run-flat brands) or the make/model/trim text has a word in lowModels
+  //       (performance / run-flat models and trims: GT, AMG, M3, Type R, N, SRT, Scat Pack, TRD Pro, RS, S line…)
+  //     - a tire size is given with aspect ratio (the "35" in 295/35R20) at or below lowProfileMaxAspect,
+  //       or rim (the "20") at or above lowProfileMinRim inches. A size can only move the type UP, never down.
+  //   Make & model not in any list (e.g. "Lada Niva"): priced as unknownTier (SUV / crossover / minivan) and the
+  //   booking is flagged for staff: "Vehicle not recognized: confirm tire type on the call". Never blocked.
+  lowProfileMaxAspect: 40,
+  lowProfileMinRim: 19,
+  unknownTier: 'suv',
+  lowMakes: ['bmw', 'mini', 'porsche', 'mercedes-amg', 'maserati', 'alfa romeo'],
+  // A word or phrase, or [a, b] = all of them must be in the make/model/trim (lower case, whole words).
+  // Plain "Sport" is NOT here on purpose: it is an ordinary trim name on many cars (CR-V Sport, Corolla Sport, Mazda3 Sport).
+  lowModels: ['supra', 'gr supra', '86', 'gr86', 'gr 86', 'brz', 'fr-s', 'gr corolla', 'corvette', 'ss', 'zl1', 'camaro ss', 'mustang gt', 'gt', 'shelby', 'gt350', 'gt500', 'mach 1',
+              'srt', 'scat pack', 'hellcat', 'trackhawk', 'amg', 's3', 's4', 's5', 's6', 's7', 's8', 'sq5', 'sq7', 'sq8', 'rs', 'rs3', 'rs4', 'rs5', 'rs6', 'rs7', 'rs q8', 'rsq8', 'e-tron gt',
+              's-line', 's line', 'sline', 'm2', 'm3', 'm4', 'm5', 'm8', 'm sport', 'f sport', 'trd pro', 'nismo', 'type r', 'type s', 'si',
+              ['tesla', 'performance'], ['model 3', 'performance'], ['model y', 'performance'], 'gt-r', 'gtr', ['nissan', 'z'], '370z', '350z',
+              ['lexus', 'rc'], ['lexus', 'lc'], 'rc f', 'is f', 'g70', 'stinger', 'golf r', 'gti', 'wrx', 'sti', ['hyundai', 'n'], 'elantra n', 'veloster n', 'kona n', 'abarth'],
+  // Ordinary cars (small car price), listed so we know the vehicle.
+  smallModels: ['camry', 'accord', 'civic', 'corolla', 'elantra', 'sentra', 'altima', 'maxima', 'versa', 'micra', 'mazda3', 'mazda 3', 'mazda6', 'mazda 6', 'jetta', 'golf',
+                'passat', 'arteon', 'beetle', 'accent', 'spark', 'malibu', 'cruze', 'sonic', 'impala', 'volt', 'bolt', 'fusion', 'focus', 'fiesta', 'taurus', 'mustang', 'camaro',
+                'sonata', 'ioniq', 'veloster', 'optima', 'k5', 'forte', 'rio', 'soul', 'fit', 'insight', 'clarity', 'prius', 'yaris', 'avalon', 'impreza', 'legacy', 'mirage',
+                'lancer', 'charger', 'challenger', 'chrysler 300', 'dart', 'leaf', 'model 3', 'model s', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'c-class', 'e-class', 'cla', 'a-class',
+                'ilx', 'tlx', 'integra', 'lexus es', 'lexus is', 'g80', 'g90', 'q50', 'q60', 'ct4', 'ct5', 'ats', 'cts', 's60', 's90', 'v60', 'giulia', 'polestar 2', 'niro ev'],
 
   // Exit offer: shown at most once per visitor (remembered in this browser), only when the
   // booking form was started but not sent.
   exitOfferOncePerVisitor: true,
 
-  // Make/model words used to pick the tier automatically (lower case; matched as whole words).
-  // Anything not listed = small car. Customers can always change the tier on the form.
+  // Make/model words used to pick the tier automatically (lower case; matched as whole words). Customers can't change it.
   pickupModels: ['f-150', 'f150', 'f-250', 'f250', 'f-350', 'f350', 'silverado', 'sierra', 'ram', 'tundra', 'tacoma', 'ranger', 'colorado',
-                 'canyon', 'frontier', 'titan', 'ridgeline', 'gladiator', 'maverick', 'santa cruz', 'cybertruck', 'lightning', 'r1t', 'hilux'],
+                 'canyon', 'frontier', 'titan', 'ridgeline', 'gladiator', 'maverick', 'ram 1500', 'ram 2500', 'ram 3500', 'f-450', 'f450', 'santa cruz', 'cybertruck', 'lightning', 'r1t', 'hilux'],
   suvModels: ['cr-v', 'crv', 'hr-v', 'hrv', 'rav4', 'rav 4', 'rogue', 'murano', 'pathfinder', 'kicks', 'qashqai', 'armada', 'escape', 'edge', 'explorer', 'expedition',
               'bronco', 'equinox', 'traverse', 'blazer', 'trax', 'trailblazer', 'tahoe', 'suburban', 'terrain', 'acadia', 'yukon', 'envision', 'encore', 'enclave',
               'tucson', 'santa fe', 'kona', 'palisade', 'venue', 'ioniq 5', 'sportage', 'sorento', 'telluride', 'seltos', 'niro', 'ev6', 'ev9', 'carnival',
@@ -77,5 +107,5 @@ window.SWAP_PRICES = {
               'venza', 'corolla cross', 'sienna', 'pilot', 'passport', 'odyssey', 'compass', 'cherokee', 'grand cherokee', 'wrangler', 'durango', 'journey',
               'pacifica', 'grand caravan', 'caravan', 'atlas', 'tiguan', 'taos', 'id.4', 'outlander', 'rvr', 'eclipse cross', 'model x', 'model y', 'mach-e',
               'q3', 'q5', 'q7', 'q8', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'glc', 'gle', 'gla', 'glb', 'gls', 'rx', 'nx', 'ux', 'gx', 'rdx', 'mdx',
-              'xc40', 'xc60', 'xc90', 'macan', 'cayenne', 'escalade', 'xt4', 'xt5', 'xt6', 'navigator', 'aviator', 'nautilus', 'corsair', 'range rover', 'discovery', 'defender']
+              'xc40', 'xc60', 'xc90', 'macan', 'transit', 'transit connect', 'sprinter', 'promaster', 'express', 'savana', 'metris', 'nv200', 'quest', 'sedona', 'ioniq 9', 'cayenne', 'escalade', 'xt4', 'xt5', 'xt6', 'navigator', 'aviator', 'nautilus', 'corsair', 'range rover', 'discovery', 'defender']
 };

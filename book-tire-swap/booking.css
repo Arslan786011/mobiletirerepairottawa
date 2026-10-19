@@ -169,3 +169,22 @@
 .bk-done .bk-cal .bk-note{color:#33415c;margin:0 0 10px}
 .bk-done .bk-cal-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .bk-done .bk-cal-btns .bk-btn{margin:0;font-size:15px;padding:12px 8px;text-align:center}
+/* "When should we come?" (required): ASAP / Today / Tomorrow / Pick a date, then a one-hour slot */
+.bk-ct-grid.bk-visit-grid{grid-template-columns:1fr 1fr}
+.bk-visit .bk-select{margin-top:4px}
+.bk-visit .bk-visit-err:empty{display:none}
+.bk-visit .bk-visit-err{margin-top:10px;font-weight:700}
+.bk-wrap .bk-card .bk-calltime.bk-invalid{border-color:#c62828;background:#fff4f4;box-shadow:0 0 0 2px rgba(198,40,40,.25)}
+.bk-wrap .bk-card .bk-visit-asap{color:#0b1530;font-weight:700}
+.bk-select option:disabled{color:#9aa3b5}
+.bk-wrap .bk-card .bk-input[aria-invalid="true"]{border-color:#c62828;box-shadow:0 0 0 2px rgba(198,40,40,.25)}
+/* vehicle type, set automatically (read-only) */
+.bk-tier-auto{margin:6px 0 2px;padding:10px 12px;border-radius:10px;border:2px solid #1a9d5c;background:#ecfbf3;color:#0b1530;line-height:1.35}
+/* "You're booked!" */
+.bk-done .bk-title{font-size:28px;margin-bottom:12px}
+.bk-done .bk-sum>div{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid rgba(107,122,153,.25)}
+.bk-done .bk-sum>div>span:first-child{font-weight:700;flex:0 0 auto}
+.bk-done .bk-sum>div>span:last-child{text-align:right}
+.bk-done .bk-cal{margin-top:16px}
+.bk-done .bk-cal-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:480px){.bk-done .bk-cal-btns{grid-template-columns:1fr}.bk-done .bk-sum>div{flex-direction:column;gap:2px}.bk-done .bk-sum>div>span:last-child{text-align:left}}

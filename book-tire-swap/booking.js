@@ -14,182 +14,179 @@
   // ---------------------------------------------------------------- text (EN / FR)
   var T = {
     en: {
-      kicker: '❄ Winter swap booking', title: 'Book your winter tire swap', sub: "We come to your driveway. Send your request in 2 minutes and we'll call you.",
-      headline: 'Winter tire swaps · mounting & balancing included · we come to you. Your price is shown before you send.',
+      kicker: '❄ Winter swap booking', title: 'Book your winter tire swap', sub: 'We come to your driveway. Book in 2 minutes: pick your time, see your total, done.',
+      headline: 'Winter tire swaps · mounting & balancing included · we come to you. Your price is shown before you book.',
       test: '🧪 TEST MODE: bookings are marked TEST and emails go to the owner only',
       s1: 'Your vehicle', year: 'Year', make: 'Make', model: 'Model', trim: 'Trim', choose: 'Choose…', notSure: 'Not sure of trim (use most common)',
       notListed: "My vehicle isn't listed", backToList: '← Pick from the list', otherYear: 'Year', otherMake: 'Make', otherModel: 'Model',
       size: 'Tire size (optional)', sizePh: 'e.g. 225/65R17', sizeBad: 'That size doesn\'t look right. Example: 225/65R17',
       sizeTip: "Your tire size is on the sticker inside the driver's door, or on the side of the tire.",
       photo: 'Or upload a sidewall photo (optional)', photoOk: '✓ Photo uploaded', photoUp: 'Uploading photo…', photoErr: "Photo didn't upload. That's OK, you can skip it.",
-      otherNote: "Type your size, or leave it blank and we'll confirm by phone.",
-      next: 'Next →', back: '← Back',
+            next: 'Next →', back: '← Back',
       s2: 'What do you need?', off: 'Off rims: mount & balance', offD: 'Your tires need to be moved onto your rims and balanced.',
       on: 'On rims', onD: 'Your winter tires are already on their own rims. We swap the wheels.', howMany: 'How many tires?', t4: '4 tires', t2: '2 tires',
       s3: "Where's the car?", addr: 'Street address + city', addrPh: 'e.g. 123 Greenbank Rd, Nepean', check: 'Check address',
       z1: "✅ Good news, we cover your area.", z2: '✅ Good news, we cover your area.', z3: '✅ Good news, we cover your area.',
       z0: 'Outside our service area — call us.',
       multi: 'I have 2 or more cars at this address', multiWaived: 'Travel fee waived for 2+ cars',
-      multiNote: "Book one time window for all of them. We'll call you to confirm the other car(s).",
-      whyQ: 'Why does this cost more?',
+            whyQ: 'Why does this cost more?',
       whyA: 'Low-profile tires have short, very stiff sidewalls. They take more time and special equipment to mount without scratching or bending your rims, and many are run-flats with sensitive tire pressure sensors.',
       exT: 'This vehicle needs a custom quote — call us',
       exSub: "Exotic and high-performance tires need special handling, so we price them one by one. Leave your details and we'll get back to you fast.",
       exSend: 'Send my quote request', exDone: "✅ Got it! We'll call you with your quote.", exAddr: 'Address or area',
       zoneWord: 'zone',
       notFound: "We couldn't find that address. Add the city (e.g. Ottawa, Kanata, Gatineau) and try again.",
-      unchecked: "✅ Got it. We'll confirm your area by phone.",
-      s4: 'Pick a day and time', s4sub: 'Only open times are shown. Our tech arrives within your window and calls before coming.',
+            s4: 'Pick a day and time', s4sub: 'Only open times are shown. Our tech arrives within your window and calls before coming.',
       full: 'Full', open1: 'open', held: "✓ We're holding this time for 10 minutes while you finish.", taken: 'Sorry, that time was just taken. Pick another.',
       waitTitle: 'This day is full', waitSub: "Join the waitlist. If a time opens up, we'll call you first.", anyTime: 'Any time',
       joinWait: 'Join waitlist', waitDone: "✅ You're on the waitlist. We'll call you if a time opens.", otherDay: '← Pick another day',
       s5: 'How do we reach you?', name: 'Name', phone: 'Mobile phone', email: 'Email (optional, for your confirmation)', notes: 'Parking notes (optional)',
-      notesPh: 'Driveway, underground, visitor spot…', mayContact: 'We may contact you about this booking.',
-      phoneBad: 'Please enter a 10-digit phone number.', nameBad: 'Please enter your name.',
+      notesPh: 'Driveway, underground, visitor spot…',       phoneBad: 'Please enter a 10-digit phone number.', nameBad: 'Please enter your name.',
       s6: 'Check your details', when: 'When', service: 'Service', where: 'Where', vehicle: 'Vehicle', contact: 'Contact', tsize: 'Tire size',
-      sizeEst: 'estimated from vehicle', sizeCust: 'entered by you', sizeUnk: "we'll confirm by phone",
+      sizeEst: 'estimated from vehicle', sizeCust: 'entered by you', sizeUnk: 'not given',
       pay: 'Pay the tech when done: cash, card or e-transfer.',
-      confirm: '✓ Send my request', booking: 'Sending…',
-      priceChanged: 'Please review your request and confirm again.', offerGone: "That offer couldn't be applied (it may have expired or already been used). Call for a quote.",
+      booking: 'Booking…',
+      priceChanged: 'Please check your booking and tap Book again.', offerGone: "That offer couldn't be applied (it may have expired or already been used). Call for a quote.",
       limit: 'This phone number already has bookings today. Please call us.',
-      doneT: "You're booked!", doneR: 'Request received!', doneRsub: "We'll call you shortly to confirm the time.", bookingNo: 'Request #',
-      emailSent: 'A copy of your request is in your email.', change: 'Need us sooner? Call (613) 601-6471.', addCal: '📅 Add to my calendar', addIcs: 'Download calendar file (.ics)',
+      doneT: '🎉 You\'re booked!', doneR: '🎉 You\'re booked!', doneRsub: 'We\'ll call you if anything changes. Questions? Call (613) 601-6471', bookingNo: 'Booking #',
+      emailSent: 'A copy of your booking is in your email.', addCal: '📅 Add to my calendar', addIcs: 'Download calendar file (.ics)',
       testDone: '🧪 Test booking saved. Check the Winter Swaps calendar, your email and the WhatsApp groups.',
       fbTitle: 'Online booking is having trouble right now', fbSub: "No problem: call us and we'll book you in on the phone.",
-      fbBtn: '📞 Call (613) 601-6471', offerTitle: 'Call for a quote', offerSub: 'We will call you to confirm the time.', offerYes: 'Call for a quote', offerNo: 'No thanks',
+      fbBtn: '📞 Call (613) 601-6471', offerTitle: 'Call for a quote', offerYes: 'Call for a quote', offerNo: 'No thanks',
       offerBar: '', loading: 'Loading…', err: 'Something went wrong. Please try again.',
-      callPrice: "We'll call you shortly to confirm the time and give you your price.",
-      prevWeek: 'Previous week', nextWeek: 'Next week', pickDay: 'Pick a day above to see open times.',
+            prevWeek: 'Previous week', nextWeek: 'Next week', pickDay: 'Pick a day above to see open times.',
       fTitle: 'Your details', req: 'required',
       car: 'Car make & model or tire size — whichever you know', carHint: "Fill in one or both. Not sure? Make and model is enough.",
-      carMM: 'Make & model', carPh: 'e.g. Toyota RAV4', or: 'or', sizeOnly: 'Tire size', 
+      carMM: 'Car make & model', carPh: 'e.g. Toyota RAV4', or: 'or', sizeOnly: 'Tire size (optional)', sizeHint: "Find it on the tire's side, e.g. 225/65R17 — skip if you don't know.",
+      needModel: 'Please add the model too, e.g. Toyota RAV4.',
+      street: 'Street address (number + street)', streetPh: 'e.g. 123 Greenbank Rd', addrBad: 'Please enter your full street address with the house number, e.g. 123 Greenbank Rd.',
+      vBusy: 'booked', vChecking: 'Checking open times…', vTaken: 'That hour was just taken, please pick another.', vTakenSel: 'That hour is already booked. Please pick another.',
+      noTotal: "We couldn't show your total, so this can't be booked online. Please call (613) 601-6471.",
+      dWhen: 'When', dAsap: 'ASAP: the next available tech is on the way', dAddr: 'Address', dVeh: 'Vehicle', dTotal: 'Total',
       area: 'City or neighbourhood', areaPh: 'e.g. Kanata, Orleans, Gatineau',
       more: '+ More details (optional)', fAddr: 'Full street address (optional)', fAddrPh: 'e.g. 123 Greenbank Rd',
-      yearTrim: 'Year / trim (optional)', yearPh: 'Year', trimPh: 'Trim, e.g. LE', when2: 'Preferred time (optional)', anyT: 'Any time',
-      svcQ: 'Service', send: '✓ Send my request', needCar: "Please enter your car's make and model, or your tire size.",
-      needArea: 'Please enter your city or neighbourhood.', fNote: "We'll call you to confirm the time and give you your price. Pay the tech when done.",
-      ctQ: 'Best time to call you?', ctOpt: 'optional', ctDay: 'Which day?', ctToday: 'Today', ctTomorrow: 'Tomorrow', ctPick: 'Pick a date', ctDate: 'Date',
-      ctAsap: 'Now / ASAP', ctMorning: 'Morning (9–12)', ctAfternoon: 'Afternoon (12–5)', ctEvening: 'Evening (5–8)', ctChosen: 'We\'ll call:', ctClear: 'Clear',
-      callBtn: '📞 Call (613) 601-6471',
-      pTitle: 'Your price', pBefore: 'before tax', pType: 'Vehicle type',
-      pAutoSize: 'Picked from your tire size ({S}). Not right? Tap another type.', pAutoCar: 'Picked from your vehicle ({C}). Not right? Tap another type.',
-      pAutoRunflat: 'Picked because you have run-flat tires. Not right? Tap another type.', pPicked: 'You picked this type.',
-      pNoTier: "Enter your car or tire size above and we'll pick the type for you, or tap yours here.",
-      pRunflat: 'Run-flat tires', pSvc: 'Winter tire swap',
-      pLow: 'Low-profile and run-flat tires take more time and care to mount, so they cost more.',
+      yearTrim: 'Year / trim (optional)', yearPh: 'Year', trimPh: 'Trim, e.g. LE',
+      svcQ: 'Service', send: '✅ Book my appointment', needCar: 'Please enter your car\'s make and model, e.g. Toyota RAV4.',
+      needArea: 'Please enter your city or neighbourhood.',       callBtn: '📞 Call (613) 601-6471',
+      pTitle: 'Your price', pBefore: 'before tax',
+      pNoTier: "Enter your car's make & model above to see your price.", pSvc: 'Winter tire swap',
       pRimsQ: 'Are your winter tires already on rims?', rYes: 'Yes', rNo: 'No', rUnsure: 'Not sure',
       rimsYes: 'tires already on rims', rimsNo: 'tires not on rims (mount & balance)', rimsUnsure: 'not sure if on rims',
       pRimsHint: 'On rims = each winter tire is already mounted on its own wheel, so we just swap the wheels.',
-      pUnsureNote: "Not sure? We've used the off-rims price. We'll confirm on the call.",
+      pUnsureNote: 'Not sure? We\'ve used the off-rims price.',
       pNeedRims: 'Please tell us if your winter tires are already on rims.',
       pAreaEmpty: 'Add your city or neighbourhood above to see your total.',
       pAreaQ: "We couldn't tell the service call fee for \"{A}\". Pick the closest area:", pAreaPick: 'Choose…',
       pAreaNone: 'No service call fee', pAreaFee: '+{F} service call', pAreaOther: 'Other (not listed)',
-      pAreaOtherNote: "We'll confirm any service call fee for your area when we call.",
+      pAreaOtherNote: 'Your area isn\'t on our list, so any service call fee isn\'t in this total yet. We\'ll call you if it changes your total.',
       pNeedArea: 'Please pick the closest area to see your total.',
       bSwap: 'Swap', bFee: 'service call ({A})', bOffer: 'offer', bAsap: 'same-day / ASAP urgency', bAfter: 'after-hours service call',
-      pAfter: '🌙 After-hours visit ({W}): {F} service call instead of the area fee.', pAfterVisitAsap: 'ASAP, now {T}', pAfterVisitPref: 'preferred time {T}',
-      pAsap: '⚡ ASAP: send the next available tech now (same-day / ASAP urgency +{F}).', pSameDay: '⚡ Same-day visit: same-day / ASAP urgency +{F} included.',
-      vQ: 'When should we come?', vOpt: 'optional', vTime: 'Visit time', vAny: 'Any time (we set it on the call)', vAsap: '⚡ ASAP is ticked below: we come as soon as possible.', vDate: 'Visit date', pAsapOff: 'ASAP not available right now. Pick a time or call us.', rimsAsap: 'same-day / ASAP',
+      pAfter: '🌙 After-hours visit ({W}): {F} service call instead of the area fee.', pAfterVisitAsap: 'ASAP, now {T}',
+      pAsap: '⚡ ASAP: we send the next available tech now (same-day / ASAP urgency +{F} included).', pSameDay: '⚡ Same-day visit: same-day / ASAP urgency +{F} included.',
+      pVisitFirst: 'Pick "When should we come?" above. ASAP and same-day visits add the urgency fee; visits from 8 PM to 8 AM use the after-hours service call.',
+      vQ: 'When should we come?', vAsapBtn: '⚡ ASAP / Now', vToday: 'Today', vTomorrow: 'Tomorrow', vPick: 'Pick a date', vChoice: 'Visit day',
+      vTime: 'Visit time (1-hour window)', vPickHour: 'Choose a time…', vDate: 'Visit date', vHint: 'Pick the 1-hour window that suits you. Need us right now? Choose ⚡ ASAP / Now (24/7).',
+      vAsap: '⚡ ASAP: we send the next available tech now. No time to pick.', vNoneLeft: 'No visit times left today. Choose ASAP / Now or Tomorrow.',
+      vNeed: 'Please choose when we should come: ASAP / Now, Today, Tomorrow or a date.', vNeedDate: 'Please pick the visit date.', vNeedHour: 'Please pick a visit time.',
+      vPast: 'That time has already passed. Please pick a later time.', vChosen: 'Your visit:',
+      pAsapOff: 'ASAP not available right now. Pick a time or call us.', rimsAsap: 'same-day / ASAP',
       pOfferOn: '🏷️ {D} off applied.', pOfferOnFees: '🏷️ {NC} waived ({D} off).', pOfferOnFeesPart: '🏷️ {D} off {X} applied.', oSvc: 'your service call', oSvcN: 'service call', oSvcMy: 'my service call', oUrg: 'the rush fee', oUrgN: 'rush fee', oUrgMy: 'my rush fee', pPlusTax: 'Plus tax. Pay the tech when the job is done.',
-      pAccept: 'I accept this total: {P} ({TIER}, {RIMS}).', pAreaOtherShort: 'Service call fee: we confirm it on the call.',
-      pNeedTier: 'Please pick your vehicle type to see your price.',
-      xoT: 'Finish booking now: {D} off', xoS: 'One time only: send your request now and pay {P} instead of {F}, before tax.',
+      pAccept: 'I accept this total: {P} ({TIER}, {RIMS}).', pAreaOtherShort: 'Service call fee for your area: not included yet.',
+      xoT: 'Finish booking now: {D} off', xoS: 'One time only: book now and pay {P} instead of {F}, before tax.',
       xoYes: 'Take {D} off', xoNo: 'No thanks',
       xoTFees: "Book now and we'll waive {X}", xoYesFees: 'Waive {Y}', xoTFeesPart: 'Book now: {D} off {X}', xoYesFeesPart: 'Take {D} off',
       pTotalT: 'Your total',
-      calT: 'Mobile Tire Repair Ottawa: tire swap', calTAsap: 'Mobile Tire Repair Ottawa: tire swap (ASAP)', calReq: "Requested time: we'll call to confirm",
-      calAddr: 'Address', calTotal: 'Total', calNoPrice: "Price: we'll confirm it on the call", calQ: 'Questions? Call', calReqNo: 'Request #',
-      calH: '📅 Add to my calendar', calWhen: 'Saved as {W} (1 hour). Requested time: we\'ll call to confirm.', calWhenGuess: 'Saved as {W} (1 hour), around your best time to call. The visit time is set on the call.',
+      calT: 'Mobile Tire Repair Ottawa: tire swap', calTAsap: 'Mobile Tire Repair Ottawa: tire swap (ASAP)', calReq: 'Booked', calReqAsap: 'Booked: ASAP, next available tech',
+      calAddr: 'Address', calTotal: 'Total', calNoPrice: 'Price: pay the tech when done', calQ: 'Questions? Call', calReqNo: 'Booking #',
+      calH: '📅 Add to my calendar', calWhen: 'Your visit: {W} (1 hour).', calWhenAsap: 'Your visit: ASAP, the next available tech (saved as {W}, 1 hour).',
       calGoogle: 'Google Calendar', calIcs: 'Apple / Outlook (.ics)'
     },
     fr: {
-      kicker: "❄ Réservation pneus d'hiver", title: "Réservez votre changement de pneus d'hiver", sub: 'On se déplace chez vous. Envoyez votre demande en 2 minutes et on vous appelle.',
-      headline: "Changement de pneus d'hiver · montage et équilibrage inclus · on se déplace chez vous. Votre prix est affiché avant l'envoi.",
+      kicker: "❄ Réservation pneus d'hiver", title: "Réservez votre changement de pneus d'hiver", sub: 'On se déplace chez vous. Réservez en 2 minutes : choisissez l\'heure, voyez votre total, c\'est fait.',
+      headline: "Changement de pneus d'hiver · montage et équilibrage inclus · on se déplace chez vous. Votre prix est affiché avant de réserver.",
       test: '🧪 MODE TEST : réservations marquées TEST, courriels au propriétaire seulement',
       s1: 'Votre véhicule', year: 'Année', make: 'Marque', model: 'Modèle', trim: 'Version', choose: 'Choisir…', notSure: 'Version inconnue (la plus courante)',
       notListed: "Mon véhicule n'est pas dans la liste", backToList: '← Choisir dans la liste', otherYear: 'Année', otherMake: 'Marque', otherModel: 'Modèle',
       size: 'Taille des pneus (facultatif)', sizePh: 'ex. 225/65R17', sizeBad: 'Cette taille semble incorrecte. Exemple : 225/65R17',
       sizeTip: "La taille est sur l'autocollant dans le cadre de la portière du conducteur, ou sur le flanc du pneu.",
       photo: 'Ou téléversez une photo du flanc (facultatif)', photoOk: '✓ Photo envoyée', photoUp: 'Envoi de la photo…', photoErr: "La photo n'a pas été envoyée. Pas grave, vous pouvez continuer.",
-      otherNote: 'Entrez la taille, ou laissez vide et on confirmera par téléphone.',
-      next: 'Suivant →', back: '← Retour',
+            next: 'Suivant →', back: '← Retour',
       s2: 'De quoi avez-vous besoin?', off: 'Hors jantes : montage et équilibrage', offD: 'Les pneus doivent être montés sur vos jantes et équilibrés.',
       on: 'Sur jantes', onD: "Vos pneus d'hiver sont déjà sur leurs jantes. On change les roues.", howMany: 'Combien de pneus?', t4: '4 pneus', t2: '2 pneus',
       s3: 'Où est le véhicule?', addr: 'Adresse + ville', addrPh: 'ex. 123 rue Principale, Gatineau', check: "Vérifier l'adresse",
       z1: '✅ Bonne nouvelle, on dessert votre secteur.', z2: '✅ Bonne nouvelle, on dessert votre secteur.', z3: '✅ Bonne nouvelle, on dessert votre secteur.',
       z0: 'Hors de notre zone de service — appelez-nous.',
       multi: "J'ai 2 véhicules ou plus à cette adresse", multiWaived: 'Frais de déplacement annulés (2+ véhicules)',
-      multiNote: 'Réservez une seule plage pour tous. On vous appelle pour confirmer les autres véhicules.',
-      whyQ: 'Pourquoi est-ce plus cher?',
+            whyQ: 'Pourquoi est-ce plus cher?',
       whyA: "Les pneus à profil bas ont des flancs courts et très rigides. Ils demandent plus de temps et un équipement spécial pour être montés sans égratigner ni plier vos jantes, et plusieurs sont des pneus à affaissement limité avec des capteurs de pression sensibles.",
       exT: 'Ce véhicule demande une soumission personnalisée — appelez-nous',
       exSub: 'Les pneus de véhicules exotiques et haute performance demandent une manipulation spéciale; on les évalue un par un. Laissez vos coordonnées et on vous répond rapidement.',
       exSend: 'Envoyer ma demande', exDone: '✅ Reçu! On vous appelle avec votre prix.', exAddr: 'Adresse ou secteur',
       zoneWord: 'zone',
       notFound: "Adresse introuvable. Ajoutez la ville (ex. Gatineau, Aylmer, Ottawa) et réessayez.",
-      unchecked: '✅ Reçu. On confirmera votre secteur par téléphone.',
-      s4: 'Choisissez le jour et la plage horaire', s4sub: 'Seules les plages libres sont affichées. Le technicien arrive dans votre plage et vous appelle avant.',
+            s4: 'Choisissez le jour et la plage horaire', s4sub: 'Seules les plages libres sont affichées. Le technicien arrive dans votre plage et vous appelle avant.',
       full: 'Complet', open1: 'libre(s)', held: '✓ On vous garde cette plage 10 minutes.', taken: "Désolé, cette plage vient d'être prise. Choisissez-en une autre.",
       waitTitle: 'Cette journée est complète', waitSub: "Inscrivez-vous sur la liste d'attente. Si une plage se libère, on vous appelle en premier.", anyTime: "N'importe quand",
       joinWait: "M'inscrire", waitDone: "✅ Vous êtes sur la liste d'attente.", otherDay: '← Choisir un autre jour',
       s5: 'Comment vous joindre?', name: 'Nom', phone: 'Cellulaire', email: 'Courriel (facultatif, pour la confirmation)', notes: 'Stationnement (facultatif)',
-      notesPh: 'Entrée, garage souterrain, visiteurs…', mayContact: 'Nous pourrions vous contacter au sujet de cette réservation.',
-      phoneBad: 'Entrez un numéro à 10 chiffres.', nameBad: 'Entrez votre nom.',
+      notesPh: 'Entrée, garage souterrain, visiteurs…',       phoneBad: 'Entrez un numéro à 10 chiffres.', nameBad: 'Entrez votre nom.',
       s6: 'Vérifiez vos informations', when: 'Quand', service: 'Service', where: 'Adresse', vehicle: 'Véhicule', contact: 'Contact', tsize: 'Taille',
-      sizeEst: 'estimée selon le véhicule', sizeCust: 'entrée par vous', sizeUnk: 'à confirmer par téléphone',
+      sizeEst: 'estimée selon le véhicule', sizeCust: 'entrée par vous', sizeUnk: 'non indiquée',
       pay: 'Paiement au technicien à la fin : comptant, carte ou virement Interac.',
-      confirm: '✓ Envoyer ma demande', booking: 'Envoi…',
-      priceChanged: 'Vérifiez votre demande et confirmez de nouveau.', offerGone: "Cette offre n'a pas pu être appliquée (expirée ou déjà utilisée). Appelez pour une soumission.",
+      booking: 'Réservation…',
+      priceChanged: 'Vérifiez votre réservation et touchez Réserver de nouveau.', offerGone: "Cette offre n'a pas pu être appliquée (expirée ou déjà utilisée). Appelez pour une soumission.",
       limit: "Ce numéro a déjà des réservations aujourd'hui. Appelez-nous.",
-      doneT: 'Réservation confirmée!', doneR: 'Demande reçue!', doneRsub: "On vous appelle bientôt pour confirmer l'heure.", bookingNo: 'Demande n°',
-      emailSent: 'Une copie de votre demande est dans vos courriels.', change: 'Besoin de nous plus vite? Appelez le (613) 601-6471 (service en anglais).', addCal: '📅 Ajouter à mon calendrier', addIcs: 'Télécharger le fichier calendrier (.ics)',
+      doneT: '🎉 Vous êtes réservé!', doneR: '🎉 Vous êtes réservé!', doneRsub: 'On vous appelle seulement si quelque chose change. Questions? Appelez le (613) 601-6471 (service en anglais)', bookingNo: 'Réservation n°',
+      emailSent: 'Une copie de votre réservation est dans vos courriels.', addCal: '📅 Ajouter à mon calendrier', addIcs: 'Télécharger le fichier calendrier (.ics)',
       testDone: '🧪 Réservation test enregistrée. Vérifiez le calendrier, votre courriel et les groupes WhatsApp.',
       fbTitle: 'La réservation en ligne a un problème', fbSub: 'Appelez-nous et on vous réserve par téléphone (service en anglais).',
-      fbBtn: '📞 Appeler le (613) 601-6471', offerTitle: 'Appelez pour une soumission', offerSub: 'On vous appelle pour confirmer l\'heure.', offerYes: 'Appelez pour une soumission', offerNo: 'Non merci',
+      fbBtn: '📞 Appeler le (613) 601-6471', offerTitle: 'Appelez pour une soumission', offerYes: 'Appelez pour une soumission', offerNo: 'Non merci',
       offerBar: '', loading: 'Chargement…', err: 'Une erreur est survenue. Réessayez.',
-      callPrice: "On vous appelle bientôt pour confirmer l'heure et vous donner le prix.", prevWeek: 'Semaine précédente', nextWeek: 'Semaine suivante', pickDay: 'Choisissez un jour ci-dessus pour voir les plages libres.', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars.",
+      prevWeek: 'Semaine précédente', nextWeek: 'Semaine suivante', pickDay: 'Choisissez un jour ci-dessus pour voir les plages libres.', quebec: "Au Québec, les pneus d'hiver sont obligatoires du 1er décembre au 15 mars.",
       fTitle: 'Vos informations', req: 'obligatoire',
       car: 'Marque et modèle du véhicule ou taille des pneus — ce que vous savez', carHint: "Remplissez l'un ou les deux. Pas sûr? La marque et le modèle suffisent.",
-      carMM: 'Marque et modèle', carPh: 'ex. Toyota RAV4', or: 'ou', sizeOnly: 'Taille des pneus',
+      carMM: 'Marque et modèle du véhicule', carPh: 'ex. Toyota RAV4', or: 'ou', sizeOnly: 'Taille des pneus (facultatif)', sizeHint: 'Inscrite sur le flanc du pneu, ex. 225/65R17 — laissez vide si vous ne savez pas.',
+      needModel: 'Ajoutez aussi le modèle, ex. Toyota RAV4.',
+      street: 'Adresse (numéro + rue)', streetPh: 'ex. 123 rue Principale', addrBad: 'Entrez votre adresse complète avec le numéro civique, ex. 123 rue Principale.',
+      vBusy: 'réservé', vChecking: 'Vérification des heures libres…', vTaken: 'Cette heure vient d’être prise, choisissez-en une autre.', vTakenSel: 'Cette heure est déjà réservée. Choisissez-en une autre.',
+      noTotal: "On n'a pas pu afficher votre total, donc la réservation en ligne n'est pas possible. Appelez le (613) 601-6471.",
+      dWhen: 'Quand', dAsap: 'Service rapide : le prochain technicien libre arrive', dAddr: 'Adresse', dVeh: 'Véhicule', dTotal: 'Total',
       area: 'Ville ou quartier', areaPh: 'ex. Gatineau, Aylmer, Orléans',
       more: '+ Plus de détails (facultatif)', fAddr: 'Adresse complète (facultatif)', fAddrPh: 'ex. 123 rue Principale',
-      yearTrim: 'Année / version (facultatif)', yearPh: 'Année', trimPh: 'Version, ex. LE', when2: 'Heure préférée (facultatif)', anyT: "N'importe quand",
-      svcQ: 'Service', send: '✓ Envoyer ma demande', needCar: 'Entrez la marque et le modèle du véhicule, ou la taille des pneus.',
-      needArea: 'Entrez votre ville ou quartier.', fNote: "On vous appelle pour confirmer l'heure et vous donner le prix. Paiement au technicien à la fin.",
-      ctQ: 'Meilleur moment pour vous appeler?', ctOpt: 'facultatif', ctDay: 'Quel jour?', ctToday: "Aujourd'hui", ctTomorrow: 'Demain', ctPick: 'Choisir une date', ctDate: 'Date',
-      ctAsap: 'Maintenant / dès que possible', ctMorning: 'Matin (9 h–12 h)', ctAfternoon: 'Après-midi (12 h–17 h)', ctEvening: 'Soir (17 h–20 h)', ctChosen: 'On vous appelle :', ctClear: 'Effacer',
-      callBtn: '📞 Appeler (613) 601-6471 (en anglais)',
-      pTitle: 'Votre prix', pBefore: 'avant taxes', pType: 'Type de véhicule',
-      pAutoSize: "Choisi selon la taille de vos pneus ({S}). Ce n'est pas ça? Touchez un autre type.", pAutoCar: "Choisi selon votre véhicule ({C}). Ce n'est pas ça? Touchez un autre type.",
-      pAutoRunflat: "Choisi parce que vous avez des pneus à affaissement limité. Ce n'est pas ça? Touchez un autre type.", pPicked: 'Vous avez choisi ce type.',
-      pNoTier: 'Entrez votre véhicule ou la taille des pneus ci-dessus et on choisit le type pour vous, ou touchez le vôtre ici.',
-      pRunflat: 'Pneus à affaissement limité (run-flat)', pSvc: "Changement de pneus d'hiver",
-      pLow: 'Les pneus à profil bas ou à affaissement limité demandent plus de temps et de soin au montage, donc ils coûtent plus cher.',
+      yearTrim: 'Année / version (facultatif)', yearPh: 'Année', trimPh: 'Version, ex. LE',
+      svcQ: 'Service', send: '✅ Réserver mon rendez-vous', needCar: 'Entrez la marque et le modèle du véhicule, ex. Toyota RAV4.',
+      needArea: 'Entrez votre ville ou quartier.',       callBtn: '📞 Appeler (613) 601-6471 (en anglais)',
+      pTitle: 'Votre prix', pBefore: 'avant taxes',
+      pNoTier: 'Entrez la marque et le modèle du véhicule ci-dessus pour voir votre prix.', pSvc: "Changement de pneus d'hiver",
       pRimsQ: "Vos pneus d'hiver sont-ils déjà sur des jantes?", rYes: 'Oui', rNo: 'Non', rUnsure: 'Je ne sais pas',
       rimsYes: 'pneus déjà sur jantes', rimsNo: 'pneus pas sur jantes (montage et équilibrage)', rimsUnsure: 'pas sûr pour les jantes',
       pRimsHint: "Sur jantes = chaque pneu d'hiver est déjà monté sur sa propre roue; on change seulement les roues.",
-      pUnsureNote: 'Pas sûr? On a utilisé le prix hors jantes. On confirmera au téléphone.',
+      pUnsureNote: 'Pas sûr? On a utilisé le prix hors jantes.',
       pNeedRims: "Dites-nous si vos pneus d'hiver sont déjà sur des jantes.",
       pAreaEmpty: 'Ajoutez votre ville ou quartier ci-dessus pour voir votre total.',
       pAreaQ: "On n'a pas pu déterminer les frais de déplacement pour « {A} ». Choisissez le secteur le plus proche :", pAreaPick: 'Choisir…',
       pAreaNone: 'Aucuns frais de déplacement', pAreaFee: '+{F} frais de déplacement', pAreaOther: 'Autre (pas dans la liste)',
-      pAreaOtherNote: 'On confirmera les frais de déplacement pour votre secteur au téléphone.',
+      pAreaOtherNote: 'Votre secteur n\'est pas dans la liste : les frais de déplacement éventuels ne sont pas encore inclus. On vous appelle si cela change votre total.',
       pNeedArea: 'Choisissez le secteur le plus proche pour voir votre total.',
       bSwap: 'Changement', bFee: 'frais de déplacement ({A})', bOffer: 'rabais', bAsap: 'urgence même jour / service rapide', bAfter: 'frais de déplacement en dehors des heures',
-      pAfter: '🌙 Visite en dehors des heures ({W}) : {F} de frais de déplacement au lieu des frais du secteur.', pAfterVisitAsap: 'service rapide, maintenant {T}', pAfterVisitPref: 'heure préférée {T}',
-      pAsap: '⚡ Service rapide : le prochain technicien libre, maintenant (urgence même jour / service rapide +{F}).', pSameDay: '⚡ Visite le jour même : urgence même jour / service rapide +{F} incluse.',
-      vQ: 'Quand voulez-vous la visite?', vOpt: 'facultatif', vTime: 'Heure de la visite', vAny: "N'importe quand (fixée au téléphone)", vAsap: '⚡ Service rapide coché plus bas : on arrive le plus tôt possible.', vDate: 'Date de la visite', pAsapOff: "Le service rapide n'est pas offert en ce moment. Choisissez une heure ou appelez-nous.", rimsAsap: 'même jour / service rapide',
+      pAfter: '🌙 Visite en dehors des heures ({W}) : {F} de frais de déplacement au lieu des frais du secteur.', pAfterVisitAsap: 'service rapide, maintenant {T}',
+      pAsap: '⚡ Service rapide : on envoie le prochain technicien libre, maintenant (urgence même jour / service rapide +{F} incluse).', pSameDay: '⚡ Visite le jour même : urgence même jour / service rapide +{F} incluse.',
+      pVisitFirst: "Choisissez « Quand voulez-vous la visite? » plus haut. Le service rapide et les visites le jour même ajoutent les frais d'urgence; de 20 h à 8 h, ce sont les frais de déplacement en dehors des heures.",
+      vQ: 'Quand voulez-vous la visite?', vAsapBtn: '⚡ Dès que possible / maintenant', vToday: "Aujourd'hui", vTomorrow: 'Demain', vPick: 'Choisir une date', vChoice: 'Jour de la visite',
+      vTime: "Heure de la visite (plage d'une heure)", vPickHour: 'Choisir une heure…', vDate: 'Date de la visite', vHint: "Choisissez la plage d'une heure qui vous convient. Besoin de nous tout de suite? Choisissez ⚡ Dès que possible (24 h/24).",
+      vAsap: "⚡ Service rapide : on envoie le prochain technicien libre, maintenant. Pas d'heure à choisir.", vNoneLeft: "Plus de plages libres aujourd'hui. Choisissez « Dès que possible » ou Demain.",
+      vNeed: 'Choisissez quand on doit venir : dès que possible, aujourd’hui, demain ou une date.', vNeedDate: 'Choisissez la date de la visite.', vNeedHour: "Choisissez l'heure de la visite.",
+      vPast: "Cette heure est déjà passée. Choisissez une heure plus tard.", vChosen: 'Votre visite :',
+      pAsapOff: "Le service rapide n'est pas offert en ce moment. Choisissez une heure ou appelez-nous.", rimsAsap: 'même jour / service rapide',
       pOfferOn: '🏷️ Rabais de {D} appliqué.', pOfferOnFees: '🏷️ {NC} annulés ({D} de rabais).', pOfferOnFeesPart: '🏷️ Rabais de {D} sur {X} appliqué.', oSvc: 'vos frais de déplacement', oSvcN: 'frais de déplacement', oSvcMy: 'mes frais de déplacement', oUrg: "les frais d'urgence", oUrgN: "frais d'urgence", oUrgMy: "mes frais d'urgence", pPlusTax: 'Taxes en sus. Paiement au technicien à la fin du travail.',
-      pAccept: "J'accepte ce total : {P} ({TIER}, {RIMS}).", pAreaOtherShort: 'Frais de déplacement : confirmés au téléphone.',
-      pNeedTier: 'Choisissez votre type de véhicule pour voir votre prix.',
-      xoT: 'Réservez maintenant : {D} de rabais', xoS: 'Une seule fois : envoyez votre demande maintenant et payez {P} au lieu de {F}, avant taxes.',
+      pAccept: "J'accepte ce total : {P} ({TIER}, {RIMS}).", pAreaOtherShort: 'Frais de déplacement pour votre secteur : pas encore inclus.',
+      xoT: 'Réservez maintenant : {D} de rabais', xoS: 'Une seule fois : réservez maintenant et payez {P} au lieu de {F}, avant taxes.',
       xoYes: 'Prendre {D} de rabais', xoNo: 'Non merci',
       xoTFees: 'Réservez maintenant et on annule {X}', xoYesFees: 'Annuler {Y}', xoTFeesPart: 'Réservez maintenant : {D} de rabais sur {X}', xoYesFeesPart: 'Prendre {D} de rabais',
       pTotalT: 'Votre total',
-      calT: 'Mobile Tire Repair Ottawa : changement de pneus', calTAsap: 'Mobile Tire Repair Ottawa : changement de pneus (service rapide)', calReq: 'Heure demandée : on vous appelle pour confirmer',
-      calAddr: 'Adresse', calTotal: 'Total', calNoPrice: 'Prix : confirmé au téléphone', calQ: 'Questions? Appelez le', calReqNo: 'Demande n°',
-      calH: '📅 Ajouter à mon calendrier', calWhen: 'Enregistré pour {W} (1 heure). Heure demandée : on vous appelle pour confirmer.', calWhenGuess: "Enregistré pour {W} (1 heure), selon votre moment préféré pour l'appel. L'heure de la visite est fixée au téléphone.",
+      calT: 'Mobile Tire Repair Ottawa : changement de pneus', calTAsap: 'Mobile Tire Repair Ottawa : changement de pneus (service rapide)', calReq: 'Réservé', calReqAsap: 'Réservé : service rapide, le prochain technicien libre',
+      calAddr: 'Adresse', calTotal: 'Total', calNoPrice: 'Prix : paiement au technicien à la fin', calQ: 'Questions? Appelez le', calReqNo: 'Réservation n°',
+      calH: '📅 Ajouter à mon calendrier', calWhen: 'Votre visite : {W} (1 heure).', calWhenAsap: 'Votre visite : service rapide, le prochain technicien libre (enregistré pour {W}, 1 heure).',
       calGoogle: 'Google Agenda', calIcs: 'Apple / Outlook (.ics)'
     }
   };
@@ -197,12 +194,12 @@
   var TS = {
     en: {
       kicker: '☀ Summer swap booking', title: 'Book your summer tire swap',
-      headline: 'Summer tire swaps · mounting & balancing included · we come to you. We call to confirm your price.',
+      headline: 'Summer tire swaps · mounting & balancing included · we come to you. Your price is shown before you book.',
       onD: 'Your summer tires are already on their own rims. We swap the wheels.', offerTitle: 'Call for a quote'
     },
     fr: {
       kicker: "☀ Réservation pneus d'été", title: "Réservez votre changement de pneus d'été",
-      headline: "Changement de pneus d'été · montage et équilibrage inclus · on se déplace chez vous. On vous appelle pour confirmer le prix.",
+      headline: "Changement de pneus d'été · montage et équilibrage inclus · on se déplace chez vous. Votre prix est affiché avant de réserver.",
       onD: "Vos pneus d'été sont déjà sur leurs jantes. On change les roues.",
       quebec: "Au Québec, les pneus d'hiver peuvent être retirés après le 15 mars."
     }
@@ -215,7 +212,7 @@
     veh: { mode: 'other', year: '', make: '', model: '', trim: '', unsure: false, id: '', cls: 'car', tier: 'STANDARD', size: '', verified: false,
            oYear: '', oMake: '', oModel: '', typed: '', photoUrl: '', car: '', oTrim: '' },
     service: 'off', tires: 4, zone: null, addrText: '', days: [], date: '', dateLabel: '', slot: '', slotLabel: '', hold: 0,
-    c: { name: '', phone: '', email: '', notes: '' }, area: '', pref: '', more: false, callDay: '', callDate: '', callPart: '', tierPick: '', runflat: false, rims: '', feePick: '', asap: false, asapAt: '', visitDay: '', visitDate: '', visitTime: '', offerApplied: lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offer: null, done: null, busy: false, waitDay: null, draftSent: ''
+    c: { name: '', phone: '', email: '', notes: '' }, area: '', pref: '', more: false, rims: '', feePick: '', asapAt: '', visitDay: '', visitDate: '', visitTime: '', visitErr: '', addrErr: '', taken: {}, slotState: {}, offerApplied: lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offer: null, done: null, busy: false, waitDay: null, draftSent: ''
   };
   lsSet('bk_session', S.session);
   // ?r=Emma (dispatcher who sent a /book link). Kept for this visit.
@@ -293,7 +290,7 @@
   }
   function currentTier() {
     var v = S.veh, typed = parseSize(v.typed);
-    if (v.mode === 'other') return tierFor(typed ? typed.text : '', 'car', v.oMake, v.oModel, '');
+    if (v.mode === 'other') return tierFor(typed ? typed.text : '', PR && listHit(PR.pickupModels, tierText()) ? 'pickup' : 'car', v.oMake, v.oModel, v.oTrim);   // a pickup on 22" stays a pickup (not a custom quote)
     if (typed) return tierFor(typed.text, v.cls, v.make, v.model, v.trim);
     return v.tier || 'STANDARD';
   }
@@ -307,19 +304,50 @@
   function hasPrices() { return !!(PR && PR.tiers && PR.order && PR.order.length) && S.season !== 'summer'; }   // winter swap prices only
   function words(x) { return ' ' + nrm(x).replace(/[^a-z0-9.\- ]+/g, ' ').replace(/\s+/g, ' ') + ' '; }
   function listHas(list, txt) { var w = words(txt); return (list || []).some(function (k) { return w.indexOf(' ' + k + ' ') >= 0; }); }
-  // Picks the tier from make/model + tire size (+ run-flat box). Returns { tier, why } or null when we can't tell.
-  function autoTier() {
-    var v = S.veh, p = parseSize(v.typed), car = v.car, base = '', why = 'car';
-    if (listHas(PR.pickupModels, car)) base = 'pickup';
-    else if (listHas(PR.suvModels, car)) base = 'suv';
-    else if (car) base = 'small';
-    if (!base && p) {   // size only: LT or big/tall truck sizes = pickup, tall 17"+ = SUV, else small car
-      why = 'size';
-      base = (p.lt || (p.width >= 255 && p.aspect >= 65 && p.rim >= 17)) ? 'pickup' : (p.rim >= 17 && p.aspect >= 55) ? 'suv' : 'small';
+  // ---- vehicle type, set AUTOMATICALLY (owner, Oct 19): no tiles, no run-flat box, the customer can't pick a cheaper type.
+  //      Lists + thresholds in prices.js. Highest wins (small < suv < low < pickup); a pickup always stays at the pickup price.
+  //      Returns { tier, reason (English, for staff), recognized, lowWhy[], base } or null when no make & model yet.
+  function listHit(list, txt) {   // first entry found; an entry is a phrase or [phrase, phrase…] (all needed)
+    var w = words(txt);
+    for (var i = 0; i < (list || []).length; i++) {
+      var e = list[i], ks = Array.isArray(e) ? e : [e];
+      if (ks.every(function (k) { return w.indexOf(' ' + k + ' ') >= 0; })) return e;
     }
-    var lowSize = !!(p && p.aspect <= (+PR.lowProfileMaxAspect || 35));
-    if ((lowSize || S.runflat) && base !== 'pickup') return { tier: 'low', why: lowSize ? 'size' : 'runflat' };   // pickup price stays (it's higher)
-    return base ? { tier: base, why: why } : null;
+    return null;
+  }
+  function nice(e) {   // 'type r' -> 'Type R', 'gr86' -> 'GR86', 'cr-v' -> 'CR-V', ['nissan','z'] -> 'Nissan Z'
+    return (Array.isArray(e) ? e.join(' ') : e).split(' ').map(function (w) {
+      return w.split('-').map(function (x) { return /\d/.test(x) || x.length <= 3 ? x.toUpperCase() : x.charAt(0).toUpperCase() + x.slice(1); }).join('-');
+    }).join(' ');
+  }
+  function tierText() { return [S.veh.car, S.veh.oTrim].filter(Boolean).join(' '); }
+  function rankOf(k) { var i = (PR.order || []).indexOf(k); return i < 0 ? 0 : i; }
+  function autoTier() {
+    var txt = tierText(), p = parseSize(S.veh.typed), e, base = '', why = '', rec = true, lowWhy = [];
+    if (!hasCar()) return null;
+    if ((e = listHit(PR.pickupModels, txt))) { base = 'pickup'; why = 'pickup model (' + nice(e) + ')'; }
+    else {
+      var lm = listHit(PR.lowModels, txt), mk = listHit(PR.lowMakes, txt);
+      if (lm) lowWhy.push('performance model/trim (' + nice(lm) + ')'); else if (mk) lowWhy.push('run-flat make (' + nice(mk) + ')');
+      if ((e = listHit(PR.suvModels, txt))) { base = 'suv'; why = 'SUV/crossover/minivan model (' + nice(e) + ')'; }
+      else if ((e = listHit(PR.smallModels, txt))) { base = 'small'; why = 'car model (' + nice(e) + ')'; }
+      else if (lowWhy.length) { base = 'small'; why = ''; }
+      else { base = PR.tiers[PR.unknownTier] ? PR.unknownTier : 'suv'; rec = false; why = 'default: vehicle not recognized'; }
+    }
+    var tier = base;
+    if (p) {   // a tire size can only move the type UP
+      var sl = [];
+      if (p.aspect <= (+PR.lowProfileMaxAspect || 40)) sl.push(p.aspect + ' series');
+      if (p.rim >= (+PR.lowProfileMinRim || 19)) sl.push(p.rim + 'in');
+      if (base === 'pickup') { if (sl.length) why += '; low-profile size ' + p.text + ' stays at the pickup price'; }
+      else {
+        if (sl.length) lowWhy.push(sl.join(' / '));
+        if (!rec && (p.lt || (p.width >= 255 && p.aspect >= 65 && p.rim >= 17)) && rankOf('pickup') > rankOf(tier)) { tier = 'pickup'; why += '; pickup-size tires (' + p.text + ')'; lowWhy = []; }
+      }
+    }
+    if (tier !== 'pickup' && lowWhy.length && rankOf('low') > rankOf(tier)) tier = 'low';
+    var reason = tier === 'low' ? 'low-profile: ' + lowWhy.join(' + ') + (rec ? '' : '; vehicle not recognized') : (tier === 'pickup' ? 'pickup: ' : tier === 'suv' && rec ? 'suv: ' : tier === 'small' ? 'small: ' : '') + why;
+    return { tier: tier, reason: reason, recognized: rec, lowWhy: lowWhy, base: base, why: rec ? 'car' : 'default' };
   }
   function tierLabel(k, lang) { var x = PR.tiers[k] || {}; return (lang || S.lang) === 'fr' ? (x.fr || x.en || k) : (x.en || k); }
   // ---- service call fee by area (lists + fees in prices.js). Area field first, then the street address.
@@ -344,7 +372,8 @@
     var a = (S.area && areaIn(S.area)) || (S.addrText && areaIn(S.addrText));
     return a || { unknown: true, typed: S.area || S.addrText };
   }
-  // ---- ASAP (+fee, prices.js). hours null = always (24/7); otherwise checked in Ottawa time when the form is shown.
+  // ---- ASAP (+fee, prices.js). "ASAP / Now" is one of the choices under "When should we come?" (the only place ASAP lives).
+  //      hours null = always (24/7); otherwise checked in Ottawa time. Fee 0 (or prices.js missing) = ASAP still offered, no urgency fee.
   function asapCfg() { return (PR && PR.asap && +PR.asap.fee > 0) ? PR.asap : null; }
   function torontoHHMM(d) {
     try { var p = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(d);
@@ -352,25 +381,56 @@
     catch (e) { return pad2(d.getHours()) + ':' + pad2(d.getMinutes()); }
   }
   function asapOpen() {
-    var a = asapCfg(); if (!a) return false;
-    var h = a.hours; if (!h || !h.start || !h.end) return true;
+    var h = PR && PR.asap && PR.asap.hours; if (!h || !h.start || !h.end) return true;
     var now = torontoHHMM(new Date());
     return h.start <= h.end ? (now >= h.start && now < h.end) : (now >= h.start || now < h.end);
   }
-  function asapOn() { return !!S.asap && asapOpen(); }
-  // ---- visit day/time the customer picks ("When should we come?"). Day resolved in Ottawa time at form time.
+  function asapOn() { return S.visitDay === 'asap' && asapOpen(); }
+  // ---- visit day/time the customer picks ("When should we come?", REQUIRED). Day resolved in Ottawa time at form time.
+  //      ASAP / Now: no hour. Today / Tomorrow / a date: a one-hour visit slot is required (prices.js slots: 10:30 AM ... 10:30 PM; ASAP is 24/7).
   function torToday() { return torParts(Date.now()).day; }
   function visitDateIso() { var d = torToday(); return S.visitDay === 'today' ? d : S.visitDay === 'tomorrow' ? wall(d, 0, 0, 1440).day : S.visitDay === 'date' ? S.visitDate : ''; }
+  function hm2min(hm) { return +hm.slice(0, 2) * 60 + +hm.slice(3, 5); }
+  function min2hm(m) { m = ((m % 1440) + 1440) % 1440; return pad2(Math.floor(m / 60)) + ':' + pad2(m % 60); }
+  function hoursFor(day) {   // 1-hour slot starts ('HH:MM') still bookable that day: prices.js slots (10:30 AM ... 10:30 PM);
+    var c = (PR && PR.slots) || {}, first = hm2min(c.first || '10:30'), last = hm2min(c.last || '22:30'), step = +c.minutes || 60;
+    var out = [], now = -1;                     // today = only slots that have not started yet (Ottawa time)
+    if (day && day === torToday()) { var tp = torParts(Date.now()); now = tp.hh * 60 + tp.mm; }
+    for (var m = first; m <= last; m += step) if (m > now) out.push(min2hm(m));
+    return out;
+  }
+  function isTaken(day, hm) { return (S.taken[day] || []).indexOf(hm) >= 0; }
+  function visitDone() { var vd = visitDateIso(); return asapOn() || (!!S.visitTime && !!vd && hoursFor(vd).indexOf(S.visitTime) >= 0 && !isTaken(vd, S.visitTime)); }
+  // ---- no double-booking: busy hours for a date from the script (?action=slots&date=YYYY-MM-DD -> { ok, busy: ['14:00', …] }).
+  //      Max 1 job per hour. If the check fails or is slow, every hour stays open and the booking is flagged
+  //      "slot check unavailable" for staff (the script re-checks the hour before saving anyway). Bookings are never lost.
+  function loadSlots(day, force) {
+    if (!day || (!force && S.slotState[day])) return;
+    S.slotState[day] = 'loading';
+    var url = API && API.indexOf('PASTE') < 0 ? API + '?action=slots&date=' + encodeURIComponent(day) : '';
+    (url ? callApi(url, { method: 'GET' }, 0, 4000, false) : Promise.reject(new Error('no_api'))).then(function (r) {
+      if (r && r.ok && Array.isArray(r.busy)) {
+        S.taken[day] = uniq((S.taken[day] || []).concat(r.busy.filter(function (h) { return /^\d{2}:\d{2}$/.test(h); })));
+        S.slotState[day] = 'ok';
+      } else S.slotState[day] = 'down';
+    }).catch(function () { S.slotState[day] = 'down'; }).then(function () {
+      if (visitDateIso() === day && S.visitTime && isTaken(day, S.visitTime)) { S.visitTime = ''; S.visitErr = t('vTakenSel'); }
+      if (!S.done && visitDateIso() === day) renderKeepFocus();
+    });
+  }
+  function slotCheckState() { if (asapOn()) return 'asap'; var st = S.slotState[visitDateIso()]; return st === 'ok' ? 'ok' : 'unavailable'; }
+  function renderKeepFocus() {
+    var a = document.activeElement, id = a && a.id; readAll(); render();
+    if (id) { var el = document.getElementById(id); if (el) el.focus(); }
+  }
   function urgencyOf(asap) { var a = asapCfg(); if (!a) return ''; if (asap) return 'asap'; return a.sameDay !== false && visitDateIso() && visitDateIso() === torToday() ? 'same-day' : ''; }
   // ---- after-hours service call (prices.js afterHours). Replaces the area fee; based on the visit time:
-  //      ASAP = the time they book; otherwise the start of the "Preferred time" window; none picked = not after hours.
+  //      ASAP = the current Ottawa time; otherwise the start of the visit hour they pick; none picked yet = not after hours.
   function inWindow(hhmm, st, en) { return st <= en ? (hhmm >= st && hhmm < en) : (hhmm >= st || hhmm < en); }
   function visitInfo(asap) {
     if (asap) { var n = torontoHHMM(new Date()); return { hhmm: n, label: 'ASAP, booked ' + n + ' ET', src: 'asap-booking-time', shown: t('pAfterVisitAsap').replace('{T}', n) }; }
     var vd = visitDateIso();
-    if (S.visitTime) return { hhmm: S.visitTime, label: 'visit ' + (vd || 'date not given') + ' ' + S.visitTime, src: 'visit-time', shown: (vd ? dateWords(vd, S.lang) + ' ' : '') + hourWord(S.visitTime) };
-    var m = String(S.pref || '').match(/^(\d{2}:\d{2})/);
-    if (m) return { hhmm: m[1], label: 'preferred time ' + S.pref, src: 'preferred-time', shown: t('pAfterVisitPref').replace('{T}', S.pref) };
+    if (S.visitTime && vd) return { hhmm: S.visitTime, label: 'visit ' + vd + ' ' + S.visitTime, src: 'visit-time', shown: dateWords(vd, S.lang) + ' ' + hourWord(S.visitTime) };
     return { hhmm: '', label: '', src: 'none', shown: '' };
   }
   function afterHoursOf(v) { var a = PR && PR.afterHours; return !!(a && +a.fee > 0 && v.hhmm && inWindow(v.hhmm, a.start, a.end)); }
@@ -378,12 +438,12 @@
   function priceInfo() {
     if (!hasPrices() || S.forceExotic) return null;
     if (isExoticSafe()) return { exotic: true };
-    var a = autoTier(), tier = (S.tierPick && PR.tiers[S.tierPick]) ? S.tierPick : (a && a.tier);
+    var a = autoTier(), tier = a && a.tier;
     if (!tier || !PR.tiers[tier]) return { none: true };
     var x = PR.tiers[tier], rk = rimsKey(), swap = +x[rk];
     if (!(swap > 0)) return { none: true };
     var dd = x.discount, dmax = Math.max(0, +(dd && typeof dd === 'object' ? dd[rk] : dd) || 0);
-    var q = { tier: tier, auto: a, picked: !!S.tierPick, rims: S.rims, rk: rk, swap: swap, low: tier === 'low', offerable: dmax > 0, dmax: dmax };
+    var q = { tier: tier, auto: a, rims: S.rims, rk: rk, swap: swap, low: tier === 'low', offerable: dmax > 0, dmax: dmax };
     if (!S.rims) { q.needRims = true; return q; }
     q.asap = asapOn(); q.urg = urgencyOf(q.asap); q.asapFee = q.urg ? +asapCfg().fee : 0;   // asapFee = the same-day / ASAP urgency fee
     q.visit = visitInfo(q.asap); q.after = afterHoursOf(q.visit);
@@ -429,18 +489,11 @@
       (q.asapFee ? ' + ' + money(q.asapFee, 'en') + (q.urg === 'asap' ? ' ASAP' : ' same-day') + ' urgency' : '') +
       (q.disc ? ' − ' + money(q.disc, 'en') + ' exit offer (' + (q.offerType === 'flat' ? 'flat' : (q.offerFull ? offerWords(q, 'en').n + ' waived' : 'off the ' + offerWords(q, 'en').n)) + '); regular ' + money(q.full, 'en') : '') + ')';
   }
-  function tierSource(q) { return q.picked ? 'picked by customer' : q.auto ? 'auto from ' + (q.auto.why === 'size' ? 'tire size' : q.auto.why === 'runflat' ? 'run-flat box' : 'make/model') : ''; }
+  function tierSource(q) { return q.auto ? 'auto (' + q.auto.reason + ')' : ''; }
   function svcToggles() {   // on/off rims is asked in the price box; only the number of tires stays here
     return '<label class="bk-label">' + t('howMany') + '</label>' +
       '<div class="bk-toggle"><button type="button" data-act="tires" data-v="4" class="' + (S.tires === 4 ? 'sel' : '') + '">' + t('t4') + '</button>' +
       '<button type="button" data-act="tires" data-v="2" class="' + (S.tires === 2 ? 'sel' : '') + '">' + t('t2') + '</button></div>';
-  }
-  function autoNote(q) {
-    if (q.none) return t('pNoTier');
-    if (q.picked) return t('pPicked');
-    if (q.auto.why === 'runflat') return t('pAutoRunflat');
-    if (q.auto.why === 'size') return t('pAutoSize').replace('{S}', parseSize(S.veh.typed).text);
-    return t('pAutoCar').replace('{C}', S.veh.car);
   }
   function areaSelect(q) {
     var o = '<option value="">' + esc(t('pAreaPick')) + '</option>';
@@ -454,16 +507,10 @@
   }
   function priceHtml() {
     var q = priceInfo(); if (!q || q.exotic) return '';
-    var sel = q.none ? '' : q.tier;
-    var h = '<div class="bk-price" id="bk-price"><div class="bk-price-h">💲 ' + t('pTitle') + '</div>' +
-      '<div class="bk-label" id="bk-tier-l">' + t('pType') + ' <span class="bk-req">*</span></div>' +
-      '<div class="bk-tiers" role="group" aria-labelledby="bk-tier-l">' + PR.order.map(function (k) {
-        var x = PR.tiers[k]; if (!x) return '';
-        return '<button type="button" class="bk-tier' + (sel === k ? ' sel' : '') + '" id="bk-tier-' + k + '" data-act="tier" data-v="' + k + '" aria-pressed="' + (sel === k) + '">' +
-          '<b>' + esc(tierLabel(k)) + '</b><small>' + esc(S.lang === 'fr' ? (x.egFr || x.egEn || '') : (x.egEn || '')) + '</small></button>';
-      }).join('') + '</div>' +
-      '<p class="bk-tier-note" id="bk-tier-note">' + (q.none ? '' : '✓ ') + esc(autoNote(q)) + '</p>' +
-      '<label class="bk-check bk-runflat"><input type="checkbox" data-act="runflat"' + (S.runflat ? ' checked' : '') + '> ' + t('pRunflat') + '</label>' +
+    var h = '<div class="bk-price" id="bk-price"' + (q.none ? '' : ' data-tier="' + q.tier + '"') + '><div class="bk-price-h">💲 ' + t('pTitle') + '</div>' +
+      // the vehicle type is worked out automatically (autoTier) and only goes to staff (payload tier + tierReason);
+      // the customer just sees the total
+      (q.none ? '<p class="bk-tier-note" id="bk-tier-note">' + esc(t('pNoTier')) + '</p>' : '') +
       '<div class="bk-label" id="bk-rims-l">' + t('pRimsQ') + ' <span class="bk-req">*</span></div>' +
       '<div class="bk-ct-grid three bk-rims" role="group" aria-labelledby="bk-rims-l">' +
         [['yes', 'rYes'], ['no', 'rNo'], ['unsure', 'rUnsure']].map(function (r) {
@@ -472,21 +519,19 @@
       '<p class="bk-tier-note">' + t('pRimsHint') + '</p>';
     if (q.none || q.needRims) return h + '</div>';
     if (q.needArea) return h + (q.area.empty ? '<p class="bk-price-note bk-area-need">📍 ' + t('pAreaEmpty') + '</p>' : areaSelect(q)) + '</div>';
-    var shown = priceText(q, S.lang), ac = asapCfg();
-    var asapHtml = !ac ? '' : asapOpen()
-      ? '<label class="bk-check bk-asap"><input type="checkbox" id="bk-asap" data-act="asap"' + (S.asap ? ' checked' : '') + '> <span>' + esc(t('pAsap').replace('{F}', money(+ac.fee))) + '</span></label>'
-      : '<p class="bk-price-note bk-asap-off" id="bk-asap-off">' + esc(t('pAsapOff')) + ' <a href="' + TEL + '">' + esc(t('callBtn')) + '</a></p>';
-    return h + (q.area.picked || q.area.other ? areaSelect({ area: { typed: S.area || S.addrText } }) : '') + asapHtml +
+    var shown = priceText(q, S.lang);
+    return h + (q.area.picked || q.area.other ? areaSelect({ area: { typed: S.area || S.addrText } }) : '') +
+      (!visitDone() ? '<p class="bk-price-note bk-visit-first" id="bk-visit-first">🚐 ' + esc(t('pVisitFirst')) + '</p>' : '') +
+      (q.urg === 'asap' ? '<p class="bk-price-note bk-sameday bk-asap-note" id="bk-asap-note">' + esc(t('pAsap').replace('{F}', money(q.asapFee))) + '</p>' : '') +
       (q.urg === 'same-day' ? '<p class="bk-price-note bk-sameday" id="bk-sameday">' + esc(t('pSameDay').replace('{F}', money(q.asapFee))) + '</p>' : '') +
       (q.after ? '<p class="bk-price-note bk-after" id="bk-after">' + esc(t('pAfter').replace('{W}', q.visit.shown).replace('{F}', money(q.fee))) + '</p>' : '') +
       (q.rims === 'unsure' ? '<p class="bk-price-note">' + t('pUnsureNote') + '</p>' : '') +
-      (q.low ? '<p class="bk-price-note">' + t('pLow') + '</p>' : '') +
       (q.fee === null ? '<p class="bk-price-note">' + t('pAreaOtherNote') + '</p>' : '') +
       '<div class="bk-total" id="bk-total"><div class="bk-total-l">' + t('pTotalT') + '</div>' +
         '<div class="bk-price-amt" id="bk-price-amt" aria-live="polite">' + esc(shown) + '</div>' +
         (q.fee || q.disc || q.asapFee ? '<div class="bk-price-break" id="bk-price-break">' + esc(breakdown(q, S.lang)) + '</div>' : '') +
         (q.disc ? '<div class="bk-offer-on" id="bk-offer-on">' + esc(offerFill(t('pOfferOn' + offerKey(q)).replace('{D}', money(q.disc)), q)) + '</div>' : '') +
-        '<div class="bk-price-svc">' + t('pSvc') + ' · ' + esc(tierLabel(q.tier)) + ' · ' + esc(rimsWord(q, S.lang)) + '</div>' +
+        '<div class="bk-price-svc">' + t('pSvc') + ' · ' + esc(rimsWord(q, S.lang)) + '</div>' +
         (q.fee === null ? '<div class="bk-price-svc">' + esc(t('pAreaOtherShort')) + '</div>' : '') +
         '<p class="bk-price-note">' + t('pPlusTax') + '</p></div></div>';
   }
@@ -500,7 +545,7 @@
       var x = window.MTRO_OFFER.text(), mt = mo.querySelector('#mo-t'), mp = mo.querySelector('.mo-box p'), my = mo.querySelector('.mo-yes');
       if (x && mt && mp && my) { mt.textContent = x.title; mp.textContent = x.sub; my.textContent = x.yes; }
     }
-    if (a === 'runflat' || a === 'tier' || a === 'rims' || a === 'feearea' || a === 'asap') { var el = w.querySelector('[data-act="' + a + '"]' + (av ? '[data-v="' + av + '"]' : '')); if (el) el.focus(); }
+    if (a === 'rims' || a === 'feearea') { var el = w.querySelector('[data-act="' + a + '"]' + (av ? '[data-v="' + av + '"]' : '')); if (el) el.focus(); }
   }
 
   // ---------------------------------------------------------------- vehicles
@@ -552,9 +597,11 @@
     return { make: w[0] || '', model: w.slice(1).join(' ') };
   }
   function syncCar() { var v = S.veh, c = splitCar(v.car); v.mode = 'other'; v.oMake = c.make; v.oModel = c.model; }
-  function hasCar() { return !!S.veh.car; }
+  // Make & model required: two words ("Toyota RAV4"), or one word we know ("F-150", "Supra").
+  function hasCar() { var c = String(S.veh.car || '').trim(); if (!c) return false; if (c.split(/\s+/).length >= 2) return true;
+    return !!(PR && (listHit(PR.pickupModels, c) || listHit(PR.suvModels, c) || listHit(PR.smallModels, c) || listHit(PR.lowModels, c))); }
   function hasSize() { return !!parseSize(S.veh.typed); }
-  function step1Basics() { return hasCar() || hasSize(); }   // enough to send the "almost booked" alert (with a phone)
+  function step1Basics() { return hasCar(); }   // enough to send the "almost booked" alert (with a phone)
   function step1Ready() { return step1Basics(); }
   function isExoticSafe() { if (S.forceExotic) return true; try { return !!(S.cfg && S.cfg.rules && isExotic()); } catch (e) { return false; } }
   function chipHtml() { return isExoticSafe() ? exoticHtml() : ''; }
@@ -581,26 +628,21 @@
     return '<div class="bk-zone z0">' + t('z0') + '<br><small>' + esc(z.formatted || '') + '</small>' +
       '<a class="bk-btn" href="' + TEL + '">' + t('callBtn') + '</a></div>';
   }
-  function slotOpts() {
-    var sl = (S.cfg && S.cfg.slots) || [];
-    return opt('', t('anyT'), !S.pref) + sl.map(function (x) { var l = x.start + '–' + x.end; return opt(l, l, S.pref === l); }).join('');
-  }
   function step1() {
     var v = S.veh, r = ' <span class="bk-req">*</span>';
     var h = '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('fTitle') + '</h2>' +
       inp('bk-name', 'name', t('name') + r, S.c.name, ' autocomplete="name"') +
       inp('bk-phone', 'phone', t('phone') + r, S.c.phone, ' type="tel" inputmode="tel" autocomplete="tel"') +
-      '<fieldset class="bk-either"><legend class="bk-label">' + t('car') + r + '</legend>' +
-      inp('bk-car', 'car', t('carMM'), v.car, ' placeholder="' + t('carPh') + '" autocomplete="off"') +
-      '<div class="bk-or">' + t('or') + '</div>' +
-      inp('bk-size', 'typed', t('sizeOnly'), v.typed, ' placeholder="' + t('sizePh') + '" autocomplete="off"') +
+      inp('bk-car', 'car', t('carMM') + r, v.car, ' placeholder="' + t('carPh') + '" autocomplete="off" required') +
+      inp('bk-size', 'typed', t('sizeOnly'), v.typed, ' placeholder="' + t('sizePh') + '" autocomplete="off" aria-describedby="bk-size-hint"') +
       '<div class="bk-err" id="bk-size-err">' + (v.typed && !parseSize(v.typed) ? t('sizeBad') : '') + '</div>' +
-      '<p class="bk-hint">💡 ' + t('sizeTip') + '</p></fieldset>' +
-      inp('bk-area', 'area', t('area') + r, S.area, ' list="bk-areas" placeholder="' + t('areaPh') + '" autocomplete="address-level2"') +
-      visitHtml() + callTimeHtml() +
+      '<p class="bk-hint" id="bk-size-hint">💡 ' + t('sizeHint') + '</p>' +
+      inp('bk-addr', 'addr', t('street') + r, S.addrText, ' autocomplete="address-line1" placeholder="' + t('streetPh') + '" required aria-describedby="bk-addr-err"' + (S.addrErr ? ' aria-invalid="true"' : '')) +
+      '<div class="bk-err" id="bk-addr-err" role="alert">' + esc(S.addrErr || '') + '</div>' +
+      inp('bk-area', 'area', t('area') + r, S.area, ' list="bk-areas" placeholder="' + t('areaPh') + '" autocomplete="address-level2" required') +
+      visitHtml() +
       '<datalist id="bk-areas">' + AREAS.map(function (x) { return '<option value="' + x + '">'; }).join('') + '</datalist>' + zoneHtml() +
       '<details class="bk-more"' + (S.more ? ' open' : '') + '><summary>' + t('more') + '</summary>' +
-      inp('bk-addr', 'addr', t('fAddr'), S.addrText, ' autocomplete="street-address" placeholder="' + t('fAddrPh') + '"') +
       inp('bk-email', 'email', t('email'), S.c.email, ' type="email" autocomplete="email"') +
       '<label class="bk-label" for="bk-oy">' + t('yearTrim') + '</label><div class="bk-row">' + inp('bk-oy', 'oYear', '', v.oYear, ' inputmode="numeric" maxlength="4" placeholder="' + t('yearPh') + '"') +
       inp('bk-trim', 'oTrim', '', v.oTrim, ' placeholder="' + t('trimPh') + '"') + '</div>' +
@@ -612,7 +654,7 @@
       '<div class="bk-err" id="bk-book-err" role="alert">' + (S.bookErr || '') + '</div>' +
       '<button class="bk-btn green" type="button" data-act="book"' + (S.busy ? ' disabled' : '') + (isExoticSafe() && !S.exoticDone ? ' style="display:none"' : '') + '>' +
         (S.busy ? '<span class="bk-spin"></span> ' + t('booking') : t('send')) + '</button>' +
-      '<p class="bk-note">' + (hasPrices() ? t('pay') : t('fNote')) + '</p><p class="bk-hint">' + t('mayContact') + '</p></div>';
+      '<p class="bk-note">' + t('pay') + '</p></div>';
     return h;
   }
   function vehicleLabel() {
@@ -622,56 +664,75 @@
     var p = parseSize(S.veh.typed);
     return p ? p.text + ' (' + t('sizeCust') + ')' : t('sizeUnk');
   }
-  // ---------------------------------------------------------------- "Best time to call you?" (optional; nothing picked by default)
-  var CT_PARTS = [['asap', 'ctAsap', 'Now / ASAP'], ['morning', 'ctMorning', 'Morning (9–12)'], ['afternoon', 'ctAfternoon', 'Afternoon (12–5)'], ['evening', 'ctEvening', 'Evening (5–8)']];
+  // ---------------------------------------------------------------- "When should we come?" (REQUIRED)
   function pad2(n) { return (n < 10 ? '0' : '') + n; }
   function isoDay(d) { return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
-  function todayIso() { return isoDay(new Date()); }
   function ymd(ds) { var p = ds.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); }
   function dateWords(iso, lang) {   // '2026-10-15' -> 'Thu Oct 15' (EN) / 'jeu. 15 oct.' (FR)
     var d = ymd(iso); return d.toLocaleDateString(lang === 'fr' ? 'fr-CA' : 'en-CA', { weekday: 'short', month: 'short', day: 'numeric' }).replace(/,/g, '');
   }
-  // The text the owner sees. Always English so the alert emails read the same for EN and FR customers.
-  function callTime() {
-    if (S.callPart === 'asap') return 'Now / ASAP';
-    var day = S.callDay === 'today' ? 'Today' : S.callDay === 'tomorrow' ? 'Tomorrow' : (S.callDay === 'date' && S.callDate ? dateWords(S.callDate, 'en') : '');
-    var part = (CT_PARTS.filter(function (x) { return x[0] === S.callPart; })[0] || [])[2] || '';
-    return [day, part].filter(Boolean).join(', ');
-  }
-  function callTimeShown() {   // same choice, in the page language
-    if (S.callPart === 'asap') return t('ctAsap');
-    var day = S.callDay === 'today' ? t('ctToday') : S.callDay === 'tomorrow' ? t('ctTomorrow') : (S.callDay === 'date' && S.callDate ? dateWords(S.callDate, S.lang) : '');
-    var part = S.callPart ? t('ct' + S.callPart.charAt(0).toUpperCase() + S.callPart.slice(1)) : '';
-    return [day, part].filter(Boolean).join(', ');
-  }
   function ctBtn(act, v, label, on, dis) {
-    return '<button type="button" class="bk-ct' + (on ? ' sel' : '') + '" data-act="' + act + '" data-v="' + v + '" aria-pressed="' + (on ? 'true' : 'false') + '"' + (dis ? ' aria-disabled="true"' : '') + '>' + esc(label) + '</button>';
+    return '<button type="button" class="bk-ct' + (on ? ' sel' : '') + '" id="bk-' + act + '-' + v + '" data-act="' + act + '" data-v="' + v + '" aria-pressed="' + (on ? 'true' : 'false') + '"' + (dis ? ' aria-disabled="true"' : '') + '>' + esc(label) + '</button>';
   }
-  function hourWord(hm) { var h = +hm.slice(0, 2); return S.lang === 'fr' ? h + ' h' : ((h % 12) || 12) + ':00 ' + (h < 12 ? 'AM' : 'PM'); }
+  function hourWord(hm, lang) { var h = +hm.slice(0, 2), m = hm.slice(3, 5); return (lang || S.lang) === 'fr' ? h + ' h' + (m !== '00' ? ' ' + m : '') : ((h % 12) || 12) + ':' + m + ' ' + (h < 12 ? 'AM' : 'PM'); }
+  function slotWord(hm, lang) { var e = min2hm(hm2min(hm) + ((PR && PR.slots && +PR.slots.minutes) || 60)); return hourWord(hm, lang) + ' – ' + hourWord(e, lang); }   // "8:30 PM – 9:30 PM" / "20 h 30 – 21 h 30"
+  // The visit the customer asked for, as text. lang 'en' = for staff (alert emails read the same for EN and FR customers).
+  function visitWhen(lang) {
+    var L = T[lang || S.lang] || T.en;
+    if (asapOn()) return lang === 'en' ? 'ASAP / Now' : L.vAsapBtn.replace('⚡ ', '');
+    var vd = visitDateIso(); if (!vd || !S.visitTime) return '';
+    var day = S.visitDay === 'today' ? L.vToday + ' ' : S.visitDay === 'tomorrow' ? L.vTomorrow + ' ' : '';
+    return day + dateWords(vd, lang || S.lang) + ', ' + slotWord(S.visitTime, lang || S.lang);
+  }
   function visitHtml() {
-    var asap = !!S.asap, hrs = '';
-    for (var h = 0; h < 24; h++) { var v = pad2(h) + ':00'; hrs += opt(v, hourWord(v), S.visitTime === v); }
-    return '<fieldset class="bk-calltime bk-visit"><legend class="bk-ct-q">🚐 ' + t('vQ') + ' <small>(' + t('vOpt') + ')</small></legend>' +
-      (asap ? '<p class="bk-note" id="bk-visit-asap">' + t('vAsap') + '</p>' :
-      '<div class="bk-ct-grid three" role="group" aria-label="' + esc(t('vDate')) + '">' +
-        ctBtn('vday', 'today', t('ctToday'), S.visitDay === 'today') + ctBtn('vday', 'tomorrow', t('ctTomorrow'), S.visitDay === 'tomorrow') + ctBtn('vday', 'date', t('ctPick'), S.visitDay === 'date') + '</div>' +
-      (S.visitDay === 'date' ? '<label class="bk-label" for="bk-visit-date">' + t('vDate') + '</label><input class="bk-input" type="date" id="bk-visit-date" data-f="visitDate" min="' + torToday() + '" value="' + esc(S.visitDate) + '">' : '') +
-      '<label class="bk-label" for="bk-visit-time">' + t('vTime') + '</label><select class="bk-select" id="bk-visit-time" data-f="visitTime">' + opt('', t('vAny'), !S.visitTime) + hrs + '</select>') +
+    var d = S.visitDay, ao = asapOpen(), vd = visitDateIso(), hrs = hoursFor(vd), err = S.visitErr || '', shown = visitWhen(S.lang), r = ' <span class="bk-req">*</span>';
+    var body = '';
+    if (d === 'asap' && ao) body = '<p class="bk-note bk-visit-asap" id="bk-visit-asap">' + esc(t('vAsap')) + '</p>';
+    else if (d === 'today' || d === 'tomorrow' || d === 'date') {
+      if (d === 'date') body += '<label class="bk-label" for="bk-visit-date">' + t('vDate') + r + '</label><input class="bk-input" type="date" id="bk-visit-date" data-f="visitDate" min="' + torToday() + '" value="' + esc(S.visitDate) + '" required>';
+      if (d === 'date' && !S.visitDate) {}
+      else if (!hrs.length) body += '<p class="bk-note bk-visit-none" id="bk-visit-none">' + esc(t('vNoneLeft')) + '</p>';
+      else {
+        if (!S.slotState[vd]) setTimeout(function () { loadSlots(vd); }, 0);
+        body += '<label class="bk-label" for="bk-visit-time">' + t('vTime') + r + '</label><select class="bk-select" id="bk-visit-time" data-f="visitTime" required' + (err && !S.visitTime ? ' aria-invalid="true"' : '') + ' aria-describedby="bk-visit-err">' +
+          opt('', t('vPickHour'), !S.visitTime) + hrs.map(function (v) {
+            return isTaken(vd, v) ? '<option value="' + v + '" disabled class="bk-busy">' + esc(slotWord(v) + ' (' + t('vBusy') + ')') + '</option>' : opt(v, slotWord(v), S.visitTime === v);
+          }).join('') + '</select>' +
+          (S.slotState[vd] === 'loading' ? '<p class="bk-hint bk-visit-checking" id="bk-visit-checking">' + esc(t('vChecking')) + '</p>' : '') +
+          '<p class="bk-hint bk-visit-hint">' + esc(t('vHint')) + '</p>';
+      }
+    }
+    return '<fieldset class="bk-calltime bk-visit' + (err ? ' bk-invalid' : '') + '" id="bk-visit"><legend class="bk-ct-q">🚐 ' + t('vQ') + r + '</legend>' +
+      '<div class="bk-ct-grid' + (ao ? ' bk-visit-grid' : ' three') + '" role="group" aria-label="' + esc(t('vChoice')) + '">' +
+        (ao ? ctBtn('vday', 'asap', t('vAsapBtn'), d === 'asap') : '') +
+        ctBtn('vday', 'today', t('vToday'), d === 'today') + ctBtn('vday', 'tomorrow', t('vTomorrow'), d === 'tomorrow') + ctBtn('vday', 'date', t('vPick'), d === 'date') + '</div>' +
+      (!ao ? '<p class="bk-note bk-asap-off" id="bk-asap-off">' + esc(t('pAsapOff')) + ' <a href="' + TEL + '">' + esc(t('callBtn')) + '</a></p>' : '') +
+      body +
+      '<div class="bk-err bk-visit-err" id="bk-visit-err" role="alert">' + esc(err) + '</div>' +
+      '<p class="bk-ct-chosen" id="bk-visit-chosen" aria-live="polite"' + (shown && visitDone() ? '' : ' hidden') + '>' + t('vChosen') + ' <b>' + esc(shown) + '</b></p>' +
       '</fieldset>';
   }
-  function callTimeHtml() {
-    var asap = S.callPart === 'asap', shown = callTimeShown();
-    return '<fieldset class="bk-calltime"><legend class="bk-ct-q">📞 ' + t('ctQ') + ' <small>(' + t('ctOpt') + ')</small></legend>' +
-      '<div class="bk-ct-grid" role="group" aria-label="' + esc(t('ctQ')) + '">' +
-        CT_PARTS.map(function (x) { return ctBtn('ctpart', x[0], t(x[1]), S.callPart === x[0]); }).join('') + '</div>' +
-      '<div class="bk-ct-day' + (asap ? ' dim' : '') + '"><div class="bk-ct-sub" id="bk-ct-day-l">' + t('ctDay') + '</div>' +
-      '<div class="bk-ct-grid three" role="group" aria-labelledby="bk-ct-day-l">' +
-        ctBtn('ctday', 'today', t('ctToday'), S.callDay === 'today', asap) + ctBtn('ctday', 'tomorrow', t('ctTomorrow'), S.callDay === 'tomorrow', asap) +
-        ctBtn('ctday', 'date', t('ctPick'), S.callDay === 'date', asap) + '</div>' +
-      (S.callDay === 'date' && !asap ? '<label class="bk-label" for="bk-ct-date">' + t('ctDate') + '</label><input class="bk-input" type="date" id="bk-ct-date" data-f="callDate" min="' + todayIso() + '" value="' + esc(S.callDate) + '">' : '') +
-      '</div>' +
-      (shown ? '<p class="bk-ct-chosen" aria-live="polite">' + t('ctChosen') + ' <b>' + esc(shown) + '</b> <button type="button" class="bk-link" data-act="ctclear">' + t('ctClear') + '</button></p>' : '') +
-      '</fieldset>';
+  function refreshVisitBits() {   // after an hour is picked: update the chosen line + clear the error without re-rendering the select
+    var shown = visitWhen(S.lang), ch = document.getElementById('bk-visit-chosen');
+    if (ch) { ch.hidden = !(shown && visitDone()); ch.innerHTML = t('vChosen') + ' <b>' + esc(shown) + '</b>'; }
+    if (S.visitErr && visitDone()) {
+      S.visitErr = ''; if (S.bookErrVisit) { S.bookErr = ''; S.bookErrVisit = false; var be = document.getElementById('bk-book-err'); if (be) be.textContent = ''; }
+      var ve = document.getElementById('bk-visit-err'); if (ve) ve.textContent = '';
+      var fs = document.getElementById('bk-visit'); if (fs) fs.classList.remove('bk-invalid');
+      var sel = document.getElementById('bk-visit-time'); if (sel) sel.removeAttribute('aria-invalid');
+    }
+  }
+  function visitError() {   // -> { msg, el } or null
+    var d = S.visitDay, first = asapOpen() ? 'bk-vday-asap' : 'bk-vday-today';
+    if (d === 'asap') return asapOpen() ? null : { msg: t('vNeed'), el: 'bk-vday-today' };
+    if (d !== 'today' && d !== 'tomorrow' && d !== 'date') return { msg: t('vNeed'), el: first };
+    if (d === 'date' && (!S.visitDate || S.visitDate < torToday())) { S.visitDate = ''; return { msg: t('vNeedDate'), el: 'bk-visit-date' }; }
+    var hrs = hoursFor(visitDateIso());
+    if (!hrs.length) { S.visitTime = ''; return { msg: t('vNoneLeft'), el: 'bk-vday-tomorrow' }; }
+    if (!S.visitTime) return { msg: t('vNeedHour'), el: 'bk-visit-time' };
+    if (hrs.indexOf(S.visitTime) < 0) { S.visitTime = ''; return { msg: t('vPast'), el: 'bk-visit-time' }; }
+    if (isTaken(visitDateIso(), S.visitTime)) { S.visitTime = ''; return { msg: t('vTakenSel'), el: 'bk-visit-time' }; }
+    return null;
   }
   // Street address + city without repeating the city ("123 Rue Exemple, Orléans" + "orleans" -> "123 Rue Exemple, Orléans").
   // Case- and accent-insensitive, whole words only (so "Hull" is not found inside "Hullmar Dr").
@@ -687,20 +748,20 @@
 
   function doneHtml() {
     var d = S.done;
-    return '<div class="bk-card bk-done"><div class="big">✅</div><h2 class="bk-title">' + t('doneR') + '</h2>' +
-      '<p class="bk-sub" style="font-size:17px"><b>' + t('doneRsub') + '</b></p>' +
-      '<div class="bk-sum" style="text-align:left"><div><span>' + t('bookingNo') + '</span><span>' + esc(d.bookingNo) + '</span></div></div>' +
+    var x = S.doneInfo || {}, row = function (k, v) { return v ? '<div><span>' + t(k) + '</span><span>' + esc(v) + '</span></div>' : ''; };
+    return '<div class="bk-card bk-done"><h2 class="bk-title" id="bk-done-h">' + t('doneR') + '</h2>' +
+      '<div class="bk-sum" id="bk-done-sum" style="text-align:left">' + row('dWhen', x.when) + row('dAddr', x.addr) + row('dVeh', x.veh) + row('dTotal', x.total) +
+        row('bookingNo', d.bookingNo) + '</div>' +
       calHtml(d) +
-      (d.emailed ? '<p class="bk-note">' + t('emailSent') + '</p>' : '') + '<p class="bk-note">' + t('change') + '</p>' +
+      '<p class="bk-note" id="bk-done-note">' + t('doneRsub') + '</p>' +
+      (d.emailed ? '<p class="bk-note">' + t('emailSent') + '</p>' : '') +
       (d.testMode ? '<p class="bk-note" style="color:#ffd27a">' + t('testDone') + '</p>' : '') + '</div>';
   }
 
   // ---- "Add to my calendar" (customer). Ottawa wall-clock times with TZID America/Toronto.
-  //   ASAP: from the moment they send, 1 hour, title "(ASAP)".  Preferred time picked: its start, 1 hour, on the
-  //   call day they chose (else today if still ahead, else tomorrow).  Neither (only a call window, or nothing):
-  //   the start of their best-time-to-call window (Morning 09:00, Afternoon 12:00, Evening 17:00) or the next full
-  //   hour, flagged as "around your best time to call". Always "Requested time: we'll call to confirm".
-  var PHONE_SHOWN = '(613) 601-6471', CT_START = { morning: '09:00', afternoon: '12:00', evening: '17:00' };
+  //   ASAP / Now: from the moment they send, 1 hour, title "(ASAP)".  Today / Tomorrow / a date: the visit hour they
+  //   picked, 1 hour.  Business name + public phone only (never the owner's name or email).
+  var PHONE_SHOWN = '(613) 601-6471';
   function torParts(ms) {
     var o = {}; new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' })
       .formatToParts(new Date(ms)).forEach(function (p) { o[p.type] = p.value; });
@@ -712,21 +773,15 @@
   }
   function wstr(w) { return w.day.replace(/-/g, '') + 'T' + pad2(w.hh) + pad2(w.mm) + '00'; }
   function calInfo(q, now) {
-    var tp = torParts(now), nowHM = pad2(tp.hh) + ':' + pad2(tp.mm), start, guess = false, asap = !!(q && q.asap);
-    var dayOf = function (hm) { return S.callDay === 'today' ? tp.day : S.callDay === 'tomorrow' ? wall(tp.day, 0, 0, 1440).day : S.callDay === 'date' && S.callDate ? S.callDate : hm > nowHM ? tp.day : wall(tp.day, 0, 0, 1440).day; };
-    var pm = String(S.pref || '').match(/^(\d{2}):(\d{2})/);
-    var vd = visitDateIso();
-    if (asap) start = { day: tp.day, hh: tp.hh, mm: tp.mm };
-    else if (S.visitTime) start = { day: vd || dayOf(S.visitTime), hh: +S.visitTime.slice(0, 2), mm: 0 };
-    else if (vd) { var c0 = (CT_START[S.callPart] || '09:00').split(':'); start = { day: vd, hh: +c0[0], mm: +c0[1] }; guess = true; }
-    else if (pm) start = { day: dayOf(pm[1] + ':' + pm[2]), hh: +pm[1], mm: +pm[2] };
-    else if (CT_START[S.callPart]) { var c = CT_START[S.callPart].split(':'); start = { day: dayOf(CT_START[S.callPart]), hh: +c[0], mm: +c[1] }; guess = true; }
-    else { start = wall(tp.day, tp.hh, 0, 60); guess = true; }
+    var tp = torParts(now), start, asap = asapOn(), vd = visitDateIso();
+    if (asap) start = wall(tp.day, tp.hh, 0, Math.ceil(tp.mm / 15) * 15);   // ASAP: now, rounded up to the next 15 minutes (same as the staff calendar event)
+    else if (S.visitTime && vd) start = { day: vd, hh: +S.visitTime.slice(0, 2), mm: +S.visitTime.slice(3, 5) };
+    else start = wall(tp.day, tp.hh, 0, 60);   // not reachable (a visit choice is required); next full hour
     var end = wall(start.day, start.hh, start.mm, 60), L = T[S.lang] || T.en;
-    var total = q ? (q.fee || q.disc || q.asapFee ? breakdown(q, S.lang) : priceText(q, S.lang)) + ' (' + tierLabel(q.tier) + ', ' + rimsWord(q, S.lang) + ')' : L.calNoPrice;
+    var total = q ? (q.fee || q.disc || q.asapFee ? breakdown(q, S.lang) : priceText(q, S.lang)) + ' (' + rimsWord(q, S.lang) + ')' : L.calNoPrice;
     if (q && q.fee === null) total += ' · ' + L.pAreaOtherShort;
-    return { asap: asap, guess: guess, start: start, end: end, title: asap ? L.calTAsap : L.calT, address: areaLabel() || S.area || S.addrText || '',
-             desc: [L.calReq, L.calAddr + ': ' + (areaLabel() || S.area || S.addrText || '—'), L.calTotal + ': ' + (q ? total : L.calNoPrice), L.calQ + ' ' + PHONE_SHOWN + '. Mobile Tire Repair Ottawa'] };
+    return { asap: asap, start: start, end: end, title: asap ? L.calTAsap : L.calT, address: areaLabel() || S.area || S.addrText || '',
+             desc: [asap ? L.calReqAsap : L.calReq + ': ' + visitWhen(S.lang), L.calAddr + ': ' + (areaLabel() || S.area || S.addrText || '—'), L.calTotal + ': ' + (q ? total : L.calNoPrice), L.calQ + ' ' + PHONE_SHOWN + '. Mobile Tire Repair Ottawa'] };
   }
   function calWhenText(c) {
     var p = c.start.day.split('-').map(Number), d = new Date(p[0], p[1] - 1, p[2]);
@@ -751,12 +806,12 @@
       'END:VTIMEZONE', 'BEGIN:VEVENT', 'UID:' + (no || tp) + '@mobiletirerepairottawa.ca', 'DTSTAMP:' + tp,
       'DTSTART;TZID=America/Toronto:' + wstr(c.start), 'DTEND;TZID=America/Toronto:' + wstr(c.end),
       'SUMMARY:' + icsEsc(c.title), 'LOCATION:' + icsEsc(c.address), 'DESCRIPTION:' + icsEsc(c.desc.concat(no ? [T[S.lang].calReqNo + ' ' + no] : []).join('\n')),
-      'STATUS:TENTATIVE', 'TRANSP:OPAQUE', 'END:VEVENT', 'END:VCALENDAR'].map(icsFold).join('\r\n') + '\r\n';
+      'STATUS:CONFIRMED', 'TRANSP:OPAQUE', 'END:VEVENT', 'END:VCALENDAR'].map(icsFold).join('\r\n') + '\r\n';
   }
   function calHtml(d) {
     var c = S.cal; if (!c) return '';
     return '<div class="bk-cal" id="bk-cal"><h3 class="bk-cal-h">' + t('calH') + '</h3>' +
-      '<p class="bk-note">' + esc(t(c.guess ? 'calWhenGuess' : 'calWhen').replace('{W}', calWhenText(c))) + '</p>' +
+      '<p class="bk-note">' + esc(t(c.asap ? 'calWhenAsap' : 'calWhen').replace('{W}', calWhenText(c))) + '</p>' +
       '<div class="bk-cal-btns"><a class="bk-btn" id="bk-cal-google" target="_blank" rel="noopener" href="' + esc(gcalLink(c, d.bookingNo)) + '">' + t('calGoogle') + '</a>' +
       '<a class="bk-btn" id="bk-cal-ics" download="mobile-tire-repair-ottawa.ics" href="data:text/calendar;charset=utf-8,' + encodeURIComponent(icsText(c, d.bookingNo, Date.now())) + '">' + t('calIcs') + '</a></div></div>';
   }
@@ -778,14 +833,15 @@
   function draftSoon() { clearTimeout(draftTimer); draftTimer = setTimeout(sendDraft, 700); }
   function readField(el) {
     var f = el.getAttribute('data-f'), val = el.value.trim(), v = S.veh; if (!f) return '';
-    if (f === 'car') { if (v.car !== val) S.tierPick = ''; v.car = val; syncCar(); S.exoticDone = false; }
-    else if (f === 'typed' || f === 'oYear' || f === 'oTrim') { if (f === 'typed' && v.typed !== val) S.tierPick = ''; v[f] = val; if (f !== 'oYear') S.exoticDone = false; }
+    if (f === 'car') { v.car = val; syncCar(); S.exoticDone = false; }
+    else if (f === 'typed' || f === 'oYear' || f === 'oTrim') { v[f] = val; if (f !== 'oYear') S.exoticDone = false; }
     else if (f === 'area') { if (S.area !== val) S.feePick = ''; S.area = val; S.zone = null; }
-    else if (f === 'addr') { if (S.addrText !== val && !S.area) S.feePick = ''; S.addrText = val; S.zone = null; }
+    else if (f === 'addr') { if (S.addrText !== val && !S.area) S.feePick = ''; S.addrText = val; S.zone = null;
+      if (S.addrErr && streetOk(val)) { S.addrErr = ''; var ae = document.getElementById('bk-addr-err'); if (ae) ae.textContent = ''; el.removeAttribute('aria-invalid'); } }
     else if (f === 'pref') S.pref = val;
     else if (f === 'visitTime') S.visitTime = val;
-    else if (f === 'visitDate') S.visitDate = val && val >= torToday() ? val : '';
-    else if (f === 'callDate') { S.callDate = val && val >= todayIso() ? val : ''; if (val && !S.callDate) el.value = ''; }
+    else if (f === 'visitDate') { S.visitDate = val && val >= torToday() ? val : ''; if (val && !S.visitDate) el.value = '';
+      if (S.visitTime && hoursFor(S.visitDate).indexOf(S.visitTime) < 0) S.visitTime = ''; }   // e.g. date changed to today: an hour already past is dropped
     else if (f === 'name' || f === 'phone' || f === 'email' || f === 'notes') S.c[f] = val;
     return f;
   }
@@ -794,7 +850,8 @@
     var f = readField(e.target); if (!f) return;
     if (f === 'car' || f === 'typed' || f === 'oYear' || f === 'oTrim') { refreshStep1(); markStarted(); }
     if (f === 'area' || f === 'addr') { var z = root.querySelector('.bk-zone'); if (z) z.remove(); refreshPrice(); }
-    if (f === 'callDate' && e.type === 'change') { render(); return draftSoon(); }
+    if (f === 'visitDate' && e.type === 'change') { S.visitErr = ''; render(); var vt = document.getElementById('bk-visit-time') || document.getElementById('bk-visit-date'); if (vt) vt.focus(); return draftSoon(); }
+    if (f === 'visitTime') refreshVisitBits();
     if (f === 'pref' || f === 'visitTime' || f === 'visitDate') { refreshPrice(); draftSoon(); }
     if (f === 'phone' || f === 'car' || f === 'typed' || f === 'name' || f === 'pref') draftSoon();
   }
@@ -809,15 +866,14 @@
     if (act === 'exotic') return sendExotic();
     if (act === 'lang') { readAll(); S.lang = S.lang === 'fr' ? 'en' : 'fr'; lsSet('bk_lang', S.lang); return render(); }
     if (act === 'tires') { readAll(); S.tires = +val; return render(); }
-    if (act === 'runflat') { S.runflat = el.checked; S.tierPick = ''; refreshStep1(); markStarted(); return draftSoon(); }
-    if (act === 'tier') { readAll(); S.tierPick = val; refreshStep1(); markStarted(); return draftSoon(); }
-    if (act === 'asap') { S.asap = el.checked; S.asapAt = el.checked ? new Date().toISOString() : ''; readAll(); render(); var ab = document.getElementById('bk-asap'); if (ab) ab.focus(); return draftSoon(); }
-    if (act === 'vday') { readAll(); S.visitDay = S.visitDay === val ? '' : val; if (val !== 'date') S.visitDate = ''; render(); focusAct(act, val); return draftSoon(); }
+    if (act === 'vday') {   // required choice: tapping the selected one again keeps it
+      readAll(); S.visitDay = val; S.asapAt = val === 'asap' ? new Date().toISOString() : '';
+      if (val !== 'date') S.visitDate = '';
+      if (val === 'asap' || (S.visitTime && hoursFor(visitDateIso()).indexOf(S.visitTime) < 0)) S.visitTime = '';
+      S.visitErr = ''; if (S.bookErrVisit) { S.bookErr = ''; S.bookErrVisit = false; }
+      render(); focusAct(act, val); return draftSoon();
+    }
     if (act === 'rims') { readAll(); S.rims = val; S.service = val === 'yes' ? 'on' : 'off'; refreshStep1(); return draftSoon(); }
-    if (act === 'ctpart') { readAll(); S.callPart = S.callPart === val ? '' : val; if (val === 'asap' && S.callPart) { S.callDay = ''; S.callDate = ''; } render(); focusAct(act, val); return draftSoon(); }
-    if (act === 'ctday') { if (el.getAttribute('aria-disabled') === 'true') return; readAll(); S.callDay = S.callDay === val ? '' : val; if (S.callPart === 'asap') S.callPart = '';
-      if (val !== 'date') S.callDate = ''; render(); focusAct(act, val); return draftSoon(); }
-    if (act === 'ctclear') { readAll(); S.callPart = S.callDay = S.callDate = ''; render(); return draftSoon(); }
     if (act === 'book') return book();
   });
 
@@ -826,15 +882,18 @@
     readAll();
     if (!S.c.name) return { msg: t('nameBad'), el: 'bk-name' };
     if (!cleanPhone(S.c.phone)) return { msg: t('phoneBad'), el: 'bk-phone' };
-    if (S.veh.typed && !parseSize(S.veh.typed) && !hasCar()) return { msg: t('sizeBad'), el: 'bk-size' };
-    if (!step1Basics()) return { msg: t('needCar'), el: 'bk-car' };
-    if (!S.area && !S.addrText) return { msg: t('needArea'), el: 'bk-area' };
+    if (!hasCar()) return { msg: t(S.veh.car ? 'needModel' : 'needCar'), el: 'bk-car' };   // make & model required; tire size optional
+    if (!streetOk(S.addrText)) return { msg: t('addrBad'), el: 'bk-addr', addr: true };   // full street address required
+    if (!S.area) return { msg: t('needArea'), el: 'bk-area' };
+    var ve = visitError(); if (ve) { ve.visit = true; return ve; }   // "When should we come?" is required
     var q = priceInfo();
-    if (q && q.none) return { msg: t('pNeedTier'), el: 'bk-tier-' + PR.order[0] };
     if (q && q.needRims) return { msg: t('pNeedRims'), el: 'bk-rims-yes' };
     if (q && q.needArea) return { msg: t('pNeedArea'), el: 'bk-feearea' };
+    if (!q || !q.ready) return { msg: t('noTotal'), el: 'bk-book-err' };   // instant booking needs the total shown above Book
     return null;
   }
+  // Full street address: a house number followed by a street name ("123 Greenbank Rd", "12-345 Main St", "Apt 4, 55 Rue Laurier").
+  function streetOk(x) { return /(^|[\s,#])\d+[a-z]?(-\d+[a-z]?)?\s+[a-zà-ÿ'’.-]{2,}/i.test(String(x || '')); }
   function cleanPhone(p) { var d = String(p || '').replace(/\D/g, ''); if (d.length === 11 && d[0] === '1') d = d.slice(1); return /^[2-9]\d{2}[2-9]\d{6}$/.test(d) ? d : ''; }
 
   // Zone from the full address if given, otherwise from the city/neighbourhood. Never blocks the request
@@ -891,7 +950,7 @@
 
   function draftDetails() {
     return { name: S.c.name, email: S.c.email, size: sizeLabel(), service: (S.service === 'on' ? 'On-rim' : 'Off-rim') + ' x' + S.tires,
-             address: areaLabel(), zone: S.zone && !S.zone.error ? S.zone.zone : '', area: S.area, callTime: callTime(), lang: S.lang, price: shownPriceForOwner(), ref: S.ref, onRims: S.rims, asap: asapOn(), serviceArea: (function () { var q = priceInfo(); return q && q.ready ? (q.areaName || 'Other') : ''; })() };
+             address: areaLabel(), zone: S.zone && !S.zone.error ? S.zone.zone : '', area: S.area, visitWhen: visitWhen('en'), visitDate: asapOn() ? torToday() : visitDateIso(), visitHour: asapOn() ? '' : S.visitTime, lang: S.lang, price: shownPriceForOwner(), ref: S.ref, onRims: S.rims, asap: asapOn(), serviceArea: (function () { var q = priceInfo(); return q && q.ready ? (q.areaName || 'Other') : ''; })() };
   }
   function shownPriceForOwner() { var q = priceInfo(); return q && q.ready ? priceForOwner(q) : 'Call for a quote'; }
   function sendDraft() {
@@ -899,7 +958,7 @@
     readAll();
     var phone = cleanPhone(S.c.phone); if (!phone || !S.cfg || !step1Basics()) return;   // fires once phone + (car or size) are in
     var payload = { action: 'draft', session: S.session, firstName: (S.c.name || '').split(' ')[0], phone: phone, vehicle: vehicleLabel(),
-                    slot: S.pref || '', callTime: callTime(), price: shownPriceForOwner(), details: draftDetails() };
+                    slot: visitWhen('en'), price: shownPriceForOwner(), details: draftDetails() };   // slot = the visit asked for (shows as "Slot picked" in the alert)
     var sig = JSON.stringify(payload); if (sig === S.draftSent) return; S.draftSent = sig;
     apiPost(payload).catch(function () {});
   }
@@ -923,7 +982,7 @@
 
   function sendExotic() {
     var fe = formError(), err = document.getElementById('bk-book-err');
-    if (fe && fe.el !== 'bk-area') { err.textContent = fe.msg; var x = document.getElementById(fe.el); if (x) x.focus(); return; }
+    if (fe && fe.el !== 'bk-area' && !fe.visit && !fe.addr && fe.el !== 'bk-book-err') { err.textContent = fe.msg; var x = document.getElementById(fe.el); if (x) x.focus(); return; }
     S.busy = true; refreshStep1();
     var typed = parseSize(S.veh.typed);
     apiPost({ action: 'exotic', name: S.c.name, phone: S.c.phone, address: areaLabel(), vehicle: vehicleLabel(), size: typed ? typed.text : '',
@@ -935,16 +994,16 @@
   function book() {
     if (S.busy) return;
     var fe = formError();
-    if (fe) { S.bookErr = fe.msg; render(); var x = document.getElementById(fe.el); if (x) x.focus(); return; }
+    if (fe) { S.bookErr = fe.msg; S.bookErrVisit = !!fe.visit; S.visitErr = fe.visit ? fe.msg : ''; S.addrErr = fe.addr ? fe.msg : ''; render(); var x = document.getElementById(fe.el); if (x) { x.focus(); if (fe.visit && x.scrollIntoView) x.scrollIntoView({ block: 'center' }); } return; }
     if (isExoticSafe()) return;   // custom-quote box is showing instead
     var hp = document.getElementById('bk-hp'), hpv = hp ? hp.value : '';
-    S.busy = true; S.bookErr = ''; render();
+    S.busy = true; S.bookErr = ''; S.visitErr = ''; S.addrErr = ''; S.bookErrVisit = false; render();
     checkZone().then(function (z) {
       if (z && !z.error && z.zone === 0) { S.busy = false; return render(); }   // outside our area: show the Call box
       sendDraft();
       var v = S.veh, typed = parseSize(v.typed);
-      var ct = callTime();
-      var notes = [S.c.notes, ct ? 'Best time to call: ' + ct : '', S.pref ? (S.lang === 'fr' ? 'Heure préférée : ' : 'Preferred time: ') + S.pref : ''].filter(Boolean).join(' · ');
+      var vw = visitWhen('en'), vasap = asapOn(), vi = visitInfo(vasap);
+      var notes = [S.c.notes, vw ? 'Visit booked: ' + vw : ''].filter(Boolean).join(' · ');
       var payload = {
         action: 'lead', session: S.session, lang: S.lang, hp: hpv,
         vehicleId: '', year: v.oYear, make: v.oMake, model: v.oModel, trim: v.oTrim, trimUnsure: !v.oTrim, vehicleClass: (priceInfo() || {}).tier === 'pickup' ? 'pickup' : 'car',
@@ -952,7 +1011,11 @@
         address: (S.addrText || S.area).length < 6 ? (S.addrText || S.area) + ', Ottawa-Gatineau' : (S.addrText || S.area), addressFormatted: areaLabel(),
         name: S.c.name, phone: S.c.phone, email: S.c.email, notes: notes, offerId: '', expectedSubtotal: null, ref: S.ref, multiCar: !!S.multiCar,
         // new, informational fields (the script can ignore them):
-        area: S.area, streetAddress: S.addrText, preferredTime: S.pref, callTime: ct, vehicleText: v.car, zone: z && !z.error ? z.zone : '', price: 'Call for a quote'
+        area: S.area, streetAddress: S.addrText, preferredTime: '', vehicleText: v.car, zone: z && !z.error ? z.zone : '', price: 'Call for a quote',
+        // "When should we come?" (required): always sent, with or without a price
+        visitChoice: S.visitDay, visitWhen: vw, visitDate: vasap ? torToday() : visitDateIso(), visitHour: vasap ? '' : S.visitTime,
+        visitTime: vi.label, visitTimeSource: vi.src, slotCheck: slotCheckState(), asap: vasap, asapRequestedAt: vasap ? S.asapAt : '',
+        asapRequestedLocal: vasap && S.asapAt ? new Date(S.asapAt).toLocaleString('en-CA', { timeZone: 'America/Toronto', dateStyle: 'medium', timeStyle: 'short' }) + ' ET' : ''
       };
       var q = priceInfo();
       if (q && q.ready) {   // itemized total shown to the customer right above Send (no accept checkbox: owner, Oct 18)
@@ -960,26 +1023,36 @@
         payload.swapPrice = q.swap; payload.onRims = q.rims === 'yes' ? 'yes' : q.rims === 'no' ? 'no' : 'not sure';
         payload.serviceFee = q.fee; payload.serviceArea = q.fee === null ? 'Other: ' + (S.area || S.addrText) : (q.areaName || S.area || S.addrText);
         payload.offerApplied = !!q.disc; payload.offerAmount = q.disc; payload.offerType = q.disc ? q.offerType : ''; payload.offerFloor = q.offerFloor; payload.tier = q.tier; payload.tierLabel = tierLabel(q.tier, 'en');
-        payload.tierSource = tierSource(q); payload.runFlat = !!S.runflat; payload.beforeTax = true; payload.priceShown = priceText(q, S.lang);
+        payload.tierSource = tierSource(q); payload.tierReason = q.auto.reason; payload.vehicleRecognized = !!q.auto.recognized;
+        payload.vehicleFlag = q.auto.recognized ? '' : '⚠️ Vehicle not recognized: confirm tire type on the call';
+        payload.runFlat = /run-flat|performance/.test(q.auto.reason); payload.beforeTax = true; payload.priceShown = priceText(q, S.lang);
         payload.afterHours = !!q.after; payload.serviceFeeType = q.after ? 'after-hours' : q.fee === null ? 'to confirm' : q.fee ? 'area' : 'none';
-        payload.visitTime = q.visit.label; payload.visitTimeSource = q.visit.src;
         payload.urgency = !!q.urg; payload.urgencyReason = q.urg; payload.urgencyFee = q.asapFee;
-        payload.visitDate = q.asap ? torToday() : visitDateIso(); payload.visitHour = q.asap ? '' : S.visitTime;
-        payload.asap = !!q.asap; payload.asapFee = q.asap ? q.asapFee : 0; payload.asapRequestedAt = q.asap ? S.asapAt : '';
-        payload.asapRequestedLocal = q.asap && S.asapAt ? new Date(S.asapAt).toLocaleString('en-CA', { timeZone: 'America/Toronto', dateStyle: 'medium', timeStyle: 'short' }) + ' ET' : '';
+        payload.asapFee = q.asap ? q.asapFee : 0;
         if (q.urg) payload.notes = ['⚡ ' + (q.urg === 'asap' ? 'ASAP' : 'SAME-DAY') + ' urgency (+' + money(q.asapFee, 'en') + ')', payload.notes].filter(Boolean).join(' · ');
-        payload.notes = [payload.notes, 'Total shown: ' + payload.price, 'Tier: ' + payload.tierLabel + ' (' + payload.tierSource + ')'].filter(Boolean).join(' · ');
+        payload.notes = [payload.vehicleFlag, payload.notes, 'Tier: ' + payload.tierLabel + ' (' + q.auto.reason + ')', 'Total shown: ' + payload.price].filter(Boolean).join(' · ');   // the script keeps 300 chars: flag first
       }
       var cal = calInfo(q && q.ready ? q : null, Date.now());
       return apiPost(payload).then(function (r) {
         S.busy = false;
         if (r.ok) {
           S.done = r; S.cal = cal;
+          S.doneInfo = { when: asapOn() ? t('dAsap') : visitWhen(S.lang), addr: areaLabel(), veh: vehicleLabel() + (typed ? ' · ' + typed.text : ''),
+                         total: q && q.ready ? (q.fee || q.disc || q.asapFee ? breakdown(q, S.lang) : priceText(q, S.lang)) : '' };
           if (S.offer) { S.offer.used = true; lsSet('bk_offer', JSON.stringify(S.offer)); S.offer = null; }
           if (S.offerApplied) lsSet('bk_swap_offer', 'used');
           lsSet('bk_booked', '1'); lsSet('bk_started', '');
           fireConversion(r);
           return render();
+        }
+        if (r.error === 'slot_taken') {   // someone booked that hour a moment ago (the script re-checks before saving)
+          var td = r.date || visitDateIso(), th = r.hour || S.visitTime; S.taken[td] = (S.taken[td] || []).concat([th]);
+          S.visitTime = ''; S.visitErr = t('vTaken'); S.bookErr = t('vTaken'); S.bookErrVisit = true; render();
+          var vt = document.getElementById('bk-visit-time'); if (vt) { vt.focus(); if (vt.scrollIntoView) vt.scrollIntoView({ block: 'center' }); }
+          loadSlots(td, true); return;
+        }
+        if (r.error === 'slot_invalid') {   // the script refused the time (not a bookable slot, or it already started)
+          S.visitTime = ''; S.visitErr = t('vPast'); S.bookErr = t('vPast'); S.bookErrVisit = true; return render();
         }
         if (r.error === 'offer_invalid') { S.offer = null; lsSet('bk_offer', 'null'); S.bookErr = t('offerGone'); return render(); }
         if (r.error === 'price_changed') { S.bookErr = t('priceChanged'); return render(); }
