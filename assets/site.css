@@ -1431,7 +1431,7 @@ a.area-card:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;}
 .book-form .btn-primary[disabled]{opacity:.7;cursor:wait;}
 .promo-done-big{font-size:46px;line-height:1;margin:6px 0 10px;}
 #done-title:focus{outline:none;}
-/* "Or Book by Text" + "Request a Call Back" side by side (home winter card) */
+/* "Or Call Us" + "Request a Call Back" side by side (home winter card) */
 .winter-alt-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
 .winter-alt-row .btn-full{margin-top:0 !important;display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;padding:12px 8px;white-space:normal;text-align:center;font-size:14px;letter-spacing:0.06em;line-height:1.2;}
 @media(max-width:340px){.winter-alt-row{grid-template-columns:1fr;}}
@@ -1598,7 +1598,8 @@ a.footer-logo{display:block;text-decoration:none;margin-bottom:12px;}
   color:var(--bg-void);
   box-shadow:0 0 0 1px rgba(255,255,255,0.35) inset,0 0 22px rgba(0,229,255,0.55);
 }
-.float-bar-inner.has-book{grid-template-columns:1.25fr 1fr 1fr;gap:8px;}
+.float-bar-inner.has-book{grid-template-columns:1fr 1fr;gap:8px;}   /* Book + Call (no Text button) */
+.float-bar-inner.call-only{grid-template-columns:1fr !important;}
 .float-bar-inner.has-book .float-btn-text{
   background:#0c2a22;
   color:var(--green);

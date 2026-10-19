@@ -1,11 +1,13 @@
-/* Leaving popup is turned off: the site does not show prices or discounts. Lives at /assets/offer.js.
+/* Exit offer popup. Lives at /assets/offer.js. It only shows on the booking form (the page sets
+ * window.MTRO_OFFER.priceOffer): a one-time $ off to finish booking now, amounts in /book-tire-swap/prices.js.
+ * On every other page it never shows (the site shows no prices or discounts outside the booking form).
  * Shows ONCE per visitor (this browser), never after they've booked here, never twice.
  * Shows when the visitor:
  *   - switches apps/tabs and comes back
  *   - sits idle ~30 seconds
  *   - (phone) scrolls back up fast toward the top after reading down the page
  *   - (computer) moves the mouse up to close/leave the tab
- *   - picked a car in the booking form, then left before confirming (shows on their next page view)
+ *   - (booking page only, and only while the form is started but not sent: see canShow in booking.js)
  * Honest: no countdown timers, no back-button trapping. The 48-hour limit and "first-time customers only"
  * are checked by the booking script when they book.
  * The booking page passes hooks in window.MTRO_OFFER (claim straight into the form, its own wording).
@@ -108,8 +110,7 @@
 
   var lastWhy = '';
   function show(why, skipArm) {
-    // No prices or discounts are shown on the site.
-    return false;
+    if (!H.priceOffer) return false;   // booking form only
     if (!eligible(skipArm)) return false;
     shown = true; lastWhy = why;
     lsSet('bk_offer_seen', '1');                 // once per visitor, even if they ignore it
@@ -125,8 +126,8 @@
     if (how === 'no' || how === 'x' || how === 'backdrop' || how === 'esc') track('offer_declined', lastWhy);
   }
 
-  // ------------------------------------------------------------ claim (offers are turned off)
-  function claim() {   // no offers or discounts: never asks the booking script for one
+  // ------------------------------------------------------------ claim (the booking form applies the $ off; the script is not asked)
+  function claim() {
     track('offer_claimed', lastWhy);
     if (H.claim) H.claim();
     close('yes');

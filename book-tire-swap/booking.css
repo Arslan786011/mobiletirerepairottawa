@@ -2,7 +2,6 @@
 .bk-wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:28px 16px 40px;}
 /* keep content clear of the fixed Text/Call bar on phones */
 @media (max-width:900px){body{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}.bk-card{scroll-margin-bottom:120px}}
-body.bk-fr-textonly .float-bar-inner{grid-template-columns:1fr !important}
 .bk-test{background:#3d2a00;color:#ffd27a;font-weight:800;font-size:13px;text-align:center;padding:8px 12px;border-radius:10px;margin-bottom:14px;border:1px solid #7a5600}
 .bk-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px}
 .bk-kicker{font-family:var(--font-cond);font-size:13px;letter-spacing:.16em;color:var(--green);font-weight:800;text-transform:uppercase}
@@ -122,3 +121,51 @@ body.bk-fr-textonly .float-bar-inner{grid-template-columns:1fr !important}
 .bk-wrap .bk-card .bk-btn.ghost{color:#006b80;border:2px solid #6b7a99}
 .bk-wrap .bk-card .bk-sum div{border-bottom-color:#6b7a99}
 .bk-wrap .bk-card .bk-sum div span:first-child{color:#44516b}
+/* Price box (Ottawa booking form only): vehicle type -> price from prices.js + required "I accept this price" */
+.bk-price{border:1px solid var(--cyan);border-radius:12px;padding:12px 14px 14px;margin:16px 0 0;background:rgba(0,229,255,.06)}
+.bk-price .bk-price-h{display:block;font-size:16px;font-weight:800;color:var(--white)}
+.bk-price .bk-runflat{margin-top:10px;font-size:15px}
+.bk-price .bk-rims{display:grid;padding:0;margin-bottom:2px}
+.bk-price #bk-rims-l,.bk-price #bk-tier-l{margin-top:14px}
+.bk-price .bk-select{margin-top:6px}
+.bk-price label[for=bk-feearea]{text-transform:none;letter-spacing:0;font-size:15px;line-height:1.35;margin-top:14px}
+.bk-price .bk-price-break{display:block;font-size:15.5px;font-weight:700;line-height:1.35;padding:2px 0;color:var(--white)}
+.bk-price .bk-area-need{font-weight:700}
+.bk-price .bk-asap{margin-top:14px;padding:10px 12px;border-radius:10px;border:2px dashed #b8860b;font-weight:700;line-height:1.35;align-items:flex-start}
+.bk-price .bk-asap input{flex:0 0 22px;width:22px;height:22px;margin-top:1px}
+.bk-wrap .bk-card .bk-price .bk-asap{background:#fffaf0;color:#0b1530}
+.bk-price .bk-tiers{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;padding:0}
+.bk-tier{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:62px;padding:10px;border-radius:10px;background:#0a1122;border:1px solid var(--glass-border);color:var(--white);text-align:left;cursor:pointer;font-family:var(--font-body);touch-action:manipulation;min-width:0}
+.bk-tier b{font-size:15px;line-height:1.2}.bk-tier small{font-size:12.5px;line-height:1.25;color:var(--muted)}
+.bk-tier.sel{border-color:var(--cyan);box-shadow:0 0 0 2px var(--cyan)}
+.bk-tier-note{font-size:13.5px;line-height:1.4;margin:8px 0 0;color:var(--muted)}
+.bk-price .bk-offer-on{display:block;font-size:14.5px;font-weight:800;color:var(--green);padding:2px 0}
+.bk-price .bk-price-amt{display:block;font-size:30px;font-weight:900;line-height:1.1;margin:12px 0 2px;padding:0;color:var(--white)}
+.bk-price .bk-price-svc{display:block;font-size:14px;font-weight:700;color:var(--muted)}
+.bk-price-note{font-size:13.5px;line-height:1.4;margin:8px 0 0;color:var(--muted)}
+.bk-price .bk-accept{align-items:flex-start;margin-top:14px;padding:10px 12px;border-radius:10px;border:2px solid var(--cyan);font-weight:700;line-height:1.35}
+.bk-price .bk-accept input{flex:0 0 22px;width:22px;height:22px;margin-top:1px}
+.bk-price .bk-accept.err{border-color:#ff5c5c;box-shadow:0 0 0 2px rgba(255,92,92,.35)}
+.bk-wrap .bk-card .bk-price{background:#eefcff;border:2px solid #00808f}
+.bk-wrap .bk-card .bk-price-h,.bk-wrap .bk-card .bk-price-amt,.bk-wrap .bk-card .bk-price .bk-check{color:#0b1530}
+.bk-wrap .bk-card .bk-price-svc,.bk-wrap .bk-card .bk-price-note,.bk-wrap .bk-card .bk-tier-note{color:#2f3c57}
+.bk-wrap .bk-card .bk-tier{background:#fff;border:2px solid #6b7a99;color:#0b1530}.bk-wrap .bk-card .bk-tier small{color:#44516b}
+.bk-wrap .bk-card .bk-tier.sel{border-color:#0d6e38;box-shadow:0 0 0 2px #0d6e38;color:#0d6e38}
+.bk-wrap .bk-card .bk-price .bk-offer-on{color:#0d6e38}
+.bk-wrap .bk-card .bk-price .bk-price-break{color:#0b1530}
+.bk-wrap .bk-card .bk-price .bk-accept{background:#ffffff;border-color:#00808f}
+.bk-wrap .bk-card .bk-price .bk-accept.err{border-color:#c62828;box-shadow:0 0 0 2px rgba(198,40,40,.3)}
+.bk-wrap .bk-card .bk-price .bk-check input{accent-color:#0d6e38}
+/* itemized total right above Send (no accept checkbox) */
+.bk-wrap .bk-price .bk-total,.bk-wrap .bk-price .bk-total>div{display:block !important}
+.bk-price .bk-total{margin-top:16px;padding:12px 14px;border-radius:12px;border:2px solid #00808f;background:#ffffff}
+.bk-price .bk-total .bk-price-amt{margin-top:2px}
+.bk-price .bk-total-l{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#00606b}
+.bk-price .bk-total .bk-price-note{margin:8px 0 0}
+.bk-price .bk-sameday{font-weight:700;color:#7a5200}
+/* add to calendar (confirmation screen) */
+.bk-done .bk-cal{margin:18px 0 6px;padding:14px;border-radius:12px;border:2px solid #00808f;background:#ffffff;text-align:left}
+.bk-done .bk-cal-h{margin:0 0 6px;font-size:18px;color:#0b1530}
+.bk-done .bk-cal .bk-note{color:#33415c;margin:0 0 10px}
+.bk-done .bk-cal-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bk-done .bk-cal-btns .bk-btn{margin:0;font-size:15px;padding:12px 8px;text-align:center}
