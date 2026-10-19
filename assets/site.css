@@ -1365,76 +1365,11 @@ a.area-card:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;}
   border-radius:40px;padding:6px 14px 6px 12px;margin-bottom:16px;
 }
 .promo-kicker .winter-badge-icon{font-size:14px;color:var(--cyan);animation:none;}
-.promo-step[hidden]{display:none !important;}
 .promo-card{max-height:92vh;overflow-y:auto;overscroll-behavior:contain;}
 
-/* Booking form */
-.book-head{text-align:left;margin-bottom:16px;}
-.book-back{background:none;border:none;color:var(--muted);font-family:var(--font-cond);font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;padding:0;margin-bottom:10px;}
-.book-back:hover,.book-back:focus-visible{color:var(--white);outline:none;}
-.book-title{font-family:var(--font-display);font-size:20px;font-weight:900;text-transform:uppercase;line-height:1.15;}
-.book-sub{font-size:13.5px;color:var(--muted);margin-top:6px;}
-.book-form{display:flex;flex-direction:column;gap:12px;text-align:left;}
-.book-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.book-field{display:flex;flex-direction:column;gap:5px;}
-.book-field label,.book-legend{font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);}
-.book-field label i,.book-legend i{font-style:normal;color:var(--muted);font-weight:500;letter-spacing:0.04em;text-transform:none;}
-.book-field input,.book-field select{
-  width:100%;
-  background:#050a17;
-  border:1px solid rgba(0,229,255,0.22);
-  border-radius:10px;
-  padding:11px 12px;
-  color:var(--white);
-  font-family:var(--font-body);
-  font-size:16px;
-  color-scheme:dark;
-}
-.book-field input::placeholder{color:#56648a;}
-.book-field input:focus,.book-field select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,0.15);}
-.book-field.err input{border-color:var(--red);}
-.book-chips{display:flex;flex-wrap:wrap;gap:8px;border:none;padding:0;margin:0;}
-.book-chips legend{margin-bottom:6px;}
-.book-chips label{cursor:pointer;}
-.book-chips input{position:absolute;opacity:0;pointer-events:none;}
-.book-chips span{
-  display:inline-block;padding:9px 14px;border-radius:40px;
-  border:1px solid rgba(0,229,255,0.25);background:#050a17;
-  font-family:var(--font-cond);font-size:14px;font-weight:700;letter-spacing:0.05em;color:var(--muted);
-  transition:all .15s;
-}
-.book-chips input:checked + span{background:var(--cyan);color:#03101f;border-color:var(--cyan);}
-.book-chips input:focus-visible + span{box-shadow:0 0 0 3px rgba(0,229,255,0.3);}
-.book-chips.err span{border-color:var(--red);}
-.book-error{font-size:13px;color:var(--red);min-height:0;}
-.book-form .btn-primary{width:100%;justify-content:center;margin-top:4px;}
-.book-note{font-size:12.5px;color:var(--muted);text-align:center;line-height:1.5;}
-.book-note b{color:var(--white);}
-@media(max-width:600px){.book-row{grid-template-columns:1fr;}}
-/* Winter popup short request form: "Best time to call" quick picks, Call button, sent screen */
-.promo-card .promo-sms,.book-form .promo-sms,.promo-card .promo-call,.book-form .promo-call,.promo-card a.btn-secondary{width:100%;justify-content:center;text-decoration:none;}
-.promo-ct{border:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}
-.promo-ct legend{margin-bottom:8px;}
-.promo-ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.promo-ct-grid.three{grid-template-columns:1fr 1fr 1fr;}
-.promo-ct-grid button{min-height:44px;padding:8px 6px;border-radius:10px;border:1px solid rgba(0,229,255,0.25);background:#050a17;color:var(--white);font-family:var(--font-body);font-size:14.5px;font-weight:600;line-height:1.2;cursor:pointer;}
-.promo-ct-grid button.sel{background:var(--cyan);color:#03101f;border-color:var(--cyan);}
-.promo-ct-grid button:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(0,229,255,0.35);}
-.promo-ct-day{display:flex;flex-direction:column;gap:6px;}
-.promo-ct-day.dim{opacity:.45;}
-.promo-ct-day.dim button{cursor:not-allowed;}
-.promo-ct-sub{font-size:13px;color:var(--muted);}
-.promo-ct-chosen{font-size:14px;color:var(--white);margin:2px 0 0;}
-.promo-ct-chosen[hidden],.promo-ct .book-field[hidden]{display:none !important;}
-.promo-ct-clear{background:none;border:none;color:var(--cyan);text-decoration:underline;font:inherit;font-size:13.5px;cursor:pointer;padding:4px;}
-.book-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
-.book-form .btn-primary[disabled]{opacity:.7;cursor:wait;}
-.promo-done-big{font-size:46px;line-height:1;margin:6px 0 10px;}
-#done-title:focus{outline:none;}
-/* "Or Call Us" + "Request a Call Back" side by side (home winter card) */
-.winter-alt-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
-.winter-alt-row .btn-full{margin-top:0 !important;display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;padding:12px 8px;white-space:normal;text-align:center;font-size:14px;letter-spacing:0.06em;line-height:1.2;}
-@media(max-width:340px){.winter-alt-row{grid-template-columns:1fr;}}
+.promo-card .promo-call,.promo-card a.btn-secondary{width:100%;justify-content:center;text-decoration:none;}
+/* Big "✅ Book online" choice in the winter popup */
+.promo-card a.promo-book{width:100%;justify-content:center;text-decoration:none;font-size:18px;min-height:58px;}
 .promo-title{
   font-family:var(--font-display);font-size:26px;font-weight:900;text-transform:uppercase;line-height:1.1;
   margin-bottom:12px;
