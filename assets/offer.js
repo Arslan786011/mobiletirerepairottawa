@@ -22,14 +22,14 @@
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   var fr = (D.documentElement.lang || '').toLowerCase().indexOf('fr') === 0;
   var TX = fr ? {
-    title: 'Appelez pour une soumission', sub: 'On vous rappelle pour confirmer l\'heure.',
-    yes: 'Appelez pour une soumission', no: 'Non merci', saving: 'Un instant…',
-    okT: '✓ Demande notée', okS: "On vous appelle pour confirmer l'heure.", book: '📅 Réserver en ligne', later: 'Plus tard',
+    title: 'Réservez en ligne', sub: 'Choisissez votre heure en 2 minutes.',
+    yes: 'Réserver en ligne', no: 'Non merci', saving: 'Un instant…',
+    okT: '✓ Noté', okS: 'Choisissez votre heure en ligne.', book: '📅 Réserver en ligne', later: 'Plus tard',
     err: "Ça n'a pas fonctionné. Réessayez.", bookUrl: '/fr/reserver-changement-pneus/'
   } : {
-    title: 'Call for a quote', sub: 'We will call you to confirm the time.',
-    yes: 'Call for a quote', no: 'No thanks', saving: 'Saving…',
-    okT: '✓ Request noted', okS: "We'll call you to confirm the time.", book: '📅 Book Online Now', later: 'Later',
+    title: 'Book online', sub: 'Pick your time in about 2 minutes.',
+    yes: 'Book online', no: 'No thanks', saving: 'Saving…',
+    okT: '✓ Noted', okS: 'Pick your time online.', book: '📅 Book Online Now', later: 'Later',
     err: "That didn't work. Please try again.", bookUrl: '/book-tire-swap/'
   };
   function useHookText() {   // booking page passes its own wording (season + language)
