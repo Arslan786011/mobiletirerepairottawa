@@ -1158,5 +1158,15 @@
   window.BK_JS_BUILD = '20261019perf';   // must match the ?v= on the booking pages (stale-cache guard there)
   // stock-sizes.js loads after this file (async): re-price once it arrives, keeping everything typed
   window.BK_STOCK_READY = function () { try { if (S.veh && S.veh.car) refreshStep1(); } catch (e) {} };
+  // load it only AFTER the form is on screen (never competes with first paint); same ?v= as this file
+  (function () {
+    function go() {
+      if (window.STOCK_SIZES || document.getElementById('bk-stock-js')) return;
+      var sc = document.createElement('script'); sc.id = 'bk-stock-js'; sc.async = true;
+      sc.src = '/book-tire-swap/stock-sizes.js?v=' + window.BK_JS_BUILD; sc.onload = window.BK_STOCK_READY;
+      document.body.appendChild(sc);
+    }
+    if (document.readyState === 'complete') setTimeout(go, 0); else window.addEventListener('load', function () { setTimeout(go, 0); });
+  })();
   window.__bk = S; // for testing
 })();
