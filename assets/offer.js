@@ -1,51 +1,54 @@
-/* Exit offer popup. Lives at /assets/offer.js. It only shows on the booking form (the page sets
- * window.MTRO_OFFER.priceOffer): a one-time $ off to finish booking now, amounts in /book-tire-swap/prices.js.
- * On every other page it never shows (the site shows no prices or discounts outside the booking form).
- * Shows ONCE per visitor (this browser), never after they've booked here, never twice.
+/* Exit offer popup. Lives at /assets/offer.js. ONE offer per visitor (this browser), shared by every page.
+ *
+ * Two modes:
+ *  - Booking form (the page sets window.MTRO_OFFER.priceOffer): the real offer with dollar amounts, worked out by the
+ *    form from /book-tire-swap/prices.js (exitOffer). Shown only when the form is started but not sent.
+ *  - Every other page (sitewide, EN + FR): words only, NO dollar amounts (the site shows no prices outside the booking
+ *    form): "One-time offer: we'll waive your service call fee when you book online now". "Book online with my offer"
+ *    saves the offer in this browser and opens the booking form with ?offer=<token>; the form applies it and shows the
+ *    actual discount in the total (or says there is nothing to take off when the total is already at the $175 floor).
+ *
+ * Never shown twice: 'bk_offer_seen' (shown), 'bk_swap_offer' ('1' taken, 'used' after booking) and 'bk_booked' are the
+ * same keys the booking form uses. A second tier ("discount on discount") is a config switch in prices.js
+ * (exitOffer.second, OFF); it only ever shows inside the booking form, once, with its own 'bk_offer2_seen' flag.
+ *
  * Shows when the visitor:
- *   - switches apps/tabs and comes back
- *   - sits idle ~30 seconds
+ *   - (computer) moves the mouse up out of the page, toward the tabs / close button
+ *   - switches apps/tabs and comes back, or comes back with the browser Back button (page restored from cache)
  *   - (phone) scrolls back up fast toward the top after reading down the page
- *   - (computer) moves the mouse up to close/leave the tab
- *   - (booking page only, and only while the form is started but not sent: see canShow in booking.js)
- * Honest: no countdown timers, no back-button trapping. The 48-hour limit and "first-time customers only"
- * are checked by the booking script when they book.
- * The booking page passes hooks in window.MTRO_OFFER (claim straight into the form, its own wording).
+ *   - closes the winter popup (✕ / Maybe later / Esc / tap outside): the offer comes first, once; closing it closes all
+ *   - (booking form only) sits idle ~30 seconds, or comes back after starting the form on an earlier visit
+ * Honest and trap-free: no countdown timers, no history.pushState / back-button trapping, "No thanks" and ✕ always close.
  */
 (function () {
   'use strict';
   var W = window, D = document, H = W.MTRO_OFFER || {};
-  var ARM_MS = 8000;          // never in the first 8 seconds of a page view
-  var IDLE_MS = 30000;        // ~30 s with no taps, scrolls, keys or mouse moves
-  var AFTER_PROMO_MS = 5000;  // wait 5 s after the winter popup closes
+  var SITE_TOKEN = 'exit1';   // keep the same as exitOffer.token in /book-tire-swap/prices.js
+  var ARM_MS = 8000;          // never in the first 8 seconds of a page view (except right after the winter popup closes)
+  var IDLE_MS = 30000;        // booking form only: ~30 s with no taps, scrolls, keys or mouse moves
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   var fr = (D.documentElement.lang || '').toLowerCase().indexOf('fr') === 0;
+  var bookUrl = fr ? '/fr/reserver-changement-pneus/' : '/book-tire-swap/';
   var TX = fr ? {
-    title: 'Réservez en ligne', sub: 'Choisissez votre heure en 2 minutes.',
-    yes: 'Réserver en ligne', no: 'Non merci', saving: 'Un instant…',
-    okT: '✓ Noté', okS: 'Choisissez votre heure en ligne.', book: '📅 Réserver en ligne', later: 'Plus tard',
-    err: "Ça n'a pas fonctionné. Réessayez.", bookUrl: '/fr/reserver-changement-pneus/'
+    title: 'Offre unique', sub: "Réservez en ligne maintenant et on annule vos frais de déplacement (ou un rabais sur votre total, s'il s'applique). Vous verrez exactement le montant déduit dans votre total avant de réserver.",
+    yes: '✅ Réserver en ligne avec mon offre', no: 'Non merci'
   } : {
-    title: 'Book online', sub: 'Pick your time in about 2 minutes.',
-    yes: 'Book online', no: 'No thanks', saving: 'Saving…',
-    okT: '✓ Noted', okS: 'Pick your time online.', book: '📅 Book Online Now', later: 'Later',
-    err: "That didn't work. Please try again.", bookUrl: '/book-tire-swap/'
+    title: 'One-time offer', sub: "Book online now and we'll waive your service call fee (or take a discount off your total where it applies). You'll see exactly what comes off in your total before you book.",
+    yes: '✅ Book online with my offer', no: 'No thanks'
   };
-  function useHookText() {   // booking page passes its own wording (season + language)
+  var priceMode = !!H.priceOffer;
+  function useHookText() {   // booking page passes its own wording with the real amounts
     var ht = typeof H.text === 'function' ? H.text() : H.text;
     if (ht) for (var k in ht) if (ht[k]) TX[k] = ht[k];
   }
 
-  var loadedAt = Date.now(), promoClosedAt = 0, promoSeenThisView = false, shown = false;
+  var loadedAt = Date.now(), shownNow = {}, open = false;
   var startedBefore = !!lsGet('bk_started') && !lsGet('bk_booked');   // picked a car on an earlier page view, didn't book
 
-  function hasOffer() {
-    try { var o = JSON.parse(lsGet('bk_offer') || 'null'); return !!(o && o.expires > Date.now() && !o.used); } catch (e) { return false; }
-  }
-  function promoOpen() { var p = D.getElementById('promo'); return !!(p && !p.hidden); }
+  function tier() { return priceMode && H.tier ? H.tier() : 1; }
+  function seenKey(t) { return t === 2 ? 'bk_offer2_seen' : 'bk_offer_seen'; }
   function otherDialogOpen() {   // never cover another popup (winter popup, booking dialogs)
-    if (promoOpen()) return true;
     var m = D.querySelectorAll('[role="dialog"]:not([hidden]):not(#mo-offer), .bk-modal:not([hidden])');
     for (var i = 0; i < m.length; i++) {
       var cs = getComputedStyle(m[i]);
@@ -54,13 +57,12 @@
     return false;
   }
   function eligible(skipArm) {
-    if (shown || lsGet('bk_offer_seen') || lsGet('bk_booked') || hasOffer()) return false;
+    var t = tier();
+    if (open || shownNow[t] || lsGet(seenKey(t)) || lsGet('bk_booked')) return false;
+    if (t === 1 && lsGet('bk_swap_offer')) return false;   // already taken (here or on another page), or used
     if (D.visibilityState === 'hidden' || otherDialogOpen()) return false;
-    if (H.canShow && !H.canShow()) return false;
-    if (!skipArm) {
-      if (Date.now() < loadedAt + ARM_MS) return false;
-      if (promoClosedAt && Date.now() < promoClosedAt + AFTER_PROMO_MS) return false;
-    }
+    if (priceMode && H.canShow && !H.canShow()) return false;
+    if (!skipArm && Date.now() < loadedAt + ARM_MS) return false;
     return true;
   }
 
@@ -74,8 +76,7 @@
     '.mo-btn{display:block;width:100%;box-sizing:border-box;border:0;border-radius:12px;padding:15px 14px;font:800 17px/1.1 var(--font-body,Barlow,sans-serif);cursor:pointer;text-decoration:none;text-align:center;min-height:50px}' +
     '.mo-yes{background:var(--green,#1dff8e);color:#021018}.mo-yes[disabled]{opacity:.7}' +
     '.mo-no{background:transparent;color:var(--muted,#8899bb);margin-top:8px;font-weight:600;font-size:15px}' +
-    '.mo-x{position:absolute;top:8px;right:8px;width:40px;height:40px;border:0;background:transparent;color:var(--muted,#8899bb);font-size:24px;cursor:pointer;border-radius:50%}' +
-    '.mo-err{color:#ff8c8c;font-size:14px;min-height:0;margin-top:8px}';
+    '.mo-x{position:absolute;top:8px;right:8px;width:40px;height:40px;border:0;background:transparent;color:var(--muted,#8899bb);font-size:24px;cursor:pointer;border-radius:50%}';
   var ov = null;
   function build() {
     if (ov) return ov;
@@ -87,34 +88,29 @@
       if (e.target === ov) return close('backdrop');
       var b = e.target.closest('[data-mo]'); if (!b) return;
       var a = b.getAttribute('data-mo');
-      if (a === 'yes') claim(); else if (a === 'no' || a === 'x' || a === 'later') close(a);
+      if (a === 'yes') claim(e); else if (a === 'no' || a === 'x') close(a);
     });
     D.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ov && !ov.hidden) close('esc'); });
     return ov;
   }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function paintAsk(err) {
+  function paint() {
+    // booking form: a button that applies the $ off right there; elsewhere: a link into the booking form carrying the token
+    var yes = priceMode ? '<button class="mo-btn mo-yes" type="button" data-mo="yes">' + esc(TX.yes) + '</button>'
+                        : '<a class="mo-btn mo-yes" href="' + bookUrl + '?offer=' + SITE_TOKEN + '" data-mo="yes">' + esc(TX.yes) + '</a>';
     ov.innerHTML = '<div class="mo-box" tabindex="-1"><button class="mo-x" type="button" data-mo="x" aria-label="Close">×</button>' +
-      '<div class="mo-tag">🏷️</div><h3 id="mo-t">' + esc(TX.title) + '</h3><p>' + esc(TX.sub) + '</p>' +
-      '<button class="mo-btn mo-yes" type="button" data-mo="yes">' + esc(TX.yes) + '</button>' +
-      '<button class="mo-btn mo-no" type="button" data-mo="no">' + esc(TX.no) + '</button>' +
-      (err ? '<div class="mo-err" role="alert">' + esc(TX.err) + '</div>' : '') + '</div>';
+      '<div class="mo-tag">🏷️</div><h3 id="mo-t">' + esc(TX.title) + '</h3><p>' + esc(TX.sub) + '</p>' + yes +
+      '<button class="mo-btn mo-no" type="button" data-mo="no">' + esc(TX.no) + '</button></div>';
   }
-  function paintSaved() {
-    ov.innerHTML = '<div class="mo-box" tabindex="-1"><button class="mo-x" type="button" data-mo="x" aria-label="Close">×</button>' +
-      '<div class="mo-tag">🏷️</div><h3 id="mo-t">' + esc(TX.okT) + '</h3><p>' + esc(TX.okS) + '</p>' +
-      '<a class="mo-btn mo-yes" href="' + TX.bookUrl + '" data-mo="book">' + esc(TX.book) + '</a>' +
-      '<button class="mo-btn mo-no" type="button" data-mo="later">' + esc(TX.later) + '</button></div>';
-  }
-  function track(name, why) { try { if (typeof W.gtag === 'function') W.gtag('event', name, { offer_trigger: why || '' }); } catch (e) {} }
+  function track(name, why) { try { if (typeof W.gtag === 'function') W.gtag('event', name, { offer_trigger: why || '', offer_mode: priceMode ? 'form' : 'site' }); } catch (e) {} }
 
-  var lastWhy = '';
+  var lastWhy = '', lastTier = 1;
   function show(why, skipArm) {
-    if (!H.priceOffer) return false;   // booking form only
     if (!eligible(skipArm)) return false;
-    shown = true; lastWhy = why;
-    lsSet('bk_offer_seen', '1');                 // once per visitor, even if they ignore it
-    useHookText(); build(); paintAsk(false); ov.hidden = false;
+    lastTier = tier(); shownNow[lastTier] = true; lastWhy = why; open = true;
+    lsSet(seenKey(lastTier), '1');   // once per visitor, even if they ignore it
+    if (priceMode) useHookText();
+    build(); paint(); ov.hidden = false;
     requestAnimationFrame(function () { requestAnimationFrame(function () { ov.classList.add('show'); }); });
     var bx = ov.querySelector('.mo-box'); if (bx) bx.focus({ preventScroll: true });
     track('offer_shown', why);
@@ -122,39 +118,36 @@
   }
   function close(how) {
     if (!ov) return;
+    open = false;
     ov.classList.remove('show'); setTimeout(function () { ov.hidden = true; }, 250);
     if (how === 'no' || how === 'x' || how === 'backdrop' || how === 'esc') track('offer_declined', lastWhy);
   }
-
-  // ------------------------------------------------------------ claim (the booking form applies the $ off; the script is not asked)
-  function claim() {
+  function claim(e) {
     track('offer_claimed', lastWhy);
-    if (H.claim) H.claim();
-    close('yes');
+    if (priceMode) { if (H.claim) H.claim(); close('yes'); return; }
+    lsSet('bk_swap_offer', '1');   // the booking form reads this (and ?offer=) and applies the offer to the total
+    open = false;                  // the link itself opens the booking form
   }
 
   // ------------------------------------------------------------ triggers
-  // Winter popup: never on top of it; give people 5 s after they close it.
-  (function watchPromo() {
-    var p = D.getElementById('promo'); if (!p || !W.MutationObserver) return;
-    new MutationObserver(function () {
-      if (!p.hidden) promoSeenThisView = true; else if (promoSeenThisView) promoClosedAt = Date.now();
-    }).observe(p, { attributes: true, attributeFilter: ['hidden'] });
-  })();
+  // Winter popup closed (site.js fires 'mtro:promo-closed'): the offer comes first, once. Closing the offer closes everything.
+  D.addEventListener('mtro:promo-closed', function () { setTimeout(function () { show('popup_close', true); }, 380); });
 
-  // 1) Switched apps/tabs and came back (also: came back with the browser Back button from another site)
+  // 1) Switched apps/tabs and came back; or came back with the browser Back button (page restored from the back/forward cache)
   var wasHidden = false;
   D.addEventListener('visibilitychange', function () {
     if (D.visibilityState === 'hidden') { wasHidden = true; return; }
-    if (wasHidden) { wasHidden = false; setTimeout(function () { show('tab_return', H.started && H.started()); }, 400); }
+    if (wasHidden) { wasHidden = false; setTimeout(function () { show('tab_return', priceMode && H.started && H.started()); }, 400); }
   });
-  W.addEventListener('pageshow', function (e) { if (e.persisted) setTimeout(function () { show('came_back'); }, 400); });
+  W.addEventListener('pageshow', function (e) { if (e.persisted) setTimeout(function () { show('came_back', true); }, 400); });
 
-  // 2) Idle ~30 s
-  var idleT = null;
-  function resetIdle() { clearTimeout(idleT); idleT = setTimeout(function () { if (!show('idle')) resetIdle(); }, IDLE_MS); }
-  ['touchstart', 'pointerdown', 'scroll', 'keydown', 'mousemove', 'click', 'input'].forEach(function (ev) { D.addEventListener(ev, resetIdle, { passive: true, capture: true }); });
-  resetIdle();
+  // 2) Booking form only: idle ~30 s
+  if (priceMode) {
+    var idleT = null;
+    var resetIdle = function () { clearTimeout(idleT); idleT = setTimeout(function () { if (!show('idle')) resetIdle(); }, IDLE_MS); };
+    ['touchstart', 'pointerdown', 'scroll', 'keydown', 'mousemove', 'click', 'input'].forEach(function (ev) { D.addEventListener(ev, resetIdle, { passive: true, capture: true }); });
+    resetIdle();
+  }
 
   // 3) Phone: fast scroll back up toward the top after reading down the page
   var coarse = W.matchMedia && W.matchMedia('(pointer:coarse)').matches;
@@ -166,23 +159,20 @@
       samples.push([now, y]); while (samples.length && now - samples[0][0] > 350) samples.shift();
       var top = samples[0][1];
       // went at least ~1.5 screens down, then flicked up at least half a screen within 0.35 s, heading for the top half
-      if (maxY > vh * 1.5 && top - y > vh * 0.5 && y < maxY * 0.7) { if (show('scroll_up', H.started && H.started())) samples = []; }
+      if (maxY > vh * 1.5 && top - y > vh * 0.5 && y < maxY * 0.7) { if (show('scroll_up', priceMode && H.started && H.started())) samples = []; }
     }, { passive: true });
   }
 
   // 4) Computer: mouse heads for the close button / tab bar
   if (W.matchMedia && W.matchMedia('(pointer:fine)').matches) {
     D.addEventListener('mouseout', function (e) {
-      if (!e.relatedTarget && e.clientY <= 0) show('exit_intent', H.started && H.started());
+      if (!e.relatedTarget && e.clientY <= 0) show('exit_intent', priceMode && H.started && H.started());
     });
   }
 
-  // 5) Picked a car in the booking form on an earlier page view but didn't book → show soon after they land
-  //    (skipped if the winter popup opens on this page view; the other triggers still work)
-  if (startedBefore) {
-    setTimeout(function () { if (!promoSeenThisView) show('left_booking', true); }, 3500);
-  }
+  // 5) Booking form: picked a car on an earlier page view but didn't book -> show soon after they land
+  if (priceMode && startedBefore) setTimeout(function () { show('left_booking', true); }, 3500);
 
   // test hook (used by automated tests only; harmless for visitors)
-  W.MTRO_OFFER_DEBUG = { show: show, eligible: eligible };
+  W.MTRO_OFFER_DEBUG = { show: show, eligible: eligible, mode: priceMode ? 'form' : 'site' };
 })();
