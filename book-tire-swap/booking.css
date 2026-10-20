@@ -188,3 +188,7 @@
 .bk-done .bk-cal{margin-top:16px}
 .bk-done .bk-cal-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media (max-width:480px){.bk-done .bk-cal-btns{grid-template-columns:1fr}.bk-done .bk-sum>div{flex-direction:column;gap:2px}.bk-done .bk-sum>div>span:last-child{text-align:left}}
+/* one-time exit offer saved (from the sitewide offer or the form's own) */
+.bk-offer-saved{margin:6px 0 14px;padding:10px 12px;border-radius:10px;background:rgba(29,255,142,.12);border:1px solid rgba(29,255,142,.45);font-weight:700;font-size:14.5px;color:var(--green)}
+.bk-wrap .bk-card .bk-offer-saved{background:#e9fbf1;border-color:#7fd8a6;color:#0d6e38}
+.bk-wrap .bk-card .bk-price .bk-offer-none{color:#4a5a6a;font-weight:600}

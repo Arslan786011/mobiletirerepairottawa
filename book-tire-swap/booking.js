@@ -40,7 +40,7 @@
       full: 'Full', open1: 'open', held: "✓ We're holding this time for 10 minutes while you finish.", taken: 'Sorry, that time was just taken. Pick another.',
       waitTitle: 'This day is full', waitSub: "Join the waitlist. If a time opens up, we'll call you first.", anyTime: 'Any time',
       joinWait: 'Join waitlist', waitDone: "✅ You're on the waitlist. We'll call you if a time opens.", otherDay: '← Pick another day',
-      s5: 'How do we reach you?', name: 'Name', phone: 'Mobile phone', email: 'Email (optional, for your confirmation)', notes: 'Parking notes (optional)',
+      s5: 'How do we reach you?', name: 'Name', phone: 'Mobile phone', email: 'Email (optional): for your confirmation and reminder', notes: 'Parking notes (optional)',
       notesPh: 'Driveway, underground, visitor spot…',       phoneBad: 'Please enter a 10-digit phone number.', nameBad: 'Please enter your name.',
       s6: 'Check your details', when: 'When', service: 'Service', where: 'Where', vehicle: 'Vehicle', contact: 'Contact', tsize: 'Tire size',
       sizeEst: 'estimated from vehicle', sizeCust: 'entered by you', sizeUnk: 'not given',
@@ -95,6 +95,8 @@
       xoT: 'Finish booking now: {D} off', xoS: 'One time only: book now and pay {P} instead of {F}, before tax.',
       xoYes: 'Take {D} off', xoNo: 'No thanks',
       xoTFees: "Book now and we'll waive {X}", xoYesFees: 'Waive {Y}', xoTFeesPart: 'Book now: {D} off {X}', xoYesFeesPart: 'Take {D} off',
+      xo2T: 'Still deciding? {D} more off', xo2S: 'One more time only: book now and pay {P} instead of {F}, before tax.', xo2Yes: 'Take {D} more off',
+      pOfferSaved: '🏷️ Your one-time online offer is saved. It comes off your total below.', pOfferNone: '🏷️ Your one-time offer is saved, but this total is already at our lowest price, so there is nothing to take off.',
       pTotalT: 'Your total',
       calT: 'Mobile Tire Repair Ottawa: tire swap', calTAsap: 'Mobile Tire Repair Ottawa: tire swap (ASAP)', calReq: 'Booked', calReqAsap: 'Booked: ASAP, next available tech',
       calAddr: 'Address', calTotal: 'Total', calNoPrice: 'Price: pay the tech when done', calQ: 'Questions? Call', calReqNo: 'Booking #',
@@ -128,7 +130,7 @@
       full: 'Complet', open1: 'libre(s)', held: '✓ On vous garde cette plage 10 minutes.', taken: "Désolé, cette plage vient d'être prise. Choisissez-en une autre.",
       waitTitle: 'Cette journée est complète', waitSub: "Inscrivez-vous sur la liste d'attente. Si une plage se libère, on vous appelle en premier.", anyTime: "N'importe quand",
       joinWait: "M'inscrire", waitDone: "✅ Vous êtes sur la liste d'attente.", otherDay: '← Choisir un autre jour',
-      s5: 'Comment vous joindre?', name: 'Nom', phone: 'Cellulaire', email: 'Courriel (facultatif, pour la confirmation)', notes: 'Stationnement (facultatif)',
+      s5: 'Comment vous joindre?', name: 'Nom', phone: 'Cellulaire', email: 'Courriel (facultatif) : pour votre confirmation et votre rappel', notes: 'Stationnement (facultatif)',
       notesPh: 'Entrée, garage souterrain, visiteurs…',       phoneBad: 'Entrez un numéro à 10 chiffres.', nameBad: 'Entrez votre nom.',
       s6: 'Vérifiez vos informations', when: 'Quand', service: 'Service', where: 'Adresse', vehicle: 'Véhicule', contact: 'Contact', tsize: 'Taille',
       sizeEst: 'estimée selon le véhicule', sizeCust: 'entrée par vous', sizeUnk: 'non indiquée',
@@ -183,6 +185,8 @@
       xoT: 'Réservez maintenant : {D} de rabais', xoS: 'Une seule fois : réservez maintenant et payez {P} au lieu de {F}, avant taxes.',
       xoYes: 'Prendre {D} de rabais', xoNo: 'Non merci',
       xoTFees: 'Réservez maintenant et on annule {X}', xoYesFees: 'Annuler {Y}', xoTFeesPart: 'Réservez maintenant : {D} de rabais sur {X}', xoYesFeesPart: 'Prendre {D} de rabais',
+      xo2T: 'Vous hésitez encore? {D} de plus en rabais', xo2S: 'Une dernière fois : réservez maintenant et payez {P} au lieu de {F}, avant taxes.', xo2Yes: 'Prendre {D} de plus',
+      pOfferSaved: '🏷️ Votre offre unique en ligne est enregistrée. Elle est déduite de votre total ci-dessous.', pOfferNone: '🏷️ Votre offre unique est enregistrée, mais ce total est déjà notre prix le plus bas : il n’y a rien à déduire.',
       pTotalT: 'Votre total',
       calT: 'Mobile Tire Repair Ottawa : changement de pneus', calTAsap: 'Mobile Tire Repair Ottawa : changement de pneus (service rapide)', calReq: 'Réservé', calReqAsap: 'Réservé : service rapide, le prochain technicien libre',
       calAddr: 'Adresse', calTotal: 'Total', calNoPrice: 'Prix : paiement au technicien à la fin', calQ: 'Questions? Appelez le', calReqNo: 'Réservation n°',
@@ -204,6 +208,12 @@
       quebec: "Au Québec, les pneus d'hiver peuvent être retirés après le 15 mars."
     }
   };
+  // Sitewide exit offer (assets/offer.js) sends visitors here with ?offer=<token> (prices.js exitOffer.token) and also saves
+  // 'bk_swap_offer' = '1' in this browser. Either one turns the offer on; the form then shows the real amount in the total.
+  (function () {
+    var tok = (location.search.match(/[?&]offer=([a-z0-9]+)/i) || [])[1], want = window.SWAP_PRICES && window.SWAP_PRICES.exitOffer && window.SWAP_PRICES.exitOffer.token;
+    if (tok && want && tok === want && lsGet('bk_swap_offer') !== 'used' && !lsGet('bk_booked')) { lsSet('bk_swap_offer', '1'); lsSet('bk_offer_seen', '1'); }
+  })();
   var qsLang = (location.search.match(/[?&]lang=(fr|en)/) || [])[1] || window.BOOKING_LANG;   // French page sets BOOKING_LANG='fr'
   var qsSeason = (location.search.match(/[?&]season=(summer|winter)/) || [])[1];   // preview only (works in TEST MODE)
   var S = {
@@ -212,7 +222,7 @@
     veh: { mode: 'other', year: '', make: '', model: '', trim: '', unsure: false, id: '', cls: 'car', tier: 'STANDARD', size: '', verified: false,
            oYear: '', oMake: '', oModel: '', typed: '', photoUrl: '', car: '', oTrim: '' },
     service: 'off', tires: 4, zone: null, addrText: '', days: [], date: '', dateLabel: '', slot: '', slotLabel: '', hold: 0,
-    c: { name: '', phone: '', email: '', notes: '' }, area: '', pref: '', more: false, rims: '', feePick: '', asapAt: '', visitDay: '', visitDate: '', visitTime: '', visitErr: '', addrErr: '', taken: {}, slotState: {}, offerApplied: lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offer: null, done: null, busy: false, waitDay: null, draftSent: ''
+    c: { name: '', phone: '', email: '', notes: '' }, area: '', pref: '', more: false, rims: '', feePick: '', asapAt: '', visitDay: '', visitDate: '', visitTime: '', visitErr: '', addrErr: '', taken: {}, slotState: {}, offerApplied: lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offerTier2: lsGet('bk_swap_offer2') === '1' && lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offer: null, done: null, busy: false, waitDay: null, draftSent: ''
   };
   lsSet('bk_session', S.session);
   // ?r=Emma (dispatcher who sent a /book link). Kept for this visit.
@@ -477,8 +487,9 @@
       q.fee = fa.other ? null : fa.fee; q.areaName = fa.other ? '' : fa.name; q.feeType = q.fee ? 'area' : 'none';
     }
     q.full = swap + (q.fee || 0) + q.asapFee;
-    var o = offerCalc(q); q.offerType = o.type; q.offerAmt = o.d; q.offerFull = o.full; q.offerable = o.d > 0; q.offerFloor = o.floor;
-    q.disc = S.offerApplied ? o.d : 0;   // the exit offer comes off the total (prices.js exitOffer)
+    var o = offerCalc(q); q.offerType = o.type; q.offerAmt = o.d; q.offerFull = o.full; q.offerable = o.d > 0; q.offerFloor = o.floor; q.offer2Amt = o.d2;
+    q.offerTier = S.offerApplied ? (S.offerTier2 && second() ? 2 : 1) : 0;
+    q.disc = q.offerTier === 2 ? o.d2 : q.offerTier === 1 ? o.d : 0;   // the exit offer comes off the total (prices.js exitOffer)
     q.amount = q.full - q.disc;   // total shown right above Send
     q.ready = true;
     return q;
@@ -488,11 +499,19 @@
   //   2) else urgency fee:                    min(urgency fee, total - floor)   -> "we'll waive the rush fee"
   //   3) else flat: min($15 off rims / "Not sure", $10 on rims, total - floor).
   //   NEVER below the floor: if the discount is $0 or less, there is no exit popup at all.
-  function offerCalc(q) {
+  function offerCalc1(q) {
     var floor = +((PR.exitOffer && PR.exitOffer.floor) || 0), room = q.full - floor, svc = q.fee || 0, urg = q.asapFee || 0, d;
     if (svc > 0) { d = Math.min(svc, room); if (d > 0) return { type: 'waive-service-call', d: d, full: d === svc, floor: floor }; }
     else if (urg > 0) { d = Math.min(urg, room); if (d > 0) return { type: 'waive-urgency', d: d, full: d === urg, floor: floor }; }
     d = Math.min(q.dmax, q.swap, room); return d > 0 ? { type: 'flat', d: d, full: false, floor: floor } : { type: '', d: 0, full: false, floor: floor };
+  }
+  // Second tier ("discount on discount"), OFF unless prices.js exitOffer.second.enabled is true: shown once more to a visitor
+  // who already took the first offer and is leaving again; `extra` dollars on top, still never below the floor.
+  function second() { var s2 = PR.exitOffer && PR.exitOffer.second; return s2 && s2.enabled ? s2 : null; }
+  function offerCalc(q) {
+    var o = offerCalc1(q), s2 = second(); o.d2 = o.d;
+    if (s2 && o.d > 0) { var ex = +((s2.extra || {})[q.rims === 'yes' ? 'on' : 'off'] || 0); o.d2 = Math.max(o.d, Math.min(o.d + ex, q.full - o.floor)); }
+    return o;
   }
   function offerWords(q, lang) { var L = T[lang || S.lang] || T.en, k = q.offerType === 'waive-urgency' ? 'Urg' : 'Svc'; return { x: L['o' + k], n: L['o' + k + 'N'], my: L['o' + k + 'My'] }; }
   function offerKey(q) { return q.offerType === 'waive-service-call' || q.offerType === 'waive-urgency' ? (q.offerFull ? 'Fees' : 'FeesPart') : ''; }
@@ -509,7 +528,7 @@
     return priceText(q, 'en') + ' (' + tierLabel(q.tier, 'en') + ', ' + r + ' ' + money(q.swap, 'en') +
       (q.after ? ' + ' + money(q.fee, 'en') + ' after-hours service call (' + q.visit.label + ')' : q.fee ? ' + ' + money(q.fee, 'en') + ' service call ' + q.areaName : q.fee === null ? ', service call fee to confirm' : ', no service call fee' + (q.areaName ? ' (' + q.areaName + ')' : '')) +
       (q.asapFee ? ' + ' + money(q.asapFee, 'en') + (q.urg === 'asap' ? ' ASAP' : ' same-day') + ' urgency' : '') +
-      (q.disc ? ' − ' + money(q.disc, 'en') + ' exit offer (' + (q.offerType === 'flat' ? 'flat' : (q.offerFull ? offerWords(q, 'en').n + ' waived' : 'off the ' + offerWords(q, 'en').n)) + '); regular ' + money(q.full, 'en') : '') + ')';
+      (q.disc ? ' − ' + money(q.disc, 'en') + ' exit offer (' + (q.offerType === 'flat' ? 'flat' : (q.offerFull ? offerWords(q, 'en').n + ' waived' : 'off the ' + offerWords(q, 'en').n)) + (q.offerTier === 2 ? ' + 2nd offer' : '') + '); regular ' + money(q.full, 'en') : '') + ')';
   }
   function tierSource(q) { return q.auto ? 'auto (' + q.auto.reason + ')' : ''; }
   function svcToggles() {   // on/off rims is asked in the price box; only the number of tires stays here
@@ -553,6 +572,7 @@
         '<div class="bk-price-amt" id="bk-price-amt" aria-live="polite">' + esc(shown) + '</div>' +
         (q.fee || q.disc || q.asapFee ? '<div class="bk-price-break" id="bk-price-break">' + esc(breakdown(q, S.lang)) + '</div>' : '') +
         (q.disc ? '<div class="bk-offer-on" id="bk-offer-on">' + esc(offerFill(t('pOfferOn' + offerKey(q)).replace('{D}', money(q.disc)), q)) + '</div>' : '') +
+        (S.offerApplied && !q.disc ? '<div class="bk-offer-on bk-offer-none" id="bk-offer-none">' + esc(t('pOfferNone')) + '</div>' : '') +
         '<div class="bk-price-svc">' + t('pSvc') + ' · ' + esc(rimsWord(q, S.lang)) + '</div>' +
         (q.fee === null ? '<div class="bk-price-svc">' + esc(t('pAreaOtherShort')) + '</div>' : '') +
         '<p class="bk-price-note">' + t('pPlusTax') + '</p></div></div>';
@@ -653,8 +673,10 @@
   function step1() {
     var v = S.veh, r = ' <span class="bk-req">*</span>';
     var h = '<div class="bk-card"><h2 class="bk-title" style="font-size:22px">' + t('fTitle') + '</h2>' +
+      (S.offerApplied ? '<p class="bk-offer-saved" id="bk-offer-saved">' + esc(t('pOfferSaved')) + '</p>' : '') +
       inp('bk-name', 'name', t('name') + r, S.c.name, ' autocomplete="name"') +
       inp('bk-phone', 'phone', t('phone') + r, S.c.phone, ' type="tel" inputmode="tel" autocomplete="tel"') +
+      inp('bk-email', 'email', t('email'), S.c.email, ' type="email" autocomplete="email" inputmode="email"') +
       inp('bk-car', 'car', t('carMM') + r, v.car, ' placeholder="' + t('carPh') + '" autocomplete="off" required') +
       inp('bk-size', 'typed', t('sizeOnly'), v.typed, ' placeholder="' + t('sizePh') + '" autocomplete="off" aria-describedby="bk-size-hint"') +
       '<div class="bk-err" id="bk-size-err">' + (v.typed && !parseSize(v.typed) ? t('sizeBad') : '') + '</div>' +
@@ -665,7 +687,6 @@
       visitHtml() +
       '<datalist id="bk-areas">' + AREAS.map(function (x) { return '<option value="' + x + '">'; }).join('') + '</datalist>' + zoneHtml() +
       '<details class="bk-more"' + (S.more ? ' open' : '') + '><summary>' + t('more') + '</summary>' +
-      inp('bk-email', 'email', t('email'), S.c.email, ' type="email" autocomplete="email"') +
       '<label class="bk-label" for="bk-oy">' + t('yearTrim') + '</label><div class="bk-row">' + inp('bk-oy', 'oYear', '', v.oYear, ' inputmode="numeric" maxlength="4" placeholder="' + t('yearPh') + '"') +
       inp('bk-trim', 'oTrim', '', v.oTrim, ' placeholder="' + t('trimPh') + '"') + '</div>' +
       svcToggles() +
@@ -1044,7 +1065,7 @@
         payload.price = priceForOwner(q); payload.totalShown = true; payload.priceAmount = q.amount; payload.total = q.amount; payload.regularPrice = q.full;
         payload.swapPrice = q.swap; payload.onRims = q.rims === 'yes' ? 'yes' : q.rims === 'no' ? 'no' : 'not sure';
         payload.serviceFee = q.fee; payload.serviceArea = q.fee === null ? 'Other: ' + (S.area || S.addrText) : (q.areaName || S.area || S.addrText);
-        payload.offerApplied = !!q.disc; payload.offerAmount = q.disc; payload.offerType = q.disc ? q.offerType : ''; payload.offerFloor = q.offerFloor; payload.tier = q.tier; payload.tierLabel = tierLabel(q.tier, 'en');
+        payload.offerApplied = !!q.disc; payload.offerAmount = q.disc; payload.offerType = q.disc ? q.offerType : ''; payload.offerTier = q.disc ? q.offerTier : 0; payload.offerFloor = q.offerFloor; payload.tier = q.tier; payload.tierLabel = tierLabel(q.tier, 'en');
         payload.tierSource = tierSource(q); payload.tierReason = q.auto.reason; payload.vehicleRecognized = !!q.auto.recognized;
         payload.vehicleFlag = q.auto.recognized ? '' : '⚠️ Vehicle not recognized: confirm tire type on the call';
         payload.stockSize = q.auto.stock ? q.auto.stock.size : ''; payload.stockSizeNote = stockNote(q.auto, typed);
@@ -1065,7 +1086,7 @@
           S.doneInfo = { when: asapOn() ? t('dAsap') : visitWhen(S.lang), addr: areaLabel(), veh: vehicleLabel() + (typed ? ' · ' + typed.text : ''),
                          total: q && q.ready ? (q.fee || q.disc || q.asapFee ? breakdown(q, S.lang) : priceText(q, S.lang)) : '' };
           if (S.offer) { S.offer.used = true; lsSet('bk_offer', JSON.stringify(S.offer)); S.offer = null; }
-          if (S.offerApplied) lsSet('bk_swap_offer', 'used');
+          if (S.offerApplied) { lsSet('bk_swap_offer', 'used'); lsSet('bk_swap_offer2', ''); }
           lsSet('bk_booked', '1'); lsSet('bk_started', '');
           fireConversion(r);
           return render();
@@ -1106,15 +1127,22 @@
   function offerQuote() { var q = priceInfo(); return q && q.ready && q.offerable ? q : null; }
   window.MTRO_OFFER = {
     priceOffer: true,
-    canShow: function () { return hasPrices() && !!S.cfg && !S.fatal && !S.done && !S.busy && !S.offerApplied && lsGet('bk_swap_offer') !== 'used' && step1Basics() && !!offerQuote(); },
+    canShow: function () {
+      if (!hasPrices() || !S.cfg || S.fatal || S.done || S.busy || lsGet('bk_swap_offer') === 'used' || !step1Basics() || !offerQuote()) return false;
+      if (!S.offerApplied) return true;
+      var q = offerQuote(); return !!second() && !S.offerTier2 && q.offer2Amt > q.offerAmt;   // tier 2 (off by default)
+    },
+    tier: function () { return S.offerApplied ? 2 : 1; },   // which offer would show now (offer.js keeps one "seen" flag per tier)
     started: function () { return !!S.cfg && !S.done && step1Basics() && !isExoticSafe(); },
     text: function () {
       var q = offerQuote(); if (!q) return null;
-      var d = q.offerAmt, D = money(d), full = money(q.full), now = money(q.full - d), k = offerKey(q);
+      var two = S.offerApplied, d = two ? q.offer2Amt - q.offerAmt : q.offerAmt, D = money(d), full = money(two ? q.full - q.offerAmt : q.full), now = money(q.full - (two ? q.offer2Amt : d)), k = offerKey(q);
       function f(x) { return t(x).replace(/\{D\}/g, D).replace('{F}', full).replace('{P}', now).replace('{X}', offerWords(q).x).replace('{Y}', offerWords(q).my); }
-      return { title: f('xoT' + k), sub: f('xoS'), yes: f('xoYes' + k), no: f('xoNo'), type: q.offerType };
+      if (two) return { title: f('xo2T'), sub: f('xo2S'), yes: f('xo2Yes'), no: f('xoNo'), type: q.offerType, tier: 2 };
+      return { title: f('xoT' + k), sub: f('xoS'), yes: f('xoYes' + k), no: f('xoNo'), type: q.offerType, tier: 1 };
     },
     claim: function () {
+      if (S.offerApplied && second()) { S.offerTier2 = true; lsSet('bk_swap_offer2', '1'); }
       S.offerApplied = true; lsSet('bk_swap_offer', '1');
       refreshPrice(); draftSoon();
       var amt = document.getElementById('bk-price'); if (amt && amt.scrollIntoView) amt.scrollIntoView({ block: 'center' });
@@ -1155,7 +1183,7 @@
       var y = window.scrollY; renderKeepFocus(); window.scrollTo(0, y);
     } else if (S.veh.car) refreshStep1();   // rules changed (exotic list etc.): refresh the price part only
   }).catch(function () { S.cfgSource = 'default (config unavailable)'; });
-  window.BK_JS_BUILD = '20261019perf';   // must match the ?v= on the booking pages (stale-cache guard there)
+  window.BK_JS_BUILD = '20261019c43';   // must match the ?v= on the booking pages (stale-cache guard there)
   // stock-sizes.js loads after this file (async): re-price once it arrives, keeping everything typed
   window.BK_STOCK_READY = function () { try { if (S.veh && S.veh.car) refreshStep1(); } catch (e) {} };
   // load it only AFTER the form is on screen (never competes with first paint); same ?v= as this file
