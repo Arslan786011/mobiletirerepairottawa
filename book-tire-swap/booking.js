@@ -80,7 +80,7 @@
       pAreaNone: 'No service call fee', pAreaFee: '+{F} service call', pAreaOther: 'Other (not listed)',
       pAreaOtherNote: 'Your area isn\'t on our list, so any service call fee isn\'t in this total yet. We\'ll call you if it changes your total.',
       pNeedArea: 'Please pick the closest area to see your total.',
-      bSwap: 'Swap', bFee: 'service call ({A})', bOffer: 'offer', bAsap: 'same-day / ASAP urgency', bAfter: 'after-hours service call',
+      bSwap: 'Swap', bFee: 'service call ({A})', bOffer: 'one-time offer', bAsap: 'same-day / ASAP urgency', bAfter: 'after-hours service call',
       pAfter: '🌙 After-hours visit ({W}): {F} service call instead of the area fee.', pAfterVisitAsap: 'ASAP, now {T}',
       pAsap: '⚡ ASAP: we send the next available tech now (same-day / ASAP urgency +{F} included).', pSameDay: '⚡ Same-day visit: same-day / ASAP urgency +{F} included.',
       pVisitFirst: 'Pick "When should we come?" above. ASAP and same-day visits add the urgency fee; visits from 8 PM to 8 AM use the after-hours service call.',
@@ -90,13 +90,13 @@
       vNeed: 'Please choose when we should come: ASAP / Now, Today, Tomorrow or a date.', vNeedDate: 'Please pick the visit date.', vNeedHour: 'Please pick a visit time.',
       vPast: 'That time has already passed. Please pick a later time.', vChosen: 'Your visit:',
       pAsapOff: 'ASAP not available right now. Pick a time or call us.', rimsAsap: 'same-day / ASAP',
-      pOfferOn: '🏷️ {D} off applied.', pOfferOnFees: '🏷️ {NC} waived ({D} off).', pOfferOnFeesPart: '🏷️ {D} off {X} applied.', oSvc: 'your service call', oSvcN: 'service call', oSvcMy: 'my service call', oUrg: 'the rush fee', oUrgN: 'rush fee', oUrgMy: 'my rush fee', pPlusTax: 'Plus tax. Pay the tech when the job is done.',
+      oLine: '🏷️ One-time offer: {W} −{D}', oLnArea: 'service call fee waived', oLnAfter: 'after-hours fee waived', oLnSame: 'same-day fee waived', oLnAsap: 'ASAP fee waived', oLnFlat: 'discount', oSvc: 'your service call', oSvcN: 'service call', oSvcMy: 'my service call', oUrg: 'the rush fee', oUrgN: 'rush fee', oUrgMy: 'my rush fee', pPlusTax: 'Plus tax. Pay the tech when the job is done.',
       pAccept: 'I accept this total: {P} ({TIER}, {RIMS}).', pAreaOtherShort: 'Service call fee for your area: not included yet.',
       xoT: 'Finish booking now: {D} off', xoS: 'One time only: book now and pay {P} instead of {F}, before tax.',
       xoYes: 'Take {D} off', xoNo: 'No thanks',
-      xoTFees: "Book now and we'll waive {X}", xoYesFees: 'Waive {Y}', xoTFeesPart: 'Book now: {D} off {X}', xoYesFeesPart: 'Take {D} off',
+      xoTFees: "Book now and we'll waive {X}", xoYesFees: 'Waive {Y}',
       xo2T: 'Still deciding? {D} more off', xo2S: 'One more time only: book now and pay {P} instead of {F}, before tax.', xo2Yes: 'Take {D} more off',
-      pOfferSaved: '🏷️ Your one-time online offer is saved. It comes off your total below.', pOfferNone: '🏷️ Your one-time offer is saved, but this total is already at our lowest price, so there is nothing to take off.',
+      pOfferSaved: '🏷️ Your one-time online offer is saved. It comes off your total below.',
       pTotalT: 'Your total',
       calT: 'Mobile Tire Repair Ottawa: tire swap', calTAsap: 'Mobile Tire Repair Ottawa: tire swap (ASAP)', calReq: 'Booked', calReqAsap: 'Booked: ASAP, next available tech',
       calAddr: 'Address', calTotal: 'Total', calNoPrice: 'Price: pay the tech when done', calQ: 'Questions? Call', calReqNo: 'Booking #',
@@ -170,7 +170,7 @@
       pAreaNone: 'Aucuns frais de déplacement', pAreaFee: '+{F} frais de déplacement', pAreaOther: 'Autre (pas dans la liste)',
       pAreaOtherNote: 'Votre secteur n\'est pas dans la liste : les frais de déplacement éventuels ne sont pas encore inclus. On vous appelle si cela change votre total.',
       pNeedArea: 'Choisissez le secteur le plus proche pour voir votre total.',
-      bSwap: 'Changement', bFee: 'frais de déplacement ({A})', bOffer: 'rabais', bAsap: 'urgence même jour / service rapide', bAfter: 'frais de déplacement en dehors des heures',
+      bSwap: 'Changement', bFee: 'frais de déplacement ({A})', bOffer: 'offre unique', bAsap: 'urgence même jour / service rapide', bAfter: 'frais de déplacement en dehors des heures',
       pAfter: '🌙 Visite en dehors des heures ({W}) : {F} de frais de déplacement au lieu des frais du secteur.', pAfterVisitAsap: 'service rapide, maintenant {T}',
       pAsap: '⚡ Service rapide : on envoie le prochain technicien libre, maintenant (urgence même jour / service rapide +{F} incluse).', pSameDay: '⚡ Visite le jour même : urgence même jour / service rapide +{F} incluse.',
       pVisitFirst: "Choisissez « Quand voulez-vous la visite? » plus haut. Le service rapide et les visites le jour même ajoutent les frais d'urgence; de 20 h à 8 h, ce sont les frais de déplacement en dehors des heures.",
@@ -180,13 +180,13 @@
       vNeed: 'Choisissez quand on doit venir : dès que possible, aujourd’hui, demain ou une date.', vNeedDate: 'Choisissez la date de la visite.', vNeedHour: "Choisissez l'heure de la visite.",
       vPast: "Cette heure est déjà passée. Choisissez une heure plus tard.", vChosen: 'Votre visite :',
       pAsapOff: "Le service rapide n'est pas offert en ce moment. Choisissez une heure ou appelez-nous.", rimsAsap: 'même jour / service rapide',
-      pOfferOn: '🏷️ Rabais de {D} appliqué.', pOfferOnFees: '🏷️ {NC} annulés ({D} de rabais).', pOfferOnFeesPart: '🏷️ Rabais de {D} sur {X} appliqué.', oSvc: 'vos frais de déplacement', oSvcN: 'frais de déplacement', oSvcMy: 'mes frais de déplacement', oUrg: "les frais d'urgence", oUrgN: "frais d'urgence", oUrgMy: "mes frais d'urgence", pPlusTax: 'Taxes en sus. Paiement au technicien à la fin du travail.',
+      oLine: '🏷️ Offre unique : {W} −{D}', oLnArea: 'frais de déplacement annulés', oLnAfter: 'frais en dehors des heures annulés', oLnSame: "frais d'urgence même jour annulés", oLnAsap: 'frais de service rapide annulés', oLnFlat: 'rabais', oSvc: 'vos frais de déplacement', oSvcN: 'frais de déplacement', oSvcMy: 'mes frais de déplacement', oUrg: "les frais d'urgence", oUrgN: "frais d'urgence", oUrgMy: "mes frais d'urgence", pPlusTax: 'Taxes en sus. Paiement au technicien à la fin du travail.',
       pAccept: "J'accepte ce total : {P} ({TIER}, {RIMS}).", pAreaOtherShort: 'Frais de déplacement pour votre secteur : pas encore inclus.',
       xoT: 'Réservez maintenant : {D} de rabais', xoS: 'Une seule fois : réservez maintenant et payez {P} au lieu de {F}, avant taxes.',
       xoYes: 'Prendre {D} de rabais', xoNo: 'Non merci',
-      xoTFees: 'Réservez maintenant et on annule {X}', xoYesFees: 'Annuler {Y}', xoTFeesPart: 'Réservez maintenant : {D} de rabais sur {X}', xoYesFeesPart: 'Prendre {D} de rabais',
+      xoTFees: 'Réservez maintenant et on annule {X}', xoYesFees: 'Annuler {Y}',
       xo2T: 'Vous hésitez encore? {D} de plus en rabais', xo2S: 'Une dernière fois : réservez maintenant et payez {P} au lieu de {F}, avant taxes.', xo2Yes: 'Prendre {D} de plus',
-      pOfferSaved: '🏷️ Votre offre unique en ligne est enregistrée. Elle est déduite de votre total ci-dessous.', pOfferNone: '🏷️ Votre offre unique est enregistrée, mais ce total est déjà notre prix le plus bas : il n’y a rien à déduire.',
+      pOfferSaved: '🏷️ Votre offre unique en ligne est enregistrée. Elle est déduite de votre total ci-dessous.',
       pTotalT: 'Votre total',
       calT: 'Mobile Tire Repair Ottawa : changement de pneus', calTAsap: 'Mobile Tire Repair Ottawa : changement de pneus (service rapide)', calReq: 'Réservé', calReqAsap: 'Réservé : service rapide, le prochain technicien libre',
       calAddr: 'Adresse', calTotal: 'Total', calNoPrice: 'Prix : paiement au technicien à la fin', calQ: 'Questions? Appelez le', calReqNo: 'Réservation n°',
@@ -487,35 +487,38 @@
       q.fee = fa.other ? null : fa.fee; q.areaName = fa.other ? '' : fa.name; q.feeType = q.fee ? 'area' : 'none';
     }
     q.full = swap + (q.fee || 0) + q.asapFee;
-    var o = offerCalc(q); q.offerType = o.type; q.offerAmt = o.d; q.offerFull = o.full; q.offerable = o.d > 0; q.offerFloor = o.floor; q.offer2Amt = o.d2;
+    var o = offerCalc(q); q.offerType = o.type; q.offerAmt = o.d; q.offerFull = o.full; q.offerable = o.d > 0; q.offer2Amt = o.d2;
     q.offerTier = S.offerApplied ? (S.offerTier2 && second() ? 2 : 1) : 0;
     q.disc = q.offerTier === 2 ? o.d2 : q.offerTier === 1 ? o.d : 0;   // the exit offer comes off the total (prices.js exitOffer)
     q.amount = q.full - q.disc;   // total shown right above Send
     q.ready = true;
     return q;
   }
-  // Exit offer (owner, Oct 19, FINAL two-step rule; never waives both):
-  //   1) service call (area or after-hours): min(service call, total - floor)  -> "we'll waive your service call"
-  //   2) else urgency fee:                    min(urgency fee, total - floor)   -> "we'll waive the rush fee"
-  //   3) else flat: min($15 off rims / "Not sure", $10 on rims, total - floor).
-  //   NEVER below the floor: if the discount is $0 or less, there is no exit popup at all.
+  // Exit offer (owner, Oct 20: NO floor, the offer ALWAYS takes something off; one item only, never two):
+  //   1) service call (area fee or after-hours fee): waived in full    -> "we'll waive your service call"
+  //   2) else same-day / ASAP urgency fee:             waived in full    -> "we'll waive the rush fee"
+  //   3) else flat: $15 off rims / "Not sure", $10 on rims (prices.js tiers[..].discount).
   function offerCalc1(q) {
-    var floor = +((PR.exitOffer && PR.exitOffer.floor) || 0), room = q.full - floor, svc = q.fee || 0, urg = q.asapFee || 0, d;
-    if (svc > 0) { d = Math.min(svc, room); if (d > 0) return { type: 'waive-service-call', d: d, full: d === svc, floor: floor }; }
-    else if (urg > 0) { d = Math.min(urg, room); if (d > 0) return { type: 'waive-urgency', d: d, full: d === urg, floor: floor }; }
-    d = Math.min(q.dmax, q.swap, room); return d > 0 ? { type: 'flat', d: d, full: false, floor: floor } : { type: '', d: 0, full: false, floor: floor };
+    var svc = q.fee || 0, urg = q.asapFee || 0, d;
+    if (svc > 0) return { type: 'waive-service-call', d: svc, full: true };
+    if (urg > 0) return { type: 'waive-urgency', d: urg, full: true };
+    d = Math.min(q.dmax, q.swap); return d > 0 ? { type: 'flat', d: d, full: false } : { type: '', d: 0, full: false };
   }
   // Second tier ("discount on discount"), OFF unless prices.js exitOffer.second.enabled is true: shown once more to a visitor
-  // who already took the first offer and is leaving again; `extra` dollars on top, still never below the floor.
+  // who already took the first offer and is leaving again; `extra` dollars on top (never more than the whole total).
   function second() { var s2 = PR.exitOffer && PR.exitOffer.second; return s2 && s2.enabled ? s2 : null; }
   function offerCalc(q) {
     var o = offerCalc1(q), s2 = second(); o.d2 = o.d;
-    if (s2 && o.d > 0) { var ex = +((s2.extra || {})[q.rims === 'yes' ? 'on' : 'off'] || 0); o.d2 = Math.max(o.d, Math.min(o.d + ex, q.full - o.floor)); }
+    if (s2 && o.d > 0) { var ex = +((s2.extra || {})[q.rims === 'yes' ? 'on' : 'off'] || 0); o.d2 = Math.max(o.d, Math.min(o.d + ex, q.full)); }
     return o;
   }
   function offerWords(q, lang) { var L = T[lang || S.lang] || T.en, k = q.offerType === 'waive-urgency' ? 'Urg' : 'Svc'; return { x: L['o' + k], n: L['o' + k + 'N'], my: L['o' + k + 'My'] }; }
-  function offerKey(q) { return q.offerType === 'waive-service-call' || q.offerType === 'waive-urgency' ? (q.offerFull ? 'Fees' : 'FeesPart') : ''; }
-  function offerFill(str, q) { var w = offerWords(q); return str.replace('{X}', w.x).replace('{Y}', w.my).replace('{NC}', w.n.charAt(0).toUpperCase() + w.n.slice(1)); }
+  function offerKey(q) { return q.offerType === 'waive-service-call' || q.offerType === 'waive-urgency' ? 'Fees' : ''; }
+  // The offer as its own line under the total: "One-time offer: same-day fee waived −$45" / "Offre unique : … −45 $"
+  function offerLine(q, lang) {
+    var L = T[lang] || T.en, k = q.offerType === 'waive-service-call' ? (q.after ? 'After' : 'Area') : q.offerType === 'waive-urgency' ? (q.urg === 'asap' ? 'Asap' : 'Same') : 'Flat';
+    return L.oLine.replace('{W}', L['oLn' + k]).replace(' −{D}', '\u00a0−' + money(q.disc, lang).replace(' ', '\u00a0'));   // the amount never wraps away from its words
+  }
   function priceText(q, lang) { var L = T[lang] || T.en; return money(q.amount, lang) + ' ' + L.pBefore; }   // "$180 before tax" / "180 $ avant taxes"
   function rimsWord(q, lang) { var L = T[lang] || T.en; return (q.rims === 'yes' ? L.rimsYes : q.rims === 'no' ? L.rimsNo : L.rimsUnsure) + (q.asapFee ? ', ' + L.rimsAsap : ''); }
   function breakdown(q, lang) {   // "Swap $130 + $50 service call (Orléans) − $15 offer = $165 before tax"
@@ -571,8 +574,7 @@
       '<div class="bk-total" id="bk-total"><div class="bk-total-l">' + t('pTotalT') + '</div>' +
         '<div class="bk-price-amt" id="bk-price-amt" aria-live="polite">' + esc(shown) + '</div>' +
         (q.fee || q.disc || q.asapFee ? '<div class="bk-price-break" id="bk-price-break">' + esc(breakdown(q, S.lang)) + '</div>' : '') +
-        (q.disc ? '<div class="bk-offer-on" id="bk-offer-on">' + esc(offerFill(t('pOfferOn' + offerKey(q)).replace('{D}', money(q.disc)), q)) + '</div>' : '') +
-        (S.offerApplied && !q.disc ? '<div class="bk-offer-on bk-offer-none" id="bk-offer-none">' + esc(t('pOfferNone')) + '</div>' : '') +
+        (q.disc ? '<div class="bk-offer-on" id="bk-offer-on">' + esc(offerLine(q, S.lang)) + '</div>' : '') +
         '<div class="bk-price-svc">' + t('pSvc') + ' · ' + esc(rimsWord(q, S.lang)) + '</div>' +
         (q.fee === null ? '<div class="bk-price-svc">' + esc(t('pAreaOtherShort')) + '</div>' : '') +
         '<p class="bk-price-note">' + t('pPlusTax') + '</p></div></div>';
@@ -1061,11 +1063,12 @@
         asapRequestedLocal: vasap && S.asapAt ? new Date(S.asapAt).toLocaleString('en-CA', { timeZone: 'America/Toronto', dateStyle: 'medium', timeStyle: 'short' }) + ' ET' : ''
       };
       var q = priceInfo();
+      // offerFloor 0 = no floor on the exit offer (owner, Oct 20); also stops the script's old $175 default from flagging it
       if (q && q.ready) {   // itemized total shown to the customer right above Send (no accept checkbox: owner, Oct 18)
         payload.price = priceForOwner(q); payload.totalShown = true; payload.priceAmount = q.amount; payload.total = q.amount; payload.regularPrice = q.full;
         payload.swapPrice = q.swap; payload.onRims = q.rims === 'yes' ? 'yes' : q.rims === 'no' ? 'no' : 'not sure';
         payload.serviceFee = q.fee; payload.serviceArea = q.fee === null ? 'Other: ' + (S.area || S.addrText) : (q.areaName || S.area || S.addrText);
-        payload.offerApplied = !!q.disc; payload.offerAmount = q.disc; payload.offerType = q.disc ? q.offerType : ''; payload.offerTier = q.disc ? q.offerTier : 0; payload.offerFloor = q.offerFloor; payload.tier = q.tier; payload.tierLabel = tierLabel(q.tier, 'en');
+        payload.offerApplied = !!q.disc; payload.offerAmount = q.disc; payload.offerType = q.disc ? q.offerType : ''; payload.offerTier = q.disc ? q.offerTier : 0; payload.offerFloor = 0; payload.tier = q.tier; payload.tierLabel = tierLabel(q.tier, 'en');
         payload.tierSource = tierSource(q); payload.tierReason = q.auto.reason; payload.vehicleRecognized = !!q.auto.recognized;
         payload.vehicleFlag = q.auto.recognized ? '' : '⚠️ Vehicle not recognized: confirm tire type on the call';
         payload.stockSize = q.auto.stock ? q.auto.stock.size : ''; payload.stockSizeNote = stockNote(q.auto, typed);
@@ -1183,7 +1186,7 @@
       var y = window.scrollY; renderKeepFocus(); window.scrollTo(0, y);
     } else if (S.veh.car) refreshStep1();   // rules changed (exotic list etc.): refresh the price part only
   }).catch(function () { S.cfgSource = 'default (config unavailable)'; });
-  window.BK_JS_BUILD = '20261019c43';   // must match the ?v= on the booking pages (stale-cache guard there)
+  window.BK_JS_BUILD = '20261020offer';   // must match the ?v= on the booking pages (stale-cache guard there)
   // stock-sizes.js loads after this file (async): re-price once it arrives, keeping everything typed
   window.BK_STOCK_READY = function () { try { if (S.veh && S.veh.car) refreshStep1(); } catch (e) {} };
   // load it only AFTER the form is on screen (never competes with first paint); same ?v= as this file

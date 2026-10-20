@@ -5,12 +5,12 @@
  *
  *   off      = price when the winter tires are NOT on rims (mount & balance). "Not sure" also uses this.
  *   on       = price when the winter tires are already on their own rims (wheel swap)
- *   discount = FALLBACK exit offer (see exitOffer below), dollars off, for off / on rims, never below the floor
+ *   discount = FALLBACK exit offer (see exitOffer below), dollars off, for off / on rims
  *              (owner, Oct 18: $15 off rims or "Not sure", $10 on rims).
  *              Set to 0 to never offer it for that case.
  * ============================================================================================ */
 window.SWAP_PRICES = {
-  build: '20261019c43',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
+  build: '20261020offer',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
   tiers: {
     small:  { off: 160, on: 120, discount: { off: 15, on: 10 }, en: 'Small car', fr: 'Petite voiture',
               egEn: 'e.g. Chevy Spark, Hyundai Accent', egFr: 'ex. Chevy Spark, Hyundai Accent' },
@@ -42,20 +42,21 @@ window.SWAP_PRICES = {
                         'Chinatown', 'Tunney\'s Pasture', 'Blackburn Hamlet'] }
   ],
 
-  // EXIT OFFER (one time per visitor, when the form is started but not sent). Owner rule, Oct 19 (final, never waives both):
-  //   1) there is a service call (area fee or after-hours): min(service call, total - floor) off -> "we'll waive your service call"
-  //   2) else there is a same-day / ASAP urgency fee:        min(urgency fee, total - floor) off  -> "we'll waive the rush fee"
-  //   3) else: the tier's flat discount above ($15 off rims / "Not sure", $10 on rims), also capped at total - floor.
-  //   NEVER below the floor: if the discount would be $0 or less (total already at/below the floor), no exit popup at all.
+  // EXIT OFFER (one time per visitor, when the form is started but not sent). Owner rule, Oct 20: NO floor, it ALWAYS
+  // takes something off, one item only (never two):
+  //   1) there is a service call (area fee or after-hours fee): it is waived  -> "we'll waive your service call"
+  //   2) else there is a same-day / ASAP urgency fee: it is waived            -> "we'll waive the rush fee"
+  //   3) else: the tier's flat discount above ($15 off rims / "Not sure", $10 on rims).
+  //   e.g. SUV on rims $130 + $45 same-day = $175 -> with the offer $130.
+  //   The total box shows it as its own line: "One-time offer: same-day fee waived −$45".
   //   ONE offer per visitor, shared with the sitewide exit offer (assets/offer.js): a visitor who took it outside the form
   //   arrives here with ?offer=<token> (and 'bk_swap_offer' saved), and the form applies it with the rule above.
   //   Outside the form the offer is words only ("we'll waive your service call fee"): no dollar amounts there.
   exitOffer: {
-    floor: 175,
     token: 'exit1',
     // SECOND TIER ("discount on discount"): OFF. To turn it on later: enabled: true (and set EXIT_OFFER_SECOND_MAX in the
     // script to the largest extra, so its price check agrees). Booking form only: shown ONCE more to a visitor who already
-    // took the first offer and is leaving again; `extra` dollars on top (off rims / "Not sure" vs on rims), never below the floor.
+    // took the first offer and is leaving again; `extra` dollars on top (off rims / "Not sure" vs on rims).
     second: { enabled: false, extra: { off: 10, on: 5 } }
   },
 
