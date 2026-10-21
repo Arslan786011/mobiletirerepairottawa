@@ -10,7 +10,7 @@
  *              Set to 0 to never offer it for that case.
  * ============================================================================================ */
 window.SWAP_PRICES = {
-  build: '20261020offer',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
+  build: '20261021idle',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
   tiers: {
     small:  { off: 160, on: 120, discount: { off: 15, on: 10 }, en: 'Small car', fr: 'Petite voiture',
               egEn: 'e.g. Chevy Spark, Hyundai Accent', egFr: 'ex. Chevy Spark, Hyundai Accent' },
@@ -84,9 +84,10 @@ window.SWAP_PRICES = {
   //     - the make is in lowMakes (run-flat brands) or the make/model/trim text has a word in lowModels
   //       (performance / run-flat models and trims: GT, AMG, M3, Type R, N, SRT, Scat Pack, TRD Pro, RS, S line…)
   //     - a tire size is given with aspect ratio (the "35" in 295/35R20) at or below lowProfileMaxAspect,
-  //       or rim (the "20") at or above lowProfileMinRim inches. A size can only move the type UP, never down.
-  //     - the car's FACTORY tire size (stock-sizes.js, ~360 models) passes one of those same two size rules
-  //       (no trim typed: the base size for normal cars, the biggest stock size for performance models)
+  //       or rim (the "20") at or above lowProfileMinRim inches. A size can only move the type UP from the model's type.
+  //     - NO size typed (blank, "not sure" or unreadable): the car's FACTORY tire size (stock-sizes.js, ~360 models) passes
+  //       one of those same two size rules (no trim typed: the base size for normal cars, the biggest stock size for
+  //       performance models). A size the customer types always wins over the factory size (owner, Oct 21).
   //     - the make/model is on the performance list in stock-sizes.js (C43, i8, M3, Golf R, Model 3 Performance...)
   //   Make & model not in any list (e.g. "Lada Niva"): priced as unknownTier (SUV / crossover / minivan) and the
   //   booking is flagged for staff: "Vehicle not recognized: confirm tire type on the call". Never blocked.

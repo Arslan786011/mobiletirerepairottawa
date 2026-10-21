@@ -345,8 +345,10 @@
       else if (lowWhy.length) { base = 'small'; why = ''; }
       else if (st) { base = PR.tiers[PR.unknownTier] ? PR.unknownTier : 'suv'; why = 'in the stock-size table (' + st.model + '), type not listed'; }
       else { base = PR.tiers[PR.unknownTier] ? PR.unknownTier : 'suv'; rec = false; why = 'default: vehicle not recognized'; }
-      // the car's factory size runs through the same size rules (never lowers the type)
-      if (st && lowSize(parseSize(st.size)).length) lowWhy.push('stock size ' + st.size + ' (' + st.label + ')');
+      // the car's factory size runs through the same size rules (never lowers the type), but ONLY when the customer did not
+      // type a valid size (owner, Oct 21: a size the customer types always wins; e.g. 2024 Outlander SE + typed 235/60R18 = SUV,
+      // not low-profile from the table's 255/45R20). "Not sure" / blank / a size we can't read = the table is used as before.
+      if (st && !p && lowSize(parseSize(st.size)).length) lowWhy.push('stock size ' + st.size + ' (' + st.label + ')');
     }
     var tier = base;
     if (p) {   // a tire size can only move the type UP
@@ -379,7 +381,7 @@
   function perfOf(txt) { var SS = window.STOCK_SIZES; try { return SS && SS.perf ? SS.perf(txt) : ''; } catch (e) { return ''; } }
   function stockNote(a, typed) {
     if (!a || !a.stock) return '';
-    return (typed ? 'Stock size for ' + a.stock.label + ': ' + a.stock.size + ' (customer typed ' + typed.text + ')' : 'Assumed stock size ' + a.stock.size + ' (' + a.stock.label + ')');
+    return (typed ? 'Stock size for ' + a.stock.label + ': ' + a.stock.size + ' (customer typed ' + typed.text + ', priced from the typed size)' : 'Assumed stock size ' + a.stock.size + ' (' + a.stock.label + ')');
   }
   function tierLabel(k, lang) { var x = PR.tiers[k] || {}; return (lang || S.lang) === 'fr' ? (x.fr || x.en || k) : (x.en || k); }
   // ---- service call fee by area (lists + fees in prices.js). Area field first, then the street address.
@@ -994,8 +996,28 @@
   }
 
   function draftDetails() {
-    return { name: S.c.name, email: S.c.email, size: sizeLabel(), service: (S.service === 'on' ? 'On-rim' : 'Off-rim') + ' x' + S.tires,
-             address: areaLabel(), zone: S.zone && !S.zone.error ? S.zone.zone : '', area: S.area, visitWhen: visitWhen('en'), visitDate: asapOn() ? torToday() : visitDateIso(), visitHour: asapOn() ? '' : S.visitTime, lang: S.lang, price: shownPriceForOwner(), ref: S.ref, onRims: S.rims, asap: asapOn(), serviceArea: (function () { var q = priceInfo(); return q && q.ready ? (q.areaName || 'Other') : ''; })() };
+    return Object.assign({ name: S.c.name, email: S.c.email, size: sizeLabel(), service: (S.service === 'on' ? 'On-rim' : 'Off-rim') + ' x' + S.tires,
+             address: areaLabel(), zone: S.zone && !S.zone.error ? S.zone.zone : '', area: S.area, visitWhen: visitWhen('en'), visitDate: asapOn() ? torToday() : visitDateIso(), visitHour: asapOn() ? '' : S.visitTime, lang: S.lang, price: shownPriceForOwner(), ref: S.ref, onRims: S.rims, asap: asapOn(), serviceArea: (function () { var q = priceInfo(); return q && q.ready ? (q.areaName || 'Other') : ''; })() }, offerStatus());
+  }
+  // ---- exit offer status for the staff emails (almost-booked draft + booking): 'taken' | 'declined' | 'shown' | 'not_shown'
+  //      taken    = the offer is on this total (popup "yes" here, or the sitewide offer / ?offer= token)
+  //      declined = the popup was closed with No thanks / ✕ / Esc / tap outside
+  //      shown    = the popup was shown but not answered (still open, or the visitor left)
+  //      offerText (English) is the ready line for the email, e.g. "taken (−$45 same-day fee waived)".
+  var OFFER_WORDS_EN = { Area: 'service call fee waived', After: 'after-hours fee waived', Same: 'same-day fee waived', Asap: 'ASAP fee waived', Flat: 'discount' };
+  function offerStatus() {
+    var q = priceInfo(), st, o = { offerStatus: '', offerAmount: 0, offerType: '', offerTrigger: lsGet('bk_offer_trigger') || '', offerText: '' };
+    if (S.offerApplied) st = 'taken';
+    else if (lsGet('bk_offer_answer') === 'declined') st = 'declined';
+    else if (lsGet('bk_offer_seen') || lsGet('bk_offer2_seen')) st = 'shown';
+    else st = 'not_shown';
+    o.offerStatus = st;
+    if (st === 'taken' && q && q.ready && q.disc) {
+      var k = q.offerType === 'waive-service-call' ? (q.after ? 'After' : 'Area') : q.offerType === 'waive-urgency' ? (q.urg === 'asap' ? 'Asap' : 'Same') : 'Flat';
+      o.offerAmount = q.disc; o.offerType = q.offerType;
+      o.offerText = 'taken (\u2212' + money(q.disc, 'en') + ' ' + OFFER_WORDS_EN[k] + ')';
+    } else o.offerText = st === 'taken' ? 'taken (amount shows once the total is complete)' : st === 'declined' ? 'shown, declined' : st === 'shown' ? 'shown, no answer' : 'not shown';
+    return o;
   }
   function shownPriceForOwner() { var q = priceInfo(); return q && q.ready ? priceForOwner(q) : 'Call for a quote'; }
   function sendDraft() {
@@ -1062,6 +1084,7 @@
         visitTime: vi.label, visitTimeSource: vi.src, slotCheck: slotCheckState(), asap: vasap, asapRequestedAt: vasap ? S.asapAt : '',
         asapRequestedLocal: vasap && S.asapAt ? new Date(S.asapAt).toLocaleString('en-CA', { timeZone: 'America/Toronto', dateStyle: 'medium', timeStyle: 'short' }) + ' ET' : ''
       };
+      Object.assign(payload, offerStatus());   // offerStatus / offerAmount / offerType / offerTrigger / offerText (the price block below keeps the same amount)
       var q = priceInfo();
       // offerFloor 0 = no floor on the exit offer (owner, Oct 20); also stops the script's old $175 default from flagging it
       if (q && q.ready) {   // itemized total shown to the customer right above Send (no accept checkbox: owner, Oct 18)
@@ -1137,6 +1160,18 @@
     },
     tier: function () { return S.offerApplied ? 2 : 1; },   // which offer would show now (offer.js keeps one "seen" flag per tier)
     started: function () { return !!S.cfg && !S.done && step1Basics() && !isExoticSafe(); },
+    // Phone "final step" idle trigger (offer.js, ~12 s): true while the visitor is on the last part of the form with a total
+    // showing and a visit time picked, nothing is being sent, nothing was booked, and the first offer was never shown/taken/declined.
+    finalStep: function () {
+      if (S.offerApplied || S.busy || S.done || lsGet('bk_booked') || lsGet('bk_offer_seen') || lsGet('bk_swap_offer') || lsGet('bk_offer_answer')) return false;
+      if (!window.MTRO_OFFER.canShow() || !visitDone() || isExoticSafe()) return false;
+      var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+      return ['bk-visit', 'bk-price'].map(function (id) { return document.getElementById(id); }).concat([root.querySelector('[data-act="book"]')]).some(function (el) {
+        if (!el) return false; var r = el.getBoundingClientRect(); return r.height > 0 && r.bottom > 0 && r.top < vh;   // on screen now
+      });
+    },
+    onShown: function () { if (!S.done) draftSoon(); },      // the almost-booked draft now says "shown"
+    onDeclined: function () { if (!S.done) draftSoon(); },   // ... and 'declined'
     text: function () {
       var q = offerQuote(); if (!q) return null;
       var two = S.offerApplied, d = two ? q.offer2Amt - q.offerAmt : q.offerAmt, D = money(d), full = money(two ? q.full - q.offerAmt : q.full), now = money(q.full - (two ? q.offer2Amt : d)), k = offerKey(q);
@@ -1186,7 +1221,7 @@
       var y = window.scrollY; renderKeepFocus(); window.scrollTo(0, y);
     } else if (S.veh.car) refreshStep1();   // rules changed (exotic list etc.): refresh the price part only
   }).catch(function () { S.cfgSource = 'default (config unavailable)'; });
-  window.BK_JS_BUILD = '20261020offer';   // must match the ?v= on the booking pages (stale-cache guard there)
+  window.BK_JS_BUILD = '20261021idle';   // must match the ?v= on the booking pages (stale-cache guard there)
   // stock-sizes.js loads after this file (async): re-price once it arrives, keeping everything typed
   window.BK_STOCK_READY = function () { try { if (S.veh && S.veh.car) refreshStep1(); } catch (e) {} };
   // load it only AFTER the form is on screen (never competes with first paint); same ?v= as this file
