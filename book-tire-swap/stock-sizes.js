@@ -29,32 +29,55 @@
   // checked against the cleaned make + model + trim text (lower case, "c 43" = "c43", "x5 m" = "x5m", "cr-v" = "crv").
   // [pattern, label shown to staff]. Ordinary trims are NOT here on purpose (Sport, GT-Line, N Line, F Sport, RS on Chevy...).
   var PERF = [
+    // ---- Oct 19 list (kept; Camaro, Mustang, Challenger/Charger, Stinger tightened Oct 21 so base trims on regular tires aren't caught)
     ['\\bmercedes(amg)?\\b.*\\b(a|c|e|s|cl|cla|cle|cls|g|gla|glb|glc|gle|gls|sl|slc|slk|ml|gl)(35|43|45|53|55|63|65)s?(amg)?\\b|\\b(c|e|s|cla|cle|cls|g|gla|glb|glc|gle|gls|sl|slc|slk)(43|45|53|55|63|65)s?(amg)?\\b', 'Mercedes-AMG model'],
-    ['\\bmercedes\\b.*\\b(amg gt|amggt|sls|slr)\\b|\\bmercedesamg\\b|\\bamg gt\\b', 'Mercedes-AMG model'],
+    ['\\bmercedes\\b.*\\b(amg gt|amggt|sls|slr)\\b|\\bmercedesamg\\b|\\bamg gt\\b|\\bamg\\b', 'Mercedes-AMG model'],
     ['\\bi8\\b', 'BMW i8'],
     ['\\bbmw\\b.*\\b(m[1-8]|m\\d{2,3}[id]|x[1-7]m|xm|m)\\b|\\b(m[2-8]|m(235|240|340|440|550|760|850)i|x[3-6]m|m(40|50|60)i)\\b', 'BMW M model'],
     ['\\bbmw\\b.*\\b(m sport|alpina)\\b|\\balpina\\b', 'BMW M Sport / Alpina'],
-    ['\\baudi\\b.*\\b(s[1-8]|sq[2-8]|rs ?\\w*|r8|tts|tt rs)\\b|\\b(rs[3-7]|rsq[38]|rs q[38]|r8|ttrs|tt rs|etron gt|rs etron gt)\\b', 'Audi S / RS / R8 / TT RS'],
+    ['\\baudi\\b.*\\b(s[1-8]|sq[2-8]|rs ?\\w*|r8|tts|tt rs)\\b|\\b(rs[3-7]|rsq[38]|rs q[38]|r8|ttrs|tt rs|etron gt|rs etron gt)\\b', 'Audi S / RS / R8 / TT RS / e-tron GT'],
     ['\\bporsche\\b|\\b(911|718|cayman|boxster|taycan|panamera)\\b', 'Porsche'],
     ['\\b(tesla|model[3sxy]|model [sxy])\\b.*\\b(performance|plaid|p\\d{2,3}d?)\\b', 'Tesla Performance / Plaid'],
-    ['\\b(corvette|camaro|zl1|chevrolet ss)\\b', 'Corvette / Camaro'],
-    ['\\bmustang\\b(?!.*\\b(mach ?e|mache)\\b)|\\b(shelby|gt350|gt500|mach1|dark horse)\\b', 'Mustang'],
-    ['\\b(challenger|charger|srt|scat pack|hellcat|demon|viper|trackhawk)\\b', 'Dodge Challenger / Charger / SRT'],
+    ['\\bcorvette\\b', 'Chevrolet Corvette'],
+    ['\\bcamaro\\b.*\\b(ss|1ss|2ss|zl1|lt1|z28)\\b|\\b(zl1|z28)\\b|\\bchevrolet ss\\b', 'Camaro SS / ZL1 / LT1, Chevrolet SS'],
+    ['\\bmustang\\b(?!.*\\bmache\\b).*\\b(gt|gt350r?|gt500|mach1|shelby|dark ?horse|bullitt|boss302|california special)\\b|\\b(shelby|gt350r?|gt500|mach1|dark horse|bullitt)\\b|\\bmustang mache gt\\b', 'Mustang GT / Mach 1 / Shelby / Dark Horse (and Mach-E GT)'],
+    ['\\b(challenger|charger)\\b.*\\b(r t|rt|scat ?pack|srt|hellcat|demon|redeye|jailbreak|daytona|392|super bee|t a)\\b|\\b(srt|srt4|srt8|scat pack|hellcat|demon|viper|trackhawk)\\b', 'Dodge R/T / Scat Pack / SRT / Hellcat'],
     ['\\b(gtr|370z|350z|nissan z|z nismo|nismo)\\b|\\bnissan\\b.*\\bz\\b', 'Nissan GT-R / Z / Nismo'],
     ['\\b(supra|gr supra|gr86|86|brz|frs|gr corolla|grcorolla)\\b', 'Supra / GR86 / BRZ / GR Corolla'],
     ['\\btype ?r\\b|\\btyper\\b|\\btype s\\b|\\bnsx\\b', 'Honda / Acura Type R / Type S / NSX'],
     ['\\bgolf r\\b|\\bgti\\b|\\bgolf\\b.*\\br\\b', 'VW Golf R / GTI'],
-    ['\\bwrx sti\\b|\\bsubaru\\b.*\\bsti\\b|\\bwrx\\b.*\\bsti\\b', 'Subaru WRX STI'],
-    ['\\b(elantra|veloster|kona|ioniq5|ioniq 5) n\\b(?! line)|\\bhyundai\\b.*\\bn\\b(?! line)', 'Hyundai N'],
+    ['\\bwrx\\b|\\bsti\\b', 'Subaru WRX / STI'],
+    ['\\b(elantra|veloster|kona|ioniq5|ioniq 5|ioniq6|ioniq 6) n\\b(?! line)|\\bhyundai\\b.*\\bn\\b(?! line)', 'Hyundai N'],
     ['\\bg70\\b.*\\b(3.3t|3.3|sport)\\b|\\bgenesis\\b.*\\b(sport|3.3t)\\b', 'Genesis G70 3.3T / Sport'],
-    ['\\bstinger\\b', 'Kia Stinger'],
+    ['\\bstinger\\b.*\\bgt\\b(?! ?line)|\\bstinger\\b.*\\b(gt1|gt2|gt limited|gt elite|tribute|scorpion)\\b', 'Kia Stinger GT (not GT-Line)'],
     ['\\b(rcf|isf|gsf|is500|lfa)\\b|\\b(rc|is|gs) f\\b(?! sport)|\\blexus\\b.*\\blc\\d*h?\\b', 'Lexus F / LC'],
     ['\\binfiniti\\b.*\\b(red sport|redsport|400)\\b|\\bq[56]0 red sport\\b', 'Infiniti Red Sport'],
     ['\\b(ct4v|ct5v|atsv|ctsv|escaladev|blackwing)\\b|\\bcadillac\\b.*\\bv\\b', 'Cadillac V'],
     ['\\b(ftype|f type)\\b|\\bjaguar\\b.*\\b(svr|project 8|r)\\b', 'Jaguar F-Type / SVR / R'],
     ['\\b(maserati|lotus|mclaren|ferrari|lamborghini|aston martin|bentley|rolls royce|rollsroyce|bugatti|koenigsegg|pagani)\\b', 'Exotic make'],
     ['\\balfa romeo\\b.*\\bquadrifoglio\\b|\\bquadrifoglio\\b', 'Alfa Romeo Quadrifoglio'],
-    ['\\babarth\\b', 'Fiat Abarth']
+    ['\\babarth\\b', 'Fiat Abarth'],
+    // ---- added Oct 21 (owner: "add all the other cars that we know run low profile or run flats"). Sources: LOW-PROFILE-MODELS.md
+    ['\\bcivic\\b.*\\bsi\\b', 'Honda Civic Si (235/40R18)'],
+    ['\\bfocus\\b.*\\b(st|rs)\\b|\\bfiesta\\b.*\\bst\\b', 'Ford Focus ST / RS, Fiesta ST'],
+    ['\\bford gt\\b', 'Ford GT'],
+    ['\\bjetta\\b.*\\bgli\\b|\\bgli\\b', 'VW Jetta GLI (225/40R18)'],
+    ['\\b(forte|forte5|k5|ev6)\\b.*\\bgt\\b(?! ?line)', 'Kia Forte GT / K5 GT / EV6 GT'],
+    ['\\bcamry\\b.*\\btrd\\b', 'Toyota Camry TRD (235/40R19)'],
+    ['\\blancer\\b.*\\b(evolution|evo|evo x)\\b|\\blancer evolution\\b', 'Mitsubishi Lancer Evolution'],
+    ['\\bmazdaspeed\\d?\\b|\\bmazdaspeed ?3\\b', 'Mazdaspeed3'],
+    ['\\b(s60|v60|xc60|s90|v90)\\b.*\\bpolestar\\b', 'Volvo Polestar Engineered'],
+    ['\\bs2000\\b', 'Honda S2000'],
+    ['\\btaurus\\b.*\\bsho\\b', 'Ford Taurus SHO']
+  ];
+  // WHOLE MAKES / ORDINARY TRIMS that the website already prices as low-profile (prices.js lowMakes / lowModels, owner Oct 19),
+  // copied here (Oct 21) so the Apps Script agrees. They count for the price type ONLY: they do not switch the factory-size
+  // lookup to "biggest size" the way PERF models do (a plain "BMW X3" still assumes its base size in the staff note).
+  var BROAD = [
+    ['\\bbmw\\b', 'BMW (run-flat tires from the factory)'],
+    ['\\bmini\\b(?! ?van)', 'MINI (run-flat tires from the factory)'],
+    ['\\balfa romeo\\b', 'Alfa Romeo (owner list)'],
+    ['\\blexus\\b.*\\bf sport\\b|\\baudi\\b.*\\bs ?line\\b', 'Lexus F Sport / Audi S line (owner list)']
   ];
   var MODELS = [
     {"mk":"Acura","md":"ILX","al":["ilx"],"base":"205/55R16","big":"225/40R18","tr":{"aspec":[["225/40R18"]],"premium":[["215/45R17"]],"technology":[["215/45R17"]],"hybrid":[["205/55R16"]]},"src":"tiresize.com/tires/Acura/ILX/ (2013,2016,2019,2022)"},
@@ -450,11 +473,13 @@
     return null;
   }
   // PERF match -> label or ''
-  function perf(text) {
+  function perfIn(list, text) {
     var t = ' ' + canon(text) + ' ', l = ' ' + canon(text, true) + ' ';
-    for (var i = 0; i < PERF.length; i++) { var re = new RegExp(PERF[i][0]); if (re.test(t) || re.test(l)) return PERF[i][1]; }
+    for (var i = 0; i < list.length; i++) { var re = new RegExp(list[i][0]); if (re.test(t) || re.test(l)) return list[i][1]; }
     return '';
   }
+  function perfStrict(text) { return perfIn(PERF, text); }                     // performance models/trims only (picks the biggest stock size)
+  function perf(text) { return perfIn(PERF, text) || perfIn(BROAD, text); }   // price type: performance models + whole run-flat makes
   // Stock size for free text "Honda Civic Type R" (+ optional trim). -> { size, model: 'Honda Civic', trim: 'Type R' | '', how: 'trim'|'base'|'largest', src } or null
   function lookup(text) {
     var toks = canon(text).split(' ').filter(Boolean), best = null;
@@ -477,7 +502,7 @@
     rest = rest.filter(function (w) { return !NOISE[w] && !/^(19|20)\d\d$/.test(w); });
     // trims: every word of the trim is in the text (full) or every remaining word of the text is in the trim (partial, e.g. "F Sport").
     // Best = covers the most of the customer's words; a full match wins a tie.
-    var isPerf = !!perf(e.mk + ' ' + e.md), cands = [], k, kt, n;
+    var isPerf = !!perfStrict(e.mk + ' ' + e.md), cands = [], k, kt, n;
     for (k in e.tr) if (e.tr.hasOwnProperty(k)) {
       kt = k.split(' ');
       n = kt.filter(function (w) { return rest.indexOf(w) >= 0; }).length;
@@ -487,14 +512,14 @@
     var cand = cands, size, how, trim = '';
     if (cand.length) {
       var top = Math.max.apply(null, cand.map(function (c) { return c[1]; })), ks = cand.filter(function (c) { return c[1] === top; }).map(function (c) { return c[0]; }), sizes = [];
-      var big = isPerf || !!perf(e.mk + ' ' + e.md + ' ' + ks[0]);
+      var big = isPerf || !!perfStrict(e.mk + ' ' + e.md + ' ' + ks[0]);
       // normal: the trim's size in the newest model year we have (smallest if several); performance: its biggest stock size, any year
       ks.forEach(function (k) { sizes = sizes.concat(big ? [].concat.apply([], e.tr[k]) : e.tr[k][0]); });
       size = pick(sizes, big); how = 'trim'; trim = ks.length === 1 ? ks[0] : rest.join(' ');
     } else { size = isPerf ? e.big : e.base; how = isPerf ? 'largest' : 'base'; }
     return { size: size, model: e.mk + ' ' + e.md, trim: trim, how: how, src: e.src };
   }
-  var api = { MODELS: MODELS, PERF: PERF, canon: canon, perf: perf, lookup: lookup, isLow: isLow, count: MODELS.length };
+  var api = { MODELS: MODELS, PERF: PERF, BROAD: BROAD, canon: canon, perf: perf, perfStrict: perfStrict, lookup: lookup, isLow: isLow, count: MODELS.length };
   root.STOCK_SIZES = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof window !== 'undefined' ? window : this);

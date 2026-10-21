@@ -339,7 +339,7 @@
     if ((e = listHit(PR.pickupModels, txt))) { base = 'pickup'; why = 'pickup model (' + nice(e) + ')'; }
     else {
       var lm = listHit(PR.lowModels, txt), mk = listHit(PR.lowMakes, txt);
-      if (lm) lowWhy.push('performance model/trim (' + nice(lm) + ')'); else if (pf) lowWhy.push('performance model (' + pf + ')'); else if (mk) lowWhy.push('run-flat make (' + nice(mk) + ')');
+      if (lm) lowWhy.push('performance model/trim (' + nice(lm) + ')'); else if (mk) lowWhy.push('run-flat make (' + nice(mk) + ')'); else if (pf) lowWhy.push('performance model (' + pf + ')');
       if ((e = listHit(PR.suvModels, txt))) { base = 'suv'; why = 'SUV/crossover/minivan model (' + nice(e) + ')'; }
       else if ((e = listHit(PR.smallModels, txt))) { base = 'small'; why = 'car model (' + nice(e) + ')'; }
       else if (lowWhy.length) { base = 'small'; why = ''; }
@@ -1221,7 +1221,7 @@
       var y = window.scrollY; renderKeepFocus(); window.scrollTo(0, y);
     } else if (S.veh.car) refreshStep1();   // rules changed (exotic list etc.): refresh the price part only
   }).catch(function () { S.cfgSource = 'default (config unavailable)'; });
-  window.BK_JS_BUILD = '20261021idle';   // must match the ?v= on the booking pages (stale-cache guard there)
+  window.BK_JS_BUILD = '20261021lp';   // must match the ?v= on the booking pages (stale-cache guard there)
   // stock-sizes.js loads after this file (async): re-price once it arrives, keeping everything typed
   window.BK_STOCK_READY = function () { try { if (S.veh && S.veh.car) refreshStep1(); } catch (e) {} };
   // load it only AFTER the form is on screen (never competes with first paint); same ?v= as this file
