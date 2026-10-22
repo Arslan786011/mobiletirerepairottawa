@@ -23,6 +23,8 @@
  *   - (phone) scrolls back up fast toward the top after reading down the page
  *   - closes the winter popup (✕ / Maybe later / Esc / tap outside): the offer comes first, once; closing it closes all
  *   - (booking form only) sits idle ~30 seconds, or comes back after starting the form on an earlier visit
+ *   - (booking form, phone/tablet) has a total showing and the visit picked, and stays ~12 s on that last part of the form
+ *     without booking ("final_idle"). Phones fire no event when the tab is closed, so this is the phone's exit offer.
  * Honest and trap-free: no countdown timers, no history.pushState / back-button trapping, "No thanks" and ✕ always close.
  */
 (function () {
@@ -31,6 +33,8 @@
   var SITE_TOKEN = 'exit1';   // keep the same as exitOffer.token in /book-tire-swap/prices.js
   var ARM_MS = 8000;          // never in the first 8 seconds of a page view (except right after the winter popup closes)
   var IDLE_MS = 30000;        // booking form only: ~30 s with no taps, scrolls, keys or mouse moves
+  var FINAL_IDLE_MS = 12000;  // booking form, touch screens: ~12 s on the last part of the form (total + visit time showing) without booking
+  var FINAL_IDLE_TOUCH_ONLY = true;   // computers keep exit-intent + the 30 s idle; set false to use the 12 s rule there too
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   var fr = (D.documentElement.lang || '').toLowerCase().indexOf('fr') === 0;
@@ -144,6 +148,8 @@
     build(); paint(); ov.hidden = false;
     requestAnimationFrame(function () { requestAnimationFrame(function () { ov.classList.add('show'); }); });
     var bx = ov.querySelector('.mo-box'); if (bx) bx.focus({ preventScroll: true });
+    lsSet('bk_offer_trigger', why); lsSet('bk_offer_answer', '');   // offer status for the staff emails (booking form reads these)
+    if (priceMode && H.onShown) try { H.onShown(why, lastTier); } catch (e) {}
     track('offer_shown', why);
     return true;
   }
@@ -151,10 +157,15 @@
     if (!ov) return;
     open = false;
     ov.classList.remove('show'); setTimeout(function () { ov.hidden = true; }, 250);
-    if (how === 'no' || how === 'x' || how === 'backdrop' || how === 'esc') track('offer_declined', lastWhy);
+    if (how === 'no' || how === 'x' || how === 'backdrop' || how === 'esc') {
+      track('offer_declined', lastWhy);
+      lsSet('bk_offer_answer', 'declined');
+      if (priceMode && H.onDeclined) try { H.onDeclined(how, lastWhy); } catch (e) {}
+    }
   }
   function claim(e) {
     track('offer_claimed', lastWhy);
+    lsSet('bk_offer_answer', 'taken');
     if (priceMode) { if (H.claim) H.claim(); close('yes'); return; }
     lsSet('bk_swap_offer', '1');   // the booking form reads this (and ?offer=) and applies the offer to the total
     open = false;                  // the link itself opens the booking form
@@ -178,6 +189,29 @@
     var resetIdle = function () { clearTimeout(idleT); idleT = setTimeout(function () { if (!show('idle')) resetIdle(); }, IDLE_MS); };
     ['touchstart', 'pointerdown', 'scroll', 'keydown', 'mousemove', 'click', 'input'].forEach(function (ev) { D.addEventListener(ev, resetIdle, { passive: true, capture: true }); });
     resetIdle();
+  }
+
+  // 2b) Booking form, phone/tablet: the "final step" idle trigger (FINAL_IDLE_MS, ~12 s).
+  //     Counts while H.finalStep() is true: a total is showing, a visit time is picked (or ASAP), the last part of the form
+  //     (visit time / total / Book button) is on screen, no booking is being sent or done, and the offer was never shown,
+  //     taken or declined. A tap, key press or typed character restarts the 12 s; scrolling does NOT (scrolling up and down
+  //     over the total without booking is exactly the hesitation this is for). Leaving that state (e.g. clearing the hour)
+  //     also restarts it. Fires once, then never again for this visitor (same 'bk_offer_seen' flag as every other trigger).
+  if (priceMode && H.finalStep && (!FINAL_IDLE_TOUCH_ONLY || (W.matchMedia && (W.matchMedia('(pointer:coarse)').matches || W.matchMedia('(hover:none)').matches)))) {
+    var finalMs = -1, finalDone = false, finalTick = null, TICK = 500;   // counts ticks (not clock time), so a changed device clock can't skip it
+    var finalReset = function () { finalMs = -1; };
+    ['touchstart', 'pointerdown', 'keydown', 'input', 'change'].forEach(function (ev) { D.addEventListener(ev, finalReset, { passive: true, capture: true }); });
+    finalTick = setInterval(function () {
+      if (finalDone) return;
+      var ok = false; try { ok = !!H.finalStep(); } catch (e) { ok = false; }
+      if (!ok || D.visibilityState === 'hidden') { finalMs = -1; return; }
+      if (finalMs < 0) { finalMs = 0; return; }
+      finalMs += TICK;
+      if (finalMs >= FINAL_IDLE_MS) {
+        if (show('final_idle', true)) { finalDone = true; clearInterval(finalTick); }
+        else finalMs = -1;   // e.g. another dialog was open: count again
+      }
+    }, TICK);
   }
 
   // 3) Phone: fast scroll back up toward the top after reading down the page
@@ -205,5 +239,5 @@
   if (priceMode && startedBefore) setTimeout(function () { show('left_booking', true); }, 3500);
 
   // test hook (used by automated tests only; harmless for visitors)
-  W.MTRO_OFFER_DEBUG = { show: show, eligible: eligible, mode: priceMode ? 'form' : 'site' };
+  W.MTRO_OFFER_DEBUG = { show: show, eligible: eligible, mode: priceMode ? 'form' : 'site', finalIdleMs: FINAL_IDLE_MS };
 })();

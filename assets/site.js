@@ -268,7 +268,7 @@ document.addEventListener('click', function(e){
   if (document.body && document.body.hasAttribute('data-no-offer')) return;
   function add(){
     if (document.querySelector('script[src*="/assets/offer.js"]')) return;
-    var s = document.createElement('script'); s.src = '/assets/offer.js?v=20261022emg'; s.async = true; document.body.appendChild(s);
+    var s = document.createElement('script'); s.src = '/assets/offer.js?v=20261022lp'; s.async = true; document.body.appendChild(s);
   }
   function idle(){ ('requestIdleCallback' in window) ? requestIdleCallback(add, {timeout: 1500}) : setTimeout(add, 200); }
   if (document.readyState === 'complete') idle(); else addEventListener('load', idle);

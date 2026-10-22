@@ -5,12 +5,12 @@
  *
  *   off      = price when the winter tires are NOT on rims (mount & balance). "Not sure" also uses this.
  *   on       = price when the winter tires are already on their own rims (wheel swap)
- *   discount = FALLBACK exit offer (see exitOffer below), dollars off, for off / on rims, never below the floor
+ *   discount = FALLBACK exit offer (see exitOffer below), dollars off, for off / on rims
  *              (owner, Oct 18: $15 off rims or "Not sure", $10 on rims).
  *              Set to 0 to never offer it for that case.
  * ============================================================================================ */
 window.SWAP_PRICES = {
-  build: '20261019c43',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
+  build: '20261022lp',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
   tiers: {
     small:  { off: 160, on: 120, discount: { off: 15, on: 10 }, en: 'Small car', fr: 'Petite voiture',
               egEn: 'e.g. Chevy Spark, Hyundai Accent', egFr: 'ex. Chevy Spark, Hyundai Accent' },
@@ -42,20 +42,21 @@ window.SWAP_PRICES = {
                         'Chinatown', 'Tunney\'s Pasture', 'Blackburn Hamlet'] }
   ],
 
-  // EXIT OFFER (one time per visitor, when the form is started but not sent). Owner rule, Oct 19 (final, never waives both):
-  //   1) there is a service call (area fee or after-hours): min(service call, total - floor) off -> "we'll waive your service call"
-  //   2) else there is a same-day / ASAP urgency fee:        min(urgency fee, total - floor) off  -> "we'll waive the rush fee"
-  //   3) else: the tier's flat discount above ($15 off rims / "Not sure", $10 on rims), also capped at total - floor.
-  //   NEVER below the floor: if the discount would be $0 or less (total already at/below the floor), no exit popup at all.
+  // EXIT OFFER (one time per visitor, when the form is started but not sent). Owner rule, Oct 20: NO floor, it ALWAYS
+  // takes something off, one item only (never two):
+  //   1) there is a service call (area fee or after-hours fee): it is waived  -> "we'll waive your service call"
+  //   2) else there is a same-day / ASAP urgency fee: it is waived            -> "we'll waive the rush fee"
+  //   3) else: the tier's flat discount above ($15 off rims / "Not sure", $10 on rims).
+  //   e.g. SUV on rims $130 + $45 same-day = $175 -> with the offer $130.
+  //   The total box shows it as its own line: "One-time offer: same-day fee waived −$45".
   //   ONE offer per visitor, shared with the sitewide exit offer (assets/offer.js): a visitor who took it outside the form
   //   arrives here with ?offer=<token> (and 'bk_swap_offer' saved), and the form applies it with the rule above.
   //   Outside the form the offer is words only ("we'll waive your service call fee"): no dollar amounts there.
   exitOffer: {
-    floor: 175,
     token: 'exit1',
     // SECOND TIER ("discount on discount"): OFF. To turn it on later: enabled: true (and set EXIT_OFFER_SECOND_MAX in the
     // script to the largest extra, so its price check agrees). Booking form only: shown ONCE more to a visitor who already
-    // took the first offer and is leaving again; `extra` dollars on top (off rims / "Not sure" vs on rims), never below the floor.
+    // took the first offer and is leaving again; `extra` dollars on top (off rims / "Not sure" vs on rims).
     second: { enabled: false, extra: { off: 10, on: 5 } }
   },
 
@@ -83,23 +84,29 @@ window.SWAP_PRICES = {
   //     - the make is in lowMakes (run-flat brands) or the make/model/trim text has a word in lowModels
   //       (performance / run-flat models and trims: GT, AMG, M3, Type R, N, SRT, Scat Pack, TRD Pro, RS, S line…)
   //     - a tire size is given with aspect ratio (the "35" in 295/35R20) at or below lowProfileMaxAspect,
-  //       or rim (the "20") at or above lowProfileMinRim inches. A size can only move the type UP, never down.
-  //     - the car's FACTORY tire size (stock-sizes.js, ~360 models) passes one of those same two size rules
-  //       (no trim typed: the base size for normal cars, the biggest stock size for performance models)
+  //       or rim (the "20") at or above lowProfileMinRim inches. A size can only move the type UP from the model's type.
+  //     - NO size typed (blank, "not sure" or unreadable): the car's FACTORY tire size (stock-sizes.js, ~360 models) passes
+  //       one of those same two size rules (no trim typed: the base size for normal cars, the biggest stock size for
+  //       performance models). A size the customer types always wins over the factory size (owner, Oct 21).
   //     - the make/model is on the performance list in stock-sizes.js (C43, i8, M3, Golf R, Model 3 Performance...)
   //   Make & model not in any list (e.g. "Lada Niva"): priced as unknownTier (SUV / crossover / minivan) and the
   //   booking is flagged for staff: "Vehicle not recognized: confirm tire type on the call". Never blocked.
   lowProfileMaxAspect: 40,
   lowProfileMinRim: 19,
   unknownTier: 'suv',
-  lowMakes: ['bmw', 'mini', 'porsche', 'mercedes-amg', 'maserati', 'alfa romeo'],
+  lowMakes: ['bmw', ['mini', 'cooper'], ['mini', 'countryman'], ['mini', 'clubman'], ['mini', 'paceman'], ['mini', 'hardtop'], ['mini', 'convertible'], 'john cooper works', 'jcw',
+             'porsche', 'mercedes-amg', 'maserati', 'alfa romeo'],   // MINI by model name (Oct 21) so "mini van" isn't caught
   // A word or phrase, or [a, b] = all of them must be in the make/model/trim (lower case, whole words).
   // Plain "Sport" is NOT here on purpose: it is an ordinary trim name on many cars (CR-V Sport, Corolla Sport, Mazda3 Sport).
-  lowModels: ['supra', 'gr supra', '86', 'gr86', 'gr 86', 'brz', 'fr-s', 'gr corolla', 'corvette', 'ss', 'zl1', 'camaro ss', 'mustang gt', 'gt', 'shelby', 'gt350', 'gt500', 'mach 1',
-              'srt', 'scat pack', 'hellcat', 'trackhawk', 'amg', 's3', 's4', 's5', 's6', 's7', 's8', 'sq5', 'sq7', 'sq8', 'rs', 'rs3', 'rs4', 'rs5', 'rs6', 'rs7', 'rs q8', 'rsq8', 'e-tron gt',
-              's-line', 's line', 'sline', 'm2', 'm3', 'm4', 'm5', 'm8', 'm sport', 'f sport', 'trd pro', 'nismo', 'type r', 'type s', 'si',
-              ['tesla', 'performance'], ['model 3', 'performance'], ['model y', 'performance'], 'gt-r', 'gtr', ['nissan', 'z'], '370z', '350z',
-              ['lexus', 'rc'], ['lexus', 'lc'], 'rc f', 'is f', 'g70', 'stinger', 'golf r', 'gti', 'wrx', 'sti', 'abarth',
+  // Oct 21: generic 'gt', 'rs', 'trd pro', 'g70', 'stinger' removed (they caught Outlander GT, Mazda3 GT, Equinox/Blazer RS, 4Runner TRD Pro,
+  // G70 2.0T, Stinger GT-Line on regular tires). Trim-sensitive models (Stinger GT, Forte/K5/EV6 GT, Camaro SS, Mustang GT, Charger R/T...)
+  // are matched in stock-sizes.js PERF, which can tell "GT" from "GT-Line". Full list + reasons: LOW-PROFILE-MODELS.md (owner notes).
+  lowModels: ['supra', 'gr supra', '86', 'gr86', 'gr 86', 'brz', 'fr-s', 'gr corolla', 'corvette', 'ss', 'zl1', 'camaro ss', 'mustang gt', 'shelby', 'gt350', 'gt500', 'mach 1', 'dark horse',
+              'srt', 'scat pack', 'hellcat', 'trackhawk', 'amg', 's3', 's4', 's5', 's6', 's7', 's8', 'sq5', 'sq7', 'sq8', ['audi', 'rs'], 'rs3', 'rs4', 'rs5', 'rs6', 'rs7', 'rs q8', 'rsq8', 'e-tron gt',
+              's-line', 's line', 'sline', 'm2', 'm3', 'm4', 'm5', 'm8', 'm sport', 'f sport', 'nismo', 'type r', 'type s', ['civic', 'si'],
+              ['tesla', 'performance'], ['model 3', 'performance'], ['model y', 'performance'], 'plaid', 'gt-r', 'gtr', ['nissan', 'z'], '370z', '350z',
+              ['lexus', 'rc'], ['lexus', 'lc'], 'rc f', 'is f', 'is 500', 'is500', ['g70', '3.3t'], ['g70', 'sport'], 'golf r', 'gti', 'gli', 'wrx', 'sti', 'abarth',
+              ['focus', 'st'], ['focus', 'rs'], ['fiesta', 'st'], ['ford', 'gt'], ['camry', 'trd'], ['lancer', 'evolution'], ['lancer', 'evo'], 'mazdaspeed', 'mazdaspeed3', 's2000', ['taurus', 'sho'],
               // Mercedes-AMG + BMW i8 by model code (also in stock-sizes.js; repeated here so they work even before that file loads)
               'i8', 'c43', 'c63', 'c63s', 'e43', 'e53', 'e63', 'e63s', 'glc43', 'glc63', 'gle43', 'gle53', 'gle63', 'gls63', 'a35', 'a45', 'cla35', 'cla45',
               'gla35', 'gla45', 'glb35', 's63', 'g63', 'sl55', 'sl63', 'amg gt'],
@@ -112,7 +119,7 @@ window.SWAP_PRICES = {
                 'lancer', 'charger', 'challenger', 'chrysler 300', 'dart', 'leaf', 'model 3', 'model s', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'c-class', 'e-class', 'cla', 'a-class',
                 'ilx', 'tlx', 'integra', 'lexus es', 'lexus is', 'g80', 'g90', 'q50', 'q60', 'ct4', 'ct5', 'ats', 'cts', 's60', 's90', 'v60', 'giulia', 'polestar 2', 'niro ev',
                 ['audi', 'tt'], 'mx-5', 'mx5', 'miata', ['jaguar', 'xf'], ['lexus', 'gs'], ['lexus', 'ls'], ['toyota', 'crown'], 'c300', 'a220', 'cla250', 'cle300', 'cle', 'e300', 'e350', 'e450',
-                's500', 's580', 'eqe', 'eqs', 'eqe350', 'eqs450', 'i4', 'i5', 'i7'],
+                's500', 's580', 'eqe', 'eqs', 'eqe350', 'eqs450', 'i4', 'i5', 'i7', 'g70', 'stinger', 'wrx'],
 
   // Exit offer: shown at most once per visitor (remembered in this browser), only when the
   // booking form was started but not sent.
