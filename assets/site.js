@@ -3,8 +3,44 @@ window.TRACKING = {
   ADS_ID:     'AW-17930508850',        // Google Ads ID
   CALL_LABEL: 'oYTACJmZ9ocdELK09-VC',  // label for the "Call click" conversion
   BOOKING_LABEL: '7xVECNbm1I0dELK09-VC', // "Online booking" conversion (winter popup request; same label the booking page uses)
+  // "Calls from website" (Google forwarding number) label JWK6CIanuKUdELK09-VC: phone snippet below, after gtag('config', ADS_ID)
   GA4_ID:     'G-T2F1ZE53Q8',          // Google Analytics 4 measurement ID
   CLARITY_ID: 'yp63l2vzfy'             // Microsoft Clarity project ID (paste when ready)
+};
+// Forwarding-number swap for the Google Ads phone snippet (called only by gtag's phone_conversion_callback).
+// formatted: the number to show, same format as '(613) 601-6471'. mobile: the number for tel: links ('+1613...' or digits).
+window.mtrSwapPhone = function(formatted, mobile){
+  var SHOWN = '(613) 601-6471';
+  var digits = String(mobile || formatted || '').replace(/[^0-9]/g, '');
+  if (digits.length === 10) digits = '1' + digits;
+  if (digits.length < 11 || !formatted) return;
+  var href = 'tel:+' + digits, text = String(formatted);
+  if (text === SHOWN && href === 'tel:+16136016471') return;   // same number: nothing to swap
+  window.MTR_FORWARDING = { formatted: text, href: href };
+  function apply(root){
+    var links = (root.querySelectorAll ? root : document).querySelectorAll('a[href^="tel:"]');
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].getAttribute('href') !== href) links[i].setAttribute('href', href);
+      var al = links[i].getAttribute('aria-label'); if (al && al.indexOf(SHOWN) !== -1) links[i].setAttribute('aria-label', al.split(SHOWN).join(text));
+    }
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, hits = [];
+    while ((n = w.nextNode())) {
+      var p = n.parentNode && n.parentNode.nodeName;
+      if (p === 'SCRIPT' || p === 'STYLE' || p === 'NOSCRIPT') continue;
+      if (n.nodeValue.indexOf(SHOWN) !== -1) hits.push(n);
+    }
+    for (var j = 0; j < hits.length; j++) hits[j].nodeValue = hits[j].nodeValue.split(SHOWN).join(text);
+  }
+  apply(document.body);
+  // parts drawn later (booking form steps, popups) get the same number
+  if (!window.__mtrSwapObs && window.MutationObserver) {
+    var busy = false;
+    window.__mtrSwapObs = new MutationObserver(function(){
+      if (busy) return; busy = true;
+      try { apply(document.body); } finally { setTimeout(function(){ busy = false; }, 0); }
+    });
+    window.__mtrSwapObs.observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
 };
 (function(){
   var T = window.TRACKING;
@@ -20,6 +56,15 @@ window.TRACKING = {
     gtag('js', new Date());
     if (ok(T.GA4_ID)) gtag('config', T.GA4_ID);
     if (ok(T.ADS_ID)) gtag('config', T.ADS_ID);
+    // Google Ads website call conversion ("Calls from website", phone snippet), sitewide. For visitors who came from an ad,
+    // Google gives a forwarding number and calls phone_conversion_callback(formatted, mobile); window.mtrSwapPhone then
+    // rewrites every tel: link and every visible "(613) 601-6471". For everyone else the callback never fires and the
+    // page keeps tel:+16136016471. Every page shows the number as exactly '(613) 601-6471' (EN and FR) so it matches.
+    // Match on a[href^="tel:"] everywhere (Call click event, no-offer flag), never on the number itself.
+    if (ok(T.ADS_ID)) gtag('config', 'AW-17930508850/JWK6CIanuKUdELK09-VC', {
+      'phone_conversion_number': '(613) 601-6471',
+      'phone_conversion_callback': function(formatted, mobile){ window.mtrSwapPhone(formatted, mobile); }
+    });
   }
   if (ok(T.CLARITY_ID)) window.clarity = window.clarity || function(){ (window.clarity.q = window.clarity.q || []).push(arguments); };
   function addScript(src){ var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
@@ -102,6 +147,14 @@ document.addEventListener('click', function(e){
   var link = e.target.closest('a[href^="tel:"]');
   if (link) window.trackConversion('call');
 });
+// They are calling: never follow up with the booking-offer popup (assets/offer.js reads 'mtr_tel_tap'), not when they come
+// back from the dialer and not on any later page. Capture phase, so it is set before anything else runs.
+document.addEventListener('click', function(e){
+  var link = e.target.closest && e.target.closest('a[href^="tel:"]');
+  if (!link) return;
+  try { sessionStorage.setItem('mtr_tel_tap', '1'); } catch (x) {}
+  try { localStorage.setItem('mtr_tel_tap', String(Date.now())); } catch (x) {}
+}, true);
 
 // Winter popup: a simple choice, "✅ Book online" (a plain link to /book-tire-swap/) or "📞 Call".
 // Opens on tap only (data-open-promo). No form: nothing is sent to the script from here. Book online deep-links
@@ -210,10 +263,12 @@ document.addEventListener('click', function(e){
 
 // One-time exit offer on every page (assets/offer.js). The booking form loads it itself; everywhere else it is added
 // after the page has loaded and gone idle, so it never slows the first paint.
+// Emergency / roadside pages carry <body data-no-offer>: no offer there at all (offer.js checks the same flag).
 (function(){
+  if (document.body && document.body.hasAttribute('data-no-offer')) return;
   function add(){
     if (document.querySelector('script[src*="/assets/offer.js"]')) return;
-    var s = document.createElement('script'); s.src = '/assets/offer.js?v=20261019flow'; s.async = true; document.body.appendChild(s);
+    var s = document.createElement('script'); s.src = '/assets/offer.js?v=20261022emg'; s.async = true; document.body.appendChild(s);
   }
   function idle(){ ('requestIdleCallback' in window) ? requestIdleCallback(add, {timeout: 1500}) : setTimeout(add, 200); }
   if (document.readyState === 'complete') idle(); else addEventListener('load', idle);

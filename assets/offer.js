@@ -12,6 +12,11 @@
  * same keys the booking form uses. A second tier ("discount on discount") is a config switch in prices.js
  * (exitOffer.second, OFF); it only ever shows inside the booking form, once, with its own 'bk_offer2_seen' flag.
  *
+ * NEVER shown (Oct 22, 2026, emergency UX):
+ *   - on a page with <body data-no-offer> (the emergency / roadside pages), and
+ *   - in a browser that has tapped any tel: (Call) link: flag 'mtr_tel_tap' in localStorage + sessionStorage.
+ *   Both are checked in eligible(), which every trigger goes through (tab return, back/forward, focus, scroll, idle, ...).
+ *
  * Shows when the visitor:
  *   - (computer) moves the mouse up out of the page, toward the tabs / close button
  *   - switches apps/tabs and comes back, or comes back with the browser Back button (page restored from cache)
@@ -46,6 +51,31 @@
   var loadedAt = Date.now(), shownNow = {}, open = false;
   var startedBefore = !!lsGet('bk_started') && !lsGet('bk_booked');   // picked a car on an earlier page view, didn't book
 
+  // ---- No offer on emergency pages, and never after a Call (tel:) tap ----
+  // 1) Page flag <body data-no-offer> (or <meta name="mtr-no-offer">). A path check backs it up in case an older cached
+  //    copy of an emergency page (without the flag) is served together with this file.
+  // 2) Any tel: tap sets 'mtr_tel_tap' (site.js sets it too, sitewide, even before this file loads). Once it is set the
+  //    offer stays off in this browser: on the return from the dialer (visibilitychange / pageshow / focus), on later
+  //    pages, and on the booking form.
+  var NO_OFFER_PATH = /^\/(fr\/)?(flat-tire-repair|roadside-tire-assistance|battery-boost|truck-tire-repair|emergency)(\/|\.html|$)/;
+  function pageNoOffer() {
+    return !!(D.body && D.body.hasAttribute('data-no-offer')) || !!D.querySelector('meta[name="mtr-no-offer"]') ||
+      NO_OFFER_PATH.test(W.location.pathname || '');
+  }
+  function telTapped() {
+    try { if (sessionStorage.getItem('mtr_tel_tap')) return true; } catch (e) {}
+    return !!lsGet('mtr_tel_tap');
+  }
+  function markTelTap() {
+    try { sessionStorage.setItem('mtr_tel_tap', '1'); } catch (e) {}
+    lsSet('mtr_tel_tap', String(Date.now()));
+  }
+  D.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest && e.target.closest('a[href^="tel:"]');
+    if (a) markTelTap();
+  }, true);
+  function offerBlocked() { return pageNoOffer() || telTapped(); }
+
   function tier() { return priceMode && H.tier ? H.tier() : 1; }
   function seenKey(t) { return t === 2 ? 'bk_offer2_seen' : 'bk_offer_seen'; }
   function otherDialogOpen() {   // never cover another popup (winter popup, booking dialogs)
@@ -58,6 +88,7 @@
   }
   function eligible(skipArm) {
     var t = tier();
+    if (offerBlocked()) return false;   // emergency page, or they already tapped Call
     if (open || shownNow[t] || lsGet(seenKey(t)) || lsGet('bk_booked')) return false;
     if (t === 1 && lsGet('bk_swap_offer')) return false;   // already taken (here or on another page), or used
     if (D.visibilityState === 'hidden' || otherDialogOpen()) return false;

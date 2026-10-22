@@ -50,7 +50,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <link rel="preload" href="/assets/fonts/barlow-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="/assets/fonts/orbitron-latin-var.woff2" as="font" type="font/woff2" crossorigin/>
-<link rel="stylesheet" href="/assets/site.css?v=20261019flow"/>
+<link rel="stylesheet" href="/assets/site.css?v=20261022emg"/>
 </head>
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
@@ -92,16 +92,10 @@
 </div>
 
 <!-- ============================================================
-     WINTER BANNER (mobile only)
-============================================================ -->
-<a class="m-winter-banner" href="/book-tire-swap/">❄️ Winter swaps · Call for a quote · Book online in 2 minutes <span class="arr" aria-hidden="true">→</span></a>
-
-<!-- ============================================================
      TICKER
 ============================================================ -->
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker-track">
-    <span>Winter Tire Swaps — Book Before the First Snow</span>
     <span>24/7 Flat Tire Repair</span>
     <span>Roadside Tire Help</span>
     <span>Battery Boosts</span>
@@ -115,6 +109,7 @@
     <span>Serving Ottawa · Kanata · Nepean · Orleans · Barrhaven · Stittsville · Gatineau</span>
     <span>Call (613) 601-6471</span>
     <span>We Come to You</span>
+    <span>Winter Tire Swaps — Book Before the First Snow</span>
   </div>
 </div>
 
@@ -157,11 +152,12 @@
   <div class="big-flake bf-5" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#flake"/></svg></div>
 
   <div class="hero-content">
-    <div class="hero-badge" role="status">
-      <div class="hero-badge-dot"></div>
-      Now booking winter tire swaps
+    <!-- EMERGENCY TAP-TO-CALL: first thing on the page (Oct 2026). Winter swap items are further down this hero and page. -->
+    <div class="hero-emergency" role="region" aria-label="Emergency tire help">
+      <p class="hero-emergency-title">🚨 Flat tire or stuck on the roadside?</p>
+      <p class="hero-emergency-sub">Flat tire repair, roadside tire help and battery boosts, 24/7. We come to you. Call for current ETA.</p>
+      <a href="tel:+16136016471" class="btn-emergency hero-emergency-call"><span class="btn-icon">📞</span> Call (613) 601-6471</a>
     </div>
-    <button type="button" class="winter-open" data-open-promo aria-haspopup="dialog" aria-controls="promo">❄ Beat the First Snow: winter swap info</button>
 
     <h1 class="hero-headline">
       <span class="line1">Mobile Tire</span>
@@ -195,6 +191,13 @@
       </div>
     </div>
 
+    <!-- Winter swaps (moved below the emergency call options, still on the page) -->
+    <div class="hero-badge" role="status">
+      <div class="hero-badge-dot"></div>
+      Now booking winter tire swaps
+    </div>
+    <button type="button" class="winter-open" data-open-promo aria-haspopup="dialog" aria-controls="promo">❄ Beat the First Snow: winter swap info</button>
+
     <div class="hero-brands">
       <span class="hero-brands-label">We work with</span>
       <span class="brand-chip">Michelin</span>
@@ -205,6 +208,11 @@
     </div>
   </div>
 </section>
+
+<!-- ============================================================
+     WINTER BANNER (mobile only; moved below the hero, emergency call comes first)
+============================================================ -->
+<a class="m-winter-banner" href="/book-tire-swap/">❄️ Winter swaps · Call for a quote · Book online in 2 minutes <span class="arr" aria-hidden="true">→</span></a>
 
 <!-- ============================================================
      STATS
@@ -734,6 +742,6 @@
   </div>
 </div>
 
-<script src="/assets/site.js?v=20261019flow" defer></script>
+<script src="/assets/site.js?v=20261022emg" defer></script>
 </body>
 </html>
