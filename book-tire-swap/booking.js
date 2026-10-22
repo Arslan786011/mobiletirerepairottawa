@@ -1221,7 +1221,7 @@
       var y = window.scrollY; renderKeepFocus(); window.scrollTo(0, y);
     } else if (S.veh.car) refreshStep1();   // rules changed (exotic list etc.): refresh the price part only
   }).catch(function () { S.cfgSource = 'default (config unavailable)'; });
-  window.BK_JS_BUILD = '20261021lp';   // must match the ?v= on the booking pages (stale-cache guard there)
+  window.BK_JS_BUILD = '20261022lp';   // must match the ?v= on the booking pages (stale-cache guard there)
   // stock-sizes.js loads after this file (async): re-price once it arrives, keeping everything typed
   window.BK_STOCK_READY = function () { try { if (S.veh && S.veh.car) refreshStep1(); } catch (e) {} };
   // load it only AFTER the form is on screen (never competes with first paint); same ?v= as this file
