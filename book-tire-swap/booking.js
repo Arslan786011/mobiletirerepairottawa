@@ -62,7 +62,7 @@
       street: 'Street address (number + street)', streetPh: 'e.g. 123 Greenbank Rd', addrBad: 'Please enter your full street address with the house number, e.g. 123 Greenbank Rd.',
       vBusy: 'booked', vChecking: 'Checking open times…', vTaken: 'That hour was just taken, please pick another.', vTakenSel: 'That hour is already booked. Please pick another.',
       noTotal: "We couldn't show your total, so this can't be booked online. Please call (613) 601-6471.",
-      dWhen: 'When', dAsap: 'ASAP: the next available tech is on the way', dAddr: 'Address', dVeh: 'Vehicle', dTotal: 'Total',
+      dWhen: 'When', dAsap: 'ASAP: the next available tech is on the way. Arrival in 60–120 min depending on location.', dAddr: 'Address', dVeh: 'Vehicle', dTotal: 'Total',
       area: 'City or neighbourhood', areaPh: 'e.g. Kanata, Orleans, Gatineau',
       more: '+ More details (optional)', fAddr: 'Full street address (optional)', fAddrPh: 'e.g. 123 Greenbank Rd',
       yearTrim: 'Year / trim (optional)', yearPh: 'Year', trimPh: 'Trim, e.g. LE',
@@ -80,17 +80,24 @@
       pAreaNone: 'No service call fee', pAreaFee: '+{F} service call', pAreaOther: 'Other (not listed)',
       pAreaOtherNote: 'Your area isn\'t on our list, so any service call fee isn\'t in this total yet. We\'ll call you if it changes your total.',
       pNeedArea: 'Please pick the closest area to see your total.',
-      bSwap: 'Swap', bFee: 'service call ({A})', bOffer: 'one-time offer', bAsap: 'same-day / ASAP urgency', bAfter: 'after-hours service call',
+      bSwap: 'Swap', bFee: 'service call ({A})', bOffer: 'one-time offer', bAsap: 'same-day / ASAP urgency', bAfter: 'after-hours service call', bNight: 'night ASAP service call',
       pAfter: '🌙 After-hours visit ({W}): {F} service call instead of the area fee.', pAfterVisitAsap: 'ASAP, now {T}',
-      pAsap: '⚡ ASAP: we send the next available tech now (same-day / ASAP urgency +{F} included).', pSameDay: '⚡ Same-day visit: same-day / ASAP urgency +{F} included.',
-      pVisitFirst: 'Pick "When should we come?" above. ASAP and same-day visits add the urgency fee; visits from 8 PM to 8 AM use the after-hours service call.',
+      pAsap: '⚡ ASAP: we send the next available tech now (same-day / ASAP urgency +{F} included). Arrival in 60–120 min depending on location.',
+      pNightAsap: '🌙 ASAP at night ({T}): one flat {F} night service call. It replaces the area, after-hours and ASAP fees. Arrival in 60–120 min depending on location.', pSameDay: '⚡ Same-day visit: same-day / ASAP urgency +{F} included.',
+      pVisitFirst: 'Pick "When should we come?" above. ASAP (daytime) and same-day visits add the urgency fee; ASAP from 8 PM to 8 AM is one flat night service call; booked times from 8 PM use the after-hours service call.',
       vQ: 'When should we come?', vAsapBtn: '⚡ ASAP / Now', vToday: 'Today', vTomorrow: 'Tomorrow', vPick: 'Pick a date', vChoice: 'Visit day',
-      vTime: 'Visit time (1-hour window)', vPickHour: 'Choose a time…', vDate: 'Visit date', vHint: 'Pick the 1-hour window that suits you. Need us right now? Choose ⚡ ASAP / Now (24/7).',
-      vAsap: '⚡ ASAP: we send the next available tech now. No time to pick.', vNoneLeft: 'No visit times left today. Choose ASAP / Now or Tomorrow.',
+      vTime: 'Visit time (1-hour window)', vPickHour: 'Choose a time…', vDate: 'Visit date', vHint: 'Pick the 1-hour window that suits you. Online times start at 2 PM. Need us right now? Choose ⚡ ASAP / Now (24/7).',
+      vAsap: '⚡ ASAP: we send the next available tech now. Arrival in 60–120 min depending on location. No time to pick.',
+      vAsapDay: 'ASAP fee: +{F} urgency (plus your area\'s service call, if any).', vAsapNight: '🌙 8 PM–8 AM: one flat {F} night service call, no other fees.',
+      earlyBtn: '📞 Need an earlier time? Request a call', earlyT: 'Need an earlier time? Request a call',
+      earlyNote: "Online times start at 2 PM. Need us earlier? Leave your name, phone and address and we'll call you back to set a time.",
+      earlyName: 'Name', earlyPhone: 'Phone', earlyAddr: 'Address or area', earlyAddrPh: 'e.g. 123 Greenbank Rd, Nepean',
+      earlySend: '📞 Request a call', earlyCancel: 'Cancel', earlyCallNow: 'Or call us now:', earlyAddrBad: 'Please enter your address or area.',
+      earlyDone: "✅ Got it! We'll call you back soon to set an earlier time.", earlyFail: "That didn't send. Please call us at (613) 601-6471.", earlySending: 'Sending…', vNoneLeft: 'No visit times left today. Choose ASAP / Now or Tomorrow.',
       vNeed: 'Please choose when we should come: ASAP / Now, Today, Tomorrow or a date.', vNeedDate: 'Please pick the visit date.', vNeedHour: 'Please pick a visit time.',
       vPast: 'That time has already passed. Please pick a later time.', vChosen: 'Your visit:',
-      pAsapOff: 'ASAP not available right now. Pick a time or call us.', rimsAsap: 'same-day / ASAP',
-      oLine: '🏷️ One-time offer: {W} −{D}', oLnArea: 'service call fee waived', oLnAfter: 'after-hours fee waived', oLnSame: 'same-day fee waived', oLnAsap: 'ASAP fee waived', oLnFlat: 'discount', oSvc: 'your service call', oSvcN: 'service call', oSvcMy: 'my service call', oUrg: 'the rush fee', oUrgN: 'rush fee', oUrgMy: 'my rush fee', pPlusTax: 'Plus tax. Pay the tech when the job is done.',
+      pAsapOff: 'ASAP not available right now. Pick a time or call us.', rimsAsap: 'same-day / ASAP', rimsNight: 'night ASAP',
+      oLine: '🏷️ One-time offer: {W} −{D}', oLnArea: 'service call fee waived', oLnAfter: 'after-hours fee waived', oLnSame: 'same-day fee waived', oLnAsap: 'ASAP fee waived', oLnNight: 'night service call waived', oLnFlat: 'discount', oSvc: 'your service call', oSvcN: 'service call', oSvcMy: 'my service call', oUrg: 'the rush fee', oUrgN: 'rush fee', oUrgMy: 'my rush fee', pPlusTax: 'Plus tax. Pay the tech when the job is done.',
       pAccept: 'I accept this total: {P} ({TIER}, {RIMS}).', pAreaOtherShort: 'Service call fee for your area: not included yet.',
       xoT: 'Finish booking now: {D} off', xoS: 'One time only: book now and pay {P} instead of {F}, before tax.',
       xoYes: 'Take {D} off', xoNo: 'No thanks',
@@ -152,7 +159,7 @@
       street: 'Adresse (numéro + rue)', streetPh: 'ex. 123 rue Principale', addrBad: 'Entrez votre adresse complète avec le numéro civique, ex. 123 rue Principale.',
       vBusy: 'réservé', vChecking: 'Vérification des heures libres…', vTaken: 'Cette heure vient d’être prise, choisissez-en une autre.', vTakenSel: 'Cette heure est déjà réservée. Choisissez-en une autre.',
       noTotal: "On n'a pas pu afficher votre total, donc la réservation en ligne n'est pas possible. Appelez le (613) 601-6471.",
-      dWhen: 'Quand', dAsap: 'Service rapide : le prochain technicien libre arrive', dAddr: 'Adresse', dVeh: 'Véhicule', dTotal: 'Total',
+      dWhen: 'Quand', dAsap: 'Service rapide : le prochain technicien libre arrive. Arrivée dans 60 à 120 min selon l\'endroit.', dAddr: 'Adresse', dVeh: 'Véhicule', dTotal: 'Total',
       area: 'Ville ou quartier', areaPh: 'ex. Gatineau, Aylmer, Orléans',
       more: '+ Plus de détails (facultatif)', fAddr: 'Adresse complète (facultatif)', fAddrPh: 'ex. 123 rue Principale',
       yearTrim: 'Année / version (facultatif)', yearPh: 'Année', trimPh: 'Version, ex. LE',
@@ -170,17 +177,24 @@
       pAreaNone: 'Aucuns frais de déplacement', pAreaFee: '+{F} frais de déplacement', pAreaOther: 'Autre (pas dans la liste)',
       pAreaOtherNote: 'Votre secteur n\'est pas dans la liste : les frais de déplacement éventuels ne sont pas encore inclus. On vous appelle si cela change votre total.',
       pNeedArea: 'Choisissez le secteur le plus proche pour voir votre total.',
-      bSwap: 'Changement', bFee: 'frais de déplacement ({A})', bOffer: 'offre unique', bAsap: 'urgence même jour / service rapide', bAfter: 'frais de déplacement en dehors des heures',
+      bSwap: 'Changement', bFee: 'frais de déplacement ({A})', bOffer: 'offre unique', bAsap: 'urgence même jour / service rapide', bAfter: 'frais de déplacement en dehors des heures', bNight: 'frais de déplacement service rapide de nuit',
       pAfter: '🌙 Visite en dehors des heures ({W}) : {F} de frais de déplacement au lieu des frais du secteur.', pAfterVisitAsap: 'service rapide, maintenant {T}',
-      pAsap: '⚡ Service rapide : on envoie le prochain technicien libre, maintenant (urgence même jour / service rapide +{F} incluse).', pSameDay: '⚡ Visite le jour même : urgence même jour / service rapide +{F} incluse.',
-      pVisitFirst: "Choisissez « Quand voulez-vous la visite? » plus haut. Le service rapide et les visites le jour même ajoutent les frais d'urgence; de 20 h à 8 h, ce sont les frais de déplacement en dehors des heures.",
+      pAsap: '⚡ Service rapide : on envoie le prochain technicien libre, maintenant (urgence même jour / service rapide +{F} incluse). Arrivée dans 60 à 120 min selon l\'endroit.',
+      pNightAsap: '🌙 Service rapide de nuit ({T}) : un seul tarif de {F} pour le déplacement de nuit. Il remplace les frais du secteur, en dehors des heures et de service rapide. Arrivée dans 60 à 120 min selon l\'endroit.', pSameDay: '⚡ Visite le jour même : urgence même jour / service rapide +{F} incluse.',
+      pVisitFirst: "Choisissez « Quand voulez-vous la visite? » plus haut. Le service rapide (de jour) et les visites le jour même ajoutent les frais d'urgence; le service rapide de 20 h à 8 h est un tarif unique de nuit; les heures réservées à partir de 20 h ont les frais de déplacement en dehors des heures.",
       vQ: 'Quand voulez-vous la visite?', vAsapBtn: '⚡ Dès que possible / maintenant', vToday: "Aujourd'hui", vTomorrow: 'Demain', vPick: 'Choisir une date', vChoice: 'Jour de la visite',
-      vTime: "Heure de la visite (plage d'une heure)", vPickHour: 'Choisir une heure…', vDate: 'Date de la visite', vHint: "Choisissez la plage d'une heure qui vous convient. Besoin de nous tout de suite? Choisissez ⚡ Dès que possible (24 h/24).",
-      vAsap: "⚡ Service rapide : on envoie le prochain technicien libre, maintenant. Pas d'heure à choisir.", vNoneLeft: "Plus de plages libres aujourd'hui. Choisissez « Dès que possible » ou Demain.",
+      vTime: "Heure de la visite (plage d'une heure)", vPickHour: 'Choisir une heure…', vDate: 'Date de la visite', vHint: "Choisissez la plage d'une heure qui vous convient. Les heures en ligne commencent à 14 h. Besoin de nous tout de suite? Choisissez ⚡ Dès que possible (24 h/24).",
+      vAsap: "⚡ Service rapide : on envoie le prochain technicien libre, maintenant. Arrivée dans 60 à 120 min selon l'endroit. Pas d'heure à choisir.",
+      vAsapDay: "Frais de service rapide : +{F} d'urgence (plus les frais de déplacement de votre secteur, s'il y a lieu).", vAsapNight: '🌙 De 20 h à 8 h : un seul tarif de {F} pour le déplacement de nuit, aucuns autres frais.',
+      earlyBtn: "📞 Besoin d'une heure plus tôt? Demandez un appel", earlyT: "Besoin d'une heure plus tôt? Demandez un appel",
+      earlyNote: 'Les heures en ligne commencent à 14 h. Besoin de nous plus tôt? Laissez votre nom, votre numéro et votre adresse, et on vous rappelle pour fixer une heure.',
+      earlyName: 'Nom', earlyPhone: 'Téléphone', earlyAddr: 'Adresse ou secteur', earlyAddrPh: 'ex. 123 rue Principale, Gatineau',
+      earlySend: '📞 Demander un appel', earlyCancel: 'Annuler', earlyCallNow: 'Ou appelez-nous maintenant :', earlyAddrBad: 'Entrez votre adresse ou votre secteur.',
+      earlyDone: '✅ Reçu! On vous rappelle bientôt pour fixer une heure plus tôt.', earlyFail: "L'envoi n'a pas fonctionné. Appelez-nous au (613) 601-6471.", earlySending: 'Envoi…', vNoneLeft: "Plus de plages libres aujourd'hui. Choisissez « Dès que possible » ou Demain.",
       vNeed: 'Choisissez quand on doit venir : dès que possible, aujourd’hui, demain ou une date.', vNeedDate: 'Choisissez la date de la visite.', vNeedHour: "Choisissez l'heure de la visite.",
       vPast: "Cette heure est déjà passée. Choisissez une heure plus tard.", vChosen: 'Votre visite :',
-      pAsapOff: "Le service rapide n'est pas offert en ce moment. Choisissez une heure ou appelez-nous.", rimsAsap: 'même jour / service rapide',
-      oLine: '🏷️ Offre unique : {W} −{D}', oLnArea: 'frais de déplacement annulés', oLnAfter: 'frais en dehors des heures annulés', oLnSame: "frais d'urgence même jour annulés", oLnAsap: 'frais de service rapide annulés', oLnFlat: 'rabais', oSvc: 'vos frais de déplacement', oSvcN: 'frais de déplacement', oSvcMy: 'mes frais de déplacement', oUrg: "les frais d'urgence", oUrgN: "frais d'urgence", oUrgMy: "mes frais d'urgence", pPlusTax: 'Taxes en sus. Paiement au technicien à la fin du travail.',
+      pAsapOff: "Le service rapide n'est pas offert en ce moment. Choisissez une heure ou appelez-nous.", rimsAsap: 'même jour / service rapide', rimsNight: 'service rapide de nuit',
+      oLine: '🏷️ Offre unique : {W} −{D}', oLnArea: 'frais de déplacement annulés', oLnAfter: 'frais en dehors des heures annulés', oLnSame: "frais d'urgence même jour annulés", oLnAsap: 'frais de service rapide annulés', oLnNight: 'frais de déplacement de nuit annulés', oLnFlat: 'rabais', oSvc: 'vos frais de déplacement', oSvcN: 'frais de déplacement', oSvcMy: 'mes frais de déplacement', oUrg: "les frais d'urgence", oUrgN: "frais d'urgence", oUrgMy: "mes frais d'urgence", pPlusTax: 'Taxes en sus. Paiement au technicien à la fin du travail.',
       pAccept: "J'accepte ce total : {P} ({TIER}, {RIMS}).", pAreaOtherShort: 'Frais de déplacement pour votre secteur : pas encore inclus.',
       xoT: 'Réservez maintenant : {D} de rabais', xoS: 'Une seule fois : réservez maintenant et payez {P} au lieu de {F}, avant taxes.',
       xoYes: 'Prendre {D} de rabais', xoNo: 'Non merci',
@@ -222,7 +236,8 @@
     veh: { mode: 'other', year: '', make: '', model: '', trim: '', unsure: false, id: '', cls: 'car', tier: 'STANDARD', size: '', verified: false,
            oYear: '', oMake: '', oModel: '', typed: '', photoUrl: '', car: '', oTrim: '' },
     service: 'off', tires: 4, zone: null, addrText: '', days: [], date: '', dateLabel: '', slot: '', slotLabel: '', hold: 0,
-    c: { name: '', phone: '', email: '', notes: '' }, area: '', pref: '', more: false, rims: '', feePick: '', asapAt: '', visitDay: '', visitDate: '', visitTime: '', visitErr: '', addrErr: '', taken: {}, slotState: {}, offerApplied: lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offerTier2: lsGet('bk_swap_offer2') === '1' && lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offer: null, done: null, busy: false, waitDay: null, draftSent: ''
+    c: { name: '', phone: '', email: '', notes: '' }, area: '', pref: '', more: false, rims: '', feePick: '', asapAt: '', visitDay: '', visitDate: '', visitTime: '', visitErr: '', addrErr: '', taken: {}, slotState: {}, offerApplied: lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offerTier2: lsGet('bk_swap_offer2') === '1' && lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offer: null, done: null, busy: false, waitDay: null, draftSent: '',
+    early: { open: false, sent: false, busy: false, err: '', name: '', phone: '', addr: '' }   // "Need an earlier time? Request a call"
   };
   lsSet('bk_session', S.session);
   // ?r=Emma (dispatcher who sent a /book link). Kept for this visit.
@@ -421,13 +436,13 @@
   }
   function asapOn() { return S.visitDay === 'asap' && asapOpen(); }
   // ---- visit day/time the customer picks ("When should we come?", REQUIRED). Day resolved in Ottawa time at form time.
-  //      ASAP / Now: no hour. Today / Tomorrow / a date: a one-hour visit slot is required (prices.js slots: 10:30 AM ... 10:30 PM; ASAP is 24/7).
+  //      ASAP / Now: no hour. Today / Tomorrow / a date: a one-hour visit slot is required (prices.js slots: 2 PM ... 10 PM; ASAP is 24/7).
   function torToday() { return torParts(Date.now()).day; }
   function visitDateIso() { var d = torToday(); return S.visitDay === 'today' ? d : S.visitDay === 'tomorrow' ? wall(d, 0, 0, 1440).day : S.visitDay === 'date' ? S.visitDate : ''; }
   function hm2min(hm) { return +hm.slice(0, 2) * 60 + +hm.slice(3, 5); }
   function min2hm(m) { m = ((m % 1440) + 1440) % 1440; return pad2(Math.floor(m / 60)) + ':' + pad2(m % 60); }
-  function hoursFor(day) {   // 1-hour slot starts ('HH:MM') still bookable that day: prices.js slots (10:30 AM ... 10:30 PM);
-    var c = (PR && PR.slots) || {}, first = hm2min(c.first || '10:30'), last = hm2min(c.last || '22:30'), step = +c.minutes || 60;
+  function hoursFor(day) {   // 1-hour slot starts ('HH:MM') still bookable that day: prices.js slots (2 PM ... 10 PM; never before 2 PM);
+    var c = (PR && PR.slots) || {}, first = hm2min(c.first || '14:00'), last = hm2min(c.last || '22:00'), step = +c.minutes || 60;
     var out = [], now = -1;                     // today = only slots that have not started yet (Ottawa time)
     if (day && day === torToday()) { var tp = torParts(Date.now()); now = tp.hh * 60 + tp.mm; }
     for (var m = first; m <= last; m += step) if (m > now) out.push(min2hm(m));
@@ -468,6 +483,11 @@
     return { hhmm: '', label: '', src: 'none', shown: '' };
   }
   function afterHoursOf(v) { var a = PR && PR.afterHours; return !!(a && +a.fee > 0 && v.hhmm && inWindow(v.hhmm, a.start, a.end)); }
+  // ---- NIGHT ASAP (prices.js asapNight, owner Oct 24): ASAP booked 8 PM - 8 AM = ONE flat service call that replaces the
+  //      after-hours fee, the area fee AND the ASAP urgency fee. Daytime ASAP = urgency fee on top of the area fee.
+  function nightCfg() { var n = PR && PR.asapNight; return n && n.enabled !== false && +n.fee > 0 ? n : null; }
+  function nightAsapAt(hhmm) { var n = nightCfg(); return !!(n && hhmm && inWindow(hhmm, n.start || '20:00', n.end || '08:00')); }
+  function nightAsapNow() { return nightAsapAt(torontoHHMM(new Date())); }
   function rimsKey() { return S.rims === 'yes' ? 'on' : 'off'; }   // "Not sure" = off-rims price
   function priceInfo() {
     if (!hasPrices() || S.forceExotic) return null;
@@ -479,10 +499,14 @@
     var dd = x.discount, dmax = Math.max(0, +(dd && typeof dd === 'object' ? dd[rk] : dd) || 0);
     var q = { tier: tier, auto: a, rims: S.rims, rk: rk, swap: swap, low: tier === 'low', offerable: dmax > 0, dmax: dmax };
     if (!S.rims) { q.needRims = true; return q; }
-    q.asap = asapOn(); q.urg = urgencyOf(q.asap); q.asapFee = q.urg ? +asapCfg().fee : 0;   // asapFee = the same-day / ASAP urgency fee
-    q.visit = visitInfo(q.asap); q.after = afterHoursOf(q.visit);
+    q.asap = asapOn(); q.visit = visitInfo(q.asap);
+    q.night = q.asap && nightAsapAt(q.visit.hhmm);   // night ASAP: one flat fee, nothing else stacks
+    q.urg = q.night ? '' : urgencyOf(q.asap); q.asapFee = q.urg ? +asapCfg().fee : 0;   // asapFee = the same-day / ASAP urgency fee
+    q.after = !q.night && afterHoursOf(q.visit);
     var fa = feeArea(); q.area = fa;
-    if (q.after) {   // after-hours fee replaces the area fee (never both); the area is still asked for the address
+    if (q.night) {   // replaces the area fee, the after-hours fee and the urgency fee; the area is still asked for the address
+      q.fee = +nightCfg().fee; q.feeType = 'night-asap'; q.areaName = fa.name || '';
+    } else if (q.after) {   // after-hours fee replaces the area fee (never both); the area is still asked for the address
       q.fee = +PR.afterHours.fee; q.feeType = 'after-hours'; q.areaName = fa.name || '';
     } else {
       if (fa.empty || fa.unknown) { q.needArea = true; return q; }
@@ -497,8 +521,8 @@
     return q;
   }
   // Exit offer (owner, Oct 20: NO floor, the offer ALWAYS takes something off; one item only, never two):
-  //   1) service call (area fee or after-hours fee): waived in full    -> "we'll waive your service call"
-  //   2) else same-day / ASAP urgency fee:             waived in full    -> "we'll waive the rush fee"
+  //   1) service call (area fee, after-hours fee or the $150 night ASAP service call): waived in full -> "we'll waive your service call"
+  //   2) else same-day / daytime ASAP urgency fee ($80):  waived in full -> "we'll waive the rush fee"
   //   3) else flat: $15 off rims / "Not sure", $10 on rims (prices.js tiers[..].discount).
   function offerCalc1(q) {
     var svc = q.fee || 0, urg = q.asapFee || 0, d;
@@ -516,22 +540,23 @@
   }
   function offerWords(q, lang) { var L = T[lang || S.lang] || T.en, k = q.offerType === 'waive-urgency' ? 'Urg' : 'Svc'; return { x: L['o' + k], n: L['o' + k + 'N'], my: L['o' + k + 'My'] }; }
   function offerKey(q) { return q.offerType === 'waive-service-call' || q.offerType === 'waive-urgency' ? 'Fees' : ''; }
-  // The offer as its own line under the total: "One-time offer: same-day fee waived −$45" / "Offre unique : … −45 $"
+  // The offer as its own line under the total: "One-time offer: same-day fee waived −$80" / "Offre unique : … −80 $"
   function offerLine(q, lang) {
-    var L = T[lang] || T.en, k = q.offerType === 'waive-service-call' ? (q.after ? 'After' : 'Area') : q.offerType === 'waive-urgency' ? (q.urg === 'asap' ? 'Asap' : 'Same') : 'Flat';
+    var L = T[lang] || T.en, k = q.offerType === 'waive-service-call' ? (q.night ? 'Night' : q.after ? 'After' : 'Area') : q.offerType === 'waive-urgency' ? (q.urg === 'asap' ? 'Asap' : 'Same') : 'Flat';
     return L.oLine.replace('{W}', L['oLn' + k]).replace(' −{D}', '\u00a0−' + money(q.disc, lang).replace(' ', '\u00a0'));   // the amount never wraps away from its words
   }
   function priceText(q, lang) { var L = T[lang] || T.en; return money(q.amount, lang) + ' ' + L.pBefore; }   // "$180 before tax" / "180 $ avant taxes"
-  function rimsWord(q, lang) { var L = T[lang] || T.en; return (q.rims === 'yes' ? L.rimsYes : q.rims === 'no' ? L.rimsNo : L.rimsUnsure) + (q.asapFee ? ', ' + L.rimsAsap : ''); }
+  function rimsWord(q, lang) { var L = T[lang] || T.en; return (q.rims === 'yes' ? L.rimsYes : q.rims === 'no' ? L.rimsNo : L.rimsUnsure) + (q.night ? ', ' + L.rimsNight : q.asapFee ? ', ' + L.rimsAsap : ''); }
   function breakdown(q, lang) {   // "Swap $130 + $50 service call (Orléans) − $15 offer = $165 before tax"
     var L = T[lang] || T.en;
-    return L.bSwap + ' ' + money(q.swap, lang) + (q.after ? ' + ' + money(q.fee, lang) + ' ' + L.bAfter : q.fee ? ' + ' + money(q.fee, lang) + ' ' + L.bFee.replace('{A}', q.areaName) : '') +
+    return L.bSwap + ' ' + money(q.swap, lang) + (q.night ? ' + ' + money(q.fee, lang) + ' ' + L.bNight : q.after ? ' + ' + money(q.fee, lang) + ' ' + L.bAfter : q.fee ? ' + ' + money(q.fee, lang) + ' ' + L.bFee.replace('{A}', q.areaName) : '') +
       (q.asapFee ? ' + ' + money(q.asapFee, lang) + ' ' + L.bAsap : '') + (q.disc ? ' − ' + money(q.disc, lang) + ' ' + L.bOffer : '') + ' = ' + priceText(q, lang);
   }
   function priceForOwner(q) {     // English, for the alert emails
     var r = q.rims === 'yes' ? 'on rims' : q.rims === 'no' ? 'off rims' : 'not sure, off-rims price';
     return priceText(q, 'en') + ' (' + tierLabel(q.tier, 'en') + ', ' + r + ' ' + money(q.swap, 'en') +
-      (q.after ? ' + ' + money(q.fee, 'en') + ' after-hours service call (' + q.visit.label + ')' : q.fee ? ' + ' + money(q.fee, 'en') + ' service call ' + q.areaName : q.fee === null ? ', service call fee to confirm' : ', no service call fee' + (q.areaName ? ' (' + q.areaName + ')' : '')) +
+      (q.night ? ' + ' + money(q.fee, 'en') + ' after-hours service call (night ASAP flat fee, replaces the area + after-hours + ASAP fees; ' + q.visit.label + ')' :
+       q.after ? ' + ' + money(q.fee, 'en') + ' after-hours service call (' + q.visit.label + ')' : q.fee ? ' + ' + money(q.fee, 'en') + ' service call ' + q.areaName : q.fee === null ? ', service call fee to confirm' : ', no service call fee' + (q.areaName ? ' (' + q.areaName + ')' : '')) +
       (q.asapFee ? ' + ' + money(q.asapFee, 'en') + (q.urg === 'asap' ? ' ASAP' : ' same-day') + ' urgency' : '') +
       (q.disc ? ' − ' + money(q.disc, 'en') + ' exit offer (' + (q.offerType === 'flat' ? 'flat' : (q.offerFull ? offerWords(q, 'en').n + ' waived' : 'off the ' + offerWords(q, 'en').n)) + (q.offerTier === 2 ? ' + 2nd offer' : '') + '); regular ' + money(q.full, 'en') : '') + ')';
   }
@@ -568,6 +593,7 @@
     var shown = priceText(q, S.lang);
     return h + (q.area.picked || q.area.other ? areaSelect({ area: { typed: S.area || S.addrText } }) : '') +
       (!visitDone() ? '<p class="bk-price-note bk-visit-first" id="bk-visit-first">🚐 ' + esc(t('pVisitFirst')) + '</p>' : '') +
+      (q.night ? '<p class="bk-price-note bk-sameday bk-asap-note bk-night-asap" id="bk-night-asap">' + esc(t('pNightAsap').replace('{T}', q.visit.hhmm ? hourWord(q.visit.hhmm) : '').replace('{F}', money(q.fee))) + '</p>' : '') +
       (q.urg === 'asap' ? '<p class="bk-price-note bk-sameday bk-asap-note" id="bk-asap-note">' + esc(t('pAsap').replace('{F}', money(q.asapFee))) + '</p>' : '') +
       (q.urg === 'same-day' ? '<p class="bk-price-note bk-sameday" id="bk-sameday">' + esc(t('pSameDay').replace('{F}', money(q.asapFee))) + '</p>' : '') +
       (q.after ? '<p class="bk-price-note bk-after" id="bk-after">' + esc(t('pAfter').replace('{W}', q.visit.shown).replace('{F}', money(q.fee))) + '</p>' : '') +
@@ -734,7 +760,7 @@
   function visitHtml() {
     var d = S.visitDay, ao = asapOpen(), vd = visitDateIso(), hrs = hoursFor(vd), err = S.visitErr || '', shown = visitWhen(S.lang), r = ' <span class="bk-req">*</span>';
     var body = '';
-    if (d === 'asap' && ao) body = '<p class="bk-note bk-visit-asap" id="bk-visit-asap">' + esc(t('vAsap')) + '</p>';
+    if (d === 'asap' && ao) body = '<p class="bk-note bk-visit-asap" id="bk-visit-asap">' + esc(t('vAsap')) + '</p>' + asapFeeNote();
     else if (d === 'today' || d === 'tomorrow' || d === 'date') {
       if (d === 'date') body += '<label class="bk-label" for="bk-visit-date">' + t('vDate') + r + '</label><input class="bk-input" type="date" id="bk-visit-date" data-f="visitDate" min="' + torToday() + '" value="' + esc(S.visitDate) + '" required>';
       if (d === 'date' && !S.visitDate) {}
@@ -748,6 +774,7 @@
           (S.slotState[vd] === 'loading' ? '<p class="bk-hint bk-visit-checking" id="bk-visit-checking">' + esc(t('vChecking')) + '</p>' : '') +
           '<p class="bk-hint bk-visit-hint">' + esc(t('vHint')) + '</p>';
       }
+      body += earlyHtml();   // "Need an earlier time? Request a call" (right under the time picker)
     }
     return '<fieldset class="bk-calltime bk-visit' + (err ? ' bk-invalid' : '') + '" id="bk-visit"><legend class="bk-ct-q">🚐 ' + t('vQ') + r + '</legend>' +
       '<div class="bk-ct-grid' + (ao ? ' bk-visit-grid' : ' three') + '" role="group" aria-label="' + esc(t('vChoice')) + '">' +
@@ -759,6 +786,58 @@
       '<p class="bk-ct-chosen" id="bk-visit-chosen" aria-live="polite"' + (shown && visitDone() ? '' : ' hidden') + '>' + t('vChosen') + ' <b>' + esc(shown) + '</b></p>' +
       '</fieldset>';
   }
+  // ASAP fee line under the ASAP note in "When should we come?" (amounts from prices.js asap / asapNight)
+  function asapFeeNote() {
+    if (!hasPrices()) return '';
+    var n = nightCfg(), a = asapCfg();
+    if (n && nightAsapNow()) return '<p class="bk-note bk-visit-asap bk-asap-fee" id="bk-asap-fee">' + esc(t('vAsapNight').replace('{F}', money(+n.fee))) + '</p>';
+    return a ? '<p class="bk-note bk-visit-asap bk-asap-fee" id="bk-asap-fee">' + esc(t('vAsapDay').replace('{F}', money(+a.fee))) + '</p>' : '';
+  }
+  // ---- "Need an earlier time? Request a call" (owner, Oct 24). Online times start at 2 PM; this collects name + phone +
+  //      address/area and sends it on the SAME path as an almost-booked lead (action 'draft', same session), tagged
+  //      'wants earlier than 2 PM', so the call centre gets the email + WhatsApp alert and calls back. Calls only.
+  //      Script v14: the alert goes out with the next almost-booked run (~15-20 min). Script v15: right away.
+  function earlyTag() { return (PR && PR.earlyCallTag) || 'wants earlier than 2 PM'; }
+  function earlyHtml() {
+    var E = S.early, r = ' <span class="bk-req">*</span>';
+    if (E.sent) return '<div class="bk-early" id="bk-early"><p class="bk-ok bk-early-done" id="bk-early-done" role="status">' + esc(t('earlyDone')) + '</p></div>';
+    if (!E.open) return '<div class="bk-early" id="bk-early"><button type="button" class="bk-early-btn" id="bk-early-btn" data-act="early" aria-expanded="false">' + esc(t('earlyBtn')) + '</button></div>';
+    return '<div class="bk-early open" id="bk-early" role="group" aria-labelledby="bk-early-t"><div class="bk-early-t" id="bk-early-t">📞 ' + esc(t('earlyT')) + '</div>' +
+      '<p class="bk-note">' + esc(t('earlyNote')) + '</p>' +
+      '<label class="bk-label" for="bk-early-name">' + t('earlyName') + r + '</label><input class="bk-input" id="bk-early-name" data-e="name" value="' + esc(E.name) + '" autocomplete="name">' +
+      '<label class="bk-label" for="bk-early-phone">' + t('earlyPhone') + r + '</label><input class="bk-input" id="bk-early-phone" data-e="phone" value="' + esc(E.phone) + '" type="tel" inputmode="tel" autocomplete="tel">' +
+      '<label class="bk-label" for="bk-early-addr">' + t('earlyAddr') + r + '</label><input class="bk-input" id="bk-early-addr" data-e="addr" value="' + esc(E.addr) + '" placeholder="' + esc(t('earlyAddrPh')) + '" autocomplete="street-address">' +
+      '<div class="bk-err" id="bk-early-err" role="alert">' + esc(E.err || '') + '</div>' +
+      '<button type="button" class="bk-btn green bk-early-send" id="bk-early-send" data-act="earlySend"' + (E.busy ? ' disabled' : '') + '>' + (E.busy ? '<span class="bk-spin"></span> ' + esc(t('earlySending')) : esc(t('earlySend'))) + '</button>' +
+      '<p class="bk-note bk-early-call">' + esc(t('earlyCallNow')) + ' <a href="' + TEL + '">' + PHONE_SHOWN + '</a></p>' +
+      '<button type="button" class="bk-early-cancel" id="bk-early-cancel" data-act="earlyCancel">' + esc(t('earlyCancel')) + '</button></div>';
+  }
+  function earlyDayWanted() { var vd = visitDateIso(); return vd ? (S.visitDay === 'today' ? 'Today ' : S.visitDay === 'tomorrow' ? 'Tomorrow ' : '') + dateWords(vd, 'en') : ''; }
+  function earlySlot() { return ('📞 CALL REQUEST: ' + earlyTag()).slice(0, 60); }
+  function earlyDetails(base) {
+    var E = S.early, day = E.day || '';
+    return Object.assign(base, { callRequest: 'earlier-than-2pm', callRequestText: '📞 Call request: ' + earlyTag() + (day ? ' (day wanted: ' + day + ')' : '') + ': call back to set a time',
+      callRequestName: E.name, callRequestPhone: cleanPhone(E.phone), callRequestAddress: E.addr, callRequestDay: day,
+      visitWhen: 'CALL REQUEST, ' + earlyTag() + (day ? ' (' + day + ')' : '') });
+  }
+  function sendEarly() {
+    var E = S.early; if (E.busy) return;
+    readEarly();
+    var phone = cleanPhone(E.phone), err = !E.name ? { m: t('nameBad'), el: 'bk-early-name' } : !phone ? { m: t('phoneBad'), el: 'bk-early-phone' } : !E.addr ? { m: t('earlyAddrBad'), el: 'bk-early-addr' } : null;
+    if (err) { E.err = err.m; readAll(); render(); var x = document.getElementById(err.el); if (x) x.focus(); return; }
+    E.err = ''; E.busy = true; E.day = earlyDayWanted(); readAll();
+    if (!S.c.name) S.c.name = E.name; if (!S.c.phone) S.c.phone = E.phone; if (!S.area && !S.addrText) S.area = E.addr;   // fills the main form too
+    render();
+    var payload = { action: 'draft', session: S.session, firstName: E.name.split(' ')[0], phone: phone, vehicle: vehicleLabel(),
+                    slot: earlySlot(), price: shownPriceForOwner(), details: earlyDetails(Object.assign(draftDetails(), { name: E.name, address: E.addr, area: S.area || E.addr })) };
+    apiPost(payload).then(function (r) {
+      E.busy = false;
+      if (r && r.ok) { E.sent = true; E.open = false; S.draftSent = JSON.stringify(payload); }
+      else E.err = t('earlyFail');
+      readAll(); render(); var d = document.getElementById('bk-early-done') || document.getElementById('bk-early-err'); if (d && d.scrollIntoView) d.scrollIntoView({ block: 'center' });
+    }).catch(function () { E.busy = false; E.err = t('earlyFail'); readAll(); render(); });
+  }
+  function readEarly() { Array.prototype.forEach.call(root.querySelectorAll('[data-e]'), function (el) { S.early[el.getAttribute('data-e')] = el.value.trim(); }); }
   function refreshVisitBits() {   // after an hour is picked: update the chosen line + clear the error without re-rendering the select
     var shown = visitWhen(S.lang), ch = document.getElementById('bk-visit-chosen');
     if (ch) { ch.hidden = !(shown && visitDone()); ch.innerHTML = t('vChosen') + ' <b>' + esc(shown) + '</b>'; }
@@ -894,6 +973,7 @@
   }
   function onEdit(e) {
     if (e.target && e.target.getAttribute && e.target.getAttribute('data-act') === 'feearea') { if (e.type !== 'change') return; S.feePick = e.target.value; refreshPrice(); return draftSoon(); }
+    if (e.target && e.target.getAttribute && e.target.getAttribute('data-e')) { S.early[e.target.getAttribute('data-e')] = e.target.value.trim(); return; }
     var f = readField(e.target); if (!f) return;
     if (f === 'car' || f === 'typed' || f === 'oYear' || f === 'oTrim') { refreshStep1(); markStarted(); }
     if (f === 'area' || f === 'addr') { var z = root.querySelector('.bk-zone'); if (z) z.remove(); refreshPrice(); }
@@ -922,6 +1002,13 @@
     }
     if (act === 'rims') { readAll(); S.rims = val; S.service = val === 'yes' ? 'on' : 'off'; refreshStep1(); return draftSoon(); }
     if (act === 'book') return book();
+    if (act === 'early') {   // open the request-a-call box, filled from what is already typed
+      readAll(); var E = S.early; E.open = true; E.err = '';
+      if (!E.name) E.name = S.c.name; if (!E.phone) E.phone = S.c.phone; if (!E.addr) E.addr = joinAddr(S.addrText, S.area);
+      render(); var n = document.getElementById(!E.name ? 'bk-early-name' : !E.phone ? 'bk-early-phone' : !E.addr ? 'bk-early-addr' : 'bk-early-send'); if (n) n.focus(); return;
+    }
+    if (act === 'earlyCancel') { readAll(); readEarly(); S.early.open = false; S.early.err = ''; render(); var b = document.getElementById('bk-early-btn'); if (b) b.focus(); return; }
+    if (act === 'earlySend') return sendEarly();
   });
 
   // Checks the required fields. Returns an error message, or '' when OK.
@@ -1003,8 +1090,8 @@
   //      taken    = the offer is on this total (popup "yes" here, or the sitewide offer / ?offer= token)
   //      declined = the popup was closed with No thanks / ✕ / Esc / tap outside
   //      shown    = the popup was shown but not answered (still open, or the visitor left)
-  //      offerText (English) is the ready line for the email, e.g. "taken (−$45 same-day fee waived)".
-  var OFFER_WORDS_EN = { Area: 'service call fee waived', After: 'after-hours fee waived', Same: 'same-day fee waived', Asap: 'ASAP fee waived', Flat: 'discount' };
+  //      offerText (English) is the ready line for the email, e.g. "taken (−$80 same-day fee waived)".
+  var OFFER_WORDS_EN = { Area: 'service call fee waived', After: 'after-hours fee waived', Night: 'night ASAP service call waived', Same: 'same-day fee waived', Asap: 'ASAP fee waived', Flat: 'discount' };
   function offerStatus() {
     var q = priceInfo(), st, o = { offerStatus: '', offerAmount: 0, offerType: '', offerTrigger: lsGet('bk_offer_trigger') || '', offerText: '' };
     if (S.offerApplied) st = 'taken';
@@ -1013,7 +1100,7 @@
     else st = 'not_shown';
     o.offerStatus = st;
     if (st === 'taken' && q && q.ready && q.disc) {
-      var k = q.offerType === 'waive-service-call' ? (q.after ? 'After' : 'Area') : q.offerType === 'waive-urgency' ? (q.urg === 'asap' ? 'Asap' : 'Same') : 'Flat';
+      var k = q.offerType === 'waive-service-call' ? (q.night ? 'Night' : q.after ? 'After' : 'Area') : q.offerType === 'waive-urgency' ? (q.urg === 'asap' ? 'Asap' : 'Same') : 'Flat';
       o.offerAmount = q.disc; o.offerType = q.offerType;
       o.offerText = 'taken (\u2212' + money(q.disc, 'en') + ' ' + OFFER_WORDS_EN[k] + ')';
     } else o.offerText = st === 'taken' ? 'taken (amount shows once the total is complete)' : st === 'declined' ? 'shown, declined' : st === 'shown' ? 'shown, no answer' : 'not shown';
@@ -1026,6 +1113,7 @@
     var phone = cleanPhone(S.c.phone); if (!phone || !S.cfg || !step1Basics()) return;   // fires once phone + (car or size) are in
     var payload = { action: 'draft', session: S.session, firstName: (S.c.name || '').split(' ')[0], phone: phone, vehicle: vehicleLabel(),
                     slot: visitWhen('en'), price: shownPriceForOwner(), details: draftDetails() };   // slot = the visit asked for (shows as "Slot picked" in the alert)
+    if (S.early.sent) { payload.slot = earlySlot(); payload.details = earlyDetails(Object.assign(payload.details, { name: S.early.name || S.c.name, address: S.early.addr || payload.details.address })); }   // keep the call-request tag
     var sig = JSON.stringify(payload); if (sig === S.draftSent) return; S.draftSent = sig;
     apiPost(payload).catch(function () {});
   }
@@ -1084,7 +1172,8 @@
         visitTime: vi.label, visitTimeSource: vi.src, slotCheck: slotCheckState(), asap: vasap, asapRequestedAt: vasap ? S.asapAt : '',
         asapRequestedLocal: vasap && S.asapAt ? new Date(S.asapAt).toLocaleString('en-CA', { timeZone: 'America/Toronto', dateStyle: 'medium', timeStyle: 'short' }) + ' ET' : ''
       };
-      Object.assign(payload, offerStatus());   // offerStatus / offerAmount / offerType / offerTrigger / offerText (the price block below keeps the same amount)
+      Object.assign(payload, offerStatus());
+      if (S.early.sent) { payload.callRequest = 'earlier-than-2pm'; payload.notes = ['📞 Also asked for a call back: ' + earlyTag(), payload.notes].filter(Boolean).join(' · '); }   // offerStatus / offerAmount / offerType / offerTrigger / offerText (the price block below keeps the same amount)
       var q = priceInfo();
       // offerFloor 0 = no floor on the exit offer (owner, Oct 20); also stops the script's old $175 default from flagging it
       if (q && q.ready) {   // itemized total shown to the customer right above Send (no accept checkbox: owner, Oct 18)
@@ -1098,10 +1187,12 @@
         payload.stockSizeSource = q.auto.stock ? q.auto.stock.src + ' (' + (q.auto.stock.how === 'trim' ? 'trim match' : q.auto.stock.how === 'largest' ? 'performance model, no trim: biggest standard size' : 'no trim given: base size') + ')' : '';
         payload.performanceModel = q.auto.perf || '';
         payload.runFlat = /run-flat|performance/.test(q.auto.reason); payload.beforeTax = true; payload.priceShown = priceText(q, S.lang);
-        payload.afterHours = !!q.after; payload.serviceFeeType = q.after ? 'after-hours' : q.fee === null ? 'to confirm' : q.fee ? 'area' : 'none';
-        payload.urgency = !!q.urg; payload.urgencyReason = q.urg; payload.urgencyFee = q.asapFee;
+        // night ASAP is sent as an after-hours service call (the v14 script prints it that way) + nightAsap / serviceFeeType 'night-asap' (v15)
+        payload.afterHours = !!(q.after || q.night); payload.nightAsap = !!q.night; payload.serviceFeeType = q.night ? 'night-asap' : q.after ? 'after-hours' : q.fee === null ? 'to confirm' : q.fee ? 'area' : 'none';
+        payload.urgency = !!q.urg; payload.urgencyReason = q.night ? 'night-asap' : q.urg; payload.urgencyFee = q.asapFee;   // 'night-asap' (fee 0): v14 then prints the plain "⚡ ASAP" line
         payload.asapFee = q.asap ? q.asapFee : 0;
         if (q.urg) payload.notes = ['⚡ ' + (q.urg === 'asap' ? 'ASAP' : 'SAME-DAY') + ' urgency (+' + money(q.asapFee, 'en') + ')', payload.notes].filter(Boolean).join(' · ');
+        if (q.night) payload.notes = ['🌙⚡ NIGHT ASAP: flat ' + money(q.fee, 'en') + ' service call (no area / after-hours / ASAP fee)', payload.notes].filter(Boolean).join(' · ');
         payload.notes = [payload.vehicleFlag, payload.notes, 'Tier: ' + payload.tierLabel + ' (' + q.auto.reason + ')', payload.stockSizeNote, 'Total shown: ' + payload.price].filter(Boolean).join(' · ');   // the script keeps 300 chars: flag first
       }
       var cal = calInfo(q && q.ready ? q : null, Date.now());
@@ -1154,7 +1245,7 @@
   window.MTRO_OFFER = {
     priceOffer: true,
     canShow: function () {
-      if (!hasPrices() || !S.cfg || S.fatal || S.done || S.busy || lsGet('bk_swap_offer') === 'used' || !step1Basics() || !offerQuote()) return false;
+      if (!hasPrices() || !S.cfg || S.fatal || S.done || S.busy || S.early.sent || S.early.open || lsGet('bk_swap_offer') === 'used' || !step1Basics() || !offerQuote()) return false;
       if (!S.offerApplied) return true;
       var q = offerQuote(); return !!second() && !S.offerTier2 && q.offer2Amt > q.offerAmt;   // tier 2 (off by default)
     },
@@ -1221,7 +1312,7 @@
       var y = window.scrollY; renderKeepFocus(); window.scrollTo(0, y);
     } else if (S.veh.car) refreshStep1();   // rules changed (exotic list etc.): refresh the price part only
   }).catch(function () { S.cfgSource = 'default (config unavailable)'; });
-  window.BK_JS_BUILD = '20261022lp';   // must match the ?v= on the booking pages (stale-cache guard there)
+  window.BK_JS_BUILD = '20261024slots';   // must match the ?v= on the booking pages (stale-cache guard there)
   // stock-sizes.js loads after this file (async): re-price once it arrives, keeping everything typed
   window.BK_STOCK_READY = function () { try { if (S.veh && S.veh.car) refreshStep1(); } catch (e) {} };
   // load it only AFTER the form is on screen (never competes with first paint); same ?v= as this file

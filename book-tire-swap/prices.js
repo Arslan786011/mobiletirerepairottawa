@@ -10,7 +10,7 @@
  *              Set to 0 to never offer it for that case.
  * ============================================================================================ */
 window.SWAP_PRICES = {
-  build: '20261022lp',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
+  build: '20261024slots',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
   tiers: {
     small:  { off: 160, on: 120, discount: { off: 15, on: 10 }, en: 'Small car', fr: 'Petite voiture',
               egEn: 'e.g. Chevy Spark, Hyundai Accent', egFr: 'ex. Chevy Spark, Hyundai Accent' },
@@ -44,11 +44,13 @@ window.SWAP_PRICES = {
 
   // EXIT OFFER (one time per visitor, when the form is started but not sent). Owner rule, Oct 20: NO floor, it ALWAYS
   // takes something off, one item only (never two):
-  //   1) there is a service call (area fee or after-hours fee): it is waived  -> "we'll waive your service call"
-  //   2) else there is a same-day / ASAP urgency fee: it is waived            -> "we'll waive the rush fee"
+  //   1) there is a service call (area fee, after-hours fee, or the $150 night ASAP service call): it is waived
+  //                                                                            -> "we'll waive your service call"
+  //   2) else there is a same-day / ASAP urgency fee ($80 since Oct 24): it is waived  -> "we'll waive the rush fee"
   //   3) else: the tier's flat discount above ($15 off rims / "Not sure", $10 on rims).
-  //   e.g. SUV on rims $130 + $45 same-day = $175 -> with the offer $130.
-  //   The total box shows it as its own line: "One-time offer: same-day fee waived −$45".
+  //   e.g. SUV on rims $130 + $80 same-day = $210 -> with the offer $130.
+  //   e.g. night ASAP: SUV on rims $130 + $150 night ASAP service call = $280 -> with the offer $130 (the whole $150 is waived).
+  //   The total box shows it as its own line: "One-time offer: same-day fee waived −$80".
   //   ONE offer per visitor, shared with the sitewide exit offer (assets/offer.js): a visitor who took it outside the form
   //   arrives here with ?offer=<token> (and 'bk_swap_offer' saved), and the form applies it with the rule above.
   //   Outside the form the offer is words only ("we'll waive your service call fee"): no dollar amounts there.
@@ -60,21 +62,36 @@ window.SWAP_PRICES = {
     second: { enabled: false, extra: { off: 10, on: 5 } }
   },
 
-  // SAME-DAY / ASAP URGENCY: added to the total as its own line when the customer ticks ASAP (next available tech)
-  // OR picks a visit date that is today (Ottawa time). Stacks on top of the service call (area or after-hours).
+  // SAME-DAY / ASAP URGENCY (owner, Oct 24: $80, was $45): added to the total as its own line when the customer ticks
+  // ASAP during the DAY (8 AM - 8 PM, Ottawa time) OR picks a visit date that is today (Ottawa time). Daytime ASAP stacks
+  // on top of the normal area fee (+$50 Gatineau / Orléans, +$100 outlying, $0 elsewhere).
   //   sameDay: false = charge it for ASAP only.
   //   hours: null = always available (the business runs 24/7). To limit it later, use e.g.
   //   hours: { start: '07:00', end: '21:00' }   (Ottawa time, checked when the form is shown; end before start = overnight)
-  asap: { fee: 45, sameDay: true, hours: null },
+  asap: { fee: 80, sameDay: true, hours: null },
 
-  // AFTER-HOURS SERVICE CALL: a visit between start and end (Ottawa time) pays this fee INSTEAD of the area fee
-  // (never both). ASAP still adds on top. Visit time = the time they book (ASAP) or the "Preferred time" they pick.
+  // NIGHT ASAP (owner, Oct 24): ASAP picked between start and end (Ottawa time, the moment they book) pays ONE flat
+  // service call instead of EVERYTHING else: it REPLACES the after-hours fee, the area fee AND the ASAP urgency fee
+  // (nothing stacks). e.g. SUV on rims $130 + $150 = $280 in Ottawa, Gatineau or Manotick alike.
+  // The exit offer waives this whole $150 (it is the service call, which is waived first).
+  // enabled: false = night ASAP goes back to the after-hours rule below (+ the ASAP urgency fee on top).
+  // Keep NIGHT_ASAP_FEE / NIGHT_ASAP_ON in the script the same.
+  asapNight: { enabled: true, fee: 150, start: '20:00', end: '08:00' },
+
+  // AFTER-HOURS SERVICE CALL for a SCHEDULED visit (Today / Tomorrow / a date) whose slot starts between start and end
+  // (Ottawa time): pays this fee INSTEAD of the area fee (never both). Same-day urgency still adds on top for a slot today.
+  // Owner still confirming this amount (Oct 24): change `fee` here (and AFTER_HOURS_FEE in the script) if it moves.
+  // ASAP at night does NOT use this: it uses asapNight above.
   afterHours: { fee: 100, start: '20:00', end: '08:00' },
 
   // VISIT SLOTS for Today / Tomorrow / a picked date: 1-hour windows starting every `minutes` from `first` to `last`
-  // (Ottawa time). 10:30 AM, 11:30 AM ... 10:30 PM (= 10:30-11:30 PM). Nothing earlier or overnight; ASAP / Now is 24/7.
-  // After-hours goes by the slot START (8:30, 9:30, 10:30 PM pay it; 7:30 PM doesn't). Keep SLOT_FIRST / SLOT_LAST in the script the same.
-  slots: { first: '10:30', last: '22:30', minutes: 60 },
+  // (Ottawa time). Owner, Oct 24: the EARLIEST online time is 2 PM every day: 2:00 PM, 3:00 PM ... 10:00 PM (= 10-11 PM).
+  // Nothing before 2 PM is shown; customers who need earlier tap "Need an earlier time? Request a call" (call-back lead).
+  // ASAP / Now is 24/7. After-hours goes by the slot START (8:00, 9:00, 10:00 PM pay it; 7:00 PM doesn't).
+  // Keep SLOT_FIRST / SLOT_LAST in the script the same (script v15; v14 only accepts the old :30 times).
+  slots: { first: '14:00', last: '22:00', minutes: 60 },
+  // label used in the request-a-call alert for staff
+  earlyCallTag: 'wants earlier than 2 PM',
 
 
   // VEHICLE TYPE IS SET AUTOMATICALLY (owner, Oct 19): customers can't pick it. Make & model are required; the tire
