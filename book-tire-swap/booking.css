@@ -192,3 +192,18 @@
 .bk-offer-saved{margin:6px 0 14px;padding:10px 12px;border-radius:10px;background:rgba(29,255,142,.12);border:1px solid rgba(29,255,142,.45);font-weight:700;font-size:14.5px;color:var(--green)}
 .bk-wrap .bk-card .bk-offer-saved{background:#e9fbf1;border-color:#7fd8a6;color:#0d6e38}
 .bk-wrap .bk-card .bk-price .bk-offer-none{color:#4a5a6a;font-weight:600}
+/* "Need an earlier time? Request a call" (owner, Oct 24): under the visit time picker. Calls only. */
+.bk-early{margin-top:12px}
+.bk-early-btn{display:block;width:100%;min-height:48px;padding:10px 12px;border-radius:10px;background:#fff;border:2px dashed #00808f;color:#006b80;font-weight:800;font-size:15.5px;line-height:1.25;cursor:pointer;font-family:var(--font-body);touch-action:manipulation;text-align:center}
+.bk-early-btn:hover{background:#eefcff}
+.bk-early.open{padding:12px;border-radius:12px;border:2px solid #00808f;background:#eefcff}
+.bk-early-t{font-weight:800;font-size:16px;color:#0b1530}
+.bk-wrap .bk-card .bk-early .bk-note{margin-top:6px;color:#2f3c57}
+.bk-early .bk-label{margin-top:10px}
+.bk-early .bk-err:empty{display:none}
+.bk-early .bk-err{margin-top:8px}
+.bk-early .bk-early-send{margin-top:12px}
+.bk-early .bk-early-call a{color:#006b80;font-weight:800}
+.bk-early-cancel{margin-top:8px;background:none;border:0;color:#006b80;font-weight:700;font-size:14px;text-decoration:underline;cursor:pointer;padding:6px 0;font-family:var(--font-body)}
+.bk-wrap .bk-card .bk-early-done{margin:0;padding:10px 12px;border-radius:10px;background:#e9fbf1;border:1px solid #7fd8a6;font-weight:800}
+.bk-wrap .bk-card .bk-asap-fee{margin-top:4px}
