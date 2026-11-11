@@ -10,7 +10,7 @@
  *              Set to 0 to never offer it for that case.
  * ============================================================================================ */
 window.SWAP_PRICES = {
-  build: '20261022lp',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
+  build: '20261111slots',   // must match the ?v= on the booking pages (stale-cache guard reloads once if a cached older file is served)
   tiers: {
     small:  { off: 160, on: 120, discount: { off: 15, on: 10 }, en: 'Small car', fr: 'Petite voiture',
               egEn: 'e.g. Chevy Spark, Hyundai Accent', egFr: 'ex. Chevy Spark, Hyundai Accent' },
@@ -72,9 +72,12 @@ window.SWAP_PRICES = {
   afterHours: { fee: 100, start: '20:00', end: '08:00' },
 
   // VISIT SLOTS for Today / Tomorrow / a picked date: 1-hour windows starting every `minutes` from `first` to `last`
-  // (Ottawa time). 10:30 AM, 11:30 AM ... 10:30 PM (= 10:30-11:30 PM). Nothing earlier or overnight; ASAP / Now is 24/7.
+  // (Ottawa time). Owner, Nov 10 (typed): nothing before 2 PM. Site-only version: 2:30 PM, 3:30 PM ... 10:30 PM (= 10:30-11:30 PM), the grid the live script accepts.
+  // Customers who need earlier tap "Need an earlier time? Request a call" (call-back lead). ASAP / Now is 24/7.
   // After-hours goes by the slot START (8:30, 9:30, 10:30 PM pay it; 7:30 PM doesn't). Keep SLOT_FIRST / SLOT_LAST in the script the same.
-  slots: { first: '10:30', last: '22:30', minutes: 60 },
+  slots: { first: '14:30', last: '22:30', minutes: 60 },
+  // label used in the request-a-call alert for staff
+  earlyCallTag: 'wants earlier than 2 PM',
 
 
   // VEHICLE TYPE IS SET AUTOMATICALLY (owner, Oct 19): customers can't pick it. Make & model are required; the tire

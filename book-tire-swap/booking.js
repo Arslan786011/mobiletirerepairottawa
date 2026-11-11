@@ -85,8 +85,13 @@
       pAsap: '⚡ ASAP: we send the next available tech now (same-day / ASAP urgency +{F} included).', pSameDay: '⚡ Same-day visit: same-day / ASAP urgency +{F} included.',
       pVisitFirst: 'Pick "When should we come?" above. ASAP and same-day visits add the urgency fee; visits from 8 PM to 8 AM use the after-hours service call.',
       vQ: 'When should we come?', vAsapBtn: '⚡ ASAP / Now', vToday: 'Today', vTomorrow: 'Tomorrow', vPick: 'Pick a date', vChoice: 'Visit day',
-      vTime: 'Visit time (1-hour window)', vPickHour: 'Choose a time…', vDate: 'Visit date', vHint: 'Pick the 1-hour window that suits you. Need us right now? Choose ⚡ ASAP / Now (24/7).',
+      vTime: 'Visit time (1-hour window)', vPickHour: 'Choose a time…', vDate: 'Visit date', vHint: 'Pick the 1-hour window that suits you. Online times start at 2:30 PM. Need us right now? Choose ⚡ ASAP / Now (24/7).',
       vAsap: '⚡ ASAP: we send the next available tech now. No time to pick.', vNoneLeft: 'No visit times left today. Choose ASAP / Now or Tomorrow.',
+      earlyBtn: '📞 Need an earlier time? Request a call', earlyT: 'Need an earlier time? Request a call',
+      earlyNote: "Online times start at 2:30 PM. Need us earlier? Leave your name, phone and address and we'll call you back to set a time.",
+      earlyName: 'Name', earlyPhone: 'Phone', earlyAddr: 'Address or area', earlyAddrPh: 'e.g. 123 Greenbank Rd, Nepean',
+      earlySend: '📞 Request a call', earlyCancel: 'Cancel', earlyCallNow: 'Or call us now:', earlyAddrBad: 'Please enter your address or area.',
+      earlyDone: "✅ Got it! We'll call you back soon to set an earlier time.", earlyFail: "That didn't send. Please call us at (613) 601-6471.", earlySending: 'Sending…',
       vNeed: 'Please choose when we should come: ASAP / Now, Today, Tomorrow or a date.', vNeedDate: 'Please pick the visit date.', vNeedHour: 'Please pick a visit time.',
       vPast: 'That time has already passed. Please pick a later time.', vChosen: 'Your visit:',
       pAsapOff: 'ASAP not available right now. Pick a time or call us.', rimsAsap: 'same-day / ASAP',
@@ -175,8 +180,13 @@
       pAsap: '⚡ Service rapide : on envoie le prochain technicien libre, maintenant (urgence même jour / service rapide +{F} incluse).', pSameDay: '⚡ Visite le jour même : urgence même jour / service rapide +{F} incluse.',
       pVisitFirst: "Choisissez « Quand voulez-vous la visite? » plus haut. Le service rapide et les visites le jour même ajoutent les frais d'urgence; de 20 h à 8 h, ce sont les frais de déplacement en dehors des heures.",
       vQ: 'Quand voulez-vous la visite?', vAsapBtn: '⚡ Dès que possible / maintenant', vToday: "Aujourd'hui", vTomorrow: 'Demain', vPick: 'Choisir une date', vChoice: 'Jour de la visite',
-      vTime: "Heure de la visite (plage d'une heure)", vPickHour: 'Choisir une heure…', vDate: 'Date de la visite', vHint: "Choisissez la plage d'une heure qui vous convient. Besoin de nous tout de suite? Choisissez ⚡ Dès que possible (24 h/24).",
+      vTime: "Heure de la visite (plage d'une heure)", vPickHour: 'Choisir une heure…', vDate: 'Date de la visite', vHint: "Choisissez la plage d'une heure qui vous convient. Les heures en ligne commencent à 14 h 30. Besoin de nous tout de suite? Choisissez ⚡ Dès que possible (24 h/24).",
       vAsap: "⚡ Service rapide : on envoie le prochain technicien libre, maintenant. Pas d'heure à choisir.", vNoneLeft: "Plus de plages libres aujourd'hui. Choisissez « Dès que possible » ou Demain.",
+      earlyBtn: "📞 Besoin d'une heure plus tôt? Demandez un appel", earlyT: "Besoin d'une heure plus tôt? Demandez un appel",
+      earlyNote: 'Les heures en ligne commencent à 14 h 30. Besoin de nous plus tôt? Laissez votre nom, votre numéro et votre adresse, et on vous rappelle pour fixer une heure.',
+      earlyName: 'Nom', earlyPhone: 'Téléphone', earlyAddr: 'Adresse ou secteur', earlyAddrPh: 'ex. 123 rue Principale, Gatineau',
+      earlySend: '📞 Demander un appel', earlyCancel: 'Annuler', earlyCallNow: 'Ou appelez-nous maintenant :', earlyAddrBad: 'Entrez votre adresse ou votre secteur.',
+      earlyDone: '✅ Reçu! On vous rappelle bientôt pour fixer une heure plus tôt.', earlyFail: "L'envoi n'a pas fonctionné. Appelez-nous au (613) 601-6471.", earlySending: 'Envoi…',
       vNeed: 'Choisissez quand on doit venir : dès que possible, aujourd’hui, demain ou une date.', vNeedDate: 'Choisissez la date de la visite.', vNeedHour: "Choisissez l'heure de la visite.",
       vPast: "Cette heure est déjà passée. Choisissez une heure plus tard.", vChosen: 'Votre visite :',
       pAsapOff: "Le service rapide n'est pas offert en ce moment. Choisissez une heure ou appelez-nous.", rimsAsap: 'même jour / service rapide',
@@ -222,7 +232,8 @@
     veh: { mode: 'other', year: '', make: '', model: '', trim: '', unsure: false, id: '', cls: 'car', tier: 'STANDARD', size: '', verified: false,
            oYear: '', oMake: '', oModel: '', typed: '', photoUrl: '', car: '', oTrim: '' },
     service: 'off', tires: 4, zone: null, addrText: '', days: [], date: '', dateLabel: '', slot: '', slotLabel: '', hold: 0,
-    c: { name: '', phone: '', email: '', notes: '' }, area: '', pref: '', more: false, rims: '', feePick: '', asapAt: '', visitDay: '', visitDate: '', visitTime: '', visitErr: '', addrErr: '', taken: {}, slotState: {}, offerApplied: lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offerTier2: lsGet('bk_swap_offer2') === '1' && lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offer: null, done: null, busy: false, waitDay: null, draftSent: ''
+    c: { name: '', phone: '', email: '', notes: '' }, area: '', pref: '', more: false, rims: '', feePick: '', asapAt: '', visitDay: '', visitDate: '', visitTime: '', visitErr: '', addrErr: '', taken: {}, slotState: {}, offerApplied: lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offerTier2: lsGet('bk_swap_offer2') === '1' && lsGet('bk_swap_offer') === '1' && !lsGet('bk_booked'), offer: null, done: null, busy: false, waitDay: null, draftSent: '',
+    early: { open: false, sent: false, busy: false, err: '', name: '', phone: '', addr: '' }   // "Need an earlier time? Request a call"
   };
   lsSet('bk_session', S.session);
   // ?r=Emma (dispatcher who sent a /book link). Kept for this visit.
@@ -421,13 +432,13 @@
   }
   function asapOn() { return S.visitDay === 'asap' && asapOpen(); }
   // ---- visit day/time the customer picks ("When should we come?", REQUIRED). Day resolved in Ottawa time at form time.
-  //      ASAP / Now: no hour. Today / Tomorrow / a date: a one-hour visit slot is required (prices.js slots: 10:30 AM ... 10:30 PM; ASAP is 24/7).
+  //      ASAP / Now: no hour. Today / Tomorrow / a date: a one-hour visit slot is required (prices.js slots: 2:30 PM ... 10:30 PM; ASAP is 24/7).
   function torToday() { return torParts(Date.now()).day; }
   function visitDateIso() { var d = torToday(); return S.visitDay === 'today' ? d : S.visitDay === 'tomorrow' ? wall(d, 0, 0, 1440).day : S.visitDay === 'date' ? S.visitDate : ''; }
   function hm2min(hm) { return +hm.slice(0, 2) * 60 + +hm.slice(3, 5); }
   function min2hm(m) { m = ((m % 1440) + 1440) % 1440; return pad2(Math.floor(m / 60)) + ':' + pad2(m % 60); }
-  function hoursFor(day) {   // 1-hour slot starts ('HH:MM') still bookable that day: prices.js slots (10:30 AM ... 10:30 PM);
-    var c = (PR && PR.slots) || {}, first = hm2min(c.first || '10:30'), last = hm2min(c.last || '22:30'), step = +c.minutes || 60;
+  function hoursFor(day) {   // 1-hour slot starts ('HH:MM') still bookable that day: prices.js slots (2:30 PM ... 10:30 PM; never before 2 PM);
+    var c = (PR && PR.slots) || {}, first = hm2min(c.first || '14:30'), last = hm2min(c.last || '22:30'), step = +c.minutes || 60;
     var out = [], now = -1;                     // today = only slots that have not started yet (Ottawa time)
     if (day && day === torToday()) { var tp = torParts(Date.now()); now = tp.hh * 60 + tp.mm; }
     for (var m = first; m <= last; m += step) if (m > now) out.push(min2hm(m));
@@ -748,6 +759,7 @@
           (S.slotState[vd] === 'loading' ? '<p class="bk-hint bk-visit-checking" id="bk-visit-checking">' + esc(t('vChecking')) + '</p>' : '') +
           '<p class="bk-hint bk-visit-hint">' + esc(t('vHint')) + '</p>';
       }
+      body += earlyHtml();   // "Need an earlier time? Request a call" (right under the time picker)
     }
     return '<fieldset class="bk-calltime bk-visit' + (err ? ' bk-invalid' : '') + '" id="bk-visit"><legend class="bk-ct-q">🚐 ' + t('vQ') + r + '</legend>' +
       '<div class="bk-ct-grid' + (ao ? ' bk-visit-grid' : ' three') + '" role="group" aria-label="' + esc(t('vChoice')) + '">' +
@@ -759,6 +771,51 @@
       '<p class="bk-ct-chosen" id="bk-visit-chosen" aria-live="polite"' + (shown && visitDone() ? '' : ' hidden') + '>' + t('vChosen') + ' <b>' + esc(shown) + '</b></p>' +
       '</fieldset>';
   }
+  // ---- "Need an earlier time? Request a call" (owner, Nov 10). Online times start at 2:30 PM; this collects name + phone +
+  //      address/area and sends it on the SAME path as an almost-booked lead (action 'draft', same session), tagged
+  //      'wants earlier than 2 PM', so the call centre gets the email + WhatsApp alert and calls back. Calls only.
+  //      Live script (v14): the alert goes out with the next almost-booked run (~15-20 min after the request).
+  function earlyTag() { return (PR && PR.earlyCallTag) || 'wants earlier than 2 PM'; }
+  function earlyHtml() {
+    var E = S.early, r = ' <span class="bk-req">*</span>';
+    if (E.sent) return '<div class="bk-early" id="bk-early"><p class="bk-ok bk-early-done" id="bk-early-done" role="status">' + esc(t('earlyDone')) + '</p></div>';
+    if (!E.open) return '<div class="bk-early" id="bk-early"><button type="button" class="bk-early-btn" id="bk-early-btn" data-act="early" aria-expanded="false">' + esc(t('earlyBtn')) + '</button></div>';
+    return '<div class="bk-early open" id="bk-early" role="group" aria-labelledby="bk-early-t"><div class="bk-early-t" id="bk-early-t">📞 ' + esc(t('earlyT')) + '</div>' +
+      '<p class="bk-note">' + esc(t('earlyNote')) + '</p>' +
+      '<label class="bk-label" for="bk-early-name">' + t('earlyName') + r + '</label><input class="bk-input" id="bk-early-name" data-e="name" value="' + esc(E.name) + '" autocomplete="name">' +
+      '<label class="bk-label" for="bk-early-phone">' + t('earlyPhone') + r + '</label><input class="bk-input" id="bk-early-phone" data-e="phone" value="' + esc(E.phone) + '" type="tel" inputmode="tel" autocomplete="tel">' +
+      '<label class="bk-label" for="bk-early-addr">' + t('earlyAddr') + r + '</label><input class="bk-input" id="bk-early-addr" data-e="addr" value="' + esc(E.addr) + '" placeholder="' + esc(t('earlyAddrPh')) + '" autocomplete="street-address">' +
+      '<div class="bk-err" id="bk-early-err" role="alert">' + esc(E.err || '') + '</div>' +
+      '<button type="button" class="bk-btn green bk-early-send" id="bk-early-send" data-act="earlySend"' + (E.busy ? ' disabled' : '') + '>' + (E.busy ? '<span class="bk-spin"></span> ' + esc(t('earlySending')) : esc(t('earlySend'))) + '</button>' +
+      '<p class="bk-note bk-early-call">' + esc(t('earlyCallNow')) + ' <a href="' + TEL + '">' + PHONE_SHOWN + '</a></p>' +
+      '<button type="button" class="bk-early-cancel" id="bk-early-cancel" data-act="earlyCancel">' + esc(t('earlyCancel')) + '</button></div>';
+  }
+  function earlyDayWanted() { var vd = visitDateIso(); return vd ? (S.visitDay === 'today' ? 'Today ' : S.visitDay === 'tomorrow' ? 'Tomorrow ' : '') + dateWords(vd, 'en') : ''; }
+  function earlySlot() { return ('📞 CALL REQUEST: ' + earlyTag()).slice(0, 60); }
+  function earlyDetails(base) {
+    var E = S.early, day = E.day || '';
+    return Object.assign(base, { callRequest: 'earlier-than-2pm', callRequestText: '📞 Call request: ' + earlyTag() + (day ? ' (day wanted: ' + day + ')' : '') + ': call back to set a time',
+      callRequestName: E.name, callRequestPhone: cleanPhone(E.phone), callRequestAddress: E.addr, callRequestDay: day,
+      visitWhen: 'CALL REQUEST, ' + earlyTag() + (day ? ' (' + day + ')' : '') });
+  }
+  function sendEarly() {
+    var E = S.early; if (E.busy) return;
+    readEarly();
+    var phone = cleanPhone(E.phone), err = !E.name ? { m: t('nameBad'), el: 'bk-early-name' } : !phone ? { m: t('phoneBad'), el: 'bk-early-phone' } : !E.addr ? { m: t('earlyAddrBad'), el: 'bk-early-addr' } : null;
+    if (err) { E.err = err.m; readAll(); render(); var x = document.getElementById(err.el); if (x) x.focus(); return; }
+    E.err = ''; E.busy = true; E.day = earlyDayWanted(); readAll();
+    if (!S.c.name) S.c.name = E.name; if (!S.c.phone) S.c.phone = E.phone; if (!S.area && !S.addrText) S.area = E.addr;   // fills the main form too
+    render();
+    var payload = { action: 'draft', session: S.session, firstName: E.name.split(' ')[0], phone: phone, vehicle: vehicleLabel(),
+                    slot: earlySlot(), price: shownPriceForOwner(), details: earlyDetails(Object.assign(draftDetails(), { name: E.name, address: E.addr, area: S.area || E.addr })) };
+    apiPost(payload).then(function (r) {
+      E.busy = false;
+      if (r && r.ok) { E.sent = true; E.open = false; S.draftSent = JSON.stringify(payload); }
+      else E.err = t('earlyFail');
+      readAll(); render(); var d = document.getElementById('bk-early-done') || document.getElementById('bk-early-err'); if (d && d.scrollIntoView) d.scrollIntoView({ block: 'center' });
+    }).catch(function () { E.busy = false; E.err = t('earlyFail'); readAll(); render(); });
+  }
+  function readEarly() { Array.prototype.forEach.call(root.querySelectorAll('[data-e]'), function (el) { S.early[el.getAttribute('data-e')] = el.value.trim(); }); }
   function refreshVisitBits() {   // after an hour is picked: update the chosen line + clear the error without re-rendering the select
     var shown = visitWhen(S.lang), ch = document.getElementById('bk-visit-chosen');
     if (ch) { ch.hidden = !(shown && visitDone()); ch.innerHTML = t('vChosen') + ' <b>' + esc(shown) + '</b>'; }
@@ -894,6 +951,7 @@
   }
   function onEdit(e) {
     if (e.target && e.target.getAttribute && e.target.getAttribute('data-act') === 'feearea') { if (e.type !== 'change') return; S.feePick = e.target.value; refreshPrice(); return draftSoon(); }
+    if (e.target && e.target.getAttribute && e.target.getAttribute('data-e')) { S.early[e.target.getAttribute('data-e')] = e.target.value.trim(); return; }
     var f = readField(e.target); if (!f) return;
     if (f === 'car' || f === 'typed' || f === 'oYear' || f === 'oTrim') { refreshStep1(); markStarted(); }
     if (f === 'area' || f === 'addr') { var z = root.querySelector('.bk-zone'); if (z) z.remove(); refreshPrice(); }
@@ -922,6 +980,13 @@
     }
     if (act === 'rims') { readAll(); S.rims = val; S.service = val === 'yes' ? 'on' : 'off'; refreshStep1(); return draftSoon(); }
     if (act === 'book') return book();
+    if (act === 'early') {   // open the request-a-call box, filled from what is already typed
+      readAll(); var E = S.early; E.open = true; E.err = '';
+      if (!E.name) E.name = S.c.name; if (!E.phone) E.phone = S.c.phone; if (!E.addr) E.addr = joinAddr(S.addrText, S.area);
+      render(); var n = document.getElementById(!E.name ? 'bk-early-name' : !E.phone ? 'bk-early-phone' : !E.addr ? 'bk-early-addr' : 'bk-early-send'); if (n) n.focus(); return;
+    }
+    if (act === 'earlyCancel') { readAll(); readEarly(); S.early.open = false; S.early.err = ''; render(); var b = document.getElementById('bk-early-btn'); if (b) b.focus(); return; }
+    if (act === 'earlySend') return sendEarly();
   });
 
   // Checks the required fields. Returns an error message, or '' when OK.
@@ -1026,6 +1091,7 @@
     var phone = cleanPhone(S.c.phone); if (!phone || !S.cfg || !step1Basics()) return;   // fires once phone + (car or size) are in
     var payload = { action: 'draft', session: S.session, firstName: (S.c.name || '').split(' ')[0], phone: phone, vehicle: vehicleLabel(),
                     slot: visitWhen('en'), price: shownPriceForOwner(), details: draftDetails() };   // slot = the visit asked for (shows as "Slot picked" in the alert)
+    if (S.early.sent) { payload.slot = earlySlot(); payload.details = earlyDetails(Object.assign(payload.details, { name: S.early.name || S.c.name, address: S.early.addr || payload.details.address })); }   // keep the call-request tag
     var sig = JSON.stringify(payload); if (sig === S.draftSent) return; S.draftSent = sig;
     apiPost(payload).catch(function () {});
   }
@@ -1084,7 +1150,8 @@
         visitTime: vi.label, visitTimeSource: vi.src, slotCheck: slotCheckState(), asap: vasap, asapRequestedAt: vasap ? S.asapAt : '',
         asapRequestedLocal: vasap && S.asapAt ? new Date(S.asapAt).toLocaleString('en-CA', { timeZone: 'America/Toronto', dateStyle: 'medium', timeStyle: 'short' }) + ' ET' : ''
       };
-      Object.assign(payload, offerStatus());   // offerStatus / offerAmount / offerType / offerTrigger / offerText (the price block below keeps the same amount)
+      Object.assign(payload, offerStatus());
+      if (S.early.sent) { payload.callRequest = 'earlier-than-2pm'; payload.notes = ['📞 Also asked for a call back: ' + earlyTag(), payload.notes].filter(Boolean).join(' · '); }   // offerStatus / offerAmount / offerType / offerTrigger / offerText (the price block below keeps the same amount)
       var q = priceInfo();
       // offerFloor 0 = no floor on the exit offer (owner, Oct 20); also stops the script's old $175 default from flagging it
       if (q && q.ready) {   // itemized total shown to the customer right above Send (no accept checkbox: owner, Oct 18)
@@ -1154,7 +1221,7 @@
   window.MTRO_OFFER = {
     priceOffer: true,
     canShow: function () {
-      if (!hasPrices() || !S.cfg || S.fatal || S.done || S.busy || lsGet('bk_swap_offer') === 'used' || !step1Basics() || !offerQuote()) return false;
+      if (!hasPrices() || !S.cfg || S.fatal || S.done || S.busy || S.early.sent || S.early.open || lsGet('bk_swap_offer') === 'used' || !step1Basics() || !offerQuote()) return false;
       if (!S.offerApplied) return true;
       var q = offerQuote(); return !!second() && !S.offerTier2 && q.offer2Amt > q.offerAmt;   // tier 2 (off by default)
     },
@@ -1221,7 +1288,7 @@
       var y = window.scrollY; renderKeepFocus(); window.scrollTo(0, y);
     } else if (S.veh.car) refreshStep1();   // rules changed (exotic list etc.): refresh the price part only
   }).catch(function () { S.cfgSource = 'default (config unavailable)'; });
-  window.BK_JS_BUILD = '20261022lp';   // must match the ?v= on the booking pages (stale-cache guard there)
+  window.BK_JS_BUILD = '20261111slots';   // must match the ?v= on the booking pages (stale-cache guard there)
   // stock-sizes.js loads after this file (async): re-price once it arrives, keeping everything typed
   window.BK_STOCK_READY = function () { try { if (S.veh && S.veh.car) refreshStep1(); } catch (e) {} };
   // load it only AFTER the form is on screen (never competes with first paint); same ?v= as this file
